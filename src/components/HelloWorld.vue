@@ -12,10 +12,7 @@
         </a>
       </li>
       <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
+        <a href="https://forum.vuejs.org" target="_blank">
           Forum
         </a>
       </li>
