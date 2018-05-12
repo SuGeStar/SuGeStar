@@ -1,0 +1,79 @@
+// out:false
+body {
+  font-size: 16px;
+  color: #2c3e50;
+  background-color: #f7f7f7;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: #2c3e50;
+  text-decoration-line: none;
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+}
+
+ul,li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6,pre,p {
+  margin: 0;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+.icon{
+  display: inline-block;
+  background: url(../image/icon.png) no-repeat;
+  background-size: 200px 200px;
+  &.icon-star {
+    width: 30px;
+    height: 30px;
+    background-position: 0px 0;
+  }
+  &.icon-shore {
+    width: 30px;
+    height: 30px;
+    background-position: 0px -30px;
+  }
+  &.icon-my {
+    width: 30px;
+    height: 30px;
+    background-position: 0px -60px;
+  }
+}
+.mint-tabbar {
+  background-color: #fff;
+  background-size: 100% 0;
+  .mint-tab-item {
+    .mint-tab-item-icon {
+      width: 30px;
+      height: 30px;
+    }
+    &.active {
+      .icon-star {
+        background-position: -30px 0px;
+      }
+      .icon-shore {
+        background-position: -30px -30px;
+      }
+      .icon-my {
+        background-position: -30px -60px;
+      }
+    }
+  }
+}
