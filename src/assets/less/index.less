@@ -2,28 +2,55 @@
 .index{
   .index-bg{
     position: relative;
+    margin-bottom: 0.8rem;
     img{
       width: 100%;
     }
     .index-classfiy{
       position: absolute;
-      bottom: -50px;
+      bottom: -.55rem;
       left: 50%;
-      margin-left: -160px;
-      width: 270px;
+      width: 80%;
+      margin-left: -45%;
       background-color: #fff;
       border-radius: 10px;
-      padding: 20px;
+      padding: 0.34rem;
       box-shadow: 5px 5px 5px #ddd;
       .list{
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         li{
+          text-align: center;
           img{
             width: 40%;
           }
         }
       }
+    }
+  }
+  .index-box{
+    padding-top: 0.2rem;
+    text-align: center;
+    h3{
+      font-size: 0.45rem;
+      color: #3981ff;
+      position: relative;
+    }
+    h3:before,h3:after{
+      content: '';
+      width: 1.88rem;
+      height: 0.39rem;
+      background-size: 1.88rem 0.39rem;
+      position: absolute;
+      top: 0.12rem;
+    }
+    h3:before{
+      background: url(../image/index-left.png) no-repeat;
+      left: 0;
+    }
+    h3:after{
+      background: url(../image/index-right.png) no-repeat;
+      right: 0;
     }
   }
 }
