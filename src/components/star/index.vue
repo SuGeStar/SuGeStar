@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="index">
+      <!-- 背景图 -->
       <div class="index-bg">
         <img src="../../assets/image/index-bg.png" alt="">
         <div class="index-classfiy">
@@ -20,23 +21,25 @@
           </ul>
         </div>
       </div>
-      <mt-tabbar fixed>
-        <mt-tab-item id="home" class="active" href="#/">
-          <i slot="icon" class="icon icon-star"></i>
-          SG星球
-        </mt-tab-item>
-        <mt-tab-item id="classify" href="#/store">
-          <i slot="icon" class="icon icon-shore"></i>
-          星球商城
-        </mt-tab-item>
-        <mt-tab-item id="shop" href="#/my">
-          <i slot="icon" class="icon icon-my"></i>
-          我的基地
-        </mt-tab-item>
-      </mt-tabbar>
+      <!-- 挖宝数据 -->
+      <div class="index-box">
+        <div class="box-title">
+          <h3>挖宝数据</h3>
+        </div>
+      </div>
+      <!-- 底部 -->
+      <footGuide></footGuide>
     </div>
   </div>
 </template>
 <style lang="less" scoped>
   @import '../../assets/less/index.less';
 </style>
+<script>
+import footGuide from '../footer/footGuide.vue'
+export default {
+  components: {
+    footGuide
+  }
+}
+</script>
