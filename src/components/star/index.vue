@@ -26,6 +26,27 @@
         <div class="box-title">
           <h3>挖宝数据</h3>
         </div>
+        <div class="box-content">
+          <p>
+            <span>当前等级</span>
+            <span class="base">{{level}}</span>
+          </p>
+          <p>
+            <span>PV</span>
+            <span>今日获得</span>
+            <span class="base">{{pv}};</span>
+            <span>累计获得</span>
+            <span class="index-all">{{allpv}}</span>
+          </p>
+          <p>
+            <span>当前等级</span>
+            <span class="base">{{level}}</span>
+          </p>
+          <p>
+            <span>当前等级</span>
+            <span class="base">{{level}}</span>
+          </p>
+        </div>
       </div>
       <!-- 底部 -->
       <footGuide></footGuide>
@@ -38,6 +59,13 @@
 <script>
 import footGuide from '../footer/footGuide.vue'
 export default {
+  data () {
+    return {
+      level: 'SG青铜时代',
+      pv: '1000',
+      pvall: '10000'
+    }
+  },
   components: {
     footGuide
   }
