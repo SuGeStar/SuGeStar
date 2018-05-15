@@ -1,11 +1,23 @@
 //out:false
 @main-color: #3981ff;
+@index-color:#ff8c37;
 .index{
   .index-bg{
     position: relative;
     margin-bottom: 0.8rem;
+    .canvas{
+      position: absolute;
+      top: 0.2rem;
+      left: 0;
+    }
     img{
       width: 100%;
+    }
+    .index-msg{
+      position: absolute;
+      top: 0.27rem;
+      right: 0.27rem;
+      z-index: 2;
     }
     .index-classfiy{
       position: absolute;
@@ -34,7 +46,7 @@
     .box-title{
       text-align: center;
       h3{
-        font-size: 0.45rem;
+        font-size: 0.29rem;
         color: @main-color;
         position: relative;
       }
@@ -44,20 +56,36 @@
         height: 0.39rem;
         background-size: 1.88rem 0.39rem;
         position: absolute;
-        top: 0.12rem;
+        top: 0;
       }
       h3:before{
         background: url(../image/index-left.png) no-repeat;
-        left: 0;
+        left: 0.28rem;
       }
       h3:after{
         background: url(../image/index-right.png) no-repeat;
-        right: 0;
+        right: 0.28rem;
       }
     }
     .box-content{
+      padding: 0.25rem;
       .base{
         color: @main-color;
+      }
+      .index-all{
+        color: @index-color
+      }
+      .box-con{
+        display: flex;
+        padding-bottom: 0.1rem;
+        padding-left: 0.25rem;
+        justify-content: flex-start;
+        align-items: flex-start;
+        .box-name{
+          width: 1.02rem;
+          text-align: right;
+          margin-right: 0.17rem;
+        }
       }
     }
   }
