@@ -6,6 +6,7 @@ import speed from '@/components/star/speed'
 import friend from '@/components/star/friend'
 import store from '@/components/store/store'
 import my from '@/components/mine/my'
+import myProperty from '@/components/mine/myProperty'
 
 Vue.use(Router)
 
@@ -40,9 +41,14 @@ export default new Router({
       component: store
     },
     {
-      path: '/my',
+      path: '/my', // 我的基地
       name: 'my',
       component: my
+    },
+    {
+      path: '/myProperty', // 我的资产
+      name: 'myProperty',
+      component: myProperty
     }
   ]
 })
