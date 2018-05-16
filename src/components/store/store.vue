@@ -14,20 +14,64 @@
       <mt-swipe-item><img src="../../assets/image/banner02.png"></mt-swipe-item>
       <mt-swipe-item><img src="../../assets/image/banner01.png"></mt-swipe-item>
     </mt-swipe>
-    <swiper :options="swiperOption" ref="mySwiper" class="swiper1">
-      <swiper-slide>I'm Slide 1</swiper-slide>
-      <swiper-slide>I'm Slide 2</swiper-slide>
-    </swiper>
-    <div class="swiper-pagination"  slot="pagination"></div>
-    <div class="swiper-button-prev" slot="button-prev"></div>
-    <div class="swiper-button-next" slot="button-next"></div>
-    <div class="swiper-scrollbar"   slot="scrollbar"></div>
+    <mt-swipe class="swiper1" :auto="0" :show-indicators="false">
+      <mt-swipe-item class="box">
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+       <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+      </mt-swipe-item>
+      <mt-swipe-item class="box">
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+       <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+      </mt-swipe-item>
+    </mt-swipe>
+    <div class="nav">
+      <mt-button class="nav-1" size="small" @click.native.prevent="active = 'tab-container1'">今日上新</mt-button>
+      <mt-button class="nav-2" size="small" @click.native.prevent="active = 'tab-container2'">精选好物</mt-button>
+    </div>
+<div class="page-tab-container">
+      <mt-tab-container class="page-tabbar-tab-container" v-model="active" swipeable>
+        <mt-tab-container-item id="tab-container1">
+          <mt-cell>
+            <div class="bar-content">
+              <div class="new-box">
+              <img  src="../../assets/image/banner01.png">
+              <p class="new-desc">复古原宿条纹外套女2017冬加加厚显加厚显加厚第三方房贷首付斯蒂芬斯蒂芬</p>
+              <p class="method">￥200+矿币36或</p>
+              <p class="price">￥236</p>
+              </div>
+                 <div class="new-box">
+              <img  src="../../assets/image/banner01.png">
+              <p class="new-desc">复古原宿条纹外套女2017冬加加厚显加厚显加厚第三方房贷首付斯蒂芬斯蒂芬</p>
+              <p class="method">￥200+矿币36或</p>
+              <p class="price">￥236</p>
+              </div>
+            </div>
+          </mt-cell>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="tab-container2">
+          <mt-cell v-for="n in 10" title="tab-container 2" :key="n"></mt-cell>
+        </mt-tab-container-item>
+      </mt-tab-container>
+    </div>
+  </div>
     <footGuide></footGuide>
   </div>
-</div>
 </template>
 <style lang="less" scoped>
   @import '../../assets/less/store.less';
+
 </style>
 <script>
 import footGuide from '../footer/footGuide.vue'
@@ -35,10 +79,10 @@ export default {
   components: {
     footGuide
   },
-  created () {
+  name: 'page-tab-container',
+  data () {
     return {
-      swiperOption: {
-      }
+      active: 'tab-container1'
     }
   }
 }
