@@ -1,0 +1,60 @@
+// out:false
+.mint-header{
+  background-color: #1e1c4b;
+  font-size: 0.28rem;
+}
+.speed{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: url(../image/speed-bg.png) no-repeat;
+  background-size: cover;
+  .speed-con{
+    margin-top: 1.3rem;
+    padding: 0 0.38rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 0.33rem;
+  }
+  .speed-line{
+    padding: 0.26rem 0;
+    img{
+      width: 100%;
+    }
+  }
+  .speed-buy{
+    h3{
+      color: #ffffff;
+      font-size: 0.29rem;
+      font-weight: normal;
+      text-align: center;
+      position: relative;
+    }
+    h3:after,h3:before{
+      content: '';
+      position: absolute;
+      width: 1.88rem;
+      height: 0.39rem;
+      top: 0;
+    }
+    h3:after{
+      background: url(../image/speed-right.png) no-repeat;
+      right: 0.32rem;
+    }
+    h3:before{
+      background: url(../image/speed-left.png) no-repeat;
+      left: 0.32rem;
+    }
+    .buy-box{
+      margin: 0.54rem auto;
+      width: 5.38rem;
+      height: 3.38rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 0.09rem;
+      .mint-cell{
+        background-color: transparent;
+      }
+    }
+  }
+}
