@@ -14,32 +14,48 @@
       <mt-swipe-item><img src="../../assets/image/banner02.png"></mt-swipe-item>
       <mt-swipe-item><img src="../../assets/image/banner01.png"></mt-swipe-item>
     </mt-swipe>
-    <swiper :options="swiperOption" ref="mySwiper" class="swiper1">
-      <swiper-slide>I'm Slide 1</swiper-slide>
-      <swiper-slide>I'm Slide 2</swiper-slide>
-    </swiper>
-    <div class="swiper-pagination"  slot="pagination"></div>
-    <div class="swiper-button-prev" slot="button-prev"></div>
-    <div class="swiper-button-next" slot="button-next"></div>
-    <div class="swiper-scrollbar"   slot="scrollbar"></div>
+    <mt-swipe class="swiper1" :auto="0" :show-indicators="false">
+      <mt-swipe-item class="box">
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+       <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+      </mt-swipe-item>
+      <mt-swipe-item class="box">
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+       <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+      </mt-swipe-item>
+    </mt-swipe>
+    <div class="commodity">
+      <span class="commodity1">今日上新</span>
+      <span class="commodity2">今日上新</span>
+    </div>
     <footGuide></footGuide>
   </div>
 </div>
 </template>
 <style lang="less" scoped>
   @import '../../assets/less/store.less';
+
 </style>
 <script>
+
 import footGuide from '../footer/footGuide.vue'
 export default {
   components: {
     footGuide
   },
   created () {
-    return {
-      swiperOption: {
-      }
-    }
   }
 }
 </script>
