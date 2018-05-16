@@ -4,6 +4,8 @@ import index from '@/components/star/index'
 import miji from '@/components/star/miji'
 import speed from '@/components/star/speed'
 import friend from '@/components/star/friend'
+import firInvitation from '@/components/star/firInvitation'
+import secInvitation from '@/components/star/secInvitation'
 import store from '@/components/store/store'
 import my from '@/components/mine/my'
 
@@ -33,6 +35,16 @@ export default new Router({
       path: '/friend',
       name: 'friend',
       component: friend
+    },
+    {
+      path: '/firInvitation',
+      name: 'firInvitation',
+      component: firInvitation
+    },
+    {
+      path: '/secInvitation',
+      name: 'secInvitation',
+      component: secInvitation
     },
     {
       path: '/store',

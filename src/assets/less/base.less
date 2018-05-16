@@ -158,6 +158,33 @@ h1,h2,h3,h4,h5,h6,pre,p {
 .right {
   float: right;
 }
+
+input {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+select,input {
+  vertical-align: middle
+}
+select,input,textarea {
+  font-size: 12px;
+  margin: 0
+}
+input[type="text"],input[type="password"],textarea {
+    outline-style: none;
+    -webkit-appearance: none
+}
+textarea {
+    resize: none
+}
+table {
+    border-collapse: collapse
+}
+  
 .wrapper{
   font-size: .24rem;
 }
@@ -188,6 +215,11 @@ h1,h2,h3,h4,h5,h6,pre,p {
     width: 30px;
     height: 30px;
     background-position: -60px 0;
+  }
+  &.icon-right {
+    width: 20px;
+    height: 20px;
+    background-position: -180px 0;
   }
 }
 .active {

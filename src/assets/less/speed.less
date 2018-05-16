@@ -2,6 +2,7 @@
 .mint-header{
   background-color: #1e1c4b;
   font-size: 0.28rem;
+  height: 0.85rem;
 }
 .speed{
   position: absolute;
@@ -50,10 +51,58 @@
       margin: 0.54rem auto;
       width: 5.38rem;
       height: 3.38rem;
+      padding: 0.45rem 0.31rem;
       background-color: rgba(255, 255, 255, 0.1);
       border-radius: 0.09rem;
-      .mint-cell{
-        background-color: transparent;
+      .box-input{
+        margin-bottom: 0.73rem;
+        margin-top: 0.3rem;
+        .buy-num{
+          margin-bottom: 0.6rem;
+          height: 0.41rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .buy-tit{
+            line-height: 0.51rem;
+            font-size: 0.27rem;
+            color: #ffffff;
+          }
+          .buy-int{
+            display: block;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            background-color: transparent;
+            height: 0.41rem;
+            color: #fff;
+            margin-left: 0.15rem;
+            padding-left: 0.15rem;
+            outline:none;
+            &::-webkit-input-placeholder {
+              color: #fff;
+              font-size: 0.25rem;
+            }
+            &:-moz-placeholder {
+                color: #fff;
+            }
+            &::-moz-placeholder {
+                color: #fff;
+            }
+            &:-ms-input-placeholder {
+                color: #fff;
+            }
+          }
+        }
+      }
+      .buy-btn{
+        display: block;
+        width: 2.82rem;
+        height: 0.68rem;
+        line-height: 0.68rem;
+        margin: 0 auto;
+        background:url(../image/speed-btn.png);
+        background-size: cover;
+        color: #fff;
       }
     }
   }

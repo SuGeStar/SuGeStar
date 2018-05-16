@@ -1,0 +1,75 @@
+// out:false
+.mint-header{
+  background-color: #1e1c4b;
+  font-size: 0.28rem;
+  height: 0.85rem;
+}
+.friend{
+  img{
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  .friend-con{
+    position: absolute;
+    top: 0.85rem;
+    left: 0;
+    right: 0;
+    .friend-cls{
+      h3{
+        margin-top:  0.5rem;
+        color: #ffffff;
+        font-size: 0.29rem;
+        font-weight: normal;
+        text-align: center;
+        position: relative;
+      }
+      h3:after,h3:before{
+        content: '';
+        position: absolute;
+        width: 1.88rem;
+        height: 0.39rem;
+        top: 0;
+      }
+      h3:after{
+        background: url(../image/speed-right.png) no-repeat;
+        right: 0.32rem;
+      }
+      h3:before{
+        background: url(../image/speed-left.png) no-repeat;
+        left: 0.32rem;
+      }
+      .friend-box{
+        margin: 0.43rem auto;
+        width: 5.38rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 0.09rem;
+        padding: 0.45rem 0.31rem;
+        .friend-int{
+          display: block;
+          border: none;
+          background-color: transparent;
+          height: 0.41rem;
+          font-size: 0.29rem;
+          color: #fff;
+          text-align: center;
+          margin: 0 auto;
+          padding-left: 0.15rem;
+          outline:none;
+        }
+        .copy-btn{
+          display: block;
+          width: 2.82rem;
+          height: 0.68rem;
+          line-height: 0.68rem;
+          margin: 0.5rem auto 0;
+          background:url(../image/speed-btn.png);
+          background-size: cover;
+          color: #fff;
+          border: none;
+        }
+      }
+    }
+  }
+}

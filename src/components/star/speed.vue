@@ -15,9 +15,17 @@
       <div class="speed-buy">
         <h3>购买加速器</h3>
         <div class="buy-box">
-          <mt-field label="购买数量" placeholder="请输入购买数量" type="number" v-model="number"></mt-field>
-          <mt-field label="所需金额" disabled="disabled" :placeholder="data">SG金币</mt-field>
-          <mt-button type="default">立即购买</mt-button>
+          <div class="box-input">
+            <div class="buy-num">
+              <span class="buy-tit">购买数量</span>
+              <input class="buy-int" type="number" placeholder="请输入购买数量" v-model="number">
+            </div>
+            <div class="buy-num">
+              <span class="buy-tit">所需金额</span>
+              <input class="buy-int" type="number" :placeholder="data+'SG金币'" v-model="pay" readonly>
+            </div>
+          </div>
+          <mt-button class="buy-btn">立即购买</mt-button>
         </div>
       </div>
     </div>
@@ -31,7 +39,8 @@ export default {
   data () {
     return {
       number: '',
-      data: '200'
+      data: '200',
+      pay: ''
     }
   }
 }
