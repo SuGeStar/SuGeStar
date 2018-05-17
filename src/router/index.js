@@ -9,6 +9,7 @@ import secInvitation from '@/components/star/secInvitation'
 import store from '@/components/store/store'
 import my from '@/components/mine/my'
 import myProperty from '@/components/mine/myProperty'
+import login from '@/components/login/login'
 
 Vue.use(Router)
 
@@ -61,6 +62,11 @@ export default new Router({
       path: '/myProperty', // 我的资产
       name: 'myProperty',
       component: myProperty
+    },
+    {
+      path: '/login', // 登录
+      name: 'login',
+      component: login
     }
   ]
 })

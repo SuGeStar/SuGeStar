@@ -184,13 +184,48 @@ textarea {
 table {
     border-collapse: collapse
 }
-  
+
+/*清除数字输入框箭头*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -moz-appearance: textfield;
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+input[type=submit]{
+  -webkit-appearance: none;
+
+}
+input[type=number]{
+  -webkit-appearance: none !important;
+  -moz-appearance: textfield;
+}
+input[type=button],
+input[type=submit],
+input[type=file],
+input[type=checkbox],
+input[type=radio],
+button {
+
+  cursor: pointer;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 .wrapper{
   font-size: .24rem;
 }
 .tabbar{
   display: flex;
   justify-content: space-around;
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+.clear{
+  clear: bottom;
 }
 .icon{
   display: inline-block;

@@ -32,7 +32,7 @@
           <p class="user-real-name-authentication">实名认证</p>
         </div>
         <div style="border: none">
-          <p class="user-set">设置</p>
+          <router-link to="login"><p class="user-set">设置</p></router-link>
         </div>
       </div>
       <!--底部-->
