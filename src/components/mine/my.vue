@@ -26,7 +26,6 @@
           </div>
         </div>
       </div>
-      <!------------------>
       <div class="store-link">
         <div>
           <p class="user-real-name-authentication">实名认证</p>

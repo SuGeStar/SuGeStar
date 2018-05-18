@@ -33,14 +33,14 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      selected: '0',
-      tabTxt: ['K矿石', 'SG矿石', 'SG矿石', 'SG金币', '原力值']
+  export default {
+    data () {
+      return {
+        selected: '0',
+        tabTxt: ['K矿石', 'SG矿石', 'SG矿石', 'SG金币', '原力值']
+      }
     }
   }
-}
 </script>
 
 <style scoped>
