@@ -13,18 +13,18 @@
   @import "../../assets/less/login";
 </style>
 <script>
+import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
       username: '',
-      password: '',
+      password: ''
     }
   },
   methods: {
     login: function () {
       if (!this.username) {
-        // Toast('登录账号不能为空！');
-        alert('登录账号不能为空')
+        Toast('登录账号不能为空!')
       }
     }
   },

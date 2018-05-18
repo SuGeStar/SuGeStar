@@ -10,6 +10,7 @@ import store from '@/components/store/store'
 import my from '@/components/mine/my'
 import myProperty from '@/components/mine/myProperty'
 import login from '@/components/login/login'
+import register from '@/components/register/register'
 
 Vue.use(Router)
 
@@ -67,6 +68,11 @@ export default new Router({
       path: '/login', // 登录
       name: 'login',
       component: login
+    },
+    {
+      path: '/register', // 注册
+      name: 'register',
+      component: register
     }
   ]
 })
