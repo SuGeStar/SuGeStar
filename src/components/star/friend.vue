@@ -6,15 +6,7 @@
       </a>
     </mt-header>
     <div class="friend">
-      <img src="../../assets/image/friend-bg.png">
       <div class="friend-con">
-        <div class="friend-cls">
-          <h3>我的邀请码</h3>
-          <div class="friend-box">
-            <input class="friend-int" :value="copy" readonly>
-            <mt-button class="copy-btn">一键复制</mt-button>
-          </div>
-        </div>
         <div class="friend-cls">
           <h3>我的战绩</h3>
           <div class="friend-box">
@@ -61,7 +53,18 @@
           </div>
         </div>
       </div>
-      <mt-button class="ivint-btn">生成邀请卡</mt-button>
+      <mt-popup v-model="popupVisible1" popup-transition="popup-fade" class="invit-pop">
+        <div class="friend-cls">
+          <div>
+            <img class="invit-tit" src="../../assets/image/friend-tit.png" alt="">
+          </div>
+          <div class="friend-box">
+            <input class="friend-int" :value="copy" readonly>
+            <mt-button class="copy-btn">一键复制</mt-button>
+          </div>
+        </div>
+      </mt-popup>
+      <mt-button class="ivint-btn" @click="invit()">生成邀请卡</mt-button>
     </div>
   </div>
 </template>
@@ -72,6 +75,7 @@
 export default {
   data () {
     return {
+      popupVisible1: false,
       copy: '123456789',
       first: {
         pople: '1000',
@@ -81,6 +85,12 @@ export default {
         pople: '1000',
         ylz: '1000'
       }
+    }
+  },
+  methods: {
+    invit () {
+      console.log('111')
+      this.popupVisible1 = true
     }
   }
 }
