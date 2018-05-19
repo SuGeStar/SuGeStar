@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueClipboard from 'vue-clipboard2'
 import index from '@/components/star/index'
 import miji from '@/components/star/miji'
 import speed from '@/components/star/speed'
 import friend from '@/components/star/friend'
 import firInvitation from '@/components/star/firInvitation'
 import secInvitation from '@/components/star/secInvitation'
+import demo from '@/components/star/demo'
 import store from '@/components/store/store'
 import my from '@/components/mine/my'
 import myProperty from '@/components/mine/myProperty'
@@ -13,6 +15,7 @@ import login from '@/components/login/login'
 import register from '@/components/register/register'
 
 Vue.use(Router)
+Vue.use(VueClipboard)
 
 export default new Router({
   routes: [
@@ -73,6 +76,11 @@ export default new Router({
       path: '/register', // 注册
       name: 'register',
       component: register
+    },
+    {
+      path: '/demo', // 注册
+      name: 'demo',
+      component: demo
     }
   ]
 })
