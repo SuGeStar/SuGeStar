@@ -7,8 +7,10 @@ import friend from '@/components/star/friend'
 import firInvitation from '@/components/star/firInvitation'
 import secInvitation from '@/components/star/secInvitation'
 import store from '@/components/store/store'
+import classify from '@/components/store/classify'
 import my from '@/components/mine/my'
 import myProperty from '@/components/mine/myProperty'
+import car from '@/components/store/car'
 
 Vue.use(Router)
 
@@ -53,6 +55,11 @@ export default new Router({
       component: store
     },
     {
+      path: '/classify',
+      name: 'classify',
+      component: classify
+    },
+    {
       path: '/my', // 我的基地
       name: 'my',
       component: my
@@ -61,6 +68,11 @@ export default new Router({
       path: '/myProperty', // 我的资产
       name: 'myProperty',
       component: myProperty
+    },
+    {
+      path: '/car',
+      name: 'car',
+      component: car
     }
   ]
 })
