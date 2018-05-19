@@ -18,29 +18,31 @@
            </div>
          </div>
        </div>
-       <div class="invit-list" v-for="index in items" :key="index.id">
+       <div class="invit-list" v-for="(item,index) in items" :key="index">
          <div class="invit-match">
            <div class="match-header">
-             邀请获得奖励：<span>{{index.ylz}}</span>原力值
+             <div>
+               邀请获得奖励：<span>{{item.ylz}}</span>原力值
+             </div>
            </div>
            <div class="match-pop">
              <div class="invit-info">
-              <p class="invit-name">{{index.name}}</p>
-              <p class="invit-phone">{{index.phone}}</p>
+              <p class="invit-name">{{item.name}}</p>
+              <p class="invit-phone">{{item.phone}}</p>
             </div>
             <div class="invit-msg">
-              <p :class="['invit-ident',isBronze?'bronze':''||isSilver?'silver':''||isGold?'gold':''||isBrilliant?'brilliant':'']">{{index.ident}}</p>
-              <p class="invit-date">{{index.date}}</p>
+              <p :class="['invit-ident',isBronze?'bronze':''||isSilver?'silver':''||isGold?'gold':''||isBrilliant?'brilliant':'']">{{item.ident}}</p>
+              <p class="invit-date">{{item.date}}</p>
             </div>
            </div>
            <div class="match-pop">
              <div class="invit-info">
-              <p class="invit-name">{{index.name}}</p>
-              <p class="invit-phone">{{index.phone}}</p>
+              <p class="invit-name">{{item.name}}</p>
+              <p class="invit-phone">{{item.phone}}</p>
             </div>
             <div class="invit-msg">
-              <p :class="['invit-ident',isBronze?'bronze':''||isSilver?'silver':''||isGold?'gold':''||isBrilliant?'brilliant':'']">{{index.ident}}</p>
-              <p class="invit-date">{{index.date}}</p>
+              <p :class="['invit-ident',isBronze?'bronze':''||isSilver?'silver':''||isGold?'gold':''||isBrilliant?'brilliant':'']">{{item.ident}}</p>
+              <p class="invit-date">{{item.date}}</p>
             </div>
            </div>
          </div>
@@ -91,20 +93,6 @@ export default {
           ylz: '1000',
           name: '张三',
           phone: '15515515500',
-          ident: 'SG青铜时代',
-          date: '2018-05-22'
-        },
-        {
-          ylz: '1000',
-          name: '张三',
-          phone: '15515515500',
-          ident: 'SG白银时代',
-          date: '2018-05-22'
-        },
-        {
-          ylz: '1000',
-          name: '张三',
-          phone: '15515515500',
           ident: 'SG白银时代',
           date: '2018-05-22'
         },
@@ -119,53 +107,13 @@ export default {
           ylz: '1000',
           name: '张三',
           phone: '15515515500',
-          ident: 'SG黄金时代',
-          date: '2018-05-22'
-        },
-        {
-          ylz: '1000',
-          name: '张三',
-          phone: '15515515500',
           ident: 'SG钻石时代',
-          date: '2018-05-22'
-        },
-        {
-          ylz: '1000',
-          name: '张三',
-          phone: '15515515500',
-          ident: 'SG钻石时代',
-          date: '2018-05-22'
-        },
-        {
-          ylz: '1000',
-          name: '张三',
-          phone: '15515515500',
-          ident: 'SG青铜时代',
-          date: '2018-05-22'
-        },
-        {
-          ylz: '1000',
-          name: '张三',
-          phone: '15515515500',
-          ident: 'SG青铜时代',
           date: '2018-05-22'
         }
       ]
     }
   },
   created () {
-    for (let i = 0; i <= this.items.length; i++) {
-      if (this.items[i].ident === 'SG青铜时代') {
-        this.isBronze = true
-      } else if (this.items[i].ident === 'SG白银时代') {
-        console.log('2222')
-        this.isSilver = true
-      } else if (this.items[i].ident === 'SG黄金时代') {
-        this.isGold = true
-      } else if (this.items[i].ident === 'SG钻石时代') {
-        this.isBrilliant = true
-      }
-    }
   }
 }
 </script>
