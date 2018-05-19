@@ -9,10 +9,12 @@ import firInvitation from '@/components/star/firInvitation'
 import secInvitation from '@/components/star/secInvitation'
 import demo from '@/components/star/demo'
 import store from '@/components/store/store'
+import classify from '@/components/store/classify'
 import my from '@/components/mine/my'
 import myProperty from '@/components/mine/myProperty'
 import login from '@/components/login/login'
 import register from '@/components/register/register'
+import car from '@/components/store/car'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -58,6 +60,11 @@ export default new Router({
       component: store
     },
     {
+      path: '/classify',
+      name: 'classify',
+      component: classify
+    },
+    {
       path: '/my', // 我的基地
       name: 'my',
       component: my
@@ -78,7 +85,12 @@ export default new Router({
       component: register
     },
     {
-      path: '/demo', // 注册
+      path: '/car',
+      name: 'car',
+      component: car
+    },
+    {
+      path: '/demo',
       name: 'demo',
       component: demo
     }
