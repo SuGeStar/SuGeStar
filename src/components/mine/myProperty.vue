@@ -13,13 +13,13 @@
       <!-- tab-container -->
       <mt-tab-container v-model="selected">
         <mt-tab-container-item :id="0">
-          <mt-cell v-for="n in 10" :title="'内容 ' + n" :key="n"/>
+          <div class="property-container">
+            <div class="pc-head-container"></div>
+          </div>
         </mt-tab-container-item>
         <mt-tab-container-item :id="1">
-          <mt-cell v-for="n in 4" :title="'测试 ' + n" :key="n"/>
         </mt-tab-container-item>
         <mt-tab-container-item :id="2">
-          <mt-cell v-for="n in 6" :title="'选项 ' + n" :key="n"/>
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
@@ -30,7 +30,7 @@
 export default {
   data () {
     return {
-      selected: '0',
+      selected: 0,
       tabTxt: ['K矿石', 'SG矿石', 'SG矿石', 'SG金币', '原力值']
     }
   }

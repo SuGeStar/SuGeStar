@@ -16,7 +16,9 @@
     </mt-swipe>
     <mt-swipe class="swiper1" :auto="0" :show-indicators="false">
       <mt-swipe-item class="box">
-        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        <router-link to="/classify">
+          <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
+        </router-link>
         <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
        <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>
         <div><img src="../../assets/image/banner01.png"><p>真爱宝</p></div>

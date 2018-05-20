@@ -55,16 +55,26 @@
       </div>
       <mt-popup v-model="popupVisible1" popup-transition="popup-fade" class="invit-pop">
         <div class="friend-cls">
-          <div>
-            <img class="invit-tit" src="../../assets/image/friend-tit.png" alt="">
-          </div>
+          <img class="invit-tit" src="../../assets/image/friend-tit.png" alt="">
           <div class="friend-box">
-            <input class="friend-int" :value="copy" readonly>
-            <mt-button class="copy-btn">一键复制</mt-button>
+            <input class="friend-int" v-model="copy" readonly>
+            <mt-button @click="copyBtn" class="copy-btn">一键复制</mt-button>
+          </div>
+          <div class="invit-line"></div>
+        </div>
+        <div class="invit-qr">
+          <div class="invit-desc">
+            <p>我是"{{name}}"</p>
+            <p>是SG星球的{{number}}位居民</p>
+            <p>我在SG星球等你，不见不散</p>
+          </div>
+          <div class="invit-img">
+            <img class="img" :src="src" alt=""/>
+            <p>扫描二维码，加入SG星球</p>
           </div>
         </div>
       </mt-popup>
-      <mt-button class="ivint-btn" @click="invit()">生成邀请卡</mt-button>
+      <mt-button class="ivint-btn" @click="invit">生成邀请卡</mt-button>
     </div>
   </div>
 </template>
@@ -72,11 +82,15 @@
   @import '../../assets/less/friend.less';
 </style>
 <script>
+import { Toast, MessageBox } from 'mint-ui'
 export default {
   data () {
     return {
+      name: '张三',
+      number: '12345',
       popupVisible1: false,
       copy: '123456789',
+      src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png',
       first: {
         pople: '1000',
         ylz: '1000'
@@ -89,8 +103,17 @@ export default {
   },
   methods: {
     invit () {
-      console.log('111')
       this.popupVisible1 = true
+    },
+    copyBtn () {
+      console.log('222')
+      this.$copyText(this.copy).then(function (e) {
+        MessageBox('复制成功')
+        console.log(e)
+      }, function (e) {
+        Toast('复制失败')
+        console.log(e)
+      })
     }
   }
 }
