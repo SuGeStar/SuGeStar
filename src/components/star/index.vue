@@ -9,7 +9,8 @@
             <i class="icon icon-msg"></i>
           </router-link>
         </div>
-        <canvas id="canvas" class="canvas"></canvas>
+        <!--<canvas id="canvas" class="canvas"></canvas>-->
+        <collecting :energy = 'arr' v-on: energyClick =''></collecting>
         <div class="index-classfiy">
           <ul class="list">
             <li>
@@ -90,7 +91,7 @@
           </div>
         </div>
       </div>
-     <!-- 底部 -->
+      <!-- 底部 -->
       <footGuide></footGuide>
     </div>
   </div>
@@ -100,6 +101,8 @@
 </style>
 <script>
 import footGuide from '../footer/footGuide.vue'
+import collecting from './collecting.vue'
+
 export default {
   data () {
     return {
@@ -113,17 +116,33 @@ export default {
       allk: '10000',
       allsg: '10000',
       alls: '10000',
-      allsgolden: '10000'
+      allsgolden: '10000',
+      arr: []
     }
   },
   components: {
-    footGuide
+    footGuide,
+    collecting
+  },
+  methods: {
+    GetArr: function () {
+      setTimeout(() => {
+        this.arr = [
+          {id: '1', num: '2'},
+          {id: '4', num: '6'},
+          {id: '2', num: '8'},
+          {id: '1', num: '2'},
+          {id: '4', num: '6'},
+          {id: '2', num: '8'},
+          {id: '1', num: '2'},
+          {id: '4', num: '6'},
+          {id: '2', num: '8'}
+        ]
+      }, 0)
+    }
   },
   mounted () {
-    // 获取屏幕宽高
-    var canvas = document.querySelector('canvas')
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight / 2.5
+    this.GetArr()
   }
 }
 </script>
