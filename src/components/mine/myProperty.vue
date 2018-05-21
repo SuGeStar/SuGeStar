@@ -6,16 +6,18 @@
     </div>
     <div class="property-tab" >
       <mt-navbar  v-model="selected">
-        <mt-tab-item :id="index" v-for="(tabName,index) in tabTxt" :key="index">{{tabName}}</mt-tab-item>
+        <mt-tab-item :id="index" v-for="(tabName,index) in tabTxt" :key="index" class="asc">{{tabName}}</mt-tab-item>
       </mt-navbar>
       <div>
       </div>
       <!-- tab-container -->
       <mt-tab-container v-model="selected">
-        <mt-tab-container-item :id="0">
-          <div class="property-container">
-            <div class="pc-head-container"></div>
-          </div>
+        <mt-tab-container-item :id="0" class="property-container">
+         <div class="pc-head-container">
+           <p>11111</p>
+           <p></p>
+           <div></div>
+         </div>
         </mt-tab-container-item>
         <mt-tab-container-item :id="1">
         </mt-tab-container-item>
