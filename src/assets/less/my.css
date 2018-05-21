@@ -1,0 +1,113 @@
+.store-head {
+  width: 6.4rem;
+  height: 3.35rem;
+  background: url("../image/my_bg.png") no-repeat center;
+  background-size: 100% auto;
+  border-top: 1px rgba(255, 255, 255, 0) solid;
+  box-sizing: border-box;
+}
+.store-head .store-head-center {
+  width: 0.94rem;
+  height: 0.94rem;
+  background: url("../image/head.png") no-repeat center;
+  background-size: 120% auto;
+  margin: .26rem auto 0;
+  position: relative;
+}
+.store-head .store-head-center p {
+  font-size: .22rem;
+  text-align: center;
+  padding-top: .13rem;
+}
+.store-head .user-nickname {
+  font-size: 0.26rem;
+  letter-spacing: 0.01rem;
+  color: #ffffff;
+  text-align: center;
+  margin-top: .26rem;
+}
+.store-head .user-order {
+  font-size: 0.22rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  margin-top: .26rem;
+}
+.store-head .user-property {
+  width: 5.9rem;
+  height: 2.35rem;
+  background-color: #ffffff;
+  box-shadow: 0.01rem 0.01rem 0.25rem 0rem rgba(0, 0, 0, 0.26);
+  border-radius: 0.09rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0.2rem auto 0;
+}
+.store-head .user-property .user-property-title {
+  width: 100%;
+  height: .8rem;
+  border-bottom: 1px #e8e8e8 solid;
+  line-height: .8rem;
+  background: url("../image/right.png") no-repeat 95% center;
+  background-size: auto .3rem;
+}
+.store-head .user-property .user-property-title p {
+  font-size: .27rem;
+  line-height: .8rem;
+  margin-left: .3rem;
+  padding-left: .4rem;
+  background: url("../image/assets.png") no-repeat left center;
+  background-size: .35rem .37rem;
+}
+.store-head .user-property .user-property-data {
+  width: 100%;
+  height: auto;
+}
+.store-head .user-property .user-property-data ul {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.store-head .user-property .user-property-data ul li {
+  width: 33.3333%;
+  height: 1.55rem;
+  float: left;
+  text-align: center;
+}
+.store-head .user-property .user-property-data ul li .user-property-notice {
+  font-size: .24rem;
+  margin-top: .38rem;
+}
+.store-head .user-property .user-property-data ul li .user-property-num {
+  font-size: .26rem;
+  margin-top: .15rem;
+  color: #3d83ff;
+}
+.store-link {
+  width: 94%;
+  height: auto;
+  padding: 0.1rem 3%;
+  background: white;
+  margin-top: 2rem;
+}
+.store-link div {
+  width: 100%;
+  border-bottom: 1px #e8e8e8 solid;
+  height: .83rem;
+  line-height: .85rem;
+  background: url("../image/right.png") no-repeat 96% center;
+  background-size: auto .32rem;
+}
+.store-link div p {
+  margin-left: .2rem;
+  padding-left: .5rem;
+  font-size: .27rem;
+}
+.store-link div p.user-real-name-authentication {
+  background: url("../image/authentication.png") no-repeat left center;
+  background-size: auto .38rem;
+}
+.store-link div p.user-set {
+  background: url("../image/set.png") no-repeat left center;
+  background-size: auto .36rem;
+}

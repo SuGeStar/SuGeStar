@@ -6,7 +6,7 @@
       </a>
     </mt-header>
     <div class="firInvit">
-       <div class="invit-list">
+       <!-- <div class="invit-list">
          <div class="invit-mismatch" v-for="item in mismatch" :key="item.id">
            <div class="invit-info">
             <p class="invit-name">{{item.name}}</p>
@@ -17,7 +17,7 @@
             <p class="invit-date">{{item.date}}</p>
            </div>
          </div>
-       </div>
+       </div> -->
        <div class="invit-list" v-for="(item,index) in items" :key="index">
          <div class="invit-match">
            <div class="match-header">
@@ -31,11 +31,11 @@
               <p class="invit-phone">{{item.phone}}</p>
             </div>
             <div class="invit-msg">
-              <p :class="['invit-ident',isBronze?'bronze':''||isSilver?'silver':''||isGold?'gold':''||isBrilliant?'brilliant':'']">{{item.ident}}</p>
+              <p :class='{resident: a, bronze: b, silver: c, gold: d,brilliant: e}'>{{item.ident}}</p>
               <p class="invit-date">{{item.date}}</p>
             </div>
            </div>
-           <div class="match-pop">
+           <!-- <div class="match-pop">
              <div class="invit-info">
               <p class="invit-name">{{item.name}}</p>
               <p class="invit-phone">{{item.phone}}</p>
@@ -44,7 +44,7 @@
               <p :class="['invit-ident',isBronze?'bronze':''||isSilver?'silver':''||isGold?'gold':''||isBrilliant?'brilliant':'']">{{item.ident}}</p>
               <p class="invit-date">{{item.date}}</p>
             </div>
-           </div>
+           </div> -->
          </div>
        </div>
     </div>
@@ -52,15 +52,31 @@
 </template>
 <style lang="less" scoped>
 @import '../../assets/less/firInvit.less';
+.resident{
+  color: #999;
+}
+.bronze{
+  color:  rgba(78, 204, 155, 0.8);
+}
+.silver{
+  color: rgba(57, 129, 255, 0.8);
+}
+.gold{
+  color: rgba(236, 191, 82, 0.8);
+}
+.brilliant{
+  color: rgba(236, 100, 82, 0.8);
+}
 </style>
 <script>
 export default {
   data () {
     return {
-      isBronze: false,
-      isSilver: false,
-      isGold: false,
-      isBrilliant: false,
+      a: true,
+      b: false,
+      c: false,
+      d: false,
+      e: false,
       mismatch: [
         {
           name: '李四',
@@ -82,6 +98,13 @@ export default {
         }
       ],
       items: [
+        {
+          ylz: '1000',
+          name: '张三',
+          phone: '15515515500',
+          ident: 'SG白银时代',
+          date: '2018-05-22'
+        },
         {
           ylz: '1000',
           name: '张三',
@@ -114,6 +137,16 @@ export default {
     }
   },
   created () {
+    for (let i = 0; i < this.items.length; i++) {
+      console.log(this.items[i].ident)
+      if (this.items[i].ident == 'SG青铜时代') {
+        this.b = true;
+        break;
+      }else if (this.items[i].ident == 'SG白银时代') {
+        this.c = true;
+        continue;
+      }
+    }
   }
 }
 </script>

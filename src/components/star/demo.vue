@@ -15,7 +15,7 @@
     </div>
   </div> -->
   <div id="app" class="invit-msg">
-    <p v-for='(data,key,index) in datas' :key="index" v-bind:class='{bronze:index==bronze}'>{{data.data}}</p>
+    <p v-for='(data,key,index) in datas' :key="index" :class='{resident: a, bronze: b, silver: c, gold: d,brilliant: e}'>{{data.data}}</p>
   </div>
 </template>
 <style lang="less" scoped>
@@ -43,6 +43,10 @@
   .invit-msg {
     font-size: 0.22rem;
     color: #999;
+  }
+    .resident {
+      color: #999;
+    }
     .bronze {
       color: rgba(78, 204, 155, 0.8);
     }
@@ -55,7 +59,6 @@
     .brilliant {
       color: rgba(236, 100, 82, 0.8);
     }
-  }
   .invit-match {
     font-size: 0.26rem;
     .match-header {
@@ -141,15 +144,16 @@ export default {
           ifAdd: 2
         }
       ],
-      bronze: '0'
+      a: true,
+      b: false,
+      c: false,
+      d: false,
+      e: false
     }
   },
   created () {
   },
   methods: {
-    addClassFun (index) {
-      this.bronze = index
-    }
   }
 }
 </script>
