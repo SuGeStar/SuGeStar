@@ -1,7 +1,8 @@
 <template>
 <div class="wrapper">
+    <div class="big-car">
  <div class="car" v-for=" (item, index) in car"  :key="index">
-     <div class="car-company"><span class="round"></span><span class="com">{{item.company}}</span></div>
+     <div class="car-company"><input type="checkbox" class="round"><span class="com">{{item.company}}</span></div>
      <div class="car-shopping" >
          <span class="shop-round"></span><img src="../../assets/image/banner01.png" alt="">
      <div class="details"><span>{{item.name}}</span>
@@ -17,6 +18,32 @@
      </div>
      </div>
  </div>
+    </div>
+ <div class="Settlement">
+     <div class="selection">
+         <span class="roundd"></span>
+         <span class="qx">全选</span>
+     </div>
+     <div class="Total">
+         <p>合计:</p>
+         <span class="money">0元</span>
+         <span class="Other">或115元+200矿币萨达撒多撒多撒</span>
+     </div>
+     <div class="zmoney">
+         结算
+     </div>
+ </div>
+  <div class="foot">
+          <div><router-link to="/store"><img src="../../assets/image/order.png" alt="">
+          <p>首页</p></router-link>
+          </div>
+          <div><router-link to="/classify"><img src="../../assets/image/order.png" alt="">
+          <p>分类</p></router-link>
+          </div>
+           <div><router-link to="/car"><img src="../../assets/image/order.png" alt="">
+          <p>购物车</p></router-link>
+          </div>
+        </div>
  </div>
  </template>
 <script>

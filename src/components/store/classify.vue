@@ -20,12 +20,12 @@
             <p>{{item.mingzi}}</p>
            </div>
         </div>
-        <div class="foot">
-          <div><img src="../../assets/image/order.png" alt="">
-          <p>首页</p>
+            <div class="foot">
+          <div><router-link to="/store"><img src="../../assets/image/order.png" alt="">
+          <p>首页</p></router-link>
           </div>
-          <div><img src="../../assets/image/order.png" alt="">
-          <p>分类</p>
+          <div><router-link to="/classify"><img src="../../assets/image/order.png" alt="">
+          <p>分类</p></router-link>
           </div>
            <div><router-link to="/car"><img src="../../assets/image/order.png" alt="">
           <p>购物车</p></router-link>
@@ -43,7 +43,7 @@ export default {
       selected: '',
       allData: '',
       className: [
-        '上衣1',
+        '上衣2',
         '下衣',
         '电器',
         '首饰',
@@ -53,11 +53,31 @@ export default {
         '电器',
         '上衣',
         '下衣',
-        '电器'
+        '电器1'
       ],
       name: '山鬼',
       idx: 0,
       commodity: [
+        { mingzi: '真爱宝1', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝2', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝3', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝4', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝1', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝2', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝3', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝4', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝1', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝2', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝3', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝4', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝1', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝2', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝3', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝4', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝1', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝2', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝3', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
+        { mingzi: '真爱宝4', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
         { mingzi: '真爱宝1', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
         { mingzi: '真爱宝2', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
         { mingzi: '真爱宝3', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
@@ -77,22 +97,5 @@ export default {
 
 <style lang="less" scoped>
 @import "../../assets/less/classify.less";
-.wrap {
-  width: 100%;
-  height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: column nowrap;
-  flex-flow: column nowrap;
-  .view {
-    width: 100%;
-    height: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  }
-}
+
 </style>
