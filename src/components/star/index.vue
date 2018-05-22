@@ -100,7 +100,7 @@
   @import '../../assets/less/index.less';
 </style>
 <script>
-import footGuide from '../footer/footGuide.vue'
+import footGuide from '../comp/footGuide.vue'
 import collecting from './collecting.vue'
 
 export default {

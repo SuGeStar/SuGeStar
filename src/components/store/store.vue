@@ -76,7 +76,7 @@
 
 </style>
 <script>
-import footGuide from '../footer/footGuide.vue'
+import footGuide from '../comp/footGuide.vue'
 export default {
   components: {
     footGuide

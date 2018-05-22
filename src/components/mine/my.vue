@@ -43,7 +43,7 @@
   @import '../../assets/less/my.less';
 </style>
 <script>
-import footGuide from '../footer/footGuide.vue'
+import footGuide from '../comp/footGuide.vue'
 // import { Navbar, TabItem } from 'mint-ui'
 
 export default {
