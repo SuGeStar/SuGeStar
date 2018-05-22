@@ -16,6 +16,7 @@ import login from '@/components/login/login'
 import register from '@/components/register/register'
 import car from '@/components/store/car'
 import apply from '@/components/store/apply'
+import applypop from '@/components/comp/applyPop'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -99,6 +100,11 @@ export default new Router({
       path: '/demo',
       name: 'demo',
       component: demo
+    },
+    {
+      path: '/applypop',
+      name: 'applypop',
+      component: applypop
     }
   ]
 })
