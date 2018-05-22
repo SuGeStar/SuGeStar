@@ -31,7 +31,7 @@
               <p class="invit-phone">{{item.phone}}</p>
             </div>
             <div class="invit-msg">
-              <p :class='{resident: a, bronze: b, silver: c, gold: d,brilliant: e}'>{{item.ident}}</p>
+              <p @click="colorTxt" :class='{resident: a, bronze: b, silver: c, gold: d,brilliant: e}'>{{item.ident}}</p>
               <p class="invit-date">{{item.date}}</p>
             </div>
            </div>
@@ -102,13 +102,6 @@ export default {
           ylz: '1000',
           name: '张三',
           phone: '15515515500',
-          ident: 'SG白银时代',
-          date: '2018-05-22'
-        },
-        {
-          ylz: '1000',
-          name: '张三',
-          phone: '15515515500',
           ident: 'SG青铜时代',
           date: '2018-05-22'
         },
@@ -138,14 +131,21 @@ export default {
   },
   created () {
     for (let i = 0; i < this.items.length; i++) {
-      console.log(this.items[i].ident)
+      // if (this.items[i].ident == 'SG青铜时代') {
+      //   this.b = true;
+      //   break;
+      // }else if (this.items[i].ident == 'SG白银时代') {
+      //   this.c = true;
+      //   continue;
+      // }
       if (this.items[i].ident == 'SG青铜时代') {
-        this.b = true;
-        break;
-      }else if (this.items[i].ident == 'SG白银时代') {
-        this.c = true;
-        continue;
+       
       }
+    }
+  },
+  methods: {
+    colorTxt () {
+      
     }
   }
 }

@@ -134,9 +134,8 @@ export default {
           {id: '1', num: '2'},
           {id: '4', num: '6'},
           {id: '2', num: '8'},
-          {id: '1', num: '2'},
-          {id: '4', num: '6'},
-          {id: '2', num: '8'}
+          {id: '2', num: '2'},
+          {id: '4', num: '6'}
         ]
       }, 0)
     }

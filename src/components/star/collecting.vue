@@ -6,12 +6,6 @@
 
 </style>
 <script>
-/** @author：zhuzi;
-  * @prop:  energy:[{id:string,num:number}];
-  * @event: energyClick(id:string);
-  * @relyOn: ocanvas;
-  * @createTime: 2018/5/20;
-*/
 import oCanvas from 'ocanvas'
 export default {
   data () {
@@ -19,8 +13,28 @@ export default {
       canvasNode: null,
       position: [
         [
+          { x: 90, y: 100 }
+        ],
+        [
+          { x: 90, y: 100 },
+          { x: 90, y: 150 }
+        ],
+        [
           { x: 90, y: 100 },
           { x: 180, y: 150 },
+          { x: 300, y: 110 }
+        ],
+        [
+          { x: 90, y: 100 },
+          { x: 200, y: 100 },
+          { x: 180, y: 150 },
+          { x: 300, y: 110 }
+        ],
+        [
+          { x: 180, y: 100 },
+          { x: 200, y: 100 },
+          { x: 180, y: 150 },
+          { x: 200, y: 150 },
           { x: 300, y: 110 }
         ],
         [
@@ -30,7 +44,27 @@ export default {
           { x: 200, y: 120 },
           { x: 251, y: 200 },
           { x: 320, y: 140 }
-        ], [
+        ],
+        [
+          { x: 90, y: 100 },
+          { x: 180, y: 100 },
+          { x: 200, y: 100 },
+          { x: 180, y: 150 },
+          { x: 200, y: 150 },
+          { x: 90, y: 150 },
+          { x: 300, y: 110 }
+        ],
+        [
+          { x: 90, y: 100 },
+          { x: 180, y: 100 },
+          { x: 200, y: 100 },
+          { x: 180, y: 150 },
+          { x: 200, y: 150 },
+          { x: 90, y: 150 },
+          { x: 210, y: 150 },
+          { x: 250, y: 110 }
+        ],
+        [
           { x: 50, y: 50 },
           { x: 120, y: 130 },
           { x: 75, y: 180 },
@@ -100,7 +134,7 @@ export default {
       if (enerayItemsLength === 0) {
         return
       }
-      let position = this.position[enerayItemsLength / 3 - 1]
+      let position = this.position[enerayItemsLength]
       enerayItems.forEach((item, index) => {
         canvasObj['image' + index] = this.canvas.display.image({
           x: position[index].x,
