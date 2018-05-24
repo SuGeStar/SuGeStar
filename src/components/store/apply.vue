@@ -12,7 +12,7 @@
           <p>微信支付</p>
         </router-link>
       </li>
-      <li class="apply-way" @click="apllyPop">
+      <li class="apply-way" @click="applyPop">
         <router-link to="">
           <i class="icon icon-sgj"></i>
           <p>SG金币支付</p>
@@ -25,9 +25,7 @@
         </router-link>
       </li>
     </ul>
-    <mt-popup v-model="popupVisible1" popup-transition="popup-fade" class="mint-popup-1">
-      <applyPop></applyPop>
-    </mt-popup>
+    <applyPop @hidden="hiddenShow" v-show="applyPop_pop_up"></applyPop>
   </div>
 </template>
 <style lang="less" scoped>
@@ -38,15 +36,20 @@ import applyPop from '../comp/applyPop.vue'
 export default {
   data () {
     return {
-      popupVisible1: false
+      applyPop_pop_up: false
     }
   },
   components: {
     applyPop
   },
   methods: {
-    apllyPop () {
-      this.popupVisible1 = true
+    applyPop () {
+
+      this.applyPop_pop_up = true
+    },
+    hiddenShow(){
+      let that = this;
+      that.applyPop_pop_up = false
     }
   }
 }

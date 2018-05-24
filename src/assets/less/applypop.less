@@ -1,5 +1,12 @@
 // out:false
 .applyPop{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2;
   .goods-psd{
     width: 90%;
     height: 25%;
@@ -26,6 +33,9 @@
         width: 0.8rem;
         height: .8rem;
         border: none;
+        text-align: center;
+        font-size: 0.65rem;
+        line-height: 0.8rem;
         border-right: 1px solid #ccc;
         box-sizing: border-box;
         &:last-child{
@@ -59,4 +69,12 @@
       }
     }
   }
+}
+.mint-popup-1{
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translate3d(0, 0, 0);
+  background-color: transparent;
 }
