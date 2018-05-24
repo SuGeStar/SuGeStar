@@ -14,7 +14,7 @@
 */
 import oCanvas from 'ocanvas';
 export default {
-  data () {
+  data() {
     return {
       canvasNode: null,
       corresponding:[
@@ -34,7 +34,7 @@ export default {
     }
   },
   props: ['energy'],
-  mounted () {
+  mounted() {
     let canvas = document.querySelector('canvas')
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight / 2.5;
@@ -54,7 +54,7 @@ export default {
         y: bolly,
         origin: { x: "center", y: "center" },
         image: require("../../assets/image/index-tiqu.png"),
-        width: 30
+        width: 40
       });
       this.canvas.addChild(boll);
       var bollText = this.canvas.display.text({
@@ -99,7 +99,7 @@ export default {
           y: position[index].y,
           origin: { x: "center", y: "center" },
           image: require("../../assets/image/index-zuanshi.png"),
-          width: 25,
+          width: 30,
         });
         createAninmal(canvasObj['image' + index], 'element.abs_y == position[index].y ? position[index].y - 10 : position[index].y', index, '', createAninmal);
         this.canvas.addChild(canvasObj['image' + index]);
@@ -115,8 +115,8 @@ export default {
         this.canvas.addChild(canvasObj['imageText' + index]);
         bindClick(canvasObj['image' + index], index);
       });
-      function createAninmal(element, Expression, index, speed = 'normal', callBack) {
-        // speed = speed ? speed : 'normal';
+      function createAninmal(element, Expression, index, speed, callBack) {
+        speed = speed ? speed : 'normal';
         element.animate(
           { y: eval(Expression) },
           {
@@ -134,10 +134,10 @@ export default {
           element.stop();
           canvasObj['imageText' + index].stop();
           element.unbind('click tap', handler);
-          createAninmal(element, 'element.abs_y-20', index, 'short', function() {
+          createAninmal(element, 'element.abs_y-20', index, 'normal', function() {
             self.canvas.removeChild(canvasObj['image' + index]);
           })
-          createAninmal(canvasObj['imageText' + index], 'element.abs_y-63', index, 'short', function() {
+          createAninmal(canvasObj['imageText' + index], 'element.abs_y-63', index, 'normal', function() {
             self.canvas.removeChild(canvasObj['imageText' + index]);
           });
           self.$emit('energyClick', self.energy[index].id);
