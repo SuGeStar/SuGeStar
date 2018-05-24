@@ -95,7 +95,7 @@
         <mt-tab-container-item :id="3" class="property-container">
           <div class="pc-head-container">
             <p class="pc-head-title">SG金币总数</p>
-            <p class="pc-head-num"><span>99999.00</span></p>
+            <p class="pc-head-num"><span>99999.00</span><router-link to="releaseOrSend"><span class="smelting fr">释放/赠送 >></span></router-link></p>
             <div class="pc-head-freeze">
               <p>冻结SG金币：<span>10000.00</span></p>
             </div>

@@ -17,6 +17,11 @@ import register from '@/components/register/register'
 import car from '@/components/store/car'
 import apply from '@/components/store/apply'
 import smelting from '@/components/mine/smelting/'
+import releaseOrSend from '@/components/mine/releaseOrSend/'
+import release from '@/components/mine/release/'
+import addressManage from '@/components/mine/addressManage/'
+import set from '@/components/mine/set/'
+import addAddress from '@/components/mine/addAddress/'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -87,9 +92,34 @@ export default new Router({
       component: register
     },
     {
+      path: '/releaseOrSend', // 释放/赠送
+      name: 'releaseOrSend',
+      component: releaseOrSend
+    },
+    {
       path: '/smelting/:id', // 熔炼
       name: 'smelting',
       component: smelting
+    },
+    {
+      path: '/release/:way/:num', // 释放
+      name: 'release',
+      component: release
+    },
+    {
+      path: '/addressManage', // 收货地址管理
+      name: 'addressManage',
+      component: addressManage
+    },
+    {
+      path: '/addAddress', // 新增地址管理
+      name: 'addAddress',
+      component: addAddress
+    },
+    {
+      path: '/set', // 设置
+      name: 'set',
+      component: set
     },
     {
       path: '/car',

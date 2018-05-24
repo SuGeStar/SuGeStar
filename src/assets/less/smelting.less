@@ -8,6 +8,11 @@
     font-size: .26rem;
     color: #999999;
     padding: .3rem 0 0 .3rem;
+    &.max-smelting{
+      font-size: .2rem;
+      padding: 0 0 0 .3rem;
+      color: #bfbfbf;
+    }
     span{
       font-size: .3rem;
       color: #666666;
@@ -24,6 +29,10 @@
       font-size: .4rem;
       font-weight: bolder;
       padding:0 .25rem;
+      &.account_s{
+        font-size: .26rem;
+        font-weight: normal;
+      }
     }
     input{
       border: none;
@@ -31,6 +40,19 @@
       font-size: .3rem;
       position: absolute;
       top: 10%;
+    }
+  }
+  .chose-bank{
+    font-size: .25rem;
+    width: 98%;
+    height: .6rem;
+    margin: 0.5rem auto;
+    text-indent: 1.5em;
+    line-height: .6rem;
+    background: url("../image/right.png") no-repeat 95% center;
+    background-size: auto .3rem;
+    span{
+      color: #ff8c37;
     }
   }
   button{
@@ -43,5 +65,31 @@
     border-radius: 0.09rem;
     margin: 0.86rem auto 0;
     color: white;
+    &.releaseBtn{
+      background-image: linear-gradient(0deg,
+      #3981ff 0%,
+      #afccff 100%);
+    }
   }
+  .btn-box{
+    width: 95%;
+    height: auto;
+    overflow: hidden;
+    margin: .26rem auto 0;
+    button{
+      display: block;
+      width: 2.73rem;
+      height: 0.75rem;
+      background-image: linear-gradient(0deg,
+      #3981ff 0%,
+      #afccff 100%);
+      border-radius: 0.09rem;
+      .mint-msgbox{
+        border-radius: 120px !important;
+        background-color: red;
+      }
+    }
+
+  }
+
 }
