@@ -2,15 +2,20 @@
 <div class="wrapper">
     <div class="big-car">
  <div class="car" v-for=" (item, index) in car"  :key="index">
-     <div class="car-company"><input type="checkbox" class="round"><span class="com">{{item.company}}</span></div>
+     <div class="car-company">
+         <span class="com">{{item.company}}</span></div>
      <div class="car-shopping" >
-         <span class="shop-round"></span><img src="../../assets/image/banner01.png" alt="">
+         <label class="label2">
+         <input type="checkbox" class="shop-round">
+         <span class="your style about checkbox"></span>
+         </label>
+         <img src="../../assets/image/banner01.png" alt="">
      <div class="details"><span>{{item.name}}</span>
         <p>{{item.details}}</p>
         <div class="esc_count">
-            <p class="esc_sub fl" @click="changeadd()">-</p>
-            <input type="number" class="esc_number fl" v-model="number">
-            <p class="esc_add fl" @click="changereduce()">+</p>
+            <p class="esc_sub fl" @click="minus">-</p>
+            <button type="button" class="esc_number fl">{{result}}</button>
+            <p class="esc_add fl" @click="plus">+</p>
         </div>
         <h2 class="Price">{{item.price}}</h2>
         <h4>{{item.mode}}</h4>
@@ -19,14 +24,12 @@
      </div>
  </div>
     </div>
- <div class="Settlement">
+ <div  class="Settlement" v-for="(item, index) in car" :key="index">
      <div class="selection">
-         <span class="roundd"></span>
-         <span class="qx">全选</span>
+         <span class="qx">合计</span>
      </div>
      <div class="Total">
-         <p>合计:</p>
-         <span class="money">0元</span>
+         <span class="money">{{item.price}}</span>
          <span class="Other">或115元+200矿币萨达撒多撒多撒</span>
      </div>
      <div class="zmoney">
@@ -50,7 +53,7 @@
 export default {
   data () {
     return {
-      number: 0,
+      result: 0,
       car: [
         {company: '苏格实业有限公司1', name: '蕰妮法国原装进口贝勒城堡干红葡萄酒波尔多赤霞珠BL0191', details: '颜色：红色，尺寸：如图750ml1', price: '￥455', mode: '或  ¥346.00+矿石399.001'},
         {company: '苏格实业有限公司2', name: '蕰妮法国原装进口贝勒城堡干红葡萄酒波尔多赤霞珠BL0192', details: '颜色：红色，尺寸：如图750ml2', price: '￥455', mode: '或  ¥346.00+矿石399.002'},
@@ -60,12 +63,14 @@ export default {
     }
   },
   methods: {
-    changeadd: function (number) {
-      this.number--
-    },
-    changereduce: function () {
-      this.number++
-    }
+   minus() {
+this.result--;
+this.$emit('input', {res: this.result, other: '--'})
+},
+plus() {
+this.result++;
+this.$emit('input', {res: this.result, other: '++'})
+}
   }
 }
 </script>

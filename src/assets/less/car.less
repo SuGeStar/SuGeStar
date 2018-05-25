@@ -16,16 +16,25 @@ body{
     margin-bottom: 0.5rem
 }
 .round{
-    width: 0.4rem;
+    opacity: 0;
+    z-index: -1;
+}
+.label1{
+    input[type=checkbox]+span {
+    display: inline-block;
     height: 0.4rem;
+    width: 0.4rem;
     border-radius: 50%;
     border: 1px #b6c4c4 solid;
     float: left;
     margin-top: 3.5%;
     margin-right: 10%;
-    margin-left: 5%;
+    margin-left: 5%;        
 }
-
+input[type=checkbox]:checked+span {
+    background-color: yellow;
+}
+}
 .car-company{
     font-size: 0.3rem;
     width: 100%;
@@ -35,12 +44,29 @@ body{
 }
 .car-shopping{
     .shop-round{
-        width: 0.4rem;
-        height: 0.4rem;
-        border-radius: 50%;
-        border: 1px #b6c4c4 solid;
-        float: left;
-        margin-top: 19%;
+        opacity: 0;
+    z-index: -1;
+
+        // width: 0.4rem;
+        // height: 0.4rem;
+        // border-radius: 50%;
+        // border: 1px #b6c4c4 solid;
+        // float: left;
+        // margin-top: 19%;
+    }
+    .label2{
+        input[type=checkbox]+span {
+            display: inline-block;
+            height: 0.4rem;
+            width: 0.4rem;
+            border-radius: 50%;
+            border: 1px #b6c4c4 solid;
+            float: left;
+            margin-top: 19%;       
+        }
+        input[type=checkbox]:checked+span {
+            background-color: yellow;
+        }
     }
     img{
         width: 1.7rem;
@@ -174,7 +200,7 @@ body{
         float: left;
     }
     .qx{
-        font-size: 0.25rem;
+        font-size: 0.4rem;
         float: left;
         line-height: 1rem;
         margin-left: 0.1rem;

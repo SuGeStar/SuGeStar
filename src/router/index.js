@@ -15,6 +15,8 @@ import myProperty from '@/components/mine/myProperty'
 import login from '@/components/login/login'
 import register from '@/components/register/register'
 import car from '@/components/store/car'
+import dama from '@/components/store/dama'
+import details from '@/components/store/details'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -93,6 +95,16 @@ export default new Router({
       path: '/demo',
       name: 'demo',
       component: demo
+    },
+    {
+      path: '/dama',
+      name: 'dama',
+      component: dama
+    },
+    {
+      path: '/details',
+      name: 'details',
+      component: details
     }
   ]
 })

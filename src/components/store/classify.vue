@@ -5,7 +5,6 @@
         <header>
          <img class="home-search" src="../../assets/image/search.png">
       <input class="home-input" type="" name="" id="" placeholder="搜索商品">
-
         </header>
         <div class="Side navigation">
            <div v-for=" (cla, index) in className" :class="{' class_active ':idx}" @click="changeClass( index )" :key="index"> {{ cla }}  </div>
