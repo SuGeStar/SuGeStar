@@ -16,16 +16,14 @@ import login from '@/components/login/login'
 import register from '@/components/register/register'
 import car from '@/components/store/car'
 import apply from '@/components/store/apply'
-<<<<<<< HEAD
 import smelting from '@/components/mine/smelting/'
 import releaseOrSend from '@/components/mine/releaseOrSend/'
 import release from '@/components/mine/release/'
 import addressManage from '@/components/mine/addressManage/'
 import set from '@/components/mine/set/'
 import addAddress from '@/components/mine/addAddress/'
-=======
-import applypop from '@/components/comp/applyPop'
->>>>>>> 4263ab3e33d284ceee986340e0f8c18056386a8a
+import proofIdent from '@/components/mine/proofIdent'
+import resetPassword from '@/components/mine/resetPassword'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -141,9 +139,14 @@ export default new Router({
       component: demo
     },
     {
-      path: '/applypop',
-      name: 'applypop',
-      component: applypop
+      path: '/proofIdent/:id', // 验证身份
+      name: 'proofIdent',
+      component: proofIdent
+    },
+    {
+      path: '/resetPassword/:id', // 重置密码
+      name: 'resetPassword',
+      component: resetPassword
     }
   ]
 })

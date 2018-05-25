@@ -5,16 +5,20 @@
     </div>
     <div class="set-container">
       <div class="set-list">
-        <router-link to="addressManage"><p>收货地址管理</p></router-link>
+        <router-link to="/addressManage"><p>收货地址管理</p></router-link>
       </div>
       <div class="set-list">
         <p>修改昵称</p>
       </div>
       <div class="set-list">
-        <p>修改登录密码</p>
+        <router-link to="/proofIdent/1">
+          <p>修改登录密码</p>
+        </router-link>
       </div>
       <div class="set-list">
-        <p>修改支付密码</p>
+        <router-link to="/proofIdent/2">
+          <p>修改支付密码</p>
+        </router-link>
       </div>
       <div class="set-list">
         <p>个人资料</p>

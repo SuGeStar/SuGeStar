@@ -1,0 +1,47 @@
+// out:false
+@import "./form.less";
+.proofIdent{
+  position: absolute;
+  top: 0.85rem;
+  width: 100%;
+  .proof-list{
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    ul{
+      display: flex;
+      justify-content: space-around;
+      // padding: 0.2rem;
+      li{
+        width: 50%;
+        padding: 0.2rem;
+        text-align: center;
+        &.proof-bg{
+          color: #4488ff;
+          background: url('../image/proof-bg.png') no-repeat;
+          background-size: 3.18rem 0.75rem;
+        }
+      }
+    }
+  }
+  .proof-phone{
+    border-top: 1px solid #ddd;
+  }
+  .regform{
+    text-align: center;
+    .reset-list{
+      padding: 0.35rem;
+      padding-bottom: 0;
+      background-color: #fff;
+      li{
+        border-bottom: 1px solid #ddd;
+      }
+    }
+    .resetBtn{
+      margin: 0.86rem auto;
+      background: url(../image/invit-btn.png) no-repeat;
+      background-size: cover;
+      color: #fff;
+    }
+  }
+}
