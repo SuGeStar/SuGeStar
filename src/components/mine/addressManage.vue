@@ -56,8 +56,14 @@ export default {
       this.del = !this.del
       if (this.del) {
         this.delTxt = '完成'
+        $('.ads-delete').animate({
+          right: '0%'
+        }, 500)
       } else {
         this.delTxt = '编辑'
+        $('.ads-delete').animate({
+          right: '-20%'
+        }, 500)
       }
     }
   },

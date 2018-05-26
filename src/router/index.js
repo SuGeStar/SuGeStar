@@ -16,16 +16,14 @@ import login from '@/components/login/login'
 import register from '@/components/register/register'
 import car from '@/components/store/car'
 import apply from '@/components/store/apply'
-<<<<<<< HEAD
 import smelting from '@/components/mine/smelting/'
 import releaseOrSend from '@/components/mine/releaseOrSend/'
 import release from '@/components/mine/release/'
 import addressManage from '@/components/mine/addressManage/'
 import set from '@/components/mine/set/'
 import addAddress from '@/components/mine/addAddress/'
-=======
 import applypop from '@/components/comp/applyPop'
->>>>>>> 4263ab3e33d284ceee986340e0f8c18056386a8a
+import city from '@/components/comp/city'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -141,9 +139,14 @@ export default new Router({
       component: demo
     },
     {
-      path: '/applypop',
+      path: '/applypop', // 支付盘
       name: 'applypop',
       component: applypop
+    },
+    {
+      path: '/city', // 三级城市联动
+      name: 'city',
+      component: city
     }
   ]
 })

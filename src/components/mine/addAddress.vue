@@ -14,7 +14,8 @@
           <input type="number" name="s_phone" placeholder="请输入手机号" required class="ad_tel" v-model="tel"></div>
         <div class="info_list">
           <span class="info_title">选择地区</span>
-          <input type="text" name="s_addr" placeholder="请选择地区信息"  readonly required  class="ad_addr" v-model="area">
+
+          <router-link to="city"> <input type="text" name="s_addr" placeholder="请选择地区信息"  readonly required  class="ad_addr" v-model="area"></router-link>
         </div>
         <div class="info_list">
           <span class="info_title">详细地址</span>
