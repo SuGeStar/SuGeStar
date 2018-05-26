@@ -12,13 +12,13 @@
         <div class="area_center">
           <div class="area_con">
             <div class="area_province">
-              <p v-for="(province,$index) in province" @click="getCity(province,$index)" :class="{'act':provinceIdx === $index}">{{province.name}}</p>
+              <p v-for="(province,$index) in province" :key="$index" @click="getCity(province,$index)" :class="{'act':provinceIdx === $index}">{{province.name}}</p>
             </div>
             <div class="area_city">
-              <p v-for="(city,$index) in city" @click="getDistrict(city,$index)" :class="{'act':cityIdx === $index}">{{city.name}}</p>
+              <p v-for="(city,$index) in city" :key="$index"  @click="getDistrict(city,$index)" :class="{'act':cityIdx === $index}">{{city.name}}</p>
             </div>
             <div class="area_district">
-              <p v-for="(district,$index) in district" @click="getAds(district,$index)" :class="{'act':districtIdx === $index}">{{district.name}}</p>
+              <p v-for="(district,$index) in district" :key="$index" @click="getAds(district,$index)" :class="{'act':districtIdx === $index}">{{district.name}}</p>
             </div>
           </div>
         </div>
