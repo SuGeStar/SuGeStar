@@ -5,7 +5,7 @@
       <span class="ads-mag" @click="deleteAds">{{delTxt}}</span>
     </div>
     <div class="ads-container">
-      <div class="ads-list" v-for="(ads,ix) in addressList">
+      <div class="ads-list" v-for="(ads,ix) in addressList" :key="ix">
         <p class="ads_name_tel">{{ads.name}} {{ads.tel}}</p>
         <p class="ads_ads"><span v-if="ads.def == 1">【默认】</span>{{ads.ads}}</p>
         <div class="ads-delete"></div>

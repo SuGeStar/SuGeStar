@@ -39,21 +39,25 @@ export default {
         verifyCode: ''
       },
       disabled: false,
-      verifyCodeBtnText: '获取验证码'
+      verifyCodeBtnText: '获取验证码',
+      id: this.$route.params.id
     }
   },
   methods: {
     sendsms () {
-      var regex = /^(?=\d{11}$)^1(?:3\d|4[57]|5[^4\D]|66|7[^249\D]|8\d|9[89])\d{8}$/g;
+      var regex = /^1(3|4|5|6|7|8|9)\d{9}$/
+      // var regex = /^(?=\d{11}$)^1(?:3\d|4[57]|5[^4\D]|66|7[^249\D]|8\d|9[89])\d{8}$/g;
       if (!regex.test(this.form.phone)) {
         Toast({
           message: '请输入正确的手机号码',
-          position: 'bottom',
+          position: 'middle',
           duration: 2000
         });
         return false;
       }
-      this.$router.push('/resetPassword')
+      this.$router.push({
+        path: '/resetPassword/'+this.id
+      })
     }
   }
 }
