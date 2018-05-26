@@ -1,0 +1,94 @@
+body{
+  overflow: hidden;
+}
+.area-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  .area-cancel{
+    width: 100%;
+    height: 100%;
+  }
+  .area-box {
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: white;
+    .a_title {
+      width: 100%;
+      height: 6%;
+      border-bottom: 1px solid #ccc;
+      font-size: .26rem;
+      text-align: center;
+    }
+    .a_chose {
+      width: 93%;
+      padding-left: 7%;
+      height: 6%;
+      border-bottom: 1px solid #ccc;
+      font-size: .26rem;
+      span {
+        display: inline-block;
+        width: auto;
+        height: 95%;
+        line-height: .6rem;
+        margin-right: .3rem;
+        padding: 0 .1rem;
+        &.area_on {
+          border-bottom: 3px solid #ff0303;
+        }
+      }
+    }
+    .area_center {
+      width: 100%;
+      height: 86%;
+      margin-top: 2%;
+      position: relative;
+      overflow-x: hidden;
+      .area_con {
+        width: 9.69rem;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        div {
+          width: 3.23rem;
+          height: 100%;
+          overflow-y: scroll;
+          float: left;
+
+            p {
+              width: 60%;
+              text-align: left;
+              height: .6rem;
+              line-height: .6rem;
+              margin-left: 20%;
+              border-bottom: 1px solid #e6e6e6;
+              display: -webkit-box;
+              font-size: .26rem;
+              -webkit-line-clamp: 1;
+              -webkit-webkit-box-orient: vertical;
+              -moz-webkit-box-orient: vertical;
+              -ms-webkit-box-orient: vertical;
+              -o-webkit-box-orient: vertical;
+              webkit-box-orient: vertical;
+              overflow: hidden;
+              &.act {
+                color: red;
+                background: url(../image/yes.png) no-repeat right center;
+                background-size: auto 60%;
+              }
+            }
+          &.area_city {
+            background: #F5F5F5;
+          }
+        }
+      }
+    }
+  }
+}

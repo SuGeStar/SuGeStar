@@ -26,6 +26,8 @@ import proofIdent from '@/components/mine/proofIdent'
 import resetPassword from '@/components/mine/resetPassword'
 import dama from '@/components/store/dama'
 import details from '@/components/store/details'
+import applypop from '@/components/comp/applyPop'
+import city from '@/components/comp/city'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -159,6 +161,16 @@ export default new Router({
       path: '/details',
       name: 'details',
       component: details
+    },
+    {
+      path: '/applypop', // 支付盘
+      name: 'applypop',
+      component: applypop
+    },
+    {
+      path: '/city', // 三级城市联动
+      name: 'city',
+      component: city
     }
   ]
 })
