@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     applyPop () {
-
       this.applyPop_pop_up = true
     },
     hiddenShow(){

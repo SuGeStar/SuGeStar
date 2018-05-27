@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="area-container">
-      <div class="area-cancel"></div>
+      <div class="area-cancel" @click="cancelAds"></div>
       <div class="area-box">
         <p class="a_title">所在地区</p>
         <p class="a_chose">
@@ -10,7 +10,7 @@
           <span :class="{'area_on':cls2}" @click="choseAddress(2)">{{choseDistrict}}</span>
         </p>
         <div class="area_center">
-          <div class="area_con">
+          <div class="area_con" ref="area">
             <div class="area_province">
               <p v-for="(province,$index) in province" :key="$index" @click="getCity(province,$index)" :class="{'act':provinceIdx === $index}">{{province.name}}</p>
             </div>
@@ -99,16 +99,16 @@ export default {
       }, (error) => {
         console.log(error)
       })
-      $(".area_con").animate({
-        left:"-3.23rem"
-      });
+      this.$refs.area.style.left = '-3.23rem'
     },
+    // 进行最后一步选择后，将address addressArr 值返回
     getAds (dis,idx) {
       this.districtIdx = idx
       this.index_d = dis.id
       this.choseDistrict = dis.name
       this.address = this.choseProvince+' '+this.choseCity+' '+this.choseDistrict
       this.addressArr = [this.index_p, this.index_c, this.index_d]
+      this.$emit('hidden')
     },
     choseAddress (idx) {
       switch (idx){
@@ -116,29 +116,38 @@ export default {
           this.cls = true
           this.cls1 = false
           this.cls2 = false
-          $(".area_con").animate({
-            left:"0"
-          });
+          this.$refs.area.style.left = '0rem'
           break
         case 1:
           this.cls = false
           this.cls1 = true
           this.cls2 = false
-          $(".area_con").animate({
-            left:"0"
-          });
+          this.$refs.area.style.left = '0rem'
           break
         case 2:
           if (this.choseDistrict != '请选择') {
-            $(".area_con").animate({
-              left:"-3.23rem"
-            });
+            this.$refs.area.style.left = '-3.23rem'
             this.cls = false
             this.cls1 = false
             this.cls2 = true
           }
           break
       }
+    },
+    cancelAds () {
+      this.$emit('hidden')
+      this.provinceIdx = -1;
+      this.cityIdx = -1;
+      this.districtIdx = -1;
+      this.city = [];
+      this.district = [];
+      this.choseProvince = '请选择';
+      this.choseCity = '请选择';
+      this.choseDistrict = '请选择';
+      this.$refs.area.style.left = '0rem';
+      this.cls = true;
+      this.cls1 = false;
+      this.cls2 = false;
     }
   },
   mounted () {

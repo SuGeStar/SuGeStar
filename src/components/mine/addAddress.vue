@@ -12,10 +12,9 @@
         <div class="info_list">
           <span class="info_title">联系电话</span>
           <input type="number" name="s_phone" placeholder="请输入手机号" required class="ad_tel" v-model="tel"></div>
-        <div class="info_list">
+        <div class="info_list" @click="cityPop">
           <span class="info_title">选择地区</span>
-
-          <router-link to="city"> <input type="text" name="s_addr" placeholder="请选择地区信息"  readonly required  class="ad_addr" v-model="area"></router-link>
+          <input type="text" name="s_addr" placeholder="请选择地区信息"  readonly required  class="ad_addr" v-model="area">
         </div>
         <div class="info_list">
           <span class="info_title">详细地址</span>
@@ -34,11 +33,13 @@
         <mt-button type="default" class="releaseBtn" @click="addAds">确认增加</mt-button>
       </div>
     </div>
+    <cityPop @hidden="hiddenShow" v-show="cityPop_up"></cityPop>
   </div>
 </template>
 
 <script>
 import { Toast } from 'mint-ui'
+import cityPop from '../comp/city.vue'
 export default {
   data () {
     return {
@@ -46,10 +47,16 @@ export default {
       tel: '', // 电话
       area: '', // 地区
       detailAds: '', // 详细地址
+      getAds: '',
       code: '',// 邮编
-      value: false, // 设为默认
-      z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/
+      value: [],
+      address: '',
+      cityPop_up: false,
+     z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/
     }
+  },
+  components: {
+    cityPop
   },
   methods: {
     addAds: function () {
@@ -82,7 +89,17 @@ export default {
         Toast('请填写邮编！')
         return false
       }
+    },
 
+    addAds () {
+      console.log(this.value)
+    },
+    cityPop () {
+      this.cityPop_up = true
+    },
+    hiddenShow () {
+      let that = this;
+      that.cityPop_up = false
     }
   }
 }

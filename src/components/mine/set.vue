@@ -11,12 +11,12 @@
         <p>修改昵称</p>
       </div>
       <div class="set-list">
-        <router-link to="/proofIdent/1">
+        <router-link :to="{path:'/proofIdent/1'}">
           <p>修改登录密码</p>
         </router-link>
       </div>
       <div class="set-list">
-        <router-link to="/proofIdent/2">
+        <router-link :to="{path:'/proofIdent/2'}">
           <p>修改支付密码</p>
         </router-link>
       </div>
