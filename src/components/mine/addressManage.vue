@@ -5,10 +5,10 @@
       <span class="ads-mag" @click="deleteAds">{{delTxt}}</span>
     </div>
     <div class="ads-container">
-      <div class="ads-list" v-for="(ads,ix) in addressList">
+      <div class="ads-list" v-for="(ads,ix) in addressList" :key="ix" @click="action">
         <p class="ads_name_tel">{{ads.name}} {{ads.tel}}</p>
         <p class="ads_ads"><span v-if="ads.def == 1">【默认】</span>{{ads.ads}}</p>
-        <div class="ads-delete"></div>
+        <div class="ads-delete" @click.stop="deleteIt"></div>
       </div>
     </div>
     <div class="add-address">
@@ -48,11 +48,12 @@ export default {
           def: '0'
         }],
       del: false,
-      delTxt: '编辑'
+      delTxt: '编辑',
+      way:this.$route.params.way
     }
   },
   methods: {
-    deleteAds: function () {
+    deleteAds () {
       this.del = !this.del
       if (this.del) {
         this.delTxt = '完成'
@@ -65,9 +66,20 @@ export default {
           right: '-20%'
         }, 500)
       }
+    },
+    action (){
+      if (!this.del) {
+        if (this.way == 'set') {
+
+        }
+      }
+    },
+    deleteIt () {
+      console.log('bbb')
     }
   },
   mounted () {
+    console.log(this.$route.params)
   }
 }
 </script>

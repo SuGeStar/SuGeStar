@@ -24,7 +24,7 @@
         </ul>
       </div>
     </div>
-  </div> 
+  </div>
 </template>
 <style lang="less" scoped>
 @import '../../assets/less/proofIdent.less';
@@ -55,6 +55,9 @@ export default {
       }
       this.$router.push('/resetPassword')
     }
+  },
+  mounted () {
+    console.log(this.$route.params)
   }
 }
 </script>

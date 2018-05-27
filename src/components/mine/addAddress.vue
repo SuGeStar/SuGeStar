@@ -38,20 +38,51 @@
 </template>
 
 <script>
+import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
-      receiver: '',
-      tel: '',
-      area: '',
-      detailAds: '',
-      code: '',
-      value: false
+      receiver: '', // 收货人
+      tel: '', // 电话
+      area: '', // 地区
+      detailAds: '', // 详细地址
+      code: '',// 邮编
+      value: false, // 设为默认
+      z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/
     }
   },
   methods: {
     addAds: function () {
-      console.log(this.value)
+      /*
+      *
+      * 添加收货地址提交事件  添加完成 执行 go(-1)
+      *
+      * */
+      if (!this.receiver) {
+        Toast('请填写收货人！')
+        return false
+      }
+      if (!this.tel) {
+        Toast('请填写收货电话！')
+        return false
+      }
+      if (this.z_tel.test(this.tel) === false) {
+        Toast('您的电话号码格式错误！')
+        return false
+      }
+      if (!this.area) {
+        Toast('请选择收货地址！')
+        return false
+      }
+      if (!this.detailAds) {
+        Toast('请填写详细地址！')
+        return false
+      }
+      if (!this.code) {
+        Toast('请填写邮编！')
+        return false
+      }
+
     }
   }
 }

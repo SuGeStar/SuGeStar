@@ -5,7 +5,7 @@
     </div>
     <div class="set-container">
       <div class="set-list">
-        <router-link to="/addressManage"><p>收货地址管理</p></router-link>
+        <router-link to="/addressManage/set"><p>收货地址管理</p></router-link>
       </div>
       <div class="set-list">
         <p>修改昵称</p>

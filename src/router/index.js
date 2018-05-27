@@ -113,7 +113,7 @@ export default new Router({
       component: release
     },
     {
-      path: '/addressManage', // 收货地址管理
+      path: '/addressManage/:way', // 收货地址管理
       name: 'addressManage',
       component: addressManage
     },
