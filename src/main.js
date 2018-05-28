@@ -6,12 +6,10 @@ import 'mint-ui/lib/style.css'
 import App from './App'
 import router from './router'
 import './assets/less/base.less'
-import $ from 'jquery'
 import VueResource from 'vue-resource'
 
 Vue.config.productionTip = false
 Vue.use(MintUI)
-Vue.use($)
 Vue.use(VueResource)
 /* eslint-disable no-new */
 new Vue({

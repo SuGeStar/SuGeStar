@@ -8,7 +8,7 @@
       <div class="ads-list" v-for="(ads,ix) in addressList" :key="ix">
         <p class="ads_name_tel">{{ads.name}} {{ads.tel}}</p>
         <p class="ads_ads"><span v-if="ads.def == 1">【默认】</span>{{ads.ads}}</p>
-        <div class="ads-delete"></div>
+        <div class="ads-delete" ref="delete"></div>
       </div>
     </div>
     <div class="add-address">
@@ -56,14 +56,12 @@ export default {
       this.del = !this.del
       if (this.del) {
         this.delTxt = '完成'
-        $('.ads-delete').animate({
-          right: '0%'
-        }, 500)
+        console.log(this.$refs)
       } else {
         this.delTxt = '编辑'
-        $('.ads-delete').animate({
-          right: '-20%'
-        }, 500)
+        // $('.ads-delete').animate({
+        //   right: '-20%'
+        // }, 500)
       }
     }
   },

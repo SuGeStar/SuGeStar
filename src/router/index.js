@@ -24,7 +24,6 @@ import set from '@/components/mine/set/'
 import addAddress from '@/components/mine/addAddress/'
 import proofIdent from '@/components/mine/proofIdent'
 import resetPassword from '@/components/mine/resetPassword'
-import dama from '@/components/store/dama'
 import details from '@/components/store/details'
 import applypop from '@/components/comp/applyPop'
 import city from '@/components/comp/city'
@@ -151,11 +150,6 @@ export default new Router({
       path: '/resetPassword/:id', // 重置密码
       name: 'resetPassword',
       component: resetPassword
-    },
-    {
-      path: '/dama',
-      name: 'dama',
-      component: dama
     },
     {
       path: '/details',
