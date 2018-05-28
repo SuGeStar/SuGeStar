@@ -11,8 +11,8 @@
         <div class="ads-delete" @click.stop="deleteIt"></div>
       </div>
     </div>
-    <div class="add-address">
-      <router-link to="addAddress">新增收货地址</router-link>
+    <div class="add-address" @click="goAds">
+      新增收货地址
     </div>
   </div>
 </template>
@@ -49,7 +49,7 @@ export default {
         }],
       del: false,
       delTxt: '编辑',
-      way:this.$route.params.way
+      way: this.$route.params.way
     }
   },
   methods: {
@@ -57,17 +57,11 @@ export default {
       this.del = !this.del
       if (this.del) {
         this.delTxt = '完成'
-        $('.ads-delete').animate({
-          right: '0%'
-        }, 500)
       } else {
         this.delTxt = '编辑'
-        $('.ads-delete').animate({
-          right: '-20%'
-        }, 500)
       }
     },
-    action (){
+    action () {
       if (!this.del) {
         if (this.way == 'set') {
 
@@ -76,6 +70,11 @@ export default {
     },
     deleteIt () {
       console.log('bbb')
+    },
+    goAds () {
+      this.$router.push({
+        path: '/addAddress/'
+      })
     }
   },
   mounted () {
