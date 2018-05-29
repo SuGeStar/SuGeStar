@@ -1,36 +1,43 @@
 <template>
-<!-- import func from './vue-temp/vue-editor-bridge'; -->
 <div class="wrapper">
-    <div class="classify">
-        <header>
-         <img class="home-search" src="../../assets/image/search.png">
-      <input class="home-input" type="" name="" id="" placeholder="搜索商品">
-        </header>
-        <div class="Side navigation">
-           <div v-for=" (cla, index) in className" :class="{' class_active ':idx}" @click="changeClass( index )" :key="index"> {{ cla }}  </div>
+  <div class="classify">
+    <header class="classify-top">
+      <a href="javascript:history.go(-1);" slot="left">
+        <i class="icon icon-back back"></i>
+      </a>
+      <router-link to="/">
+        <div class="search">
+          <span>
+            搜索商品
+          </span>
         </div>
-        <div class="commodity">
-          <div class="Title">
-            <img class="title_l" src="../../assets/image/title_l.png"><span>{{ name }}</span>
-            <img class="title_r" src="../../assets/image/title_r.png">
-          </div>
-           <div class="commodity-box" v-for=" (item, index) in commodity"  :key="index">
-            <img :src="item.src" alt="">
-            <p>{{item.mingzi}}</p>
-           </div>
+      </router-link>
+    </header>
+    <div class="classify-content">
+      <div class="classify-left">
+        <ul>
+          <li v-for="(classifyName,index) in classList" :key="index" :class="{active:index===ins}" @click="active(index)">
+            {{classifyName.name}}
+          </li>
+        </ul>
+      </div>
+      <div class="classify-right">
+        <div class="content-box">
+          <img src="http://www.sgyxmall.com//Upload/category/2018-05-03/5aea6fee29278.jpg" alt="">
+          <ul class="content-list">
+            <li v-for="(classifyCont,index) in classBox" :key="index">
+              <router-link to="/list">
+                <img :src="classifyCont.img" alt="">
+                <p>
+                  {{classifyCont.name}}
+                </p>
+              </router-link>
+            </li>
+          </ul>
         </div>
-            <div class="foot">
-          <div><router-link to="/store"><img src="../../assets/image/order.png" alt="">
-          <p>首页</p></router-link>
-          </div>
-          <div><router-link to="/classify"><img src="../../assets/image/order.png" alt="">
-          <p>分类</p></router-link>
-          </div>
-           <div><router-link to="/car"><img src="../../assets/image/order.png" alt="">
-          <p>购物车</p></router-link>
-          </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 </template>
 <style lang="less" scoped>
@@ -39,56 +46,66 @@
 export default {
   data () {
     return {
-      selected: '',
-      allData: '',
-      className: [
-        '上衣2',
-        '下衣',
-        '电器',
-        '首饰',
-        '家电',
-        '上衣',
-        '下衣',
-        '电器',
-        '上衣',
-        '下衣',
-        '电器1'
+      ins: 0,
+      classList: [
+        {
+          name: '真艾宝'
+        },
+        {
+          name: '女装'
+        },
+        {
+          name: '男装'
+        },
+        {
+          name: '配件'
+        },
+        {
+          name: '居家'
+        },
+        {
+          name: '3C专区'
+        },
+        {
+          name: '洗护'
+        },
+        {
+          name: '饮食'
+        },
+        {
+          name: '婴童'
+        },
+        {
+          name: '餐厨'
+        },
+        {
+          name: '珠宝'
+        }
       ],
-      name: '山鬼',
-      idx: 0,
-      commodity: [
-        { mingzi: '真爱宝1', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝2', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝3', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝4', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝1', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝2', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝3', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝4', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝1', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝2', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝3', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝4', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝1', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝2', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝3', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝4', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝1', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝2', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝3', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝4', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝1', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝2', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝3', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝4', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' },
-        { mingzi: '真爱宝5', src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png' }
+      classBox: [
+        {
+          img: 'http://www.sgyxmall.com//Upload/category/2018-05-03/5aea7306f28c1.png',
+          name: '真艾宝'
+        },
+        {
+          img: 'http://www.sgyxmall.com//Upload/category/2018-05-03/5aea7306f28c1.png',
+          name: '真艾宝'
+        },
+        {
+          img: 'http://www.sgyxmall.com//Upload/category/2018-05-03/5aea7306f28c1.png',
+          name: '真艾宝'
+        },
+        {
+          img: 'http://www.sgyxmall.com//Upload/category/2018-05-03/5aea7306f28c1.png',
+          name: '真艾宝'
+        }
       ]
     }
   },
   methods: {
-    changeClass: function (idxs) {
-      console.log(idxs)
-      this.idx = idxs
+    active (num) {
+      console.log(num)
+      this.ins = num
     }
   }
 }
@@ -96,5 +113,4 @@ export default {
 
 <style lang="less" scoped>
 @import "../../assets/less/classify.less";
-
 </style>

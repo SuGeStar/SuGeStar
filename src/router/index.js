@@ -10,6 +10,7 @@ import secInvitation from '@/components/star/secInvitation'
 import demo from '@/components/star/demo'
 import store from '@/components/store/store'
 import classify from '@/components/store/classify'
+import list from '@/components/store/list'
 import my from '@/components/mine/my'
 import myProperty from '@/components/mine/myProperty'
 import login from '@/components/login/login'
@@ -70,6 +71,11 @@ export default new Router({
       path: '/store',
       name: 'store',
       component: store
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: list
     },
     {
       path: '/classify',

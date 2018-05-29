@@ -1,4 +1,5 @@
 // out:false
+@import "./function.less";
 @main-color: #3981ff;
 /*媒体查询条件*/
 @media (max-width: 1442px) {
@@ -287,6 +288,11 @@ button {
     height: 20px;
     background-position: -160px -20px;
   }
+  &.icon-back {
+    width: 20px;
+    height: 20px;
+    background-position: -180px -40px;
+  }
 }
 .active {
   .icon-star {
@@ -297,16 +303,6 @@ button {
   }
   .icon-my {
     background-position: -30px -60px;
-  }
-}
-.mint-tabbar {
-  background-color: #fff;
-  background-size: 100% 0;
-  .mint-tab-item {
-    .mint-tab-item-icon {
-      width: 30px;
-      height: 30px;
-    }
   }
 }
 .moduleHead{
