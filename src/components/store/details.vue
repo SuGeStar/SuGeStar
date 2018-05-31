@@ -68,7 +68,7 @@
 								<p class="cti-sub cti" @click="numSub">-</p>
 								<input type="number" class="cti-number" readonly="" :value="value">
 								<p class="cti-add cti" @click="numAdd">+</p>
-						</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -204,13 +204,13 @@ export default {
 				});
 			}else {
 				this.value--;
-				this.$emit('input', {res: this.result, other: '--'})
+				this.$emit('input', {res: this.value, other: '--'})
 			}
 		},
 		numAdd () {
 			if (this.value < this.number) {
 				this.value++;
-				this.$emit('input', {res: this.result, other: '++'})
+				this.$emit('input', {res: this.value, other: '++'})
 			} else {
 				Toast({
 					message: '已达到最大购买数量',

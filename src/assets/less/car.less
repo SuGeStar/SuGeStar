@@ -1,241 +1,71 @@
 // out:false
-*{
-    margin: 0 ;
-    padding: 0;
-}
-body{
-    position: relative
-}
-.big-car{
-    margin-bottom: 2rem
-}
 .car{
-    width: 100%;
-    height: 4rem;
-    background: white;
-    margin-bottom: 0.5rem
+  margin-top: 1rem;
+	.car-box{
+		.list-box{
+			margin-top: 0.2rem;
+		}
+		.car-list{
+			border-bottom: 1px solid #ccc;
+			.cart-checkbox{
+				margin-right: 0.2rem;
+			}
+			.car-title{
+				background-color: #fff;
+				padding: 0.2rem;
+				border-bottom: 1px solid #ccc;
+				display: flex;
+				align-items: center;
+			}
+			.car-content{
+				width: 100%;
+				background-color: #fff;
+				padding: 0.2rem;
+				display: flex;
+				align-items: center;
+				.img-box{
+					width: 30%;
+					img{
+						width: 100%;
+					}
+				}
+				.info-box{
+					margin-left: 0.2rem;
+					.info-desc{
+						font-size: .21rem;
+						color: #999;
+						margin: 0.1rem 0;
+					}
+					.esc-count{
+						display: flex;
+						height: .5rem !important;
+						width: 1.85rem;
+						border: 1px solid #ccc;
+						border-radius: .1rem;
+						input{
+							border: none;
+							width: 40%;
+							text-align: center;
+							border-right:1px solid #ccc;
+							border-left: 1px solid #ccc;
+						}
+						.cti{
+							padding: 0;
+							line-height: 0.5rem;
+							width: 30%;
+							text-align: center;
+						}
+					}
+					.car-price{
+						font-size: .26rem;
+						color: #ff853e;
+						margin: 0.1rem 0;
+					}
+				}
+			}
+		}
+	}
 }
-.round{
-    opacity: 0;
-    z-index: -1;
-}
-.label1{
-    input[type=checkbox]+span {
-    display: inline-block;
-    height: 0.4rem;
-    width: 0.4rem;
-    border-radius: 50%;
-    border: 1px #b6c4c4 solid;
-    float: left;
-    margin-top: 3.5%;
-    margin-right: 10%;
-    margin-left: 5%;        
-}
-input[type=checkbox]:checked+span {
-    background-color: yellow;
-}
-}
-.car-company{
-    font-size: 0.3rem;
-    width: 100%;
-    height: 1rem;
-    border-bottom: 0.5px #E0E0E0 solid;
-    line-height: 1rem
-}
-.car-shopping{
-    .shop-round{
-        opacity: 0;
-    z-index: -1;
-
-        // width: 0.4rem;
-        // height: 0.4rem;
-        // border-radius: 50%;
-        // border: 1px #b6c4c4 solid;
-        // float: left;
-        // margin-top: 19%;
-    }
-    .label2{
-        input[type=checkbox]+span {
-            display: inline-block;
-            height: 0.4rem;
-            width: 0.4rem;
-            border-radius: 50%;
-            border: 1px #b6c4c4 solid;
-            float: left;
-            margin-top: 19%;       
-        }
-        input[type=checkbox]:checked+span {
-            background-color: yellow;
-        }
-    }
-    img{
-        width: 1.7rem;
-        height: 1.7rem;
-        margin-top: 8%;
-        margin-left: 0.3rem;
-        float: left;
-    }
-
-}
-.details{
-    width: 60%;
-    height: 3rem;
-    float: right;
-    span{
-        font-size: 0.27rem;
-        margin-top: 0.1rem;
-        display: block;
-        word-break:break-all;
-        display:-webkit-box;
-        text-overflow:ellipsis;
-        -webkit-line-clamp:1;
-        -webkit-box-orient:vertical;
-        overflow:hidden;
-    }
-    p{
-        float: left;
-        width: 100%;
-        height: 0.5rem;
-        font-size: 0.15rem;
-        line-height: 0.5rem;
-        color: #b6c4c4
-    }
-    h2{
-        color: #FFCC00
-    }
-}
-.esc_count{
-    width: 2rem;
-    border: 1px solid #ccc;
-    border-radius: .1rem;
-    height: 0.5rem;
-    margin-top: 0.5rem;
-    .esc_sub{
-        width: 29%;
-        border-right: 1px solid #cccc;
-        text-align: center;
-        line-height: 0.4rem;
-        font-size: 0.7rem
-    }
-    .esc_number {
-        border: none;
-        height: 100%;
-        font-size: .25rem;
-        width: 40%;
-        text-align: center;
-        line-height: 0.7rem;
-        float: left;
-    }
-    .esc_add {
-        border-left: 1px solid #cccc;
-        font-size: .5rem;
-        width: 28%;
-        text-align: center;
-        float: left;
-    }
-   
-}
-.delete{
-    border: none;
-    background: white;
-    float:right;
-    color: #000;
-    margin-right: 0.1rem;
-}
-.com{
-    float: left;
-}
-.shop_car_clearing_container {
-    position: fixed;
-    bottom:0rem;
-    width: 100%;
-    height: 1rem;
-    background: white;
- .all_shop_check{
-     width: 20%;
-     height: 1rem;
-     background: red;
- }   
-}
-.foot{
-    width: 100%;
-    height: 1rem;
-  background: white;
-  position:fixed;
-  bottom:0;
-  border-top:1px #e8e8e8 solid;
-    div{
-        width: 20%;
-        height: 1rem;
-        text-align: center;
-        float: left;
-        margin-left: 10%;
-        img{
-            width: 0.4rem;
-        }
-    }
-}
-
-.Settlement{
-    width: 100%;
-    background: white;
-    height: 1rem;
-    position: fixed;
-    bottom: 1rem;
-    border-top: 1px #b6c4c4 solid;
-    float: left;
-    .selection{
-        width: 20%;
-        height: 1rem;
-        border-right: 1px #e8e8e8 solid;
-        float: left;
-        .roundd{
-        width: 0.4rem;
-        height: 0.4rem;
-        border-radius: 50%;
-        border: 1px #b6c4c4 solid;
-        display: block;
-        margin-left: 0.1rem;
-        margin-top: 0.25rem;
-        float: left;
-    }
-    .qx{
-        font-size: 0.4rem;
-        float: left;
-        line-height: 1rem;
-        margin-left: 0.1rem;
-    }
-    }
-    
-}
-.Total{
-    width: 60%;
-    height: 1rem;
-    float: left;
-    position: relative;
-    p{
-        line-height: 1rem;
-        font-size: 0.3rem;
-        margin-left: 0.1rem;
-        float: left;
-    }
-    .money{
-      position: absolute;
-      top: 5%;
-      right: 0.1rem;
-    }
-    .Other{
-        position: absolute;
-      top: 66%;
-      right: 0.1rem;
-    }
-}
-.zmoney{
-    font-size: 0.5rem;
-    color: white;
-    background: indianred;
-    height: 1rem;
-    width: 19.7%;
-    float: left;
-    line-height: 1rem
+input[type=checkbox] {
+	display: none;
 }
