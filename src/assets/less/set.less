@@ -67,7 +67,7 @@ button{
       overflow: hidden;
       position: absolute;
       top: 0;
-      right: -20%;
+      right: 0;
     }
   }
 }
@@ -86,3 +86,33 @@ button{
     color: #4488ff;
   }
 }
+.deleteIt-enter-active {
+  animation: deleteIt-in .5s linear;
+}
+.deleteIt-leave-active {
+  animation: deleteIt-out .5s linear;
+}
+@keyframes deleteIt-in {
+  0% {
+    transform: translateX(-20%);
+  }
+  50% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes deleteIt-out {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateX(20%);
+  }
+}
+
+

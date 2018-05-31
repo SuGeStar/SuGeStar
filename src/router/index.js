@@ -28,6 +28,7 @@ import resetPassword from '@/components/mine/resetPassword'
 import details from '@/components/store/details'
 import applypop from '@/components/comp/applyPop'
 import city from '@/components/comp/city'
+import realName from '@/components/mine/realName'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -118,12 +119,12 @@ export default new Router({
       component: release
     },
     {
-      path: '/addressManage', // 收货地址管理
+      path: '/addressManage/:way', // 收货地址管理
       name: 'addressManage',
       component: addressManage
     },
     {
-      path: '/addAddress', // 新增地址管理
+      path: '/addAddress/:way', // 新增地址管理
       name: 'addAddress',
       component: addAddress
     },
@@ -131,6 +132,11 @@ export default new Router({
       path: '/set', // 设置
       name: 'set',
       component: set
+    },
+    {
+      path: '/realName', // 实名认证
+      name: 'realName',
+      component: realName
     },
     {
       path: '/car',

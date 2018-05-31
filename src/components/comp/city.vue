@@ -55,7 +55,8 @@ export default {
 
       provinceIdx: -1,
       cityIdx: -1,
-      districtIdx: -1
+      districtIdx: -1,
+      finalAddress: []
     }
   },
   methods: {
@@ -103,15 +104,17 @@ export default {
     },
     // 进行最后一步选择后，将address addressArr 值返回
     getAds (dis,idx) {
+      this.finalAddress = []
       this.districtIdx = idx
       this.index_d = dis.id
       this.choseDistrict = dis.name
       this.address = this.choseProvince+' '+this.choseCity+' '+this.choseDistrict
       this.addressArr = [this.index_p, this.index_c, this.index_d]
-      this.$emit('hidden')
+      this.finalAddress.push(this.address,this.addressArr)
+      this.$emit('hidden',this.finalAddress)
     },
     choseAddress (idx) {
-      switch (idx){
+      switch (idx) {
         case 0:
           this.cls = true
           this.cls1 = false
@@ -135,7 +138,7 @@ export default {
       }
     },
     cancelAds () {
-      this.$emit('hidden')
+      this.$emit('hidden',this.finalAddress)
       this.provinceIdx = -1;
       this.cityIdx = -1;
       this.districtIdx = -1;

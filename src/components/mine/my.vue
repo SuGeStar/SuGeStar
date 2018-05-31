@@ -28,7 +28,7 @@
       </div>
       <div class="store-link">
         <div>
-          <router-link to="register"><p class="user-real-name-authentication">实名认证</p></router-link>
+          <router-link to="realName"><p class="user-real-name-authentication">实名认证</p></router-link>
         </div>
         <div style="border: none">
           <router-link to="set"><p class="user-set">设置</p></router-link>

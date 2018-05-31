@@ -51,7 +51,6 @@ export default {
     }
   },
   created () {
-    
   },
   methods: {
     resetBtn () {
@@ -59,20 +58,20 @@ export default {
       if (this.id == 2) {
         // 判断是否为重置支付密码
         console.log('重置支付密码')
-        if(this.form.newpsd.length !== 6){
+        if (this.form.newpsd.length !== 6){
           Toast({
             message: '请输入6位数字',
             position: 'middle',
             duration: 2000
           });
-        }else if (!regex.test(this.form.newpsd)) {
+        } else if (!regex.test(this.form.newpsd)) {
           // 调取重置支付密码接口
         }
-      }else{
+      } else {
         // 调取重置登录密码接口
         console.log('重置登录密码')
       }
-    },
+    }
   }
 }
 </script>
