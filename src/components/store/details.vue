@@ -62,13 +62,18 @@
 								<span v-for="(skuItem,index) in specList" :key="index" :class="{active:index===spec}" @click="activeSpec(index)">{{skuItem.item}}</span>
 							</div>
 						</div>
-						<div class="con-buy clearfix">
+						<div class="con-buy">
 							<p>购买数量</p>
+							<div class="esc-count">
+								<p class="cti-sub cti" @click="numSub">-</p>
+								<input type="number" class="cti-number" readonly="" :value="value">
+								<p class="cti-add cti" @click="numAdd">+</p>
+						</div>
 						</div>
 					</div>
 				</div>
 				<div class="spec-foot">
-					<mt-button type="default" class="default-btn">确认</mt-button>
+					<mt-button type="default" @click="defaultBtn" class="default-btn">确认</mt-button>
 				</div>
 			</div>
 		</div>
@@ -79,6 +84,7 @@
 @import "../../assets/less/details.less";
 </style>
 <script>
+import { Toast } from 'mint-ui';
 export default {
 	data () {
 		return {
@@ -99,8 +105,8 @@ export default {
 			title: '男式潮牌男装青少年男士T恤短袖丝光棉体恤啦啦啦啦9603#',
 			price: '￥87.00',
 			sgk: '¥79.00+严选积分 8.00',
-			number: '100',
-			popupVisible: true,
+			number: '5',
+			popupVisible: false,
 			imgBox: [
 				{
 					pic: 'http://www.sgyxmall.com//Upload/goods/store_88/2018-05-24/5b066c71dd2d6.jpg'
@@ -174,7 +180,8 @@ export default {
 				{
 					item: 'XXXL'
 				},
-			]
+			],
+			value: '1'
 		}
 	},
 	methods: {
@@ -186,6 +193,34 @@ export default {
 		},
 		activeSpec (index) {
 			this.spec = index
+		},
+		numSub () {
+			if (this.value <= 1) {
+				console.log('1111')
+				Toast({
+					message: '当前已是最小成交数量',
+					position: 'bottom',
+					duration: 2000
+				});
+			}else {
+				this.value--;
+				this.$emit('input', {res: this.result, other: '--'})
+			}
+		},
+		numAdd () {
+			if (this.value < this.number) {
+				this.value++;
+				this.$emit('input', {res: this.result, other: '++'})
+			} else {
+				Toast({
+					message: '已达到最大购买数量',
+					position: 'bottom',
+					duration: 2000
+				});
+			}
+		},
+		defaultBtn () {
+			this.popupVisible = false
 		}
 	}
 }  
