@@ -11,18 +11,20 @@
       </div>
       <div><span>登录密码</span><input type="password" placeholder="字母数字组合" v-model="loginPsd"></div>
       <div><span>支付密码</span><input type="password" placeholder="6位数字" v-model="applyPsd"></div>
-      <div><span>所属地区</span><input type="text" placeholder="请选择省 市 县" v-model="locations" v-bind:readonly="true"></div>
+      <div  @click="cityPop"><span>所属地区</span><input type="text" placeholder="请选择省 市 县" v-model="locations" v-bind:readonly="true"></div>
       <div><span>优品账号</span><input type="text" placeholder="请输入您的优品账号" v-model="YPAccount"></div>
       <div><span>真是姓名</span><input type="text" placeholder="请输入您的真是姓名" v-model="realName"></div>
       <div><span>身份证号</span><input type="text" placeholder="请输入身份证号码" v-model="IDNumber"></div>
       <div><span>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span><input type="text" placeholder="给自己起个名字吧~" v-model="nickName"></div>
     </div>
     <mt-button type="default" v-on:click="register">注册</mt-button>
+    <cityPop @hidden="hiddenShow" v-show="cityPop_up"></cityPop>
   </div>
 </template>
 
 <script>
 import { Toast } from 'mint-ui'
+import cityPop from '../comp/city.vue'
 export default {
   data () {
     return {
@@ -38,8 +40,12 @@ export default {
       IDNumber: '',
       nickName: '',
       isSend: false,
-      z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/
+      z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/,
+      cityPop_up: false
     }
+  },
+  components: {
+    cityPop
   },
   methods: {
     // 倒计时
@@ -103,6 +109,14 @@ export default {
         Toast('给自己起一个昵称吧~')
         return false
       }
+    },
+    cityPop () {
+      this.cityPop_up = true
+    },
+    hiddenShow (e) {
+      this.locations = e[0]
+      let that = this
+      that.cityPop_up = false
     }
   }
 }

@@ -119,7 +119,7 @@ export default new Router({
       component: addressManage
     },
     {
-      path: '/addAddress', // 新增地址管理
+      path: '/addAddress/:way', // 新增地址管理
       name: 'addAddress',
       component: addAddress
     },
