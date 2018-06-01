@@ -31,7 +31,7 @@ export default {
               { x: 270, y: 60 },
               { x: 330, y: 110 },
               { x: 260, y: 160 },
-              { x: 340, y: 220 }
+              { x: 320, y: 200 }
       ]                                  //砖石位置数组
       }
       },
@@ -47,7 +47,7 @@ export default {
       },
       methods: {
       createCanvas(w, h) {
-      var bollx = w / 2, bolly = h - 60;                                      //确定星球的位置
+      var bollx = w / 2, bolly = h - 38;                                      //确定星球的位置
       this.canvas = oCanvas.create({
           canvas: "#canvas"                                                   //创建oCanvas实例，并挂载至提前声明的this.canvas对象上
       });
@@ -61,9 +61,9 @@ export default {
       this.canvas.addChild(boll);                                             //调用oCanvas实例addChild方法，传入需要绘制至canvas上的oCanvas对象
       var bollText = this.canvas.display.text({                               //同上，调用text方法，建立文字对象
           x: bollx,
-          y: bolly + 40,
+          y: bolly +30,
           origin: { x: "center", y: "center" },
-          font: "normal 14px sans-serif",                                     //字体
+          font: "normal 14px Arial",                                     //字体
           text: "正在提取中...",                                               //文本内容
           fill: "#ccc"                                                        //颜色
       });
@@ -92,7 +92,7 @@ export default {
       }
       let positionCorresponding = this.corresponding[enerayItemsLength-1];   //根据个数判断一下该取位置数组中哪个元素
       let position=[];                                                       //声明一个空数组   用来呈放位置数组
-      let randomArray = new Array(30).fill(0).map((v,i)=>i+10).sort(()=>0.5 - Math.random()).filter((v,i)=>i<enerayItemsLength);
+      let randomArray = new Array(10).fill(0).map((v,i)=>i+9).sort(()=>0.5 - Math.random()).filter((v,i)=>i<enerayItemsLength);
       positionCorresponding.split('').forEach(element=>{
           position.push(this.position[element-1])                             //遍历上一步取出的字符串，在提前制定好的位置数组中取出对应项
       });
