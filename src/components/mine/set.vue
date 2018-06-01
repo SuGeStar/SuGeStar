@@ -33,7 +33,9 @@ export default {
   methods: {
     // 退出登录
     quitLogin: function () {
-      console.log('退出了')
+      this.$router.push({
+        path: '/login'
+      })
     }
   }
 }
