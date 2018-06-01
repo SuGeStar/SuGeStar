@@ -145,10 +145,10 @@ export default {
           element.stop();                                                                 //停止当前对象动画，此处是砖石
           canvasObj['imageText' + index].stop();                                          //通过index找到文字，停止动画
           element.unbind('click tap', handler);                                           //同时解除点击事件
-          createAninmal(element, 'element.abs_y-20', index, 'normal', function() {        //对砖石创建动画
+          createAninmal(element, 'element.abs_y-20', index, 'short', function() {        //对砖石创建动画
             self.canvas.removeChild(canvasObj['image' + index]);                        //回调函数内移除砖石
           })
-          createAninmal(canvasObj['imageText' + index], 'element.abs_y-63', index, 'normal', function() {
+          createAninmal(canvasObj['imageText' + index], 'element.abs_y-63', index, 'short', function() {
             self.canvas.removeChild(canvasObj['imageText' + index]);                   //对文字操作，逻辑同砖石
           });
           self.$emit('energyClick', self.energy[index].id);                              //传播事件，携带能量id；
