@@ -102,7 +102,7 @@ export default {
               y: position[index].y,
               origin: { x: "center", y: "center" },
               image: require("../../assets/image/index-zuanshi.png"),         //图片地址
-              width: 25,                                                      //宽度大小
+              width: 28,                                                      //宽度大小
           });
           let randomNum = randomArray[index];
           createAninmal(canvasObj['image' + index], 'element.abs_y == position[index].y ? position[index].y - '+randomNum+': position[index].y', index, '', createAninmal);  //调用创建动画函数
@@ -111,7 +111,7 @@ export default {
               x: position[index].x,
               y: position[index].y + 20,
               origin: { x: "center", y: "center" },
-              font: "normal 12px sans-serif",                                 //字体
+              font: "normal 15px sans-serif",                                 //字体
               text: enerayItems[index].num + 'k',                             //字体内容
               fill: "#ccc"                                                    //字体颜色
           });
