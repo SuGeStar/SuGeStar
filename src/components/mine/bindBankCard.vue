@@ -67,7 +67,11 @@ export default {
     setDef () {
       // console.log('aa')
       MessageBox.confirm('确定执行此操作?').then(action => {
-        this.$root.reload()
+        // window.location.reload()
+        // console.log(action)
+        if (action != 'confirm') {
+          console.log('aaaa')
+        }
       })
     }
   },

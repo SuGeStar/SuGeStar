@@ -9,8 +9,7 @@
             <i class="icon icon-msg"></i>
           </router-link>
         </div>
-        <!--<canvas id="canvas" class="canvas"></canvas>-->
-        <collecting :energy = 'arr' v-on: energyClick =''></collecting>
+        <collecting :energy = 'arr' @energyClick ='receive'></collecting>
         <div class="index-classfiy">
           <ul class="list">
             <li>
@@ -139,6 +138,10 @@ export default {
           {id: '5', num: '8'}
         ]
       }, 0)
+    },
+    // 收取钻石事件
+    receive (e) {
+      // console.log(e)
     }
   },
   mounted () {
