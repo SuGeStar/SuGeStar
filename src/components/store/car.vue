@@ -47,7 +47,21 @@
 		</ul>
 	</div>
 	<div class="footer">
-		
+		<label class="cart-checkbox">
+			<input class="" data-storeId=""	type="checkbox" name="cart-checkbox">
+			<i :class="['icon','icon-checkbox',isSelect?'select':'']"></i>
+			<span>全选</span>
+		</label>
+		<div class="foot-total">
+			<span>合计:</span>
+			<div class="total-price">
+				<p>{{totPrice}}元</p>
+				<p>或{{totmony}}+严选积分{{totsgk}}</p>
+			</div>
+		</div>
+		<div class="foot-sure">
+			结算
+		</div>
 	</div>
 </div>
 </template>
@@ -129,7 +143,10 @@ export default {
 				},
 			],
 			number: '5',
-			isSelect: true
+			isSelect: true,
+			totPrice: '100',
+			totmony: '￥10',
+			totsgk: '90'
     }
 	},
   methods: {

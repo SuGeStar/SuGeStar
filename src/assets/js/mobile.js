@@ -1,11 +1,12 @@
+// 接口url
 var url = 'http://www.sugebei.com/'
+
+// 定义一个对象，名字是$$
 var $$ = function () {}
-// 封装
+
+// 开始封装
 $$.prototype = {
-  askData: function (fn, form, async) {
-    // form.app_id = app_id;
-    // form.nonce = $$.getRandom(0, 1000000);
-    // form.sign = $$.mysign(form);
+  askData: function (fn, form) {
     axios({
       method: 'post',
       url: url,

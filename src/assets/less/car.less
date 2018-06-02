@@ -2,11 +2,15 @@
 .car{
   margin-top: 1rem;
 	.car-box{
+		padding-bottom: 0.85rem;
 		.list-box{
 			margin-top: 0.2rem;
 		}
 		.car-list{
 			border-bottom: 1px solid #ccc;
+			&:last-child{
+				border-bottom: none;
+			}
 			.cart-checkbox{
 				margin-right: 0.2rem;
 			}
@@ -64,6 +68,44 @@
 				}
 			}
 		}
+	}
+}
+.footer{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background-color: #fff;
+	height: 0.85rem;
+	border-top: 1px solid #ccc;
+	display: flex;
+	// justify-content: space-between;
+	.cart-checkbox{
+		height: 0.85rem;
+		padding: 0.2rem;
+		padding-left: 20px;
+		border-right: 1px solid #ccc;
+		i{
+			position: absolute;
+			left: 0;
+		}
+	}
+	.foot-total{
+		flex-grow: 3;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-left: .2rem;
+		padding-right: .2rem;
+		.total-price{
+			text-align: right;
+		}
+	}
+	.foot-sure{
+		background-color: #fb6400;
+		color: #fff;
+		line-height: 0.85rem;
+		padding-left: 0.2rem;
+		padding-right: 0.2rem;
 	}
 }
 input[type=checkbox] {
