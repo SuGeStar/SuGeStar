@@ -29,7 +29,7 @@ import details from '@/components/store/details'
 import applypop from '@/components/comp/applyPop'
 import city from '@/components/comp/city'
 import realName from '@/components/mine/realName'
-
+import bindBankCard from '@/components/mine/bindBankCard'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -137,6 +137,11 @@ export default new Router({
       path: '/realName', // 实名认证
       name: 'realName',
       component: realName
+    },
+    {
+      path: '/bindBankCard', // 实名认证
+      name: 'bindBankCard',
+      component: bindBankCard
     },
     {
       path: '/car',

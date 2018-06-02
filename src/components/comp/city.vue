@@ -62,7 +62,7 @@ export default {
   methods: {
     // 请求省份
     getProvince () {
-      this.$http.get('http://www.yuyulu.cn/city/1').then((value) => {
+      this.$http.get('http://www.sugebei.com/city/1').then((value) => {
         this.province = JSON.parse(value.bodyText).data
       }, (error) => {
         console.log(error)
@@ -80,7 +80,7 @@ export default {
       this.cls1 = true
       this.cls2 = false
       this.district = []
-      this.$http.get('http://www.yuyulu.cn/city/'+pro.id+'').then((value) => {
+      this.$http.get('http://www.sugebei.com/city/'+pro.id+'').then((value) => {
         this.city = JSON.parse(value.bodyText).data
       }, (error) => {
         console.log(error)
@@ -95,7 +95,7 @@ export default {
       this.cls = false
       this.cls1 = false
       this.cls2 = true
-      this.$http.get('http://www.yuyulu.cn/city/'+city.id+'').then((value) => {
+      this.$http.get('http://www.sugebei.com/city/'+city.id+'').then((value) => {
         this.district = JSON.parse(value.bodyText).data
       }, (error) => {
         console.log(error)

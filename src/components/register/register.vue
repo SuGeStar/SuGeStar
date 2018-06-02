@@ -4,6 +4,10 @@
     <div class="reg-form">
       <div><span>推荐编号</span><input type="text" placeholder="" v-bind:readonly="true" v-model="recommendCode"></div>
       <div><span>手机号码</span><input type="number" placeholder="请输入手机号码" v-model="phoneNum"></div>
+      <div><span>图片验证</span>
+        <input type="text" placeholder="图片验证码" v-model="pic" class="verificationCode">
+        <img :src="imgSrc" alt="" @click="changePic()">
+      </div>
       <div>
         <span>验&nbsp;证&nbsp;&nbsp;码</span>
         <input type="number" placeholder="手机验证码" v-model="verificationCode" class="verificationCode">
@@ -41,7 +45,9 @@ export default {
       nickName: '',
       isSend: false,
       z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/,
-      cityPop_up: false
+      cityPop_up: false,
+      imgSrc: 'http://www.sugebei.com/verify',
+      pic: ''
     }
   },
   components: {
@@ -117,7 +123,14 @@ export default {
       this.locations = e[0]
       let that = this
       that.cityPop_up = false
+    },
+    // 请求图片验证
+    changePic () {
+      var time = new Date().getTime()
+      this.imgSrc = 'http://www.sugebei.com/verify/' + time
     }
+  },
+  mounted () {
   }
 }
 </script>

@@ -1,12 +1,15 @@
 .reg-container{
-  position: fixed;
+  //position: fixed;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
+  //top: 0;
+  //left: 0;
   background: url("../image/login_bg.png") no-repeat center;
   background-size: 100% 100%;
   color: white;
+  border-top: 1px solid rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  padding-bottom: .65rem;
   .reg-title{
     width: 100%;
     height: .4rem;
@@ -46,23 +49,34 @@
       height: .41rem;
       line-height: .41rem;
       margin:0 auto .22rem;
+      position: relative;
       span{
         display: inline-block;
-        width: 1.4rem;
+        width: 1.3rem;
         text-align: right;
         letter-spacing: 2px;
+      }
+      img{
+        display: inline-block;
+        position: absolute;
+        width: 1.4rem;
+        height: .45rem;
+        right: .2rem;
+        top: 0rem;
+        border: 1px #e5e5e5 solid;
+        border-radius: .1rem;
       }
       input{
         background: none;
         border: none;
         font-size: .26rem;
         margin-left: .22rem;
-        width: 3.2rem;
+        width: 3rem;
         border-bottom: 1px rgba(232, 232, 232, 0.5) solid;
         line-height: .5rem;
         color: white;
         &.verificationCode{
-          width: 1.5rem;
+          width: 1.4rem;
         }
       }
       input::-webkit-input-placeholder{

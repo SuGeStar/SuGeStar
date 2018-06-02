@@ -23,15 +23,15 @@ export default {
           '5','37','258','1357','12569','134679','1345679','12346789','123456789'
       ],                                 //个数与位置对应关系数组
       position: [
-              { x: 50, y: 50 },
-              { x: 120, y: 130 },
+              { x: 50, y: 70 },
+              { x: 100, y: 130 },
               { x: 75, y: 180 },
-              { x: 170, y: 30 },
+              { x: 170, y: 90 },
               { x: 220, y: 120 },
               { x: 270, y: 60 },
               { x: 330, y: 110 },
               { x: 260, y: 160 },
-              { x: 340, y: 220 }
+              { x: 320, y: 200 }
       ]                                  //砖石位置数组
       }
       },
@@ -47,7 +47,7 @@ export default {
       },
       methods: {
       createCanvas(w, h) {
-      var bollx = w / 2, bolly = h - 60;                                      //确定星球的位置
+      var bollx = w / 2, bolly = h - 38;                                      //确定星球的位置
       this.canvas = oCanvas.create({
           canvas: "#canvas"                                                   //创建oCanvas实例，并挂载至提前声明的this.canvas对象上
       });
@@ -56,14 +56,14 @@ export default {
           y: bolly,                                                           //目标偏离左上角的垂直位置
           origin: { x: "center", y: "center" },                               //确定中心店
           image: require("../../assets/image/index-tiqu.png"),                //图片地址
-          width: 40                                                           //指定图片大小
+          width: 30                                                           //指定图片大小
       });
       this.canvas.addChild(boll);                                             //调用oCanvas实例addChild方法，传入需要绘制至canvas上的oCanvas对象
       var bollText = this.canvas.display.text({                               //同上，调用text方法，建立文字对象
           x: bollx,
-          y: bolly + 40,
+          y: bolly +30,
           origin: { x: "center", y: "center" },
-          font: "normal 14px sans-serif",                                     //字体
+          font: "normal 14px Arial",                                     //字体
           text: "正在提取中...",                                               //文本内容
           fill: "#ccc"                                                        //颜色
       });
@@ -92,6 +92,7 @@ export default {
       }
       let positionCorresponding = this.corresponding[enerayItemsLength-1];   //根据个数判断一下该取位置数组中哪个元素
       let position=[];                                                       //声明一个空数组   用来呈放位置数组
+      let randomArray = new Array(10).fill(0).map((v,i)=>i+9).sort(()=>0.5 - Math.random()).filter((v,i)=>i<enerayItemsLength);
       positionCorresponding.split('').forEach(element=>{
           position.push(this.position[element-1])                             //遍历上一步取出的字符串，在提前制定好的位置数组中取出对应项
       });
@@ -101,19 +102,21 @@ export default {
               y: position[index].y,
               origin: { x: "center", y: "center" },
               image: require("../../assets/image/index-zuanshi.png"),         //图片地址
-              width: 30,                                                      //宽度大小
+              width: 25, //宽度大小
+              height: 20
           });
-          createAninmal(canvasObj['image' + index], 'element.abs_y == position[index].y ? position[index].y - 10 : position[index].y', index, '', createAninmal);  //调用创建动画函数
+          let randomNum = randomArray[index];
+          createAninmal(canvasObj['image' + index], 'element.abs_y == position[index].y ? position[index].y - '+randomNum+': position[index].y', index, '', createAninmal);  //调用创建动画函数
           this.canvas.addChild(canvasObj['image' + index]);                  //将生成好及添加好动画的对象添加到ocanvas对象上
           canvasObj['imageText' + index] = this.canvas.display.text({        //同时创建文字
               x: position[index].x,
               y: position[index].y + 20,
               origin: { x: "center", y: "center" },
-              font: "normal 12px sans-serif",                                 //字体
+              font: "normal 13px sans-serif",                                 //字体
               text: enerayItems[index].num + 'k',                             //字体内容
               fill: "#ccc"                                                    //字体颜色
           });
-          createAninmal(canvasObj['imageText' + index], 'element.abs_y == position[index].y + 20 ? position[index].y + 20 - 10 : position[index].y + 20', index, '', createAninmal);  //给文字创建动画
+          createAninmal(canvasObj['imageText' + index], 'element.abs_y == position[index].y + 20 ? position[index].y + 20 - '+randomNum+' : position[index].y + 20', index, '', createAninmal);  //给文字创建动画
           this.canvas.addChild(canvasObj['imageText' + index]);               //将文字对象也添加到ocanvas对象上
           bindClick(canvasObj['image' + index], index);                       //给星球绑定点击事件
       });
@@ -124,7 +127,7 @@ export default {
       *@speed         //速度  默认为normal
       *@callBack      //动画完成时执行的操作
        */
-      function createAninmal(element, Expression, index, speed='normal', callBack) {          //创建对象函数
+      function createAninmal(element, Expression, index, speed='long', callBack) {          //创建对象函数
         element.animate(                                                                    //调用对象的element方法
           { y: eval(Expression) },                                                        //动画效果，此处仅需在y轴上移动，然后将字符串表达式转换成javaScript代码
           {                                                                               //eval有一定的性能问题，不建议学习
@@ -142,10 +145,10 @@ export default {
           element.stop();                                                                 //停止当前对象动画，此处是砖石
           canvasObj['imageText' + index].stop();                                          //通过index找到文字，停止动画
           element.unbind('click tap', handler);                                           //同时解除点击事件
-          createAninmal(element, 'element.abs_y-20', index, 'normal', function() {        //对砖石创建动画
+          createAninmal(element, 'element.abs_y-20', index, 'short', function() {        //对砖石创建动画
             self.canvas.removeChild(canvasObj['image' + index]);                        //回调函数内移除砖石
           })
-          createAninmal(canvasObj['imageText' + index], 'element.abs_y-63', index, 'normal', function() {
+          createAninmal(canvasObj['imageText' + index], 'element.abs_y-63', index, 'short', function() {
             self.canvas.removeChild(canvasObj['imageText' + index]);                   //对文字操作，逻辑同砖石
           });
           self.$emit('energyClick', self.energy[index].id);                              //传播事件，携带能量id；

@@ -5,10 +5,13 @@
     </div>
     <div class="real-name-container">
       <div class="real-name-head">
-        <p></p>
-        <p></p>
-        <p></p>
+        <p class="real-name-name">姓名 <span>张三</span></p>
+        <p class="real-name-id">身份证号 <span>阿斯加德</span></p>
+        <p class="real-name-yp">优品账户 <span>15738669091</span></p>
       </div>
+    </div>
+    <div class="id-card-set" >
+      <router-link to="bindBankCard"><p>银行卡 <span class="fr">去绑定</span></p></router-link>
     </div>
   </div>
 </template>
