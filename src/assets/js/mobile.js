@@ -3,7 +3,6 @@ var url = 'http://www.sugebei.com/'
 
 // 定义一个对象，名字是$$
 var $$ = function () {}
-
 // 开始封装
 $$.prototype = {
   askData: function (fn, form) {

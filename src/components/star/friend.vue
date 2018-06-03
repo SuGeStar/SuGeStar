@@ -108,7 +108,7 @@ export default {
     copyBtn () {
       console.log('222')
       this.$copyText(this.copy).then(function (e) {
-        MessageBox('复制成功')
+        Toast('复制成功')
         console.log(e)
       }, function (e) {
         Toast('复制失败')

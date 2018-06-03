@@ -10,7 +10,7 @@
       </div> -->
       <div>
         <span>验&nbsp;证&nbsp;&nbsp;码</span>
-        <input type="number" placeholder="手机验证码" v-model="verificationCode" class="verificationCode">
+        <input type="number" placeholder="手机验证码" @blur="code" v-model="verificationCode" class="verificationCode">
         <i :class="{'haveSend':isSend}" @click="sendCode">{{verificationCodeTxt}}</i>
       </div>
       <div><span>登录密码</span><input type="password" placeholder="字母数字组合" v-model="loginPsd"></div>
@@ -36,17 +36,17 @@ import cityPop from '../comp/city.vue'
 export default {
   data () {
     return {
-      recommendCode: '1023515',
-      phoneNum: '18237714532',
-      verificationCode: '1234',
+      recommendCode: '13193835328',
+      phoneNum: '',
+      verificationCode: '',
       verificationCodeTxt: '发送验证码',
-      loginPsd: '123456',
-      applyPsd: '123456',
-      locations: '111',
-      YPAccount: '18237714532',
-      realName: 'k',
-      IDNumber: '455856599445658233',
-      nickName: 'm',
+      loginPsd: '',
+      applyPsd: '',
+      locations: [],
+      YPAccount: '',
+      realName: '',
+      IDNumber: '',
+      nickName: '',
       addressArr: [],
       isSend: false,
       // 手机号
@@ -128,6 +128,37 @@ export default {
         })
       }
     },
+    // 判断验证码是否正确
+    code () {
+      console.log('111')
+      this.$http.get(url + 'checkSmsCode?phone=' + this.phoneNum +'&code='+this.verificationCode)
+        .then(response => {
+        console.log(response)
+        if (response.data.code == 200) {
+          Toast({
+            message: response.data.msg,
+            position: 'bottom',
+            duration: 2000
+          })
+        } else {
+          Toast({
+            message: response.data.msg,
+            position: 'bottom',
+            duration: 2000
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    },
+    // 所属地区
+    hiddenShow (e) {
+      this.locations = e[0]
+      this.addressArr = e[1]
+      let that = this
+      that.cityPop_up = false
+    },
     // 注册
     register () {
       if (!this.phoneNum) {
@@ -140,27 +171,6 @@ export default {
       if (!this.verificationCode) {
         Toast('请填写验证码!')
         return false
-      } else {
-         this.$http.get(url + 'checkSmsCode?phone=' + this.phoneNum +'&code='+this.verificationCode)
-         .then(response => {
-          console.log(response)
-          if (response.data.code == 200) {
-            Toast({
-              message: response.data.msg,
-              position: 'bottom',
-              duration: 2000
-            })
-          } else {
-            Toast({
-              message: response.data.msg,
-              position: 'bottom',
-              duration: 2000
-            });
-          }
-        })
-        .catch(error => {
-          console.log(error)
-        })
       }
       if (!this.loginPsd) {
         Toast('请填写登录密码!')
@@ -202,7 +212,7 @@ export default {
         Toast('给自己起一个昵称吧~')
         return false
       }
-      let form = {
+      let form = this.$qs.stringify({
         recommender: this.recommendCode,
         password: this.loginPsd,
         payment_password: this.applyPsd,
@@ -214,11 +224,19 @@ export default {
         yp_account: this.YPAccount,
         province: this.addressArr[0],
         city: this.addressArr[1],
-        area: this.addressArr[2],
-      }
+        area: this.addressArr[2]
+      })
       this.$http.post(url+'register', form)
       .then(response => {
         console.log(response)
+        Toast({
+          message: response.data.msg,
+          position: 'bottom',
+          duration: 2000
+        })
+        if (response.data.code == 200) {
+          this.$router.push('/login')
+        }
       })
       .catch(error => {
         console.log(error)
@@ -226,12 +244,6 @@ export default {
     },
     cityPop () {
       this.cityPop_up = true
-    },
-    hiddenShow (e) {
-      this.locations = e[0]
-      this.addressArr = e[1]
-      let that = this
-      that.cityPop_up = false
     },
     // 请求图片验证
     // changePic () {

@@ -10,7 +10,7 @@
           </router-link>
         </div>
         <!--<canvas id="canvas" class="canvas"></canvas>-->
-        <collecting :energy = 'arr' v-on: energyClick =''></collecting>
+        <collecting :energy = 'arr' @energyClick ='getEnergy'></collecting>
         <div class="index-classfiy">
           <ul class="list">
             <li>
@@ -102,7 +102,7 @@
 <script>
 import footGuide from '../comp/footGuide.vue'
 import collecting from './collecting.vue'
-
+import { url } from '../../assets/js/mobile.js'
 export default {
   data () {
     return {
@@ -125,24 +125,64 @@ export default {
     collecting
   },
   methods: {
-    GetArr: function () {
+    GetArr () {
       setTimeout(() => {
         this.arr = [
-          {id: '1', num: '2'},
-          {id: '4', num: '6'},
-          {id: '2', num: '8'},
-          {id: '1', num: '2'},
-          {id: '4', num: '6'},
-          {id: '2', num: '8'},
-          {id: '2', num: '2'},
-          {id: '4', num: '6'},
-          {id: '5', num: '8'}
+          // {id: '1', num: '2'},
+          // {id: '4', num: '6'},
+          // {id: '2', num: '8'},
+          // {id: '1', num: '2'},
+          // {id: '4', num: '6'},
+          // {id: '2', num: '8'},
+          // {id: '2', num: '2'},
+          // {id: '4', num: '6'},
+          // {id: '5', num: '8'}
         ]
       }, 0)
+    },
+    getEnergy (id) {
+      console.log(id)
     }
   },
-  mounted () {
+  created () {
+    let getGevel = localStorage.getItem('user_level')
+    let token = localStorage.getItem('token')
+    switch (getGevel) {
+      case '1':
+        this.level = 'SG星球居民'
+        break;
+      case '2':
+        this.level = 'SG青铜时代'
+        break;
+      case '3':
+        this.level = 'SG白银时代'
+        break;
+      case '4':
+        this.level = 'SG黄金时代'
+        break;
+      case '5':
+        this.level = 'SG钻石时代'
+        break;
+    }
+    this.$http.get(url + 'notGet?token='+token)
+    // 未开采K矿
+    .then(response => {
+      // console.log(response)
+      response.data.data = this.arr;
+    })
+    .catch(error => {
+      console.log(error)
+    })
     this.GetArr()
+    // 已经开采的矿石记录按月统计
+    this.$http.get(url + 'alreadyGetMonth?token='+token)
+    .then(response => {
+      console.log(response)
+      response.data.data = this.arr;
+    })
+    .catch(error => {
+      console.log(error)
+    })
   }
 }
 </script>

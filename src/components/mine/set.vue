@@ -33,6 +33,9 @@ export default {
   methods: {
     // 退出登录
     quitLogin: function () {
+      localStorage.removeItem('token')
+      localStorage.removeItem('user_id')
+      localStorage.removeItem('user_level')
       this.$router.push({
         path: '/login'
       })
