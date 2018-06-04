@@ -45,7 +45,7 @@ export default {
       btnTxt: '确认增加',
       receiver: '', // 收货人
       tel: '', // 电话
-      area: '', // 地区
+      area: [], // 地区
       detailAds: '', // 详细地址
       getAds: '',
       code: '', // 邮编
@@ -60,7 +60,7 @@ export default {
     cityPop
   },
   methods: {
-    addAds: function () {
+    addAds () {
       /*
       * 添加收货地址提交事件  添加完成 执行 go(-1)
       * */

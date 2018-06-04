@@ -45,7 +45,7 @@
             <span class="base">{{level}}</span>
           </div>
           <div class="box-con">
-            <div class="box-name">PV</div>
+            <div class="box-name">原力值</div>
             <div class="ml">
               <span>今日获得</span>
               <span class="base">{{pv}};</span>
@@ -100,9 +100,12 @@
   @import '../../assets/less/index.less';
 </style>
 <script>
+import { Toast } from 'mint-ui'
 import footGuide from '../comp/footGuide.vue'
 import collecting from './collecting.vue'
 import { url } from '../../assets/js/mobile.js'
+let getGevel = localStorage.getItem('user_level')
+let token = localStorage.getItem('token')
 export default {
   data () {
     return {
@@ -127,26 +130,30 @@ export default {
   methods: {
     GetArr () {
       setTimeout(() => {
-        this.arr = [
-          // {id: '1', num: '2'},
-          // {id: '4', num: '6'},
-          // {id: '2', num: '8'},
-          // {id: '1', num: '2'},
-          // {id: '4', num: '6'},
-          // {id: '2', num: '8'},
-          // {id: '2', num: '2'},
-          // {id: '4', num: '6'},
-          // {id: '5', num: '8'}
-        ]
+        this.arr = []
       }, 0)
     },
     getEnergy (id) {
-      console.log(id)
+      // 开采K矿
+      let form = this.$qs.stringify({
+        token: token,
+        id: id
+      })
+      this.$http.post(url+'get', form)
+      .then(response => {
+        console.log(response)
+        Toast({
+          message: response.data.msg,
+          position: 'middle',
+          duration: 2000
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
     }
   },
   created () {
-    let getGevel = localStorage.getItem('user_level')
-    let token = localStorage.getItem('token')
     switch (getGevel) {
       case '1':
         this.level = 'SG星球居民'
@@ -168,7 +175,7 @@ export default {
     // 未开采K矿
     .then(response => {
       // console.log(response)
-      response.data.data = this.arr;
+      this.arr = response.data.data;
     })
     .catch(error => {
       console.log(error)
@@ -177,8 +184,8 @@ export default {
     // 已经开采的矿石记录按月统计
     this.$http.get(url + 'alreadyGetMonth?token='+token)
     .then(response => {
-      console.log(response)
-      response.data.data = this.arr;
+      // console.log(response)
+      // response.data.data = this.arr;
     })
     .catch(error => {
       console.log(error)
