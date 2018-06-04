@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul>
+    <li>
+      <div class="goods-wrap" style="left: 0;">
+        <label class="cart-checkbox store_goods'+ this.store_id +' select'+ this.is_select +' '+ is_on_sale +'">
+          <input class="rec_id'+ this.rec_id +' store_goods_input'+ this.store_id +'" data-recId="'+ this.rec_id +'" data-storeId="'+ this.store_id +'"
+            type="checkbox" name="cart-checkbox" '+ is_checked + ' ' + is_on_sale + '>
+          <i class="checkbox-icon"></i>
+        </label>
+        <div class="goods-item clearfix">
+          <div class="goods-img">
+            <a href="detail.html?id='+ this.goods_id +'">
+              <img src="'+ this.goods_thumb +'" alt="">
+            </a>
+          </div>
+          <div class="goods-info">
+            <div class="goods-title">
+              <a href="detail.html?id='+ this.goods_id +'">'+ this.goods_name +'</a>
+            </div>
+            <div class="goods-attr">'+ this.goods_attr +'</div>
+            <div class="goods-price">
+              <span class="recid'+ this.rec_id +'">'+ this.shop_price + '
+                <em>' + is_on_sale_text + '</em>
+              </span>
+            </div>
+          </div>
+          <div class="number-update clearfix">
+            <span class="subtract" data-goodsId="'+ this.goods_id +'" data-recId="'+ this.rec_id +'" data-price="'+ this.shop_price +'">
+              <i class="subtract-icon"></i>
+            </span>
+            <span id="'+ this.rec_id +'" class="number recid'+ this.rec_id +'">'+ this.goods_number +'</span>
+            <span class="add" data-goodsId="'+ this.goods_id +'" data-recId="'+ this.rec_id +'"
+              data-price="'+ this.shop_price +'">
+              <i class="add-icon"></i>
+            </span>
+          </div>
+        </div>
+        <a data-recid="'+ this.rec_id +'" class="delete-btn" href="javascript:;">
+          <span>删除</span>
+        </a>
+      </div>
+    </li>
+  </ul>
+</body>
+
+</html>

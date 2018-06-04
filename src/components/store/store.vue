@@ -12,7 +12,7 @@
         <router-link to="/">
           <i class="icon icon-car"></i>
         </router-link>
-        <router-link to="/">
+        <router-link to="myOrder">
           <i class="icon icon-order"></i>
         </router-link>
       </div>

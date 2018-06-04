@@ -30,6 +30,8 @@ import applypop from '@/components/comp/applyPop'
 import city from '@/components/comp/city'
 import realName from '@/components/mine/realName'
 import bindBankCard from '@/components/mine/bindBankCard'
+import myOrder from '@/components/store/myOrder'
+import confirmOrder from '@/components/store/confirmOrder'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -142,6 +144,16 @@ export default new Router({
       path: '/bindBankCard', // 实名认证
       name: 'bindBankCard',
       component: bindBankCard
+    },
+    {
+      path: '/myOrder', // 我的商城订单
+      name: 'myOrder',
+      component: myOrder
+    },
+    {
+      path: '/confirmOrder', // 确认订单
+      name: 'confirmOrder',
+      component: confirmOrder
     },
     {
       path: '/car',
