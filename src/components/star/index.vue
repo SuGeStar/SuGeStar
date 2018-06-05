@@ -174,22 +174,17 @@ export default {
     this.$http.get(url + 'notGet?token='+token)
     // 未开采K矿
     .then(response => {
-      // console.log(response)
+      console.log(response)
       this.arr = response.data.data;
     })
     .catch(error => {
       console.log(error)
     })
     this.GetArr()
-    // 已经开采的矿石记录按月统计
-    this.$http.get(url + 'alreadyGetMonth?token='+token)
-    .then(response => {
-      // console.log(response)
-      // response.data.data = this.arr;
-    })
-    .catch(error => {
-      console.log(error)
-    })
+    if ( !token ) {
+      this.$router.push('/login')
+      return false
+    }
   }
 }
 </script>
