@@ -1,97 +1,97 @@
-.property-tab{
+.property-tab {
   margin-top: .81rem;
   border-top: 1px #e8e8e8 solid;
 }
-.asc{
+.asc {
   font-size: .26rem!important;
 }
-.property-container{
+.property-container {
   width: 100%;
   height: auto;
   margin-top: .05rem;
 }
-.pc-head-container{
+.pc-head-container {
   height: 2.18rem;
   background: url("../image/assets_bg.png") no-repeat center;
   position: relative;
 }
-.pc-head-container p{
+.pc-head-container p {
   font-size: .26rem;
   color: white;
-  padding:.2rem 0 .2rem .3rem;
+  padding: .2rem 0 .2rem .3rem;
 }
-.pc-head-title{
+.pc-head-title {
   font-size: 0.2rem!important;
-  color: rgba(255, 255, 255, 0.9)!important;
+  color: rgba(255, 255, 255, 0.9) !important;
 }
-.pc-head-num span:nth-child(1){
+.pc-head-num span:nth-child(1) {
   font-size: .3rem;
   letter-spacing: 1px;
 }
-.smelting{
+.smelting {
   font-size: .2rem!important;
   margin-right: .2rem;
   color: white;
 }
-.pc-head-freeze{
+.pc-head-freeze {
   position: absolute;
   width: 100%;
   height: .72rem;
   border-top: 1px rgba(232, 232, 232, 0.47) solid;
 }
-.pc-head-freeze p{
+.pc-head-freeze p {
   font-size: .2rem;
 }
-.pc-head-freeze p span{
+.pc-head-freeze p span {
   font-size: .3rem;
   display: inline-block;
   padding-right: .3rem;
   background: url("../image/freeze.png") no-repeat 98% 30%;
   background-size: .2rem auto;
 }
-.pc-record-container{
+.pc-record-container {
   width: 100%;
   height: auto;
   background: white;
 }
-.pc-record-title{
+.pc-record-title {
   font-size: 0.3rem;
   color: #666666;
   padding: .2rem .25rem;
   border-bottom: 1px rgba(0, 0, 0, 0.58) solid;
 }
-.pc-record-list{
+.pc-record-list {
   width: 94%;
   padding: 0 3%;
   height: 1.29rem;
   border-bottom: 1px #e8e8e8 solid;
 }
 .pc-record-list-container,
-.pc-record-list-data{
+.pc-record-list-data {
   width: 50%;
   height: 100%;
 }
-.pc-record-list-data{
+.pc-record-list-data {
   width: 40%;
 }
-.pc-record-list-container p{
+.pc-record-list-container p {
   padding-left: .3rem;
 }
-.pc-record-list-title{
+.pc-record-list-title {
   font-size: .26rem;
   color: #333333;
   line-height: .8rem;
 }
-.pc-record-list-time{
+.pc-record-list-time {
   font-size: 0.22rem;
   color: rgba(153, 153, 153, 0.8);
 }
-.pc-record-list-data{
+.pc-record-list-data {
   text-align: right;
   line-height: 1.29rem;
   font-size: .28rem;
 }
-.am_near_shop_all{
+.am_near_shop_all {
   width: 100%;
   height: .6rem;
   background: url(../image/title_line.png) no-repeat center;

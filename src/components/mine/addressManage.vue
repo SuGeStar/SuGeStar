@@ -6,8 +6,8 @@
     </div>
     <div class="ads-container">
       <div class="ads-list" v-for="(ads,ix) in addressList" :key="ix" @click="action(ads)">
-        <p class="ads_name_tel">{{ads.name}} {{ads.tel}}</p>
-        <p class="ads_ads"><span v-if="ads.def == 1">【默认】</span>{{ads.area}}{{ads.ads}}</p>
+        <p class="ads_name_tel">{{ads.name}} {{ads.phone}}</p>
+        <p class="ads_ads"><span v-if="ads.is_default == 1">【默认】</span>{{ads.province}} {{ads.city}} {{ads.area}} {{ads.detail}}</p>
         <transition name="deleteIt">
           <p class="ads-delete" @click.stop="deleteIt(addressList,ix,ads)" v-if="show"></p>
         </transition>
@@ -20,43 +20,13 @@
 </template>
 
 <script>
+import { url } from '../../assets/js/mobile.js'
+import { Toast } from 'mint-ui'
+let token = localStorage.getItem('token')
 export default {
   data () {
     return {
-      token: '',
-      addressList: [
-        {
-          name: '张3',
-          tel: '15233001234',
-          area: '河南省 南阳市 卧龙区 ',
-          ads: '车站南路 中达明淯新城E区',
-          def: '1',
-          mal_code: '000000'
-        },
-        {
-          name: '李4',
-          tel: '15233001234',
-          area: '河南省 南阳市 卧龙区 ',
-          ads: '车站南路 中达明淯新城E区',
-          def: '0',
-          mal_code: '000000'
-        },
-        {
-          name: '王5',
-          tel: '15233001234',
-          area: '河南省 南阳市 卧龙区 ',
-          ads: '车站南路 中达明淯新城E区',
-          def: '0',
-          mal_code: '000000'
-        },
-        {
-          name: '赵6',
-          tel: '15233001234',
-          area: '河南省 南阳市 卧龙区 ',
-          ads: '车站南路 中达明淯新城E区',
-          def: '0',
-          mal_code: '000000'
-        }],
+      addressList: [],
       del: false,
       delTxt: '编辑',
       show: false,
@@ -95,8 +65,15 @@ export default {
       })
     }
   },
-  mounted () {
-    // console.log(this.$route.params)
+  created () {
+    this.$http.get(url + 'myAddress?token='+token)
+    .then(response => {
+      console.log(response)
+      this.addressList = response.data.data
+    })
+    .catch(error => {
+      console.log(error)
+    })
   }
 }
 </script>
