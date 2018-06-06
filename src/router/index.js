@@ -36,6 +36,7 @@ Vue.use(Router)
 Vue.use(VueClipboard)
 
 export default new Router({
+  mode: 'history',
   routes: [
     { path: '/',
       redirect: 'index'
@@ -43,6 +44,7 @@ export default new Router({
     {
       path: '/index',
       name: 'index',
+      meta: { requiresAuth: true },
       component: index
     },
     {

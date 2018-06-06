@@ -106,6 +106,7 @@ import collecting from './collecting.vue'
 import { url } from '../../assets/js/mobile.js'
 let getGevel = localStorage.getItem('user_level')
 let token = localStorage.getItem('token')
+
 export default {
   data () {
     return {
@@ -181,9 +182,8 @@ export default {
       console.log(error)
     })
     this.GetArr()
-    if ( !token ) {
+    if (!token) {
       this.$router.push('/login')
-      return false
     }
   }
 }
