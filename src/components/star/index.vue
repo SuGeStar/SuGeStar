@@ -14,15 +14,15 @@
         <div class="index-classfiy">
           <ul class="list">
             <li>
-              <router-link to="/miji">
-                <img src="../../assets/image/index-miji.png" alt="">
-                <p>星球秘籍</p>
+              <router-link to="/myProperty">
+                <img src="../../assets/image/index-zichan.png" alt="">
+                <p>我的资产</p>
               </router-link>
             </li>
             <li>
-              <router-link to="/speed">
-                <img src="../../assets/image/index-speed.png" alt="">
-                <p>加速器</p>
+              <router-link to="/miji">
+                <img src="../../assets/image/index-miji.png" alt="">
+                <p>星球秘籍</p>
               </router-link>
             </li>
             <li>
@@ -39,7 +39,7 @@
         <div class="box-title">
           <h3>挖宝数据</h3>
         </div>
-        <div class="box-content">
+        <!-- <div class="box-content">
           <div class="box-con">
             <div class="box-name">当前等级</div>
             <span class="base">{{level}}</span>
@@ -89,6 +89,58 @@
               <span class="index-all">{{allsgolden}}</span>
             </div>
           </div>
+        </div> -->
+        <div class="content-box">
+          <ul>
+            <li class="content-list">
+              <div class="con-title">
+                S矿石
+                <i class="icon icon-tips"></i>
+              </div>
+              <div class="con-desc">
+                <div class="desc today">
+                  <p>今日获得</p>
+                  <span>{{today_owen}}</span>
+                </div>
+                <div class="desc">
+                  <p>累计获得</p>
+                  <span>{{all_owen}}</span>
+                </div>
+              </div>
+            </li>
+            <li class="content-list">
+              <div class="con-title">
+                星币
+                <i class="icon icon-tips"></i>
+              </div>
+              <div class="con-desc">
+                <div class="desc today">
+                  <p>今日获得</p>
+                  <span>{{today_owen}}</span>
+                </div>
+                <div class="desc">
+                  <p>累计获得</p>
+                  <span>{{all_owen}}</span>
+                </div>
+              </div>
+            </li>
+            <li class="content-list">
+              <div class="con-title">
+                收益
+                <i class="icon icon-tips"></i>
+              </div>
+              <div class="con-desc">
+                <div class="desc today">
+                  <p>今日获得</p>
+                  <span>{{today_owen}}</span>
+                </div>
+                <div class="desc">
+                  <p>累计获得</p>
+                  <span>{{all_owen}}</span>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
       <!-- 底部 -->
@@ -110,6 +162,8 @@ let token = localStorage.getItem('token')
 export default {
   data () {
     return {
+      today_owen: '1000000',
+      all_owen: '1000000',
       level: 'SG青铜时代',
       pv: '1000',
       k: '1000',

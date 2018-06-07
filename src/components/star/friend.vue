@@ -13,11 +13,11 @@
             <router-link to="/firInvitation">
               <div class="invitation fir-invit">
                 <div class="invit-pople">
-                  <span>一级邀请人数：</span>
+                  <span>原始居民邀请人数：</span>
                   <span>{{first.pople}}人>></span>
                 </div>
                 <div class="invit-ylz">
-                  <p>累计获得原力值</p>
+                  <p>累计获得星币（个）</p>
                   <span class="ylz-color">{{first.ylz}}</span>
                 </div>
               </div>
@@ -25,11 +25,11 @@
             <router-link to="/secInvitation">
               <div class="invitation sec-invit">
                 <div class="invit-pople">
-                  <span>二级邀请人数：</span>
+                  <span>星球居民邀请人数：</span>
                   <span>{{second.pople}}人>></span>
                 </div>
                 <div class="invit-ylz">
-                  <p>累计获得原力值</p>
+                  <p>累计获得收益（元）</p>
                   <span class="ylz-color">{{second.ylz}}</span>
                 </div>
               </div>
