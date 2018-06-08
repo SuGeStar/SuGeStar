@@ -23,6 +23,7 @@ import release from '@/components/mine/release/'
 import addressManage from '@/components/mine/addressManage/'
 import set from '@/components/mine/set/'
 import addAddress from '@/components/mine/addAddress/'
+import editAddress from '@/components/mine/editAddress/'
 import proofIdent from '@/components/mine/proofIdent'
 import resetPassword from '@/components/mine/resetPassword'
 import details from '@/components/store/details'
@@ -131,6 +132,11 @@ export default new Router({
       path: '/addAddress/:way', // 新增地址管理
       name: 'addAddress',
       component: addAddress
+    },
+    {
+      path: '/editAddress/:id', // 编辑地址管理
+      name: 'editAddress',
+      component: editAddress
     },
     {
       path: '/set', // 设置
