@@ -4,13 +4,15 @@
       <a href="javascript:window.history.go(-1)"></a>
       确认订单
     </div>
-    <div class="clear_address_container">
-      <p class="receiver_name fl">zhuzi</p>
-      <div class="receiver_address_container fl">
-        <p class="receiver_phone">15738669091</p>
-        <p class="receiver_address">内蒙古 呼伦贝尔 根河市 离开的咖啡机 螺丝刀开房就 </p>
+    <router-link to="/addressManage/set">
+      <div class="clear_address_container">
+        <p class="receiver_name fl">zhuzi</p>
+        <div class="receiver_address_container fl">
+          <p class="receiver_phone">15738669091</p>
+          <p class="receiver_address">内蒙古 呼伦贝尔 根河市 离开的咖啡机 螺丝刀开房就 </p>
+        </div>
       </div>
-    </div>
+    </router-link>
     <!--订单信息-->
     <div class="clear_order_list_container">
       <div class="each_order_list ng-scope">
@@ -46,21 +48,23 @@
           <p class="applyPriceCommon ng-binding">或 ¥50.00 + 积分58.00</p>
         </div>
       </div>
-      <div class="go_apply fl" @click="goApply()">去支付</div>
+      <div class="go_apply fl" @click="goApply">去支付</div>
     </div>
   </div>
 </template>
 
 <script>
+let token = localStorage.getItem('token')
 export default {
   data () {
     return {
-      token: ''
+      
     }
   },
   methods: {
     goApply () {
       // todo
+      this.$router.push('/apply')
     }
   },
   mounted () {
