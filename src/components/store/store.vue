@@ -17,7 +17,7 @@
         </router-link>
       </div>
     </header>
-    <mt-swipe class="swiper" :auto="4000">
+    <mt-swipe class="swiper" :show-indicators="false" :auto="4000">
       <mt-swipe-item><img src="../../assets/image/banner01.png"></mt-swipe-item>
       <mt-swipe-item><img src="../../assets/image/banner02.png"></mt-swipe-item>
       <mt-swipe-item><img src="../../assets/image/banner01.png"></mt-swipe-item>
