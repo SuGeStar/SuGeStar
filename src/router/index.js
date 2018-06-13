@@ -33,6 +33,7 @@ import realName from '@/components/mine/realName'
 import bindBankCard from '@/components/mine/bindBankCard'
 import myOrder from '@/components/store/myOrder'
 import confirmOrder from '@/components/store/confirmOrder'
+import search from '@/components/store/search'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -202,6 +203,11 @@ export default new Router({
       path: '/city', // 三级城市联动
       name: 'city',
       component: city
+    },
+    {
+      path: '/search', // 三级城市联动
+      name: 'search',
+      component: search
     }
   ]
 })

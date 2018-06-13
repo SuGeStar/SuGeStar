@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="iconBox">
-        <router-link to="/">
+        <router-link to="/car">
           <i class="icon icon-car"></i>
         </router-link>
         <router-link to="myOrder">
