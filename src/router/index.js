@@ -23,6 +23,7 @@ import release from '@/components/mine/release/'
 import addressManage from '@/components/mine/addressManage/'
 import set from '@/components/mine/set/'
 import addAddress from '@/components/mine/addAddress/'
+import editAddress from '@/components/mine/editAddress/'
 import proofIdent from '@/components/mine/proofIdent'
 import resetPassword from '@/components/mine/resetPassword'
 import details from '@/components/store/details'
@@ -32,10 +33,12 @@ import realName from '@/components/mine/realName'
 import bindBankCard from '@/components/mine/bindBankCard'
 import myOrder from '@/components/store/myOrder'
 import confirmOrder from '@/components/store/confirmOrder'
+import search from '@/components/store/search'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
 export default new Router({
+  mode: 'history',
   routes: [
     { path: '/',
       redirect: 'index'
@@ -43,6 +46,7 @@ export default new Router({
     {
       path: '/index',
       name: 'index',
+      meta: { requiresAuth: true },
       component: index
     },
     {
@@ -131,6 +135,11 @@ export default new Router({
       component: addAddress
     },
     {
+      path: '/editAddress/:id', // 编辑地址管理
+      name: 'editAddress',
+      component: editAddress
+    },
+    {
       path: '/set', // 设置
       name: 'set',
       component: set
@@ -194,6 +203,11 @@ export default new Router({
       path: '/city', // 三级城市联动
       name: 'city',
       component: city
+    },
+    {
+      path: '/search', // 三级城市联动
+      name: 'search',
+      component: search
     }
   ]
 })

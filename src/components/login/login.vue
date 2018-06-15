@@ -22,11 +22,6 @@ export default {
       password: ''
     }
   },
-  created () {
-    if (localStorage.getItem('token')) {
-      this.$router.push('/index')
-    }
-  },
   methods: {
     login () {
       if (!this.username) {
@@ -43,9 +38,8 @@ export default {
             localStorage.setItem('user_id', response.data.data.userinfo.id)
             localStorage.setItem('user_level', response.data.data.userinfo.level)
             localStorage.setItem('token', response.data.data.token)
-            if (localStorage.getItem('token')) {
-              this.$router.push('/index')
-            }
+            window.location.href = '/index'
+            // this.$router.push('/index')
           }
         })
         .catch(error => {

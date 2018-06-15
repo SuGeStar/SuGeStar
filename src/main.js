@@ -24,3 +24,19 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // 这里判断用户是否登录，我例子中是验证本地存储是否有token
+    if (!localStorage.token) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+    // 确保一定要调用 next()
+  }
+})

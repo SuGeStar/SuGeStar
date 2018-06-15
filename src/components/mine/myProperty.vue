@@ -93,6 +93,6 @@ export default {
 }
 </script>
 
-<style scoped>
-  @import '../../assets/less/myProperty.less';
+<style lang="less" scoped>
+@import '../../assets/less/myProperty.less';
 </style>

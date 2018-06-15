@@ -47,9 +47,18 @@ export default {
     action (ads) {
       if (!this.del) {
         if (this.way === 'set') {
-          localStorage.setItem('choseAds', JSON.stringify(ads))
+          // localStorage.setItem('choseAds', JSON.stringify(ads))
           this.$router.push({
-            path: '/addAddress/modify/'
+            name: 'editAddress',
+            params: {
+              id: ads.id,
+              name: ads.name,
+              phone: ads.phone,
+              addressArea: ads.province + ads.city + ads.area,
+              detail: ads.detail,
+              postcode: ads.postcode,
+              is_default: ads.is_default
+            }
           })
         } else {
           console.log('返回结算页')
