@@ -181,10 +181,10 @@ export default {
       console.log(error)
     })
     this.GetArr()
-    if ( !token ) {
+   /* if ( !token ) {
       this.$router.push('/login')
       return false
-    }
+    }*/
   }
 }
 </script>
