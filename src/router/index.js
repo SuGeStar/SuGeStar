@@ -7,7 +7,6 @@ import speed from '@/components/star/speed'
 import friend from '@/components/star/friend'
 import firInvitation from '@/components/star/firInvitation'
 import secInvitation from '@/components/star/secInvitation'
-import demo from '@/components/star/demo'
 import store from '@/components/store/store'
 import classify from '@/components/store/classify'
 import list from '@/components/store/list'
@@ -173,11 +172,6 @@ export default new Router({
       path: '/apply',
       name: 'apply',
       component: apply
-    },
-    {
-      path: '/demo',
-      name: 'demo',
-      component: demo
     },
     {
       path: '/proofIdent/:id', // 验证身份

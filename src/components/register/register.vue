@@ -14,15 +14,15 @@
         <i :class="{'haveSend':isSend}" @click="sendCode">{{verificationCodeTxt}}</i>
       </div>
       <div><span>登录密码</span><input type="password" placeholder="字母数字组合" v-model="loginPsd"></div>
-      <div><span>支付密码</span><input type="password" placeholder="6位数字" v-model="applyPsd"></div>
-      <div  @click="cityPop">
+      <!-- <div><span>支付密码</span><input type="password" placeholder="6位数字" v-model="applyPsd"></div> -->
+      <!-- <div  @click="cityPop">
         <span>所属地区</span>
         <input type="text" placeholder="请选择省 市 县" v-model="locations" :readonly="true">
       </div>
       <div><span>优品账号</span><input type="text" placeholder="请输入您的优品账号" v-model="YPAccount"></div>
       <div><span>真实姓名</span><input type="text" placeholder="请输入您的真实姓名" v-model="realName"></div>
       <div><span>身份证号</span><input type="text" placeholder="请输入身份证号码" v-model="IDNumber"></div>
-      <div><span>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span><input type="text" placeholder="给自己起个名字吧~" v-model="nickName"></div>
+      <div><span>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span><input type="text" placeholder="给自己起个名字吧~" v-model="nickName"></div> -->
     </div>
     <mt-button type="default" @click="register">注册</mt-button>
     <cityPop v-model="addressArr" @hidden="hiddenShow" v-show="cityPop_up"></cityPop>
@@ -41,18 +41,18 @@ export default {
       verificationCode: '',
       verificationCodeTxt: '发送验证码',
       loginPsd: '',
-      applyPsd: '',
-      locations: [],
-      YPAccount: '',
-      realName: '',
-      IDNumber: '',
-      nickName: '',
+      // applyPsd: '',
+      // locations: [],
+      // YPAccount: '',
+      // realName: '',
+      // IDNumber: '',
+      // nickName: '',
       addressArr: [],
       isSend: false,
       // 手机号
-      z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/,
+      // z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/,
       // 身份证
-      z_idNumber: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
+      // z_idNumber: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
       cityPop_up: false,
       // imgSrc: 'http://www.sugebei.com/verify',
       pic: ''

@@ -11,15 +11,11 @@
           <div class="user-property-data">
             <ul>
               <li>
-                <p class="user-property-notice">当前原力值</p>
-                <p class="user-property-num">{{userPV}}</p>
-              </li>
-              <li>
-                <p class="user-property-notice">当前SG矿币</p>
+                <p class="user-property-notice">金币</p>
                 <p class="user-property-num">{{userSGK}}</p>
               </li>
               <li>
-                <p class="user-property-notice">当前SG金币</p>
+                <p class="user-property-notice">星币</p>
                 <p class="user-property-num">{{userSGK}}</p>
               </li>
             </ul>
