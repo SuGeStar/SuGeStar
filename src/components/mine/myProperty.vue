@@ -12,44 +12,81 @@
       <mt-tab-container v-model="selected">
         <mt-tab-container-item :id="0" class="property-container">
           <div class="pc-head-container">
-            <p class="pc-head-title">K矿石总数</p>
-            <p class="pc-head-num"><span>{{total}}</span><router-link :to="{path:'/smelting/S'}"><span class="smelting fr">熔炼 >></span></router-link></p>
+            <p class="pc-head-title">星币总数</p>
+            <p class="pc-head-num"><span>{{total}}</span>
+            <!-- <router-link :to="{path:'/smelting/S'}"><span class="smelting fr"></span></router-link> -->
+            </p>
+            <p class="pc-head-freeze">
+              冻结星币：{{freeze}}
+              <i class="icon icon-lock"></i>
+            </p>
           </div>
-          <p class="am_near_shop_all">
-            明细
-          </p>
-          <mt-cell class="propertyCell" v-for="(item,index) in propertyContainer" :key="index" :title="item.times" :value="'总计：'+item.total_ore"  is-link @click="propertyCell(index)"></mt-cell>
+          <div class="pc-content">
+            <p class="pc-content-title">收支记录</p>
+            <ul>
+              <li v-for="(list,index) in lists" :key="index">
+                <div class="list list-header">
+                  <div>
+                    <span>{{list.date}}</span>
+                    <span>总收入：{{list.total}}</span>
+                  </div>
+                  <i class="icon icon-pull"></i>
+                </div>
+                <div class="list list-content">
+                  <div class="list-subnav">
+                    <p>日常领取</p>
+                    <span>{{list.time}}</span>
+                  </div>
+                  <p>{{list.earn}}</p>
+                </div>
+                <div class="list list-content">
+                  <div class="list-subnav">
+                    <p>邀请收益</p>
+                    <span>2018-05-22 15:06</span>
+                  </div>
+                  <p>+0.0001</p>
+                </div>
+              </li>
+            </ul>
+          </div>
         </mt-tab-container-item>
         <mt-tab-container-item :id="1" class="property-container">
           <div class="pc-head-container">
-            <p class="pc-head-title">S矿石总数</p>
-            <p class="pc-head-num"><span>99999.00</span><router-link :to="{path:'/smelting/S'}"><span class="smelting fr">熔炼 >></span></router-link></p>
+            <p class="pc-head-title">金币总数</p>
+            <p class="pc-head-num"><span>99999.00</span><router-link :to="{path:'/smelting/S'}"><span class="smelting fr">释放/赠送/充值 >></span></router-link></p>
+            <p class="pc-head-freeze">
+              冻结金币：{{gold}}
+              <i class="icon icon-lock"></i>
+            </p>
           </div>
-          <mt-cell v-for="(item,index) in propertyContainer" :key="index" :title="item.times" :label="item.total_ore" is-link></mt-cell>
-        </mt-tab-container-item>
-        <mt-tab-container-item :id="2" class="property-container">
-          <div class="pc-head-container">
-            <p class="pc-head-title">SG矿币总数</p>
-            <p class="pc-head-num"><span>99999.00</span><router-link :to="{path:'/smelting/S'}"><span class="smelting fr">熔炼 >></span></router-link></p>
+          <div class="pc-content">
+            <p class="pc-content-title">收支记录</p>
+            <ul>
+              <li v-for="(list,index) in lists" :key="index">
+                <div class="list list-header">
+                  <div>
+                    <span>{{list.date}}</span>
+                    <span>总收入：{{list.total}}</span>
+                  </div>
+                  <i class="icon icon-pull"></i>
+                </div>
+                <div class="list list-content">
+                  <div class="list-subnav">
+                    <p>日常领取</p>
+                    <span>{{list.time}}</span>
+                  </div>
+                  <p>{{list.earn}}</p>
+                </div>
+                <div class="list list-content">
+                  <div class="list-subnav">
+                    <p>邀请收益</p>
+                    <span>2018-05-22 15:06</span>
+                  </div>
+                  <p>+0.0001</p>
+                </div>
+              </li>
+            </ul>
           </div>
-          <mt-cell v-for="(item,index) in propertyContainer" :key="index" :title="item.times" :label="item.total_ore" is-link></mt-cell>
-        </mt-tab-container-item>
-        <mt-tab-container-item :id="3" class="property-container">
-          <div class="pc-head-container">
-            <p class="pc-head-title">SG金币总数</p>
-            <p class="pc-head-num"><span>99999.00</span><router-link :to="{path:'/smelting/S'}"><span class="smelting fr">熔炼 >></span></router-link></p>
-          </div>
-          <mt-cell v-for="(item,index) in propertyContainer" :key="index" :title="item.times" :label="item.total_ore" is-link></mt-cell>
-        </mt-tab-container-item>
-        <mt-tab-container-item :id="4" class="property-container">
-          <div class="pc-head-container">
-            <p class="pc-head-title">原力值</p>
-            <p class="pc-head-num"><span>99999.00</span><router-link :to="{path:'/smelting/S'}"><span class="smelting fr">熔炼 >></span></router-link></p>
-            <div class="pc-head-freeze">
-              <p>冻结原力值：<span>10000.00</span></p>
-            </div>
-          </div>
-          <mt-cell v-for="(item,index) in propertyContainer" :key="index" :title="item.times" :label="item.total_ore" is-link></mt-cell>
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
@@ -63,22 +100,38 @@ export default {
   data () {
     return {
       selected: 0,
-      total: '',
-      tabTxt: ['K矿石', 'S矿石', 'SG矿币', 'SG金币', '原力值'],
-      propertyContainer: []
+      freeze: '1000',
+      gold: '1000',
+      total: '1000',
+      tabTxt: ['星币', '金币'],
+      propertyContainer: [],
+      lists: [
+        {
+          date: '2018-06',
+          total: '235',
+          time: '2018-05-22 15:06',
+          earn: '+0.0001'
+        },
+        {
+          date: '2018-05',
+          total: '235',
+          time: '2018-05-22 15:06',
+          earn: '+0.0001'
+        }
+      ]
     }
   },
   created () {
     // 已经开采的矿石记录按月统计
-    this.$http.get(url + 'alreadyGetMonth?token='+token)
-    .then(response => {
-      console.log(response)
-      this.propertyContainer = response.data.data
-      this.total = response.data.total
-    })
-    .catch(error => {
-      console.log(error)
-    })
+    // this.$http.get(url + 'alreadyGetMonth?token='+token)
+    // .then(response => {
+    //   console.log(response)
+    //   this.propertyContainer = response.data.data
+    //   this.total = response.data.total
+    // })
+    // .catch(error => {
+    //   console.log(error)
+    // })
   },
   watch: {
     selected (value) {

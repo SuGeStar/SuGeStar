@@ -1,3 +1,4 @@
+// out:false
 .property-tab{
   margin-top: .81rem;
   border-top: 1px #e8e8e8 solid;
@@ -34,10 +35,13 @@
   color: white;
 }
 .pc-head-freeze{
-  position: absolute;
+  position: relative;
   width: 100%;
   height: .72rem;
   border-top: 1px rgba(232, 232, 232, 0.47) solid;
+  i{
+    position: absolute;
+  }
 }
 .pc-head-freeze p{
   font-size: .2rem;
@@ -103,4 +107,37 @@
 }
 .propertyCell {
   border-bottom: 1px solid #f0f0f0;
+}
+
+.pc-content{
+  margin-top: 0.2rem;
+  .pc-content-title{
+    padding: 0.2rem;
+    background-color: #fff;
+  }
+  ul{
+    li{
+      margin-top: 0.2rem;
+      background-color: #fff;
+      .list{
+        display: flex;
+        justify-content: space-between;
+        padding: 0.2rem;
+        border-bottom: 1px solid #e8e8e8;
+      }
+      .list-content{
+       align-items: center;
+       .list-subnav{
+         p{
+          font-size: 0.27rem;
+          color: #333333;
+         }
+         span{
+          font-size: 0.22rem;
+          color: rgba(153, 153, 153, 0.8);
+         }
+       }
+      }
+    }
+  }
 }

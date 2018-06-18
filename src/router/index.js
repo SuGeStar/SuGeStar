@@ -29,6 +29,7 @@ import details from '@/components/store/details'
 import applypop from '@/components/comp/applyPop'
 import city from '@/components/comp/city'
 import realName from '@/components/mine/realName'
+import changename from '@/components/mine/changeName'
 import bindBankCard from '@/components/mine/bindBankCard'
 import myOrder from '@/components/store/myOrder'
 import confirmOrder from '@/components/store/confirmOrder'
@@ -199,9 +200,14 @@ export default new Router({
       component: city
     },
     {
-      path: '/search', // 三级城市联动
+      path: '/search',
       name: 'search',
       component: search
+    },
+    {
+      path: '/changename',
+      name: 'changename',
+      component: changename
     }
   ]
 })

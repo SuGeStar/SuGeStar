@@ -8,7 +8,9 @@
         <router-link to="/addressManage/set"><p>收货地址管理</p></router-link>
       </div>
       <div class="set-list">
-        <p>修改昵称</p>
+        <router-link to="/changename">
+          <p>修改昵称</p>
+        </router-link>
       </div>
       <div class="set-list">
         <router-link :to="{path:'/proofIdent/1'}">
@@ -21,7 +23,10 @@
         </router-link>
       </div>
       <div class="set-list">
-        <p>个人资料</p>
+        <p>个人资料管理</p>
+      </div>
+      <div class="set-list">
+        <p>银行卡管理</p>
       </div>
     </div>
     <mt-button type="primary" plain size="normal" @click="quitLogin">退出登录</mt-button>
