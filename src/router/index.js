@@ -36,6 +36,7 @@ import confirmOrder from '@/components/store/confirmOrder'
 import search from '@/components/store/search'
 import information from '@/components/mine/information'
 import team from '@/components/mine/team'
+import relation from '@/components/mine/relation'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -220,6 +221,11 @@ export default new Router({
       path: '/team',
       name: 'team',
       component: team
+    },
+    {
+      path: '/relation',
+      name: 'relation',
+      component: relation
     }
   ]
 })
