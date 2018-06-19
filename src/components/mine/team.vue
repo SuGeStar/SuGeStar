@@ -101,7 +101,7 @@ export default {
       });
       mychart.on('click', function (params) {
           console.log(params)
-          window.open('/')
+          window.location.href = '/relation'
       });
     }
   }
