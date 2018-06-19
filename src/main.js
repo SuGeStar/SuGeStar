@@ -8,6 +8,7 @@ import router from './router'
 import './assets/less/base.less'
 import axios from 'axios'
 import qs from 'qs'
+import echarts from 'echarts'
 // import VueResource from 'vue-resource'
 import mobile from './assets/js/mobile.js'
 
@@ -17,6 +18,7 @@ Vue.use(MintUI)
 Vue.prototype.$http = axios
 Vue.prototype.$qs = qs
 Vue.prototype.$mobile = mobile
+Vue.prototype.$echarts = echarts
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -34,6 +34,8 @@ import bindBankCard from '@/components/mine/bindBankCard'
 import myOrder from '@/components/store/myOrder'
 import confirmOrder from '@/components/store/confirmOrder'
 import search from '@/components/store/search'
+import information from '@/components/mine/information'
+import team from '@/components/mine/team'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -208,6 +210,16 @@ export default new Router({
       path: '/changename',
       name: 'changename',
       component: changename
+    },
+    {
+      path: '/information',
+      name: 'information',
+      component: information
+    },
+    {
+      path: '/team',
+      name: 'team',
+      component: team
     }
   ]
 })

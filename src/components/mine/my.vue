@@ -60,7 +60,7 @@
             </router-link>
           </li>
           <li>
-            <router-link to="/">
+            <router-link to="/team">
               <div class="store-list">
                 <div class="store-name">
                   <i class="icon icon-team"></i>

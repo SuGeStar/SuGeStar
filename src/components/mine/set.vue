@@ -23,7 +23,9 @@
         </router-link>
       </div>
       <div class="set-list">
-        <p>个人资料管理</p>
+        <router-link to="/information">
+          <p>个人资料管理</p>
+        </router-link>
       </div>
       <div class="set-list">
         <p>银行卡管理</p>
