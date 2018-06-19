@@ -20,3 +20,8 @@
     </router-link>
   </mt-tabbar>
 </template>
+<style lang="less" scoped>
+  .tabbar{
+    justify-content: space-around;
+  }
+</style>
