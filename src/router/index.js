@@ -7,7 +7,6 @@ import speed from '@/components/star/speed'
 import friend from '@/components/star/friend'
 import firInvitation from '@/components/star/firInvitation'
 import secInvitation from '@/components/star/secInvitation'
-import demo from '@/components/star/demo'
 import store from '@/components/store/store'
 import classify from '@/components/store/classify'
 import list from '@/components/store/list'
@@ -30,10 +29,13 @@ import details from '@/components/store/details'
 import applypop from '@/components/comp/applyPop'
 import city from '@/components/comp/city'
 import realName from '@/components/mine/realName'
+import changename from '@/components/mine/changeName'
 import bindBankCard from '@/components/mine/bindBankCard'
 import myOrder from '@/components/store/myOrder'
 import confirmOrder from '@/components/store/confirmOrder'
 import search from '@/components/store/search'
+import information from '@/components/mine/information'
+import team from '@/components/mine/team'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -175,11 +177,6 @@ export default new Router({
       component: apply
     },
     {
-      path: '/demo',
-      name: 'demo',
-      component: demo
-    },
-    {
       path: '/proofIdent/:id', // 验证身份
       name: 'proofIdent',
       component: proofIdent
@@ -205,9 +202,24 @@ export default new Router({
       component: city
     },
     {
-      path: '/search', // 三级城市联动
+      path: '/search',
       name: 'search',
       component: search
+    },
+    {
+      path: '/changename',
+      name: 'changename',
+      component: changename
+    },
+    {
+      path: '/information',
+      name: 'information',
+      component: information
+    },
+    {
+      path: '/team',
+      name: 'team',
+      component: team
     }
   ]
 })

@@ -13,7 +13,7 @@
             <router-link to="/firInvitation">
               <div class="invitation fir-invit">
                 <div class="invit-pople">
-                  <span>原始居民邀请人数：</span>
+                  <span>我的邀请：</span>
                   <span>{{first.pople}}人>></span>
                 </div>
                 <div class="invit-ylz">
@@ -25,7 +25,7 @@
             <router-link to="/secInvitation">
               <div class="invitation sec-invit">
                 <div class="invit-pople">
-                  <span>星球居民邀请人数：</span>
+                  <span>我的推荐：</span>
                   <span>{{second.pople}}人>></span>
                 </div>
                 <div class="invit-ylz">
