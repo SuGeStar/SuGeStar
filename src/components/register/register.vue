@@ -2,7 +2,7 @@
   <div class="reg-container">
     <h3 class="reg-title">SG星球注册</h3>
     <div class="reg-form">
-      <div><span>推荐编号</span><input type="text" placeholder="" :readonly="true" v-model="recommendCode"></div>
+      <div><span>推荐编号</span><input type="text" placeholder="" :readonly="true" v-model="invite_code"></div>
       <div><span>手机号码</span><input type="number" placeholder="请输入手机号码" v-model="phoneNum"></div>
       <!-- <div><span>图片验证</span>
         <input type="text" placeholder="图片验证码" v-model="pic" class="verificationCode">
@@ -36,7 +36,7 @@ import cityPop from '../comp/city.vue'
 export default {
   data () {
     return {
-      recommendCode: '13193835328',
+      invite_code: 'U9RU3FC2',
       phoneNum: '',
       verificationCode: '',
       verificationCodeTxt: '发送验证码',
@@ -50,7 +50,7 @@ export default {
       addressArr: [],
       isSend: false,
       // 手机号
-      // z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/,
+      z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/,
       // 身份证
       // z_idNumber: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
       cityPop_up: false,
@@ -179,52 +179,45 @@ export default {
         Toast('请输入6-16位密码')
         return false
       }
-      if (!this.applyPsd) {
-        Toast('请填写支付密码!')
-        return false
-      } else if (this.applyPsd.length !== 6 || isNaN(this.applyPsd)) {
-        Toast('请填写6位数字密码!')
-        return false
-      }
-      if (!this.locations) {
-        Toast('请选择归属地!')
-        return false
-      } 
-      if (!this.YPAccount) {
-        Toast('请填写优品账号!')
-        return false
-      } else if (!this.z_tel.test(this.YPAccount)) {
-        Toast('您的优品账号有误')
-        return false
-      }
-      if (!this.realName) {
-        Toast('请填写真实姓名!')
-        return false
-      } 
-      if (!this.IDNumber) {
-        Toast('请填写身份证号码!')
-        return false
-      } else if (!this.z_idNumber.test(this.IDNumber)) {
-        Toast('请填写正确的身份证号码!')
-        return false;
-      }
-      if (!this.nickName) {
-        Toast('给自己起一个昵称吧~')
-        return false
-      }
+      // if (!this.applyPsd) {
+      //   Toast('请填写支付密码!')
+      //   return false
+      // } else if (this.applyPsd.length !== 6 || isNaN(this.applyPsd)) {
+      //   Toast('请填写6位数字密码!')
+      //   return false
+      // }
+      // if (!this.locations) {
+      //   Toast('请选择归属地!')
+      //   return false
+      // } 
+      // if (!this.YPAccount) {
+      //   Toast('请填写优品账号!')
+      //   return false
+      // } else if (!this.z_tel.test(this.YPAccount)) {
+      //   Toast('您的优品账号有误')
+      //   return false
+      // }
+      // if (!this.realName) {
+      //   Toast('请填写真实姓名!')
+      //   return false
+      // } 
+      // if (!this.IDNumber) {
+      //   Toast('请填写身份证号码!')
+      //   return false
+      // } else if (!this.z_idNumber.test(this.IDNumber)) {
+      //   Toast('请填写正确的身份证号码!')
+      //   return false;
+      // }
+      // if (!this.nickName) {
+      //   Toast('给自己起一个昵称吧~')
+      //   return false
+      // }
       let form = this.$qs.stringify({
-        recommender: this.recommendCode,
+        invite_code: this.invite_code,
         password: this.loginPsd,
-        payment_password: this.applyPsd,
         code: this.verificationCode,
         phone: this.phoneNum,
-        realname: this.realName,
-        nickname: this.nickName,
-        id_number: this.IDNumber,
-        yp_account: this.YPAccount,
-        province: this.addressArr[0],
-        city: this.addressArr[1],
-        area: this.addressArr[2]
+        realname: this.realName
       })
       this.$http.post(url+'register', form)
       .then(response => {
