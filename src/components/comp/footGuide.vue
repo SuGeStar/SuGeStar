@@ -21,7 +21,13 @@
   </mt-tabbar>
 </template>
 <style lang="less" scoped>
+<<<<<<< HEAD
   .tabbar{
     justify-content: space-around;
   }
+=======
+.tabbar{
+  justify-content: space-around;
+}
+>>>>>>> 1683bdc6d1002ce127dda36dbf217e2fdc44745b
 </style>
