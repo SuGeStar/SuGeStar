@@ -50,7 +50,7 @@ export default {
       addressArr: [],
       isSend: false,
       // 手机号
-      // z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/,
+      z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/,
       // 身份证
       // z_idNumber: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
       cityPop_up: false,
@@ -167,7 +167,7 @@ export default {
       } if (this.z_tel.test(this.phoneNum) === false) {
         Toast('您的电话号码格式有误!')
         return false
-      } 
+      }
       if (!this.verificationCode) {
         Toast('请填写验证码!')
         return false
@@ -189,7 +189,7 @@ export default {
       if (!this.locations) {
         Toast('请选择归属地!')
         return false
-      } 
+      }
       if (!this.YPAccount) {
         Toast('请填写优品账号!')
         return false
@@ -200,7 +200,7 @@ export default {
       if (!this.realName) {
         Toast('请填写真实姓名!')
         return false
-      } 
+      }
       if (!this.IDNumber) {
         Toast('请填写身份证号码!')
         return false
