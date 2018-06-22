@@ -34,6 +34,17 @@
           </ul>
         </div>
       </div>
+      <!-- 团队看板 -->
+      <div class="index-box">
+        <div class="box-title">
+          <h3>团队看板</h3>
+        </div>
+        <div class="content-box">
+          <div class="">
+            
+          </div>
+        </div>
+      </div>
       <!-- 挖宝数据 -->
       <div class="index-box">
         <div class="box-title">
