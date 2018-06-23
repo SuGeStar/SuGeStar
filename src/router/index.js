@@ -31,6 +31,7 @@ import city from '@/components/comp/city'
 import realName from '@/components/mine/realName'
 import changename from '@/components/mine/changeName'
 import bindBankCard from '@/components/mine/bindBankCard'
+import addBankCard from '@/components/mine/addBankCard'
 import myOrder from '@/components/store/myOrder'
 import confirmOrder from '@/components/store/confirmOrder'
 import search from '@/components/store/search'
@@ -226,6 +227,11 @@ export default new Router({
       path: '/relation',
       name: 'relation',
       component: relation
+    },
+    {
+      path: '/addBankCard',
+      name: 'addBankCard',
+      component: addBankCard
     }
   ]
 })
