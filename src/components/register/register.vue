@@ -167,7 +167,7 @@ export default {
       } if (this.z_tel.test(this.phoneNum) === false) {
         Toast('您的电话号码格式有误!')
         return false
-      } 
+      }
       if (!this.verificationCode) {
         Toast('请填写验证码!')
         return false
@@ -179,39 +179,6 @@ export default {
         Toast('请输入6-16位密码')
         return false
       }
-      // if (!this.applyPsd) {
-      //   Toast('请填写支付密码!')
-      //   return false
-      // } else if (this.applyPsd.length !== 6 || isNaN(this.applyPsd)) {
-      //   Toast('请填写6位数字密码!')
-      //   return false
-      // }
-      // if (!this.locations) {
-      //   Toast('请选择归属地!')
-      //   return false
-      // } 
-      // if (!this.YPAccount) {
-      //   Toast('请填写优品账号!')
-      //   return false
-      // } else if (!this.z_tel.test(this.YPAccount)) {
-      //   Toast('您的优品账号有误')
-      //   return false
-      // }
-      // if (!this.realName) {
-      //   Toast('请填写真实姓名!')
-      //   return false
-      // } 
-      // if (!this.IDNumber) {
-      //   Toast('请填写身份证号码!')
-      //   return false
-      // } else if (!this.z_idNumber.test(this.IDNumber)) {
-      //   Toast('请填写正确的身份证号码!')
-      //   return false;
-      // }
-      // if (!this.nickName) {
-      //   Toast('给自己起一个昵称吧~')
-      //   return false
-      // }
       let form = this.$qs.stringify({
         invite_code: this.invite_code,
         password: this.loginPsd,
@@ -237,7 +204,7 @@ export default {
     },
     cityPop () {
       this.cityPop_up = true
-    },
+     }
     // 请求图片验证
     // changePic () {
     //   var time = new Date().getTime()

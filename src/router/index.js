@@ -39,6 +39,7 @@ import information from '@/components/mine/information'
 import team from '@/components/mine/team'
 import relation from '@/components/mine/relation'
 import upgrade from '@/components/mine/upgrade'
+import giftBag from '@/components/store/giftBag'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -238,6 +239,11 @@ export default new Router({
       path: '/upgrade',
       name: 'upgrade',
       component: upgrade
+    },
+    {
+      path: '/giftBag', // 礼包
+      name: 'giftBag',
+      component: giftBag
     }
   ]
 })
