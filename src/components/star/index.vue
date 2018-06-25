@@ -59,7 +59,7 @@
       </div>
       <!-- 大礼包 -->
         <div class="gift-box">
-          <router-link to="/">
+          <router-link to="/giftBag">
             <img src="http://attach.bbs.miui.com/forum/201507/01/101024hpo6hqhvt77dhsqq.jpg" alt="">
           </router-link>
         </div>

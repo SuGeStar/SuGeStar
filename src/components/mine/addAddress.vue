@@ -65,27 +65,12 @@ export default {
   },
   methods: {
     setDefault () {
-      if (this.is_default === 0) {
+      if (this.is_default === 0 || this.is_default == false) {
         this.is_default = 1
       }else {
         this.is_default = 0
       }
-      // let form = this.$qs.stringify({
-      //   token: token,
-      //   id: modify_.id
-      // })
-      // this.$http.post(url+'setDefault', form)
-      // .then(response => {
-      //   console.log(response)
-      //   Toast({
-      //     message: response.data.msg,
-      //     position: 'middle',
-      //     duration: 2000
-      //   })
-      // })
-      // .catch(error => {
-      //   console.log(error)
-      // })
+      return(this.is_default)
     },
     addAds () {
       /*
@@ -115,6 +100,11 @@ export default {
         Toast('请填写邮编！')
         return false
       }
+      console.log(this.setDefault())
+      if (this.setDefault()) {
+        console.log('1111')
+        console.log(this.is_default)
+      }
       let form = this.$qs.stringify({
         name: this.receiver,
         phone: this.phone,
@@ -123,7 +113,8 @@ export default {
         token: token,
         province: this.addressArea.split(' ')[0],
         city: this.addressArea.split(' ')[1],
-        area: this.addressArea.split(' ')[2]
+        area: this.addressArea.split(' ')[2],
+        is_default: this.is_default
       })
       this.$http.post(url+'adressAdd', form)
       .then(response => {
@@ -149,6 +140,8 @@ export default {
       let that = this
       that.cityPop_up = false
     }
+  },
+  created () {
   },
   mounted () {
     // if (this.way === 'modify') {
