@@ -18,7 +18,7 @@
               </li>
               <li>
                 <p class="user-property-notice">星币</p>
-                <p class="user-property-num">{{userSGK}}</p>
+                <p class="user-property-num">{{userST}}</p>
               </li>
             </ul>
           </div>
@@ -71,7 +71,7 @@
             </router-link>
           </li>
           <li>
-            <router-link to="/">
+            <router-link to="/upgrade">
               <div class="store-list">
                 <div class="store-name">
                   <i class="icon icon-update"></i>
@@ -114,9 +114,10 @@
   @import '../../assets/less/my.less';
 </style>
 <script>
+import { url } from '../../assets/js/mobile.js'
 import footGuide from '../comp/footGuide.vue'
 // import { Navbar, TabItem } from 'mint-ui'
-
+let token = localStorage.getItem('token')
 export default {
   components: {
     footGuide
@@ -127,9 +128,23 @@ export default {
       userNickName: 'づ塟送じò ぴéā', // 用户昵称
       userOrder: '100203', // 用户排名
       userPV: '11002', // 用户原力值
-      userSGK: '46546', // 用户SG矿币
-      userSGJ: '465465' // 用户SG金币
+      userSGK: '46546', // 用户SG金币
+      userST: '465465' // 用户SG星币
     }
+  },
+  created () {
+    this.$http.get(url + 'availableGold?token=' + token)
+        .then(response => {
+        console.log(response.data)
+        if (response.data.code == 200) {
+          this.userSGK = response.data.data.gold
+        } else {
+          
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 }
 </script>

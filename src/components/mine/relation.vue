@@ -130,3 +130,23 @@
 <style lang="less" scoped>
 @import '../../assets/less/relation.less';
 </style>
+<script>
+import { url } from '../../assets/js/mobile.js'
+let token = localStorage.getItem('token')
+export default {
+  data () {
+    return {
+      
+    }
+  },
+  created () {
+    this.$http.get(url + 'touchs?token='+token)
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+}
+</script>

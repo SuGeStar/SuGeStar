@@ -48,86 +48,28 @@
             </div>
           </div>
           <div class="team-content">
-            <!-- <vm-progress :percentage="70"></vm-progress>
-            <vm-progress :percentage="30" strokeColor="purple"></vm-progress> -->
-             <vm-progress class="progress" v-for="(progress,index) in progressBox" :key="index" :percentage="progress.percentage" :text-inside="true" :stroke-width="18" :strokeColor="progress.color"></vm-progress>
+            <router-link :to="{path: '/relation/' + index}" class="floor" v-for="(progress,index) in progressBox" :key="index">
+              <div class="team-floor">
+                第{{progress.floor}}层
+              </div>
+              <vm-progress class="progress"  :percentage="progress.percentage" :text-inside="true" :stroke-width="18" :strokeColor="progress.color"></vm-progress>
+            </router-link>
           </div>
         </div>
       </div>
+      <!-- 大礼包 -->
+        <div class="gift-box">
+          <router-link to="/">
+            <img src="http://attach.bbs.miui.com/forum/201507/01/101024hpo6hqhvt77dhsqq.jpg" alt="">
+          </router-link>
+        </div>
       <!-- 挖宝数据 -->
       <div class="index-box">
         <div class="box-title">
           <h3>挖宝数据</h3>
         </div>
-        <!-- <div class="box-content">
-          <div class="box-con">
-            <div class="box-name">当前等级</div>
-            <span class="base">{{level}}</span>
-          </div>
-          <div class="box-con">
-            <div class="box-name">原力值</div>
-            <div class="ml">
-              <span>今日获得</span>
-              <span class="base">{{pv}};</span>
-              <span>累计获得</span>
-              <span class="index-all">{{allpv}}</span>
-            </div>
-          </div>
-          <div class="box-con">
-            <div class="box-name">K矿石</div>
-            <div class="ml">
-              <span>今日获得</span>
-              <span class="base">{{k}};</span>
-              <span>累计获得</span>
-              <span class="index-all">{{allk}}</span>
-            </div>
-          </div>
-          <div class="box-con">
-            <div class="box-name">SG矿币</div>
-            <div class="ml">
-              <span>今日获得</span>
-              <span class="base">{{sg}};</span>
-              <span>累计获得</span>
-              <span class="index-all">{{allsg}}</span>
-            </div>
-          </div>
-          <div class="box-con">
-            <div class="box-name">S矿石</div>
-            <div class="ml">
-              <span>今日获得</span>
-              <span class="base">{{s}};</span>
-              <span>累计获得</span>
-              <span class="index-all">{{alls}}</span>
-            </div>
-          </div>
-          <div class="box-con">
-            <div class="box-name">SG金币</div>
-            <div class="ml">
-              <span>今日获得</span>
-              <span class="base">{{sgolden}};</span>
-              <span>累计获得</span>
-              <span class="index-all">{{allsgolden}}</span>
-            </div>
-          </div>
-        </div> -->
         <div class="content-box">
           <ul>
-            <li class="content-list">
-              <div class="con-title">
-                S矿石
-                <i class="icon icon-tips"></i>
-              </div>
-              <div class="con-desc">
-                <div class="desc today">
-                  <p>今日获得</p>
-                  <span>{{today_owen}}</span>
-                </div>
-                <div class="desc">
-                  <p>累计获得</p>
-                  <span>{{all_owen}}</span>
-                </div>
-              </div>
-            </li>
             <li class="content-list">
               <div class="con-title">
                 星币
@@ -146,7 +88,7 @@
             </li>
             <li class="content-list">
               <div class="con-title">
-                收益
+                金币
                 <i class="icon icon-tips"></i>
               </div>
               <div class="con-desc">
@@ -203,18 +145,27 @@ export default {
       allpeo: "10",
       progressBox: [
         {
+          floor: '1',
           percentage: 100,
           color: '#a288d2'
         },
         {
+          floor: '2',
           percentage: 75,
           color: '#03a8f7'
         },
         {
+          floor: '3',
           percentage: 50,
           color: '#f0b026'
         },
         {
+          floor: '4',
+          percentage: 25,
+          color: '#1ad3a7'
+        },
+        {
+          floor: '5',
           percentage: 25,
           color: '#1ad3a7'
         }

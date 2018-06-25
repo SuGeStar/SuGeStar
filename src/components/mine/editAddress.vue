@@ -70,7 +70,8 @@ export default {
     this.addressArea = this.$route.params.addressArea,
     this.detail = this.$route.params.detail,
     this.code = this.$route.params.postcode,
-    this.is_default = this.$route.params.is_default
+    this.is_default = this.$route.params.is_defaults
+
   },
   methods: {
     cityPop () {
@@ -87,7 +88,7 @@ export default {
 
     },
     addAds () {
-
+      
     }
   }
 }
