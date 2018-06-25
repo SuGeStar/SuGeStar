@@ -70,22 +70,22 @@ export default {
       }else {
         this.is_default = 0
       }
-      let form = this.$qs.stringify({
-        token: token,
-        id: modify_.id
-      })
-      this.$http.post(url+'setDefault', form)
-      .then(response => {
-        console.log(response)
-        Toast({
-          message: response.data.msg,
-          position: 'middle',
-          duration: 2000
-        })
-      })
-      .catch(error => {
-        console.log(error)
-      })
+      // let form = this.$qs.stringify({
+      //   token: token,
+      //   id: modify_.id
+      // })
+      // this.$http.post(url+'setDefault', form)
+      // .then(response => {
+      //   console.log(response)
+      //   Toast({
+      //     message: response.data.msg,
+      //     position: 'middle',
+      //     duration: 2000
+      //   })
+      // })
+      // .catch(error => {
+      //   console.log(error)
+      // })
     },
     addAds () {
       /*
@@ -133,6 +133,7 @@ export default {
           position: 'middle',
           duration: 2000
         })
+        this.$router.back(-1)
       })
       .catch(error => {
         console.log(error)
@@ -150,24 +151,24 @@ export default {
     }
   },
   mounted () {
-    if (this.way === 'modify') {
-      this.title = '修改收货地址'
-      this.btnTxt = '确认修改'
-      this.receiver = modify_.name;
-      this.phone = modify_.phone;
-      this.addressArea = modify_.province + modify_.city + modify_.area;
-      this.detail = modify_.detail;
-      this.code = modify_.postcode;
-      this.is_default = modify_.is_default
-      // if (modify_.is_default === 1) {
-      //   this.is_default = true
-      // } else {
-      //   this.is_default = false
-      // }
-    } else {
-      this.title = '新增收货地址'
-      this.btnTxt = '确认增加'
-    }
+    // if (this.way === 'modify') {
+    //   this.title = '修改收货地址'
+    //   this.btnTxt = '确认修改'
+    //   this.receiver = modify_.name;
+    //   this.phone = modify_.phone;
+    //   this.addressArea = modify_.province + modify_.city + modify_.area;
+    //   this.detail = modify_.detail;
+    //   this.code = modify_.postcode;
+    //   this.is_default = modify_.is_default
+    //   if (modify_.is_default === 1) {
+    //     this.is_default = true
+    //   } else {
+    //     this.is_default = false
+    //   }
+    // } else {
+    //   this.title = '新增收货地址'
+    //   this.btnTxt = '确认增加'
+    // }
   }
 }
 </script>

@@ -38,6 +38,7 @@ import search from '@/components/store/search'
 import information from '@/components/mine/information'
 import team from '@/components/mine/team'
 import relation from '@/components/mine/relation'
+import upgrade from '@/components/mine/upgrade'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -224,7 +225,7 @@ export default new Router({
       component: team
     },
     {
-      path: '/relation',
+      path: '/relation/:id',
       name: 'relation',
       component: relation
     },
@@ -232,6 +233,11 @@ export default new Router({
       path: '/addBankCard',
       name: 'addBankCard',
       component: addBankCard
+    },
+    {
+      path: '/upgrade',
+      name: 'upgrade',
+      component: upgrade
     }
   ]
 })
