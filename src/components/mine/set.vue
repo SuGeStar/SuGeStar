@@ -28,7 +28,9 @@
         </router-link>
       </div>
       <div class="set-list">
-        <p>银行卡管理</p>
+        <router-link to="bindBankCard">
+          <p>银行卡管理</p>
+        </router-link>
       </div>
     </div>
     <mt-button type="primary" plain size="normal" @click="quitLogin">退出登录</mt-button>

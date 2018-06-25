@@ -92,6 +92,17 @@
               </div>
             </router-link>
           </li>
+           <li>
+            <router-link to="/giftBag">
+              <div class="store-list">
+                <div class="store-name">
+                  <i class="icon icon-setting"></i>
+                  大礼包
+                </div>
+                <i class="icon icon-right"></i>
+              </div>
+            </router-link>
+          </li>
         </ul>
       </div>
       <!--底部-->
