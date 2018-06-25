@@ -31,12 +31,14 @@ import city from '@/components/comp/city'
 import realName from '@/components/mine/realName'
 import changename from '@/components/mine/changeName'
 import bindBankCard from '@/components/mine/bindBankCard'
+import addBankCard from '@/components/mine/addBankCard'
 import myOrder from '@/components/store/myOrder'
 import confirmOrder from '@/components/store/confirmOrder'
 import search from '@/components/store/search'
 import information from '@/components/mine/information'
 import team from '@/components/mine/team'
 import relation from '@/components/mine/relation'
+import giftBag from '@/components/store/giftBag'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -226,6 +228,17 @@ export default new Router({
       path: '/relation',
       name: 'relation',
       component: relation
+    },
+    {
+      path: '/addBankCard',
+      name: 'addBankCard',
+      component: addBankCard
+    },
+    {
+      path: '/giftBag', // 礼包
+      name: 'giftBag',
+      component: giftBag
     }
+
   ]
 })

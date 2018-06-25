@@ -204,7 +204,7 @@ export default {
     },
     cityPop () {
       this.cityPop_up = true
-    }
+     }
     // 请求图片验证
     // changePic () {
     //   var time = new Date().getTime()

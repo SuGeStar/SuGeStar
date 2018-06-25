@@ -18,9 +18,11 @@
         </div>
       </div>
     </div>
-    <div class="addBC">
-      添加银行卡
-    </div>
+    <router-link to="addBankCard">
+      <div class="addBC">
+        添加银行卡
+      </div>
+    </router-link>
   </div>
 </template>
 

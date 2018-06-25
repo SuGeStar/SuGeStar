@@ -11,9 +11,11 @@ import qs from 'qs'
 import echarts from 'echarts'
 // import VueResource from 'vue-resource'
 import mobile from './assets/js/mobile.js'
+import Progress from 'vue-multiple-progress'
 
 Vue.config.productionTip = false
 Vue.use(MintUI)
+Vue.use(Progress)
 // Vue.use(VueResource)
 Vue.prototype.$http = axios
 Vue.prototype.$qs = qs

@@ -39,9 +39,18 @@
         <div class="box-title">
           <h3>团队看板</h3>
         </div>
-        <div class="content-box">
-          <div class="">
-            
+        <div class="content-box team">
+          <div class="team-head">
+            <p>提示：第{{floor}}层另招募{{lesspeo}}人，即可拿到{{moregold}}金币</p>
+            <div class="team-exist">
+              <p>直推人数：<span>{{invitpeo}}</span></p>
+              <p>旗下人数：<span>{{allpeo}}</span></p>
+            </div>
+          </div>
+          <div class="team-content">
+            <!-- <vm-progress :percentage="70"></vm-progress>
+            <vm-progress :percentage="30" strokeColor="purple"></vm-progress> -->
+             <vm-progress class="progress" v-for="(progress,index) in progressBox" :key="index" :percentage="progress.percentage" :text-inside="true" :stroke-width="18" :strokeColor="progress.color"></vm-progress>
           </div>
         </div>
       </div>
@@ -186,7 +195,30 @@ export default {
       allsg: '10000',
       alls: '10000',
       allsgolden: '10000',
-      arr: []
+      arr: [],
+      floor: "2",
+      lesspeo: "3",
+      moregold: "350",
+      invitpeo: "3",
+      allpeo: "10",
+      progressBox: [
+        {
+          percentage: 100,
+          color: '#a288d2'
+        },
+        {
+          percentage: 75,
+          color: '#03a8f7'
+        },
+        {
+          percentage: 50,
+          color: '#f0b026'
+        },
+        {
+          percentage: 25,
+          color: '#1ad3a7'
+        }
+      ]
     }
   },
   components: {
