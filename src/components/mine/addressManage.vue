@@ -4,17 +4,19 @@
       <a href="javascript:window.history.go(-1)"></a>收货地址管理
       <span class="ads-mag" @click="deleteAds">{{delTxt}}</span>
     </div>
-    <div class="ads-container">
-      <div class="ads-list" v-for="(ads,ix) in addressList" :key="ix" @click="action(ads)">
-        <p class="ads_name_tel">{{ads.name}} {{ads.phone}}</p>
-        <p class="ads_ads"><span v-if="ads.is_default == 1">【默认】</span>{{ads.province}} {{ads.city}} {{ads.area}} {{ads.detail}}</p>
-        <transition name="deleteIt">
-          <p class="ads-delete" @click.stop="deleteIt(addressList,ix,ads)" v-if="show"></p>
-        </transition>
+    <div class="addressManage">
+      <div class="ads-container">
+        <div class="ads-list" v-for="(ads,ix) in addressList" :key="ix" @click="action(ads)">
+          <p class="ads_name_tel">{{ads.name}} {{ads.phone}}</p>
+          <p class="ads_ads"><span v-if="ads.is_default == 1">【默认】</span>{{ads.province}} {{ads.city}} {{ads.area}} {{ads.detail}}</p>
+          <transition name="deleteIt">
+            <p class="ads-delete" @click.stop="deleteIt(addressList,ix,ads)" v-if="show"></p>
+          </transition>
+        </div>
       </div>
-    </div>
-    <div class="add-address" @click="goAds">
-      新增收货地址
+      <div class="add-address" @click="goAds">
+        新增收货地址
+      </div>
     </div>
   </div>
 </template>
@@ -39,7 +41,6 @@ export default {
       this.show = !this.show
       if (this.del) {
         this.delTxt = '完成'
-        console.log(this.$refs)
       } else {
         this.delTxt = '编辑'
       }
@@ -47,14 +48,13 @@ export default {
     action (ads) {
       if (!this.del) {
         if (this.way === 'set') {
-          // localStorage.setItem('choseAds', JSON.stringify(ads))
           this.$router.push({
             name: 'editAddress',
             params: {
               id: ads.id,
               name: ads.name,
               phone: ads.phone,
-              addressArea: ads.province + ads.city + ads.area,
+              addressArea: [ads.province, ads.city, ads.area],
               detail: ads.detail,
               postcode: ads.postcode,
               is_default: ads.is_default
@@ -66,6 +66,27 @@ export default {
       }
     },
     deleteIt (ele, idx, ads) {
+      console.log(ads.id)
+      // 删除地址
+      let form = this.$qs.stringify({
+        address_id: ads.id,
+        token: token
+      })
+      this.$http.post(url + 'delMyAddress',form)
+      .then(response => {
+        console.log(response)
+        Toast({
+          message: response.data.msg,
+          position: 'middle',
+          duration: 2000
+        })
+        setTimeout(() => {
+          this.$router.go(0)
+        }, 2000);
+      })
+      .catch(error => {
+        console.log(error)
+      })
       ele.splice(idx, 1)
     },
     goAds () {
@@ -75,6 +96,7 @@ export default {
     }
   },
   created () {
+    // 获取收货地址
     this.$http.get(url + 'myAddress?token='+token)
     .then(response => {
       console.log(response)
