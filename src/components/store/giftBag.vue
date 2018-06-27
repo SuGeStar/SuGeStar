@@ -14,7 +14,7 @@
                 </div>
                 <p class="gift-name">{{eachGift.giftName}}</p>
                 <p class="gift-price">{{eachGift.giftPrice}}22</p>
-                <input type="radio" name="gift">
+                <input type="radio" :name="eachGift.giftBelong">
              </div>
           </div>
         </div>
