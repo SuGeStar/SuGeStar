@@ -1,16 +1,18 @@
 <template>
   <div class="wrapper">
     <div class="moduleHead">
-      <a href="javascript:window.history.go(-1)"></a>熔炼
+      <a href="javascript:window.history.go(-1)"></a>赠送/释放/充值
     </div>
     <div class="smelting-container">
-      <p>可用{{oreType}}矿石：<span>{{SGNum}}</span></p>
-      <p>熔炼{{oreType}}数量</p>
+      <p>可用SG金币：<span>{{SGNum}}</span></p>
+      <p>释放/赠送/充值金币数量</p>
       <div class="smelting-withdraw">
         <span>¥</span><input type="number" v-model="smeltingNum">
       </div>
-      <p class="max-smelting">当前可熔炼最大值为：{{max_smelting}} 个</p>
-      <mt-button type="default" @click="smelting">熔炼</mt-button>
+      <!-- <p class="max-smelting">当前可熔炼最大值为：{{max_smelting}} 个</p> -->
+      <mt-button @click="smelting">释放</mt-button>
+      <mt-button @click="give">转增</mt-button>
+      <mt-button @click="recharge">充值</mt-button>
     </div>
   </div>
 </template>
@@ -20,31 +22,43 @@ import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
-      oreType: this.$route.params.id,
       smeltingNum: '',
       SGNum: 32,
-      max_smelting: 0
+      // max_smelting: 0
     }
   },
   methods: {
-    smelting: function () {
-      var finalSmelting = this.smeltingNum
-      if (!finalSmelting) {
-        Toast('熔炼数量不能为空!')
+    smelting () {
+      if (this.smeltingNum == '') {
+        this.judge()
         return false
       }
-      if (parseInt(finalSmelting) > this.max_smelting) {
-        Toast('熔炼数量有误，请认真核对!')
+      this.$router.push('/release/0/'+this.smeltingNum)
+    },
+    give () {
+      if (this.smeltingNum == '') {
+        this.judge()
+        return false
+      }
+      this.$router.push('/release/1/'+this.smeltingNum)
+    },
+    recharge () {
+      this.judge()
+    },
+    judge () {
+      var finalSmelting = this.smeltingNum
+      if (!finalSmelting) {
+        Toast('数量不能为空!')
+        return false
+      }
+      if (parseInt(finalSmelting) > this.SGNum) {
+        Toast('数量有误，请认真核对!')
         return false
       }
     }
   },
   mounted () {
-    if (this.oreType == 'K') {
-      this.max_smelting = Math.floor((this.SGNum) / 5)
-    } else {
-      this.max_smelting = this.SGNum
-    }
+
   }
 }
 </script>

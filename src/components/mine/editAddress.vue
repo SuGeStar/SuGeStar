@@ -51,10 +51,13 @@ export default {
       receiver: '', // 收货人
       phone: '', // 电话
       addressArea: [], // 地区
+      province: '',
+      city: '',
+      area: '',
       detail: '', // 详细地址
       getAds: '',
       code: '', // 邮编
-      is_default: 0,
+      is_default: '', 
       address: '',
       cityPop_up: false,
       z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/,
@@ -70,8 +73,7 @@ export default {
     this.addressArea = this.$route.params.addressArea,
     this.detail = this.$route.params.detail,
     this.code = this.$route.params.postcode,
-    this.is_default = this.$route.params.is_defaults
-
+    this.is_default = this.$route.params.is_default
   },
   methods: {
     cityPop () {
@@ -85,10 +87,71 @@ export default {
       that.cityPop_up = false
     },
     setDefault () {
-
+      if (this.is_default === 0 || this.is_default == false) {
+        this.is_default = 1
+      }else {
+        this.is_default = 0
+      }
+      
+      return(this.is_default)
     },
     addAds () {
-      
+      if (!this.receiver) {
+        Toast('请填写收货人！')
+        return false
+      }
+      if (!this.phone) {
+        Toast('请填写收货电话！')
+        return false
+      }
+      if (this.z_tel.test(this.phone) === false) {
+        Toast('您的电话号码格式错误！')
+        return false
+      }
+      if (!this.addressArea) {
+        Toast('请选择收货地址！')
+        return false
+      }
+      if (!this.detail) {
+        Toast('请填写详细地址！')
+        return false
+      }
+      if (!this.code) {
+        Toast('请填写邮编！')
+        return false
+      }
+      if ( this.is_default == false) {
+        this.is_default = 0
+      } else {
+        this.is_default = 1
+      }
+      console.log(this.is_default)
+      let form = this.$qs.stringify({
+        id: this.$route.params.id,
+        name: this.receiver,
+        phone: this.phone,
+        postcode: this.code,
+        detail: this.detail,
+        token: token,
+        province: this.addressArea[0],
+        city: this.addressArea[1],
+        area: this.addressArea[2],
+        is_default: this.is_default
+      })
+    // 编辑收货地址
+      this.$http.post(url+'addressEdit', form)
+      .then(response => {
+        console.log(response)
+        Toast({
+          message: response.data.msg,
+          position: 'middle',
+          duration: 2000
+        })
+        this.$router.back(-1)
+      })
+      .catch(error => {
+        console.log(error)
+      })
     }
   }
 }

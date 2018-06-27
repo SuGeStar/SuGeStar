@@ -9,7 +9,9 @@
         <div class="smelting-withdraw" v-if="isS">
           <span class="account_s">账号：</span><input type="number" v-model="sendTel">
         </div>
-        <div class="chose-bank" v-if="isR">到账银行卡 <span>中国工商银行(尾号1234)</span></div>
+        <router-link to="/bindBankCard" v-if="isR">
+          <div class="chose-bank" >到账银行卡 <span>中国工商银行(尾号1234)</span></div>
+        </router-link>
         <mt-button type="default" class="releaseBtn" @click="releaseBtn">{{titleTxt}}</mt-button>
       </div>
     </div>
@@ -54,6 +56,7 @@ export default {
   },
   mounted () {
     var way = parseInt(this.$route.params.way)
+    console.log(way)
     switch (way) {
       case 0:
         this.titleTxt = '释放'

@@ -121,7 +121,7 @@ export default new Router({
       component: releaseOrSend
     },
     {
-      path: '/smelting/:id', // 熔炼
+      path: '/smelting', // 熔炼
       name: 'smelting',
       component: smelting
     },

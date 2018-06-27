@@ -27,6 +27,8 @@
 </template>
 
 <script>
+let token = localStorage.getItem('token')
+import { url } from '../../assets/js/mobile.js'
 import { MessageBox } from 'mint-ui'
 export default {
   data () {
@@ -78,6 +80,14 @@ export default {
     }
   },
   mounted () {
+    this.$http.get(url + 'getBankcard?token='+token)
+    // 获取银行卡列表
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error)
+    })
   }
 }
 </script>
