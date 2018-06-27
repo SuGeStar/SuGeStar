@@ -40,6 +40,8 @@ export default {
             localStorage.setItem('token', response.data.data.token)
             window.location.href = '/index'
             // this.$router.push('/index')
+          } else {
+            Toast(response.data.msg)
           }
         })
         .catch(error => {

@@ -120,7 +120,6 @@ import collecting from './collecting.vue'
 import { url } from '../../assets/js/mobile.js'
 let getGevel = localStorage.getItem('user_level')
 let token = localStorage.getItem('token')
-
 export default {
   data () {
     return {
@@ -230,6 +229,14 @@ export default {
       console.log(error)
     })
     this.GetArr()
+    this.$http.get(url + 'occupancyRate?token='+token)
+    // 团队看板占比
+    .then(response => {
+      this.progressBox = response.data.data
+    })
+    .catch(error => {
+      console.log(error)
+    })
     if (!token) {
       this.$router.push('/login')
     }
