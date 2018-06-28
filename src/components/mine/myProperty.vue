@@ -53,7 +53,7 @@
         <mt-tab-container-item :id="1" class="property-container">
           <div class="pc-head-container">
             <p class="pc-head-title">金币总数</p>
-            <p class="pc-head-num"><span>99999.00</span><router-link :to="{path:'/smelting/S'}"><span class="smelting fr">释放/赠送/充值 >></span></router-link></p>
+            <p class="pc-head-num"><span>99999.00</span><router-link :to="{path:'/smelting'}"><span class="smelting fr">释放/赠送/充值 >></span></router-link></p>
             <p class="pc-head-freeze">
               冻结金币：{{gold}}
               <i class="icon icon-lock"></i>

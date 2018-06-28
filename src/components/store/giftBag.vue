@@ -14,9 +14,7 @@
                 </div>
                 <p class="gift-name">{{eachGift.giftName}}</p>
                 <p class="gift-price">{{eachGift.giftPrice}}22</p>
-
-                <input type="radio" v-model="eachGift.giftBelong">
-
+                <input type="radio" :name="eachGift.giftBelong">
              </div>
           </div>
         </div>
