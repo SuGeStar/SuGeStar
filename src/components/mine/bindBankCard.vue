@@ -1,26 +1,30 @@
 <template>
   <div class="wrapper">
-    <div class="moduleHead">
-      <a href="javascript:window.history.go(-1)"></a>
-      绑定银行卡
-    </div>
+    <mt-header fixed title="绑定银行卡">
+      <a href="/set" slot="left">
+        <mt-button icon="back"></mt-button>
+      </a>
+    </mt-header>
     <div class="card-container">
       <div class="card-list" v-for="(card, $index) in cardList" :key="$index">
-        <div class="bcImg"><img src="../../assets/image/card.png" alt=""></div>
+        <div class="bcImg">
+          <img :src="card.cardImg" alt="">
+        </div>
         <div class="bcInfo">
-          <p class="bcName">{{card.cardName}}</p>
-          <p class="bcNum">{{card.cardNum}}</p>
+          <p class="bcName">{{card.bank}}</p>
+          <p class="bcNum">{{card.card}}</p>
         </div>
         <div class="bcDo">
-          <span class="icon icon-delete" @click="deleteBC(cardList, card, $index)"></span>
-          <input type="radio" :id="$index" name="def" @click="setDef()" v-bind:checked="card.def == 1">
-          <label :for="$index"> 设为默认</label>
+          <span class="icon icon-delete" @click="deleteBC(cardList, card.id, $index)"></span>
+          <input type="radio" :id="card.id" name="def" @click="setDef(card.id)" v-bind:checked="card.is_default == 1">
+          <label :for="card.id"> 设为默认</label>
         </div>
       </div>
     </div>
     <router-link to="addBankCard">
       <div class="addBC">
-        添加银行卡
+        <img src="../../assets/image/add.png" alt="">
+        <p>添加银行卡</p>
       </div>
     </router-link>
   </div>
@@ -29,11 +33,11 @@
 <script>
 let token = localStorage.getItem('token')
 import { url } from '../../assets/js/mobile.js'
-import { MessageBox } from 'mint-ui'
+import { Toast,MessageBox } from 'mint-ui'
 export default {
   data () {
     return {
-      token: '',
+      id: '',
       cardList: [
         {
           cardImg: '',
@@ -64,18 +68,45 @@ export default {
   },
   methods: {
     // 删除银行卡
-    deleteBC (ele, card, idx) {
-      ele.splice(idx, 1)
+    deleteBC (ele, id, idx) {
+      let form = this.$qs.stringify({
+        token: token,
+        bank_id: id
+      })
+      this.$http.post(url+'delBank', form)
+      .then(response => {
+        console.log(response)
+        Toast({
+          message: response.data.msg,
+          position: 'bottom',
+          duration: 2000
+        })
+        if (response.data.code == 200) {
+          ele.splice(idx, 1)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
     },
     // 设置默认
-    setDef () {
-      // console.log('aa')
-      MessageBox.confirm('确定执行此操作?').then(action => {
-        // window.location.reload()
-        // console.log(action)
-        if (action != 'confirm') {
-          console.log('aaaa')
-        }
+    setDef (id) {
+      console.log(id)
+      let form = this.$qs.stringify({
+        token: token,
+        bank_id: id
+      })
+      this.$http.post(url+'setBankDefault', form)
+      .then(response => {
+        console.log(response)
+        Toast({
+          message: response.data.msg,
+          position: 'bottom',
+          duration: 2000
+        })
+      })
+      .catch(error => {
+        console.log(error)
       })
     }
   },
@@ -84,6 +115,10 @@ export default {
     // 获取银行卡列表
     .then(response => {
       console.log(response)
+      this.cardList = response.data.data
+      for (var i = 0; i < this.cardList.length; i++) {
+        this.cardList[i].cardImg = response.data.data[i].logo.bank_logo
+      }
     })
     .catch(error => {
       console.log(error)

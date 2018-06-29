@@ -9,108 +9,67 @@
       <div class="relation-box tabbar">
         <div class="relation-list">
           <p class="title">左区</p>
-          <div class="left-list" v-for="(relation,index) in list" :key="index">
+          <div class="left-list" v-for="(relation,index) in leftList" :key="index">
             <div class="list-box tabbar">
               <div class="left-box">
-                <p>{{relation.left.realname}}</p>
-                <span>推:{{relation.realname}}</span>
+                <p>{{relation.realname}}</p>
+                <!-- <span>推:{{relation}}</span> -->
               </div>
-              <div class="right-box">
-                <div :class="['box',isNull ? 'short' : '' ]" v-for="(child,i) in relation.left.child" :key="i">
-                  <!-- <p >{{child}}</p> -->
-                  <p v-show="isDisnull">{{child.realname}}</p>
-                  <span>推:{{relation.left.realname}}</span>
+              <div class="right-box" v-if="relation.left !== null && relation.right !== null">
+                <div class="box">
+                  <p>{{relation.left.realname}}</p>
+                  <!-- <span>推:{{relation.left}}</span> -->
+                </div>
+                <div class="box">
+                  <p>{{relation.right.realname}}</p>
+                  <!-- <span>推:{{relation.left}}</span> -->
+                </div>
+              </div>
+              <div class="right-box" v-if="relation.left == null || relation.right == null">
+                <div class="box">
+                  <p v-if="relation.left !== null">{{relation.left.realname}}</p>
+                  <p class="short" v-else @click="shortPeo(relation.id)">缺人</p>
+                  <!-- <span>推:{{relation.left}}</span> -->
+                </div>
+                <div class="box">
+                  <p v-if="relation.right !== null">{{relation.rignt.realname}}</p>
+                  <p class="short" v-else @click="shortPeo(relation.id)">缺人</p>
                 </div>
               </div>
             </div>
           </div>
-          <!-- <div class="left-list">
-            <div class="list-box tabbar">
-              <div class="left-box">
-                <p>左一</p>
-                <span>推:王三</span>
-              </div>
-              <div class="right-box">
-                <div class="box">
-                  <p>左一一</p>
-                  <span>推:王三</span>
-                </div>
-                <div class="box">
-                  <p>左一二</p>
-                  <span>推:王三</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="left-list">
-            <div class="list-box tabbar">
-              <div class="left-box">
-                <p>左一</p>
-                <span>推:王三</span>
-              </div>
-              <div class="right-box">
-                <div class="box">
-                  <p>左一一</p>
-                  <span>推:王三</span>
-                </div>
-                <div class="box short">
-                  缺人
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
         <div class="relation-list">
           <p class="title">右区</p>
-          <div class="left-list" v-for="(relation,index) in list" :key="index">
+          <div class="left-list" v-for="(relation,index) in rightList" :key="index">
             <div class="list-box tabbar">
               <div class="left-box">
-                <p>{{relation.right.realname}}</p>
-                <span>推:{{relation.realname}}</span>
+                <p>{{relation.realname}}</p>
+                <!-- <span>推:{{relation}}</span> -->
               </div>
-              <div class="right-box">
-                <div :class="['box',isNull ? 'short' : '' ]" v-for="(child,i) in relation.right.child" :key="i">
-                  <p>{{child}}</p>
-                  <span>推:{{relation.right.realname}}</span>
+              <div class="right-box" v-if="relation.left !== null && relation.right !== null">
+                <div class="box">
+                  <p>{{relation.left.realname}}</p>
+                  <!-- <span>推:{{relation.left}}</span> -->
+                </div>
+                <div class="box">
+                  <p>{{relation.right.realname}}</p>
+                  <!-- <span>推:{{relation.left}}</span> -->
+                </div>
+              </div>
+              <div class="right-box" v-if="relation.left == null || relation.right == null">
+                <div class="box">
+                  <p v-if="relation.left !== null">{{relation.left.realname}}</p>
+                  <p class="short" v-else @click="shortPeo(relation.id)">缺人</p>
+                  <!-- <span>推:{{relation.left}}</span> -->
+                </div>
+                <div class="box">
+                  <p v-if="relation.right !== null">{{relation.rignt.realname}}</p>
+                  <p class="short" v-else @click="shortPeo(relation.id)">缺人</p>
                 </div>
               </div>
             </div>
           </div>
-          <!-- <div class="left-list">
-            <div class="list-box tabbar">
-              <div class="left-box">
-                <p>右一</p>
-                <span>推:王三</span>
-              </div>
-              <div class="right-box">
-                <div class="box">
-                  <p>右一一</p>
-                  <span>推:王三</span>
-                </div>
-                <div class="box">
-                  <p>右一二</p>
-                  <span>推:王三</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="left-list">
-            <div class="list-box tabbar">
-              <div class="left-box">
-                <p>右一</p>
-                <span>推:王三</span>
-              </div>
-              <div class="right-box">
-                <div class="box">
-                  <p>右一一</p>
-                  <span>推:王三</span>
-                </div>
-                <div class="box short">
-                    缺人
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>
@@ -125,37 +84,25 @@ let token = localStorage.getItem('token')
 export default {
   data () {
     return {
-      list: [],
-      childList: [],
-      isNull: false,
-      isShow: false,
-      isDisnull: true
+      rightList: [],
+      leftList: []
     }
   },
   created () {
     this.$http.get(url + 'branches?token='+token)
     .then(response => {
       console.log(response)
-      this.list = response.data.data
-      for (var i = 0; i < this.list.length; i++) {
-        // this.childList = this.list[i].left.child
-        console.log(this.list[i].right.child)
-        if (this.list[i].left.child.left == null || this.list[i].left.child.right == null) {
-          console.log('111')
-          this.isNull = true
-          this.list[i].left.child.left = '缺人'
-          this.list[i].left.child.right = '缺人'
-          this.list[i].right.child.left = '缺人'
-          this.list[i].right.child.right = '缺人'
-          return false
-        } else {
-          this.isNull = false
-        }
-      }
+      this.leftList = response.data.data.left
+      this.rightList = response.data.data.right
     })
     .catch(error => {
       console.log(error)
     })
+  },
+  methods: {
+    shortPeo (e) {
+      console.log(e)
+    }
   }
 }
 </script>

@@ -5,8 +5,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #fff;
   .relation-box{
+    background-color: #fff;
     .relation-list{
       width: 50%;
       text-align: center;
@@ -41,7 +41,8 @@
             border-left: 1px solid #ebebeb;
             width: 70%;
             .box{
-              padding: 0.2rem;
+              overflow: hidden;
+              // padding: 0.2rem;
               border-bottom: 1px solid #ebebeb;
               &:last-child{
                 border-bottom: none;
@@ -50,17 +51,19 @@
                 }
               }
               p{
+                padding: 0.2rem;
                 font-size: 0.26rem;
                 color: #03a8f7;
+                &.short{
+                  background-color: #f1f1f1;
+                  color: #999;
+                }
               }
               span{
                 font-size: 0.2rem;
                 color: #999;
               }
-              &.short{
-                background-color: #f1f1f1;
-                color: #999;
-              }
+              
             }
           }
         }

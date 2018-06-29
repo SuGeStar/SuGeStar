@@ -48,6 +48,7 @@ export default {
           Toast('电话号码格式错误!')
           return false
         }
+        
         MessageBox.confirm('确定执行此操作?').then(action => {
           console.log('aaa')
         })
