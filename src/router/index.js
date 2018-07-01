@@ -41,6 +41,8 @@ import relation from '@/components/mine/relation'
 import upgrade from '@/components/mine/upgrade'
 import deal from '@/components/mine/deal'
 import giftBag from '@/components/store/giftBag'
+import gift from '@/components/store/gift'
+import giftOrder from '@/components/store/giftOrder'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -250,6 +252,16 @@ export default new Router({
       path: '/deal', // 交易列表
       name: 'deal',
       component: deal
+    },
+    {
+      path: '/gift',
+      name: 'gift',
+      component: gift
+    },
+    {
+      path: '/giftOrder/:id',
+      name: 'giftOrder',
+      component: giftOrder
     }
   ]
 })
