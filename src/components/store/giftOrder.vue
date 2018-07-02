@@ -8,10 +8,10 @@
     <div class="giftOrder">
       <router-link to="/addressManage/set">
         <div class="address">
-          <p class="receiver_name fl">苏格时代</p>
+          <p class="receiver_name fl">{{name}}</p>
           <div class="address-detail">
-            <p>18237714532</p>
-            <p>内蒙古 呼伦贝尔 根河市 离开的咖啡机 螺丝刀开房就 </p>
+            <p>{{phone}}</p>
+            <p>{{province}}{{city}}{{area}}{{detail}} </p>
           </div>
           <i class="icon icon-right"></i>
         </div>
@@ -22,14 +22,26 @@
         </div>
         <div class="gift-desc">
           <p>升级大礼包</p>
-          <span>礼包一</span>
+          <span>{{giftBag}}</span>
           <p class="price">￥700</p>
         </div>
       </div>
-      <div class="gift-list">
-        支付方式
+      <div class="gift-list" @click="popup">
+        <p>支付方式</p>
+        <div class="item-input">
+          <input type="text" :value="payment" readonly>
+          <i class="icon icon-right"></i>
+        </div>
       </div>
     </div>
+    <mt-popup v-model="popupVisible" position="bottom" class="mint-popup">
+      <div class="payment">
+        <ul>
+          <li @click="wx"> <i class="icon icon-wx"></i> 微信支付</li>
+          <li @click="gb"> <i class="icon icon-sgj"></i> 代币支付</li>
+        </ul>
+      </div>
+    </mt-popup>
     <div class="footer">
       <div class="footer-price">
         <p>应支付：</p>
@@ -47,7 +59,43 @@ let token = localStorage.getItem('token')
 export default {
   data () {
     return {
-      
+      popupVisible: false,
+      name: '',
+      phone: '',
+      province: '',
+      city: '',
+      area: '',
+      detail: '',
+      payment: '',
+      giftBag: ''
+    }
+  },
+  created () {
+    console.log(this.$route.params.id)
+    if (this.$route.params.id == 1) {
+      this.giftBag = '礼包一'
+      return false
+    }
+    if (this.$route.params.id == 2) {
+      this.giftBag = '礼包二'
+      return false
+    }
+    if (this.$route.params.id == 3) {
+      this.giftBag = '礼包三'
+      return false
+    }
+  },
+  methods: {
+    popup () {
+      this.popupVisible = true
+    },
+    wx () {
+      this.payment = '微信支付'
+      this.popupVisible = false
+    },
+    gb () {
+      this.payment = '代币支付'
+      this.popupVisible = false
     }
   }
 }
