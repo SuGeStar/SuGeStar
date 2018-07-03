@@ -227,6 +227,7 @@ export default {
     })
     .catch(error => {
       console.log(error)
+      Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
     })
     this.GetArr()
     this.$http.get(url + 'occupancyRate?token='+token)
@@ -244,6 +245,7 @@ export default {
     })
     .catch(error => {
       console.log(error)
+      Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
     })
     if (!token) {
       this.$router.push('/login')

@@ -192,6 +192,7 @@ export default {
       })
       .catch(error => {
         console.log(error)
+        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
       })
     },
     cityPop () {

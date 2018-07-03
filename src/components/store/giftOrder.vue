@@ -7,11 +7,11 @@
     </mt-header>
     <div class="giftOrder">
       <router-link to="/addressManage/set">
-        <div class="address">
+        <div class="address" :id="id">
           <p class="receiver_name fl">{{name}}</p>
           <div class="address-detail">
             <p>{{phone}}</p>
-            <p>{{province}}{{city}}{{area}}{{detail}} </p>
+            <p>{{addressDetail}} </p>
           </div>
           <i class="icon icon-right"></i>
         </div>
@@ -29,7 +29,7 @@
       <div class="gift-list" @click="popup">
         <p>支付方式</p>
         <div class="item-input">
-          <input type="text" :value="payment" readonly>
+          <input type="text" :id="pay_channel" :value="payment" readonly>
           <i class="icon icon-right"></i>
         </div>
       </div>
@@ -47,7 +47,7 @@
         <p>应支付：</p>
         <p>700元</p>
       </div>
-      <div class="button">
+      <div class="button" @click="gotoPay">
         去支付
       </div>
     </div>
@@ -56,22 +56,38 @@
 <script>
 import { url } from '../../assets/js/mobile.js'
 let token = localStorage.getItem('token')
+import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
       popupVisible: false,
+      id: '',
       name: '',
       phone: '',
-      province: '',
-      city: '',
-      area: '',
-      detail: '',
+      addressDetail: '',
       payment: '',
-      giftBag: ''
+      giftBag: '',
+      pay_channel: ''
     }
   },
   created () {
-    console.log(this.$route.params.id)
+    this.$http.get(url + 'getDefaultAddress?token=' + token)
+    // 获取默认地址
+    .then(response => {
+      console.log(response)
+      if (response.data.data.id == '') {
+        this.$router.push('/addressManage/set')
+        return false
+      }
+      this.id = response.data.data.id
+      this.name = response.data.data.name
+      this.phone = response.data.data.phone
+      this.addressDetail = response.data.data.province + response.data.data.city + response.data.data.area + response.data.data.detail
+    })
+    .catch(error => {
+      console.log(error)
+      Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+    })
     if (this.$route.params.id == 1) {
       this.giftBag = '礼包一'
       return false
@@ -91,11 +107,34 @@ export default {
     },
     wx () {
       this.payment = '微信支付'
+      this.pay_channel = 'wx'
       this.popupVisible = false
     },
     gb () {
       this.payment = '代币支付'
+      this.pay_channel = 'gb'
       this.popupVisible = false
+    },
+    gotoPay () {
+      if (this.payment == '') {
+        Toast('请选择支付方式')
+        return false
+      }
+      let form = this.$qs.stringify({
+        token: token,
+        gift: this.giftBag,
+        address_id: this.id,
+        pay_channel: this.pay_channel
+      })
+      this.$http.post(url + 'giftOrderCreate', form)
+    // 执行购买流程
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error)
+      Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+    })
     }
   }
 }
