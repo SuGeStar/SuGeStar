@@ -38,11 +38,13 @@ import search from '@/components/store/search'
 import information from '@/components/mine/information'
 import team from '@/components/mine/team'
 import relation from '@/components/mine/relation'
+import relatShare from '@/components/mine/relatShare'
 import upgrade from '@/components/mine/upgrade'
 import deal from '@/components/mine/deal'
 import giftBag from '@/components/store/giftBag'
 import gift from '@/components/store/gift'
 import giftOrder from '@/components/store/giftOrder'
+import payment from '@/components/store/payment'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -234,6 +236,11 @@ export default new Router({
       component: relation
     },
     {
+      path: '/relatShare/:id',
+      name: 'relatShare',
+      component: relatShare
+    },
+    {
       path: '/addBankCard',
       name: 'addBankCard',
       component: addBankCard
@@ -262,6 +269,11 @@ export default new Router({
       path: '/giftOrder/:id',
       name: 'giftOrder',
       component: giftOrder
+    },
+    {
+      path: '/payment/:id',
+      name: 'payment',
+      component: payment
     }
   ]
 })

@@ -1,5 +1,10 @@
+import axios from 'axios'
 // 接口url
 var url = 'http://www.sugebei.com/'
+// axios 配置
+axios.defaults.timeout = 5000
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+axios.defaults.baseURL = url
 
 // 定义一个对象，名字是$$
 var $$ = function () {}

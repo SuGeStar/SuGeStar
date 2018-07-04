@@ -23,7 +23,7 @@
           </div>
           <div class="pc-content">
             <p class="pc-content-title">收支记录</p>
-            <ul>
+            <!-- <ul>
               <li v-for="(list,index) in lists" :key="index">
                 <div class="list list-header">
                   <div>
@@ -47,7 +47,7 @@
                   <p>+0.0001</p>
                 </div>
               </li>
-            </ul>
+            </ul> -->
           </div>
         </mt-tab-container-item>
         <mt-tab-container-item :id="1" class="property-container">
@@ -64,7 +64,7 @@
             <router-link to="/deal">
               <p class="pc-content-title">交易列表</p>
             </router-link>
-            <ul>
+            <!-- <ul>
               <li v-for="(list,index) in lists" :key="index">
                 <div class="list list-header">
                   <div>
@@ -88,7 +88,7 @@
                   <p>+0.0001</p>
                 </div>
               </li>
-            </ul>
+            </ul> -->
           </div>
         </mt-tab-container-item>
       </mt-tab-container>
