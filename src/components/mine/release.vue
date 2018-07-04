@@ -18,7 +18,9 @@
 </template>
 
 <script>
+import { url } from '../../assets/js/mobile.js'
 import { Toast, MessageBox } from 'mint-ui'
+let token = localStorage.getItem('token')
 export default {
   data () {
     return {
@@ -48,9 +50,29 @@ export default {
           Toast('电话号码格式错误!')
           return false
         }
-        MessageBox.confirm('确定执行此操作?').then(action => {
-          console.log('aaa')
+        // 赠送金币
+        let form = this.$qs.stringify({
+          token: token,
+          phone: this.sendTel,
+          gold: this.SGB,
+          mark: '转出'+this.SGB
         })
+        this.$http.post(url+'transfer', form)
+        .then(response => {
+          console.log(response)
+          Toast({
+            message: response.data.msg,
+            position: 'bottom',
+            duration: 2000
+          })
+          if (response.data.code == 200) {
+            this.$router.push('/myProperty')
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        })  
       }
     }
   },

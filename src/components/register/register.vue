@@ -3,6 +3,7 @@
     <h3 class="reg-title">SG星球注册</h3>
     <div class="reg-form">
       <div><span>推荐编号</span><input type="text" placeholder="" :readonly="true" v-model="invite_code"></div>
+      <div><span>真实姓名</span><input type="text" placeholder="请输入您的真实姓名" v-model="realName"></div>
       <div><span>手机号码</span><input type="number" placeholder="请输入手机号码" v-model="phoneNum"></div>
       <!-- <div><span>图片验证</span>
         <input type="text" placeholder="图片验证码" v-model="pic" class="verificationCode">
@@ -20,7 +21,6 @@
         <input type="text" placeholder="请选择省 市 县" v-model="locations" :readonly="true">
       </div>
       <div><span>优品账号</span><input type="text" placeholder="请输入您的优品账号" v-model="YPAccount"></div>
-      <div><span>真实姓名</span><input type="text" placeholder="请输入您的真实姓名" v-model="realName"></div>
       <div><span>身份证号</span><input type="text" placeholder="请输入身份证号码" v-model="IDNumber"></div>
       <div><span>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span><input type="text" placeholder="给自己起个名字吧~" v-model="nickName"></div> -->
     </div>
@@ -44,7 +44,7 @@ export default {
       // applyPsd: '',
       // locations: [],
       // YPAccount: '',
-      // realName: '',
+      realName: '',
       // IDNumber: '',
       // nickName: '',
       addressArr: [],
@@ -111,20 +111,8 @@ export default {
           }
         })
         .catch(error => {
-          console.log(error.response);
-          if (error.response.data.code == 0) {
-            Toast({
-              message: '服务器开小差啦（ﾉ´д｀）快去告诉程序猿~',
-              position: 'bottom',
-              duration: 2000
-            });
-          } else {
-            Toast({
-              message: error.response.data.message[0],
-              position: 'bottom',
-              duration: 2000
-            });
-          }
+          Toast('服务器开小差啦（ﾉ´д｀）快去告诉程序猿~');
+          console.log(error);
         })
       }
     },
@@ -161,6 +149,10 @@ export default {
     },
     // 注册
     register () {
+      if (!this.realName) {
+        Toast('请填写您的真实姓名!')
+        return false
+      }
       if (!this.phoneNum) {
         Toast('请填写电话号码!')
         return false
@@ -200,6 +192,7 @@ export default {
       })
       .catch(error => {
         console.log(error)
+        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
       })
     },
     cityPop () {

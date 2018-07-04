@@ -35,17 +35,18 @@ export default {
         .then(response => {
           console.log(response)
           if (response.data.code == 200) {
-            localStorage.setItem('user_id', response.data.data.userinfo.id)
-            localStorage.setItem('user_level', response.data.data.userinfo.level)
+            localStorage.setItem('userinfo',JSON.stringify(response.data.data.userinfo))
+            // localStorage.setItem('user_id', response.data.data.userinfo.id)
+            // localStorage.setItem('user_level',response.data.data.userinfo.level)
+            // localStorage.setItem('invite_code', response.data.data.userinfo.invite_code)
             localStorage.setItem('token', response.data.data.token)
             window.location.href = '/index'
             // this.$router.push('/index')
-          } else {
-            Toast(response.data.msg)
           }
         })
         .catch(error => {
           console.log(error)
+          Toast('服务器开小差啦（ﾉ´д｀）快去告诉程序猿~')
         })
       }
     }

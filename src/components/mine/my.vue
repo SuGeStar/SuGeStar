@@ -9,7 +9,11 @@
         <p class="user-nickname">{{userNickName}}</p>
         <p class="user-order">SG星球第{{userOrder}}位居民</p>
         <div class="user-property">
-          <div class="user-property-title"><router-link to="myProperty"><p>我的资产</p></router-link></div>
+          <div class="user-property-title">
+            <router-link to="/myProperty">
+              <p>我的资产</p>
+            </router-link>
+          </div>
           <div class="user-property-data">
             <ul>
               <li>
@@ -144,6 +148,7 @@ export default {
       })
       .catch(error => {
         console.log(error)
+        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
       })
   }
 }

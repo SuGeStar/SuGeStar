@@ -59,7 +59,7 @@
       </div>
       <!-- 大礼包 -->
         <div class="gift-box">
-          <router-link to="/giftBag">
+          <router-link to="/gift">
             <img src="http://attach.bbs.miui.com/forum/201507/01/101024hpo6hqhvt77dhsqq.jpg" alt="">
           </router-link>
         </div>
@@ -143,31 +143,31 @@ export default {
       invitpeo: "3",
       allpeo: "10",
       progressBox: [
-        {
-          floor: '1',
-          percentage: 100,
-          color: '#a288d2'
-        },
-        {
-          floor: '2',
-          percentage: 75,
-          color: '#03a8f7'
-        },
-        {
-          floor: '3',
-          percentage: 50,
-          color: '#f0b026'
-        },
-        {
-          floor: '4',
-          percentage: 25,
-          color: '#1ad3a7'
-        },
-        {
-          floor: '5',
-          percentage: 25,
-          color: '#1ad3a7'
-        }
+        // {
+        //   floor: '1',
+        //   percentage: 100,
+        //   color: '#a288d2'
+        // },
+        // {
+        //   floor: '2',
+        //   percentage: 75,
+        //   color: '#03a8f7'
+        // },
+        // {
+        //   floor: '3',
+        //   percentage: 50,
+        //   color: '#f0b026'
+        // },
+        // {
+        //   floor: '4',
+        //   percentage: 25,
+        //   color: '#1ad3a7'
+        // },
+        // {
+        //   floor: '5',
+        //   percentage: 25,
+        //   color: '#1ad3a7'
+        // }
       ]
     }
   },
@@ -227,15 +227,25 @@ export default {
     })
     .catch(error => {
       console.log(error)
+      Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
     })
     this.GetArr()
     this.$http.get(url + 'occupancyRate?token='+token)
     // 团队看板占比
     .then(response => {
-      this.progressBox = response.data.data
+      console.log(response.data.data)
+      // this.progressBox = response.data.data
+      for (let i = 0; i < response.data.data.length; i++) {
+        if (response.data.data[i].percentage == 0) {
+          this.progressBox[i] = response.data.data[i]
+        } else {
+          this.progressBox = response.data.data
+        }
+      }
     })
     .catch(error => {
       console.log(error)
+      Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
     })
     if (!token) {
       this.$router.push('/login')

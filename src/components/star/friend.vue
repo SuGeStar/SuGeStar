@@ -82,7 +82,10 @@
   @import '../../assets/less/friend.less';
 </style>
 <script>
+import { url } from '../../assets/js/mobile.js'
 import { Toast, MessageBox } from 'mint-ui'
+let token = localStorage.getItem('token')
+let userinfo = JSON.parse(localStorage.getItem('userinfo'))
 export default {
   data () {
     return {
@@ -101,8 +104,13 @@ export default {
       }
     }
   },
+  created () {
+    
+  },
   methods: {
     invit () {
+      this.copy = userinfo.invite_code
+      this.src = url + 'registerLink?token='+ token
       this.popupVisible1 = true
     },
     copyBtn () {
