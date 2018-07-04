@@ -121,7 +121,8 @@
 import { url } from '../../assets/js/mobile.js'
 import footGuide from '../comp/footGuide.vue'
 // import { Navbar, TabItem } from 'mint-ui'
-let token = localStorage.getItem('token')
+let token = localStorage.getItem('token');
+
 export default {
   components: {
     footGuide
@@ -132,18 +133,29 @@ export default {
       userNickName: 'づ塟送じò ぴéā', // 用户昵称
       userOrder: '100203', // 用户排名
       userPV: '11002', // 用户原力值
-      userSGK: '46546', // 用户SG金币
-      userST: '465465' // 用户SG星币
+      userSGK: '', // 用户SG金币
+      userST: '465465', // 用户SG星币
+      baseUserInfo: JSON.parse(localStorage.getItem('userinfo')) // 用户个人信息
     }
   },
   created () {
+    console.log(this.baseUserInfo)
+    this.userNickName = this.baseUserInfo.nickname;
+    if (this.baseUserInfo.level == 2) {
+      this.userIdent = '创 世 居 民';
+    }else {
+      this.userIdent = '居 民';
+    }
+    /*
+    * 获得金币数量
+    * */
     this.$http.get(url + 'availableGold?token=' + token)
         .then(response => {
         console.log(response.data)
         if (response.data.code == 200) {
           this.userSGK = response.data.data.gold
         } else {
-          
+
         }
       })
       .catch(error => {
