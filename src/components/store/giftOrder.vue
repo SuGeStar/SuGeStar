@@ -75,7 +75,10 @@ export default {
     // 获取默认地址
     .then(response => {
       console.log(response)
-      if (response.data.data.id == '') {
+      if (response.data.code == 500) {
+        Toast({
+          message: response.data.msg
+        })
         this.$router.push('/addressManage/set')
         return false
       }
@@ -116,25 +119,29 @@ export default {
       this.popupVisible = false
     },
     gotoPay () {
+       window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6f71648f90719a98&redirect_uri=http%3a%2f%2fsgxq.sugebei.com%2fpayment&response_type=code&scope=snsapi_base&state=1#wechat_redirect'
+      //  this.$router.push('/payment')
+      //  let code = location.href.substring(location.href.indexOf('=')+1,location.href.indexOf('&'))
+      //  localStorage.setItem('code',code)
       if (this.payment == '') {
         Toast('请选择支付方式')
         return false
       }
-      let form = this.$qs.stringify({
-        token: token,
-        gift: this.giftBag,
-        address_id: this.id,
-        pay_channel: this.pay_channel
-      })
-      this.$http.post(url + 'giftOrderCreate', form)
-    // 执行购买流程
-    .then(response => {
-      console.log(response)
-    })
-    .catch(error => {
-      console.log(error)
-      Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-    })
+      // this.$http.get(url + 'giftOrderCreate?token='+token+'&gift='+this.giftBag+'&address_id='+this.id+'&pay_channel=wx')
+      // 执行购买流程
+      // .then(response => {
+      //   console.log(response.data)
+      //   Toast({
+      //     message: response,
+      //     position: 'bottom',
+      //     duration: 5000000
+      //   })
+      // })
+      // .catch(error => {
+      //   console.log(error)
+      //   Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+      // })
+      // window.location.href = 'http://www.sugebei.com/index.php/giftOrderCreate?token='+token+'&gift='+this.giftBag+'&address_id='+this.id+'&pay_channel=wx'
     }
   }
 }

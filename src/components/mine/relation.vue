@@ -28,7 +28,7 @@
               <div class="right-box" v-if="relation.left == null || relation.right == null">
                 <div class="box">
                   <p v-if="relation.left !== null">{{relation.left.realname}}</p>
-                  <p class="short" v-else @click="shortPeo(relation.id)">缺人</p>
+                  <p class="short" v-else>缺人</p>
                   <!-- <span>推:{{relation.left}}</span> -->
                 </div>
                 <div class="box">
@@ -60,7 +60,7 @@
               <div class="right-box" v-if="relation.left == null || relation.right == null">
                 <div class="box">
                   <p v-if="relation.left !== null">{{relation.left.realname}}</p>
-                  <p class="short" v-else @click="shortPeo(relation.id)">缺人</p>
+                  <p class="short" v-else>缺人</p>
                   <!-- <span>推:{{relation.left}}</span> -->
                 </div>
                 <div class="box">
@@ -103,6 +103,18 @@ export default {
   methods: {
     shortPeo (e) {
       console.log(e)
+      this.$router.push({
+        name: 'relatShare',
+        params: {id: e}
+      })
+      // this.$http.get(url + 'inviteLink?token='+token+'&contact_id='+e)
+      // .then(response => {
+      //   console.log(response)
+      // })
+      // .catch(error => {
+      //   console.log(error)
+      //   Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+      // })
     }
   }
 }
