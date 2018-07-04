@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { url } from '../../assets/js/mobile.js'
 export default {
   data () {
     return {
@@ -62,8 +63,8 @@ export default {
   methods: {
     // 请求省份
     getProvince () {
-      this.$http.get('http://www.yuyulu.cn/city/1').then((value) => {
-        this.province = JSON.parse(value.bodyText).data
+      this.$http.get(url + 'city/1').then((value) => {
+         this.province = value.data.data
       }, (error) => {
         console.log(error)
       })
@@ -80,8 +81,9 @@ export default {
       this.cls1 = true
       this.cls2 = false
       this.district = []
-      this.$http.get('http://www.yuyulu.cn/city/'+pro.id+'').then((value) => {
-        this.city = JSON.parse(value.bodyText).data
+      this.$http.get(url + 'city/'+pro.id+'')
+      .then((value) => {
+        this.city = value.data.data
       }, (error) => {
         console.log(error)
       })
@@ -95,8 +97,8 @@ export default {
       this.cls = false
       this.cls1 = false
       this.cls2 = true
-      this.$http.get('http://www.yuyulu.cn/city/'+city.id+'').then((value) => {
-        this.district = JSON.parse(value.bodyText).data
+      this.$http.get(url + 'city/'+city.id+'').then((value) => {
+        this.district = value.data.data
       }, (error) => {
         console.log(error)
       })
@@ -111,7 +113,8 @@ export default {
       this.address = this.choseProvince+' '+this.choseCity+' '+this.choseDistrict
       this.addressArr = [this.index_p, this.index_c, this.index_d]
       this.finalAddress.push(this.address,this.addressArr)
-      this.$emit('hidden',this.finalAddress)
+      // this.$emit('hidden',this.finalAddress,this.index_p,this.index_c,this.index_d)
+      this.$emit('hidden',this.finalAddress,this.addressArr)
     },
     choseAddress (idx) {
       switch (idx) {

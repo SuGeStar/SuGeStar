@@ -1,76 +1,180 @@
 <template>
 <div class="wrapper">
-    <div class="big-car">
- <div class="car" v-for=" (item, index) in car"  :key="index">
-     <div class="car-company">
-         <span class="com">{{item.company}}</span></div>
-     <div class="car-shopping" >
-         <label class="label2">
-         <input type="checkbox" class="shop-round">
-         <span class="your style about checkbox"></span>
-         </label>
-         <img src="../../assets/image/banner01.png" alt="">
-     <div class="details"><span>{{item.name}}</span>
-        <p>{{item.details}}</p>
-        <div class="esc_count">
-            <p class="esc_sub fl" @click="minus">-</p>
-            <button type="button" class="esc_number fl">{{result}}</button>
-            <p class="esc_add fl" @click="plus">+</p>
-        </div>
-        <h2 class="Price">{{item.price}}</h2>
-        <h4>{{item.mode}}</h4>
-        <button class="delete">删除</button>
-     </div>
-     </div>
- </div>
-    </div>
- <div  class="Settlement" v-for="(item, index) in car" :key="index">
-     <div class="selection">
-         <span class="qx">合计</span>
-     </div>
-     <div class="Total">
-         <span class="money">{{item.price}}</span>
-         <span class="Other">或115元+200矿币萨达撒多撒多撒</span>
-     </div>
-     <div class="zmoney">
-         结算
-     </div>
- </div>
-  <div class="foot">
-          <div><router-link to="/store"><img src="../../assets/image/order.png" alt="">
-          <p>首页</p></router-link>
-          </div>
-          <div><router-link to="/classify"><img src="../../assets/image/order.png" alt="">
-          <p>分类</p></router-link>
-          </div>
-           <div><router-link to="/car"><img src="../../assets/image/order.png" alt="">
-          <p>购物车</p></router-link>
-          </div>
-        </div>
- </div>
- </template>
+	<mt-header fixed title="购物车">
+		<a href="javascript:history.go(-1);" slot="left">
+			<mt-button icon="back"></mt-button>
+		</a>
+	</mt-header>
+	<div class="car">
+		<ul class="car-box">
+			<li class="list-box" v-for="(carItem,index) in carList" :key="index">
+				<div class="car-list">
+					<div class="car-title">
+						<label class="cart-checkbox">
+							<input class="" data-storeId=""	type="checkbox" name="cart-checkbox">
+							<i :class="['icon','icon-checkbox',isSelect?'select':'']"></i>
+						</label>
+						<span>{{carItem.title}}</span>
+					</div>
+					<div class="car-content">
+						<div class="check-box">
+							<label class="cart-checkbox">
+								<input class="" data-storeId=""	type="checkbox" name="cart-checkbox">
+								<i class="icon icon-checkbox"></i>
+							</label>
+						</div>
+						<div class="img-box">
+							<img :src="carItem.img" alt="">
+						</div>
+						<div class="info-box">
+							<h3>{{carItem.name}}</h3>
+							<p class="info-desc">颜色：{{carItem.color}}，尺寸：{{carItem.size}}</p>
+							<div class="esc-count">
+								<p class="cti-sub cti" @click="numSub">-</p>
+								<input type="number" class="cti-number" readonly="" :value="carItem.result">
+								<p class="cti-add cti" @click="numAdd">+</p>
+							</div>
+							<p class="car-price">{{carItem.price}} </p>
+							<p>或{{carItem.skg}}</p>
+						</div>
+						<div class="delete-btn">
+							<p class="icon icon-delete"></p>
+							<p>删除</p>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="footer">
+		<label class="cart-checkbox">
+			<input class="" data-storeId=""	type="checkbox" name="cart-checkbox">
+			<i :class="['icon','icon-checkbox',isSelect?'select':'']"></i>
+			<span>全选</span>
+		</label>
+		<div class="foot-total">
+			<span>合计:</span>
+			<div class="total-price">
+				<p>{{totPrice}}元</p>
+				<p>或{{totmony}}+严选积分{{totsgk}}</p>
+			</div>
+		</div>
+		<div class="foot-sure">
+			结算
+		</div>
+	</div>
+</div>
+</template>
 <script>
+import { Toast } from 'mint-ui';
 export default {
   data () {
     return {
-      result: 0,
-      car: [
-        {company: '苏格实业有限公司1', name: '蕰妮法国原装进口贝勒城堡干红葡萄酒波尔多赤霞珠BL0191', details: '颜色：红色，尺寸：如图750ml1', price: '￥455', mode: '或  ¥346.00+矿石399.001'},
-        {company: '苏格实业有限公司2', name: '蕰妮法国原装进口贝勒城堡干红葡萄酒波尔多赤霞珠BL0192', details: '颜色：红色，尺寸：如图750ml2', price: '￥455', mode: '或  ¥346.00+矿石399.002'},
-        {company: '苏格实业有限公司3', name: '蕰妮法国原装进口贝勒城堡干红葡萄酒波尔多赤霞珠BL0193', details: '颜色：红色，尺寸：如图750ml3', price: '￥455', mode: '或  ¥346.00+矿石399.003'},
-        {company: '苏格实业有限公司4', name: '蕰妮法国原装进口贝勒城堡干红葡萄酒波尔多赤霞珠BL0194', details: '颜色：红色，尺寸：如图750ml4', price: '￥455', mode: '或  ¥346.00+矿石399.004'},
-        {company: '苏格实业有限公司5', name: '蕰妮法国原装进口贝勒城堡干红葡萄酒波尔多赤霞珠BL0195', details: '颜色：红色，尺寸：如图750ml5', price: '￥455', mode: '或¥346.00+矿石399.005'}]
+			carList: [
+				{
+					title: '五月真艾',
+					img: 'http://www.sgyxmall.com//Upload/goods/store_37/2018-05-03/5aea7227b5443.jpg',
+					name: '真艾宝',
+					color: '如图',
+					size: '如图',
+					result: '1',
+					price: '￥169',
+					skg: '¥96.00+严选积分100.00'
+				},
+				{
+					title: '五月真艾',
+					img: 'http://www.sgyxmall.com//Upload/goods/store_37/2018-05-03/5aea7227b5443.jpg',
+					name: '真艾宝',
+					color: '如图',
+					size: '如图',
+					result: '1',
+					price: '￥169',
+					skg: '¥96.00+严选积分100.00'
+				},
+				{
+					title: '五月真艾',
+					img: 'http://www.sgyxmall.com//Upload/goods/store_37/2018-05-03/5aea7227b5443.jpg',
+					name: '真艾宝',
+					color: '如图',
+					size: '如图',
+					result: '1',
+					price: '￥169',
+					skg: '¥96.00+严选积分100.00'
+				},
+				{
+					title: '五月真艾',
+					img: 'http://www.sgyxmall.com//Upload/goods/store_37/2018-05-03/5aea7227b5443.jpg',
+					name: '真艾宝',
+					color: '如图',
+					size: '如图',
+					result: '1',
+					price: '￥169',
+					skg: '¥96.00+严选积分100.00'
+				},
+				{
+					title: '五月真艾',
+					img: 'http://www.sgyxmall.com//Upload/goods/store_37/2018-05-03/5aea7227b5443.jpg',
+					name: '真艾宝',
+					color: '如图',
+					size: '如图',
+					result: '1',
+					price: '￥169',
+					skg: '¥96.00+严选积分100.00'
+				},
+				{
+					title: '五月真艾',
+					img: 'http://www.sgyxmall.com//Upload/goods/store_37/2018-05-03/5aea7227b5443.jpg',
+					name: '真艾宝',
+					color: '如图',
+					size: '如图',
+					result: '1',
+					price: '￥169',
+					skg: '¥96.00+严选积分100.00'
+				},
+				{
+					title: '五月真艾',
+					img: 'http://www.sgyxmall.com//Upload/goods/store_37/2018-05-03/5aea7227b5443.jpg',
+					name: '真艾宝',
+					color: '如图',
+					size: '如图',
+					result: '1',
+					price: '￥169',
+					skg: '¥96.00+严选积分100.00'
+				},
+			],
+			number: '5',
+			isSelect: true,
+			totPrice: '100',
+			totmony: '￥10',
+			totsgk: '90'
     }
-  },
+	},
   methods: {
-   minus() {
-this.result--;
-this.$emit('input', {res: this.result, other: '--'})
-},
-plus() {
-this.result++;
-this.$emit('input', {res: this.result, other: '++'})
-}
+   numSub () {
+			if (this.result <= 1) {
+				console.log('1111')
+				Toast({
+					message: '当前已是最小成交数量',
+					position: 'bottom',
+					duration: 2000
+				});
+			}else {
+				this.result--;
+				this.$emit('input', {res: this.result, other: '--'})
+			}
+		},
+		numAdd () {
+			if (this.result < this.number) {
+				this.result++;
+				this.$emit('input', {res: this.result, other: '++'})
+			} else {
+				Toast({
+					message: '已达到最大购买数量',
+					position: 'bottom',
+					duration: 2000
+				});
+			}
+		},
   }
 }
 </script>

@@ -32,8 +32,8 @@
 				<i class="icon icon-car"></i>
 			</div>
 		</router-link>
-		<p @click="format">加入购物车</p>
-		<p @click="format" class="deta-buy">立即购买</p>
+		<p @click="format(0)">加入购物车</p>
+		<p @click="format(1)" class="deta-buy">立即购买</p>
 	</div>
 	<mt-popup v-model="popupVisible" class="deta-pop" position="bottom">
 		<div class="spec-box">
@@ -68,7 +68,7 @@
 								<p class="cti-sub cti" @click="numSub">-</p>
 								<input type="number" class="cti-number" readonly="" :value="value">
 								<p class="cti-add cti" @click="numAdd">+</p>
-						</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -78,7 +78,7 @@
 			</div>
 		</div>
 	</mt-popup>
-</div> 
+</div>
 </template>
 <style lang="less" scoped>
 @import "../../assets/less/details.less";
@@ -181,12 +181,14 @@ export default {
 					item: 'XXXL'
 				},
 			],
-			value: '1'
+			value: '1',
+      whichDo: 0
 		}
 	},
 	methods: {
-		format () {
+		format (idx) {
 			this.popupVisible = true
+      this.whichDo = idx
 		},
 		active (index) {
 			this.color = index
@@ -204,13 +206,13 @@ export default {
 				});
 			}else {
 				this.value--;
-				this.$emit('input', {res: this.result, other: '--'})
+				this.$emit('input', {res: this.value, other: '--'})
 			}
 		},
 		numAdd () {
 			if (this.value < this.number) {
 				this.value++;
-				this.$emit('input', {res: this.result, other: '++'})
+				this.$emit('input', {res: this.value, other: '++'})
 			} else {
 				Toast({
 					message: '已达到最大购买数量',
@@ -221,7 +223,18 @@ export default {
 		},
 		defaultBtn () {
 			this.popupVisible = false
+      var did = this.whichDo
+      switch (did) {
+        case 0:
+          // todo
+          break;
+        case 1:
+          this.$router.push({
+            path: '/confirmOrder'
+          })
+          break;
+      }
 		}
 	}
-}  
-</script> 
+}
+</script>

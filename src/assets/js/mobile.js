@@ -1,11 +1,16 @@
+import axios from 'axios'
+// 接口url
 var url = 'http://www.sugebei.com/'
+// axios 配置
+axios.defaults.timeout = 5000
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+axios.defaults.baseURL = url
+
+// 定义一个对象，名字是$$
 var $$ = function () {}
-// 封装
+// 开始封装
 $$.prototype = {
-  askData: function (fn, form, async) {
-    // form.app_id = app_id;
-    // form.nonce = $$.getRandom(0, 1000000);
-    // form.sign = $$.mysign(form);
+  askData: function (fn, form) {
     axios({
       method: 'post',
       url: url,

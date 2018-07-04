@@ -2,6 +2,7 @@
 @main-color: #3981ff;
 @index-color:#ff8c37;
 .index{
+  padding-bottom: 61px;
   .index-bg{
     position: relative;
     margin-bottom: 0.8rem;
@@ -85,6 +86,83 @@
           width: 1.02rem;
           text-align: right;
           margin-right: 0.17rem;
+        }
+      }
+    }
+  }
+  .gift-box{
+    width: 100%;
+    height: 1.62rem;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .content-box{
+    ul{
+      .content-list{
+        width: 90%;
+        background-color: #fff;
+        margin: 0.2rem auto;
+        border-radius: 10px;
+        .con-title{
+          font-size: 0.27rem;
+          color: #ff8f3c;
+          padding: 0.2rem;
+          border-bottom: 1px solid #ebebeb;
+          .icon-tips{
+            margin-bottom: -5px;
+          }
+        }
+        .con-desc{
+          width: 100%;
+          display: flex;
+          padding: 0.2rem 0;
+          .desc{
+            width: 50%;
+            text-align: center;
+            &.today{
+              border-right: 1px solid #ebebeb;
+            }
+            p{
+              margin-bottom: 0.1rem;
+              color: #999;
+            }
+          }
+        }
+      }
+    }
+    &.team{
+      width: 90%;
+      background-color: #fff;
+      margin: 0.2rem auto;
+      border-radius: 10px;
+      padding-bottom: 0.2rem;
+      .team-head{
+        padding: 0.2rem;
+        font-size: 0.26rem;
+        color: #333;
+        .team-exist{
+          display: flex;
+          p{
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+            span{
+              color: #f0b026;
+            }
+          }
+        }
+      }
+      .floor{
+        padding: 0.2rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        .team-floor{
+          font-size: 0.27rem;
+        }
+        .progress{
+          width: 80%;
         }
       }
     }

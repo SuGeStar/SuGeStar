@@ -7,7 +7,6 @@ import speed from '@/components/star/speed'
 import friend from '@/components/star/friend'
 import firInvitation from '@/components/star/firInvitation'
 import secInvitation from '@/components/star/secInvitation'
-import demo from '@/components/star/demo'
 import store from '@/components/store/store'
 import classify from '@/components/store/classify'
 import list from '@/components/store/list'
@@ -23,17 +22,34 @@ import release from '@/components/mine/release/'
 import addressManage from '@/components/mine/addressManage/'
 import set from '@/components/mine/set/'
 import addAddress from '@/components/mine/addAddress/'
+import editAddress from '@/components/mine/editAddress/'
 import proofIdent from '@/components/mine/proofIdent'
 import resetPassword from '@/components/mine/resetPassword'
 import details from '@/components/store/details'
 import applypop from '@/components/comp/applyPop'
 import city from '@/components/comp/city'
 import realName from '@/components/mine/realName'
+import changename from '@/components/mine/changeName'
 import bindBankCard from '@/components/mine/bindBankCard'
+import addBankCard from '@/components/mine/addBankCard'
+import myOrder from '@/components/store/myOrder'
+import confirmOrder from '@/components/store/confirmOrder'
+import search from '@/components/store/search'
+import information from '@/components/mine/information'
+import team from '@/components/mine/team'
+import relation from '@/components/mine/relation'
+import relatShare from '@/components/mine/relatShare'
+import upgrade from '@/components/mine/upgrade'
+import deal from '@/components/mine/deal'
+import giftBag from '@/components/store/giftBag'
+import gift from '@/components/store/gift'
+import giftOrder from '@/components/store/giftOrder'
+import payment from '@/components/store/payment'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
 export default new Router({
+  mode: 'history',
   routes: [
     { path: '/',
       redirect: 'index'
@@ -41,6 +57,7 @@ export default new Router({
     {
       path: '/index',
       name: 'index',
+      meta: { requiresAuth: true },
       component: index
     },
     {
@@ -109,7 +126,7 @@ export default new Router({
       component: releaseOrSend
     },
     {
-      path: '/smelting/:id', // 熔炼
+      path: '/smelting', // 熔炼
       name: 'smelting',
       component: smelting
     },
@@ -129,6 +146,11 @@ export default new Router({
       component: addAddress
     },
     {
+      path: '/editAddress/:id', // 编辑地址管理
+      name: 'editAddress',
+      component: editAddress
+    },
+    {
       path: '/set', // 设置
       name: 'set',
       component: set
@@ -144,6 +166,16 @@ export default new Router({
       component: bindBankCard
     },
     {
+      path: '/myOrder', // 我的商城订单
+      name: 'myOrder',
+      component: myOrder
+    },
+    {
+      path: '/confirmOrder', // 确认订单
+      name: 'confirmOrder',
+      component: confirmOrder
+    },
+    {
       path: '/car',
       name: 'car',
       component: car
@@ -152,11 +184,6 @@ export default new Router({
       path: '/apply',
       name: 'apply',
       component: apply
-    },
-    {
-      path: '/demo',
-      name: 'demo',
-      component: demo
     },
     {
       path: '/proofIdent/:id', // 验证身份
@@ -182,6 +209,71 @@ export default new Router({
       path: '/city', // 三级城市联动
       name: 'city',
       component: city
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: search
+    },
+    {
+      path: '/changename',
+      name: 'changename',
+      component: changename
+    },
+    {
+      path: '/information',
+      name: 'information',
+      component: information
+    },
+    {
+      path: '/team',
+      name: 'team',
+      component: team
+    },
+    {
+      path: '/relation/:id',
+      name: 'relation',
+      component: relation
+    },
+    {
+      path: '/relatShare/:id',
+      name: 'relatShare',
+      component: relatShare
+    },
+    {
+      path: '/addBankCard',
+      name: 'addBankCard',
+      component: addBankCard
+    },
+    {
+      path: '/upgrade',
+      name: 'upgrade',
+      component: upgrade
+    },
+    {
+      path: '/giftBag', // 礼包
+      name: 'giftBag',
+      component: giftBag
+    },
+    {
+      path: '/deal', // 交易列表
+      name: 'deal',
+      component: deal
+    },
+    {
+      path: '/gift',
+      name: 'gift',
+      component: gift
+    },
+    {
+      path: '/giftOrder/:id',
+      name: 'giftOrder',
+      component: giftOrder
+    },
+    {
+      path: '/payment/:id',
+      name: 'payment',
+      component: payment
     }
   ]
 })

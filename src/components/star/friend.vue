@@ -13,11 +13,11 @@
             <router-link to="/firInvitation">
               <div class="invitation fir-invit">
                 <div class="invit-pople">
-                  <span>一级邀请人数：</span>
+                  <span>我的邀请：</span>
                   <span>{{first.pople}}人>></span>
                 </div>
                 <div class="invit-ylz">
-                  <p>累计获得原力值</p>
+                  <p>累计获得星币（个）</p>
                   <span class="ylz-color">{{first.ylz}}</span>
                 </div>
               </div>
@@ -25,11 +25,11 @@
             <router-link to="/secInvitation">
               <div class="invitation sec-invit">
                 <div class="invit-pople">
-                  <span>二级邀请人数：</span>
+                  <span>我的推荐：</span>
                   <span>{{second.pople}}人>></span>
                 </div>
                 <div class="invit-ylz">
-                  <p>累计获得原力值</p>
+                  <p>累计获得收益（元）</p>
                   <span class="ylz-color">{{second.ylz}}</span>
                 </div>
               </div>
@@ -82,7 +82,10 @@
   @import '../../assets/less/friend.less';
 </style>
 <script>
+import { url } from '../../assets/js/mobile.js'
 import { Toast, MessageBox } from 'mint-ui'
+let token = localStorage.getItem('token')
+let userinfo = JSON.parse(localStorage.getItem('userinfo'))
 export default {
   data () {
     return {
@@ -101,14 +104,19 @@ export default {
       }
     }
   },
+  created () {
+    
+  },
   methods: {
     invit () {
+      this.copy = userinfo.invite_code
+      this.src = url + 'registerLink?token='+ token
       this.popupVisible1 = true
     },
     copyBtn () {
       console.log('222')
       this.$copyText(this.copy).then(function (e) {
-        MessageBox('复制成功')
+        Toast('复制成功')
         console.log(e)
       }, function (e) {
         Toast('复制失败')

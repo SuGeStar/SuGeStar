@@ -154,14 +154,6 @@ h1,h2,h3,h4,h5,h6,pre,p {
 h1,h2,h3,h4,h5,h6{
   font-weight: normal;
 }
-.left {
-  float: left;
-}
-
-.right {
-  float: right;
-}
-
 input {
   padding-top: 0;
   padding-bottom: 0;
@@ -193,11 +185,13 @@ input::-webkit-inner-spin-button {
 }
 input[type=submit]{
   -webkit-appearance: none;
-
 }
 input[type=number]{
   -webkit-appearance: none !important;
   -moz-appearance: textfield;
+}
+input:focus {
+  outline: none;
 }
 input[type=button],
 input[type=submit],
@@ -210,6 +204,7 @@ button {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .wrapper{
+  overflow: hidden;
   font-size: .24rem;
   .mint-header{
     background-color: #fff;
@@ -220,7 +215,7 @@ button {
 }
 .tabbar{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .fl{
   float: left;
@@ -296,9 +291,59 @@ button {
     background-position: -180px -40px;
   }
   &.icon-delete {
+    width: 30px;
+    height: 30px;
+    background-position: 3px -150px;
+  }
+  &.icon-checkbox {
     width: 20px;
     height: 20px;
-    background-position: 0px -150px;
+    background-position: -160px -60px;
+    &.select {
+      width: 20px;
+      height: 20px;
+      background-position: -180px -60px;
+    }
+  }
+  &.icon-tips {
+    width: 20px;
+    height: 20px;
+    background-position: -160px -80px;
+  }
+  &.icon-pull {
+    width: 20px;
+    height: 20px;
+    background-position: -180px -80px;
+  }
+  &.icon-invit {
+    width: 20px;
+    height: 20px;
+    background-position: -120px -20px;
+  }
+  &.icon-recom {
+    width: 20px;
+    height: 20px;
+    background-position: -120px -40px;
+  }
+  &.icon-team {
+    width: 20px;
+    height: 20px;
+    background-position: -120px -60px;
+  }
+  &.icon-update {
+    width: 20px;
+    height: 20px;
+    background-position: -120px -80px;
+  }
+  &.icon-setting {
+    width: 20px;
+    height: 20px;
+    background-position: -140px 0;
+  }
+  &.icon-lock {
+    width: 20px;
+    height: 20px;
+    background-position: -140px -20px;
   }
 }
 .active {

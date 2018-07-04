@@ -1,3 +1,4 @@
+// out:false
 .set-container{
   width: 94%;
   height: auto;
@@ -12,6 +13,9 @@
     background: url("../image/right.png") no-repeat right center;
     background-size: auto .3rem;
     font-size: .25rem;
+    &:last-child{
+      border-bottom: none;
+    }
     p{
       text-indent: .5em;
     }
@@ -28,13 +32,16 @@ button{
   font-size: .24rem;
   color: #999999;
 }
-
+.addressManage{
+  padding-bottom: 0.86rem;
+}
 .ads-container{
   width: 94%;
   height: auto;
   background: white;
   margin-top: 1rem;
   padding: 0 3%;
+  
   div{
     width: 100%;
     height: 1.15rem;
@@ -80,7 +87,7 @@ button{
   font-size: .3rem;
   text-align: center;
   line-height: .86rem;
-  border-top: 1px #afafaf solid;
+  border-top: 1px #e4e4e4 solid;
   background: white;
   a{
     color: #4488ff;

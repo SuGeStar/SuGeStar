@@ -8,156 +8,87 @@
       <mt-navbar  v-model="selected">
         <mt-tab-item :id="index" v-for="(tabName,index) in tabTxt" :key="index" class="asc">{{tabName}}</mt-tab-item>
       </mt-navbar>
-      <div>
-      </div>
       <!-- tab-container -->
       <mt-tab-container v-model="selected">
         <mt-tab-container-item :id="0" class="property-container">
-         <div class="pc-head-container">
-           <p class="pc-head-title">K矿石总数</p>
-           <p class="pc-head-num"><span>99999.00</span><router-link :to="{path:'/smelting/K'}"><span class="smelting fr">熔炼 >></span></router-link></p>
-           <div class="pc-head-freeze">
-             <p>冻结K矿石：<span>10000.00</span></p>
-           </div>
-         </div>
-          <div class="pc-record-container">
-            <p class="pc-record-title">收支记录</p>
-            <div class="pc-record-list">
-              <div class="pc-record-list-container fl">
-                <p class="pc-record-list-title">日常收取</p>
-                <p class="pc-record-list-time">2018-05-22</p>
-              </div>
-              <p class="pc-record-list-data fr">+5</p>
-            </div>
-            <div class="pc-record-list">
-              <div class="pc-record-list-container fl">
-                <p class="pc-record-list-title">熔炼</p>
-                <p class="pc-record-list-time">2018-05-22</p>
-              </div>
-              <p class="pc-record-list-data fr">-25</p>
-            </div>
+          <div class="pc-head-container">
+            <p class="pc-head-title">星币总数</p>
+            <p class="pc-head-num"><span>{{total}}</span>
+            <!-- <router-link :to="{path:'/smelting/S'}"><span class="smelting fr"></span></router-link> -->
+            </p>
+            <p class="pc-head-freeze">
+              冻结星币：{{freeze}}
+              <i class="icon icon-lock"></i>
+            </p>
+          </div>
+          <div class="pc-content">
+            <p class="pc-content-title">收支记录</p>
+            <!-- <ul>
+              <li v-for="(list,index) in lists" :key="index">
+                <div class="list list-header">
+                  <div>
+                    <span>{{list.date}}</span>
+                    <span>总收入：{{list.total}}</span>
+                  </div>
+                  <i class="icon icon-pull"></i>
+                </div>
+                <div class="list list-content">
+                  <div class="list-subnav">
+                    <p>日常领取</p>
+                    <span>{{list.time}}</span>
+                  </div>
+                  <p>{{list.earn}}</p>
+                </div>
+                <div class="list list-content">
+                  <div class="list-subnav">
+                    <p>邀请收益</p>
+                    <span>2018-05-22 15:06</span>
+                  </div>
+                  <p>+0.0001</p>
+                </div>
+              </li>
+            </ul> -->
           </div>
         </mt-tab-container-item>
         <mt-tab-container-item :id="1" class="property-container">
           <div class="pc-head-container">
-            <p class="pc-head-title">S矿石总数</p>
-            <p class="pc-head-num"><span>99999.00</span><router-link :to="{path:'/smelting/S'}"><span class="smelting fr">熔炼 >></span></router-link></p>
-            <div class="pc-head-freeze">
-              <p>冻结S矿石：<span>10000.00</span></p>
-            </div>
+            <p class="pc-head-title">金币总数</p>
+            <p class="pc-head-num"><span>99999.00</span><router-link :to="{path:'/smelting'}"><span class="smelting fr">释放/赠送/充值 >></span></router-link></p>
+            <p class="pc-head-freeze">
+              冻结金币：{{gold}}
+              <i class="icon icon-lock"></i>
+            </p>
           </div>
-          <div class="pc-record-container">
-            <p class="pc-record-title">收支记录</p>
-            <div class="pc-record-list">
-              <div class="pc-record-list-container fl">
-                <p class="pc-record-list-title">日常收取</p>
-                <p class="pc-record-list-time">2018-05-22</p>
-              </div>
-              <p class="pc-record-list-data fr">+5</p>
-            </div>
-            <div class="pc-record-list">
-              <div class="pc-record-list-container fl">
-                <p class="pc-record-list-title">熔炼</p>
-                <p class="pc-record-list-time">2018-05-22</p>
-              </div>
-              <p class="pc-record-list-data fr">-25</p>
-            </div>
-
-          </div>
-        </mt-tab-container-item>
-        <mt-tab-container-item :id="2" class="property-container">
-          <div class="pc-head-container">
-            <p class="pc-head-title">SG矿币总数</p>
-            <p class="pc-head-num"><span>99999.00</span></p>
-            <div class="pc-head-freeze">
-              <p>冻结SG矿币：<span>10000.00</span></p>
-            </div>
-          </div>
-          <div class="pc-record-container">
-            <p class="pc-record-title">收支记录</p>
-            <div class="pc-record-list">
-              <div class="pc-record-list-container fl">
-                <p class="pc-record-list-title">熔炼</p>
-                <p class="pc-record-list-time">2018-05-22</p>
-              </div>
-              <p class="pc-record-list-data fr">+5</p>
-            </div>
-            <div class="pc-record-list">
-              <div class="pc-record-list-container fl">
-                <p class="pc-record-list-title">消费</p>
-                <p class="pc-record-list-time">2018-05-22</p>
-              </div>
-              <p class="pc-record-list-data fr">-25</p>
-            </div>
-
-          </div>
-        </mt-tab-container-item>
-        <mt-tab-container-item :id="3" class="property-container">
-          <div class="pc-head-container">
-            <p class="pc-head-title">SG金币总数</p>
-            <p class="pc-head-num"><span>99999.00</span><router-link to="releaseOrSend"><span class="smelting fr">释放/赠送 >></span></router-link></p>
-            <div class="pc-head-freeze">
-              <p>冻结SG金币：<span>10000.00</span></p>
-            </div>
-          </div>
-          <div class="pc-record-container">
-            <p class="pc-record-title">收支记录</p>
-            <div class="pc-record-list">
-              <div class="pc-record-list-container fl">
-                <p class="pc-record-list-title">熔炼</p>
-                <p class="pc-record-list-time">2018-05-22</p>
-              </div>
-              <p class="pc-record-list-data fr">+5</p>
-            </div>
-            <div class="pc-record-list">
-              <div class="pc-record-list-container fl">
-                <p class="pc-record-list-title">商城消费</p>
-                <p class="pc-record-list-time">2018-05-22</p>
-              </div>
-              <p class="pc-record-list-data fr">-25</p>
-            </div>
-            <div class="pc-record-list">
-              <div class="pc-record-list-container fl">
-                <p class="pc-record-list-title">赠送他人</p>
-                <p class="pc-record-list-time">2018-05-22</p>
-              </div>
-              <p class="pc-record-list-data fr">-25</p>
-            </div>
-            <div class="pc-record-list">
-              <div class="pc-record-list-container fl">
-                <p class="pc-record-list-title">他人赠送</p>
-                <p class="pc-record-list-time">2018-05-22</p>
-              </div>
-              <p class="pc-record-list-data fr">+25</p>
-            </div>
-
-          </div>
-        </mt-tab-container-item>
-        <mt-tab-container-item :id="4" class="property-container">
-          <div class="pc-head-container">
-            <p class="pc-head-title">原力总数</p>
-            <p class="pc-head-num"><span>99999.00</span></p>
-            <div class="pc-head-freeze">
-              <p>冻结原力：<span>10000.00</span></p>
-            </div>
-          </div>
-          <div class="pc-record-container">
-            <p class="pc-record-title">收支记录</p>
-            <div class="pc-record-list">
-              <div class="pc-record-list-container fl">
-                <p class="pc-record-list-title">系统赠送</p>
-                <p class="pc-record-list-time">2018-05-22</p>
-              </div>
-              <p class="pc-record-list-data fr">+5</p>
-            </div>
-            <div class="pc-record-list">
-              <div class="pc-record-list-container fl">
-                <p class="pc-record-list-title">日常提炼</p>
-                <p class="pc-record-list-time">2018-05-22</p>
-              </div>
-              <p class="pc-record-list-data fr">-25</p>
-            </div>
-
+          <div class="pc-content">
+            <p class="pc-content-title">收支记录</p>
+            <router-link to="/deal">
+              <p class="pc-content-title">交易列表</p>
+            </router-link>
+            <!-- <ul>
+              <li v-for="(list,index) in lists" :key="index">
+                <div class="list list-header">
+                  <div>
+                    <span>{{list.date}}</span>
+                    <span>总收入：{{list.total}}</span>
+                  </div>
+                  <i class="icon icon-pull"></i>
+                </div>
+                <div class="list list-content">
+                  <div class="list-subnav">
+                    <p>日常领取</p>
+                    <span>{{list.time}}</span>
+                  </div>
+                  <p>{{list.earn}}</p>
+                </div>
+                <div class="list list-content">
+                  <div class="list-subnav">
+                    <p>邀请收益</p>
+                    <span>2018-05-22 15:06</span>
+                  </div>
+                  <p>+0.0001</p>
+                </div>
+              </li>
+            </ul> -->
           </div>
         </mt-tab-container-item>
       </mt-tab-container>
@@ -166,16 +97,58 @@
 </template>
 
 <script>
+import { url } from '../../assets/js/mobile.js'
+let token = localStorage.getItem('token')
 export default {
   data () {
     return {
       selected: 0,
-      tabTxt: ['K矿石', 'SG矿石', 'SG矿石', 'SG金币', '原力值']
+      freeze: '1000',
+      gold: '1000',
+      total: '1000',
+      tabTxt: ['星币', '金币'],
+      propertyContainer: [],
+      lists: [
+        {
+          date: '2018-06',
+          total: '235',
+          time: '2018-05-22 15:06',
+          earn: '+0.0001'
+        },
+        {
+          date: '2018-05',
+          total: '235',
+          time: '2018-05-22 15:06',
+          earn: '+0.0001'
+        }
+      ]
+    }
+  },
+  created () {
+    // 已经开采的矿石记录按月统计
+    // this.$http.get(url + 'alreadyGetMonth?token='+token)
+    // .then(response => {
+    //   console.log(response)
+    //   this.propertyContainer = response.data.data
+    //   this.total = response.data.total
+    // })
+    // .catch(error => {
+    //   console.log(error)
+    // })
+  },
+  watch: {
+    selected (value) {
+      console.log(value);
+    }
+  },
+  methods: {
+    propertyCell (index) {
+      console.log(index)
     }
   }
 }
 </script>
 
-<style scoped>
-  @import '../../assets/less/myProperty.less';
+<style lang="less" scoped>
+@import '../../assets/less/myProperty.less';
 </style>

@@ -10,19 +10,19 @@
           </router-link>
         </div>
         <!--<canvas id="canvas" class="canvas"></canvas>-->
-        <collecting :energy = 'arr' v-on: energyClick =''></collecting>
+        <collecting :energy = 'arr' @energyClick ='getEnergy'></collecting>
         <div class="index-classfiy">
           <ul class="list">
+            <li>
+              <router-link to="/myProperty">
+                <img src="../../assets/image/index-zichan.png" alt="">
+                <p>我的资产</p>
+              </router-link>
+            </li>
             <li>
               <router-link to="/miji">
                 <img src="../../assets/image/index-miji.png" alt="">
                 <p>星球秘籍</p>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="/speed">
-                <img src="../../assets/image/index-speed.png" alt="">
-                <p>加速器</p>
               </router-link>
             </li>
             <li>
@@ -34,61 +34,75 @@
           </ul>
         </div>
       </div>
+      <!-- 团队看板 -->
+      <div class="index-box">
+        <div class="box-title">
+          <h3>团队看板</h3>
+        </div>
+        <div class="content-box team">
+          <div class="team-head">
+            <p>提示：第{{floor}}层另招募{{lesspeo}}人，即可拿到{{moregold}}金币</p>
+            <div class="team-exist">
+              <p>直推人数：<span>{{invitpeo}}</span></p>
+              <p>旗下人数：<span>{{allpeo}}</span></p>
+            </div>
+          </div>
+          <div class="team-content">
+            <router-link :to="{path: '/relation/' + index}" class="floor" v-for="(progress,index) in progressBox" :key="index">
+              <div class="team-floor">
+                第{{progress.floor}}层
+              </div>
+              <vm-progress class="progress"  :percentage="progress.percentage" :text-inside="true" :stroke-width="18" :strokeColor="progress.color"></vm-progress>
+            </router-link>
+          </div>
+        </div>
+      </div>
+      <!-- 大礼包 -->
+        <div class="gift-box">
+          <router-link to="/gift">
+            <img src="http://attach.bbs.miui.com/forum/201507/01/101024hpo6hqhvt77dhsqq.jpg" alt="">
+          </router-link>
+        </div>
       <!-- 挖宝数据 -->
       <div class="index-box">
         <div class="box-title">
           <h3>挖宝数据</h3>
         </div>
-        <div class="box-content">
-          <div class="box-con">
-            <div class="box-name">当前等级</div>
-            <span class="base">{{level}}</span>
-          </div>
-          <div class="box-con">
-            <div class="box-name">PV</div>
-            <div class="ml">
-              <span>今日获得</span>
-              <span class="base">{{pv}};</span>
-              <span>累计获得</span>
-              <span class="index-all">{{allpv}}</span>
-            </div>
-          </div>
-          <div class="box-con">
-            <div class="box-name">K矿石</div>
-            <div class="ml">
-              <span>今日获得</span>
-              <span class="base">{{k}};</span>
-              <span>累计获得</span>
-              <span class="index-all">{{allk}}</span>
-            </div>
-          </div>
-          <div class="box-con">
-            <div class="box-name">SG矿币</div>
-            <div class="ml">
-              <span>今日获得</span>
-              <span class="base">{{sg}};</span>
-              <span>累计获得</span>
-              <span class="index-all">{{allsg}}</span>
-            </div>
-          </div>
-          <div class="box-con">
-            <div class="box-name">S矿石</div>
-            <div class="ml">
-              <span>今日获得</span>
-              <span class="base">{{s}};</span>
-              <span>累计获得</span>
-              <span class="index-all">{{alls}}</span>
-            </div>
-          </div>
-          <div class="box-con">
-            <div class="box-name">SG金币</div>
-            <div class="ml">
-              <span>今日获得</span>
-              <span class="base">{{sgolden}};</span>
-              <span>累计获得</span>
-              <span class="index-all">{{allsgolden}}</span>
-            </div>
-          </div>
+        <div class="content-box">
+          <ul>
+            <li class="content-list">
+              <div class="con-title">
+                星币
+                <i class="icon icon-tips"></i>
+              </div>
+              <div class="con-desc">
+                <div class="desc today">
+                  <p>今日获得</p>
+                  <span>{{today_owen}}</span>
+                </div>
+                <div class="desc">
+                  <p>累计获得</p>
+                  <span>{{all_owen}}</span>
+                </div>
+              </div>
+            </li>
+            <li class="content-list">
+              <div class="con-title">
+                金币
+                <i class="icon icon-tips"></i>
+              </div>
+              <div class="con-desc">
+                <div class="desc today">
+                  <p>今日获得</p>
+                  <span>{{today_owen}}</span>
+                </div>
+                <div class="desc">
+                  <p>累计获得</p>
+                  <span>{{all_owen}}</span>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
       <!-- 底部 -->
@@ -100,12 +114,17 @@
   @import '../../assets/less/index.less';
 </style>
 <script>
+import { Toast } from 'mint-ui'
 import footGuide from '../comp/footGuide.vue'
 import collecting from './collecting.vue'
-
+import { url } from '../../assets/js/mobile.js'
+let getGevel = localStorage.getItem('user_level')
+let token = localStorage.getItem('token')
 export default {
   data () {
     return {
+      today_owen: '1000000',
+      all_owen: '1000000',
       level: 'SG青铜时代',
       pv: '1000',
       k: '1000',
@@ -117,7 +136,39 @@ export default {
       allsg: '10000',
       alls: '10000',
       allsgolden: '10000',
-      arr: []
+      arr: [],
+      floor: "2",
+      lesspeo: "3",
+      moregold: "350",
+      invitpeo: "3",
+      allpeo: "10",
+      progressBox: [
+        // {
+        //   floor: '1',
+        //   percentage: 100,
+        //   color: '#a288d2'
+        // },
+        // {
+        //   floor: '2',
+        //   percentage: 75,
+        //   color: '#03a8f7'
+        // },
+        // {
+        //   floor: '3',
+        //   percentage: 50,
+        //   color: '#f0b026'
+        // },
+        // {
+        //   floor: '4',
+        //   percentage: 25,
+        //   color: '#1ad3a7'
+        // },
+        // {
+        //   floor: '5',
+        //   percentage: 25,
+        //   color: '#1ad3a7'
+        // }
+      ]
     }
   },
   components: {
@@ -125,23 +176,80 @@ export default {
     collecting
   },
   methods: {
-    GetArr: function () {
+    GetArr () {
       setTimeout(() => {
-        this.arr = [
-          {id: '1', num: '2'},
-          {id: '4', num: '6'},
-          {id: '2', num: '8'},
-          {id: '1', num: '2'},
-          {id: '4', num: '6'},
-          {id: '2', num: '8'},
-          {id: '2', num: '2'},
-          {id: '4', num: '6'}
-        ]
+        this.arr = []
       }, 0)
+    },
+    getEnergy (id) {
+      // 开采K矿
+      let form = this.$qs.stringify({
+        token: token,
+        id: id
+      })
+      this.$http.post(url+'get', form)
+      .then(response => {
+        console.log(response)
+        Toast({
+          message: response.data.msg,
+          position: 'middle',
+          duration: 2000
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
     }
   },
-  mounted () {
+  created () {
+    switch (getGevel) {
+      case '1':
+        this.level = 'SG星球居民'
+        break;
+      case '2':
+        this.level = 'SG青铜时代'
+        break;
+      case '3':
+        this.level = 'SG白银时代'
+        break;
+      case '4':
+        this.level = 'SG黄金时代'
+        break;
+      case '5':
+        this.level = 'SG钻石时代'
+        break;
+    }
+    this.$http.get(url + 'notGet?token='+token)
+    // 未开采K矿
+    .then(response => {
+      console.log(response)
+      this.arr = response.data.data;
+    })
+    .catch(error => {
+      console.log(error)
+      Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+    })
     this.GetArr()
+    this.$http.get(url + 'occupancyRate?token='+token)
+    // 团队看板占比
+    .then(response => {
+      console.log(response.data.data)
+      // this.progressBox = response.data.data
+      for (let i = 0; i < response.data.data.length; i++) {
+        if (response.data.data[i].percentage == 0) {
+          this.progressBox[i] = response.data.data[i]
+        } else {
+          this.progressBox = response.data.data
+        }
+      }
+    })
+    .catch(error => {
+      console.log(error)
+      Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+    })
+    if (!token) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

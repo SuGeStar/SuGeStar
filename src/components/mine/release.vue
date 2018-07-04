@@ -9,14 +9,18 @@
         <div class="smelting-withdraw" v-if="isS">
           <span class="account_s">账号：</span><input type="number" v-model="sendTel">
         </div>
-        <div class="chose-bank" v-if="isR">到账银行卡 <span>中国工商银行(尾号1234)</span></div>
+        <router-link to="/bindBankCard" v-if="isR">
+          <div class="chose-bank" >到账银行卡 <span>中国工商银行(尾号1234)</span></div>
+        </router-link>
         <mt-button type="default" class="releaseBtn" @click="releaseBtn">{{titleTxt}}</mt-button>
       </div>
     </div>
 </template>
 
 <script>
+import { url } from '../../assets/js/mobile.js'
 import { Toast, MessageBox } from 'mint-ui'
+let token = localStorage.getItem('token')
 export default {
   data () {
     return {
@@ -46,14 +50,35 @@ export default {
           Toast('电话号码格式错误!')
           return false
         }
-        MessageBox.confirm('确定执行此操作?').then(action => {
-          console.log('aaa')
+        // 赠送金币
+        let form = this.$qs.stringify({
+          token: token,
+          phone: this.sendTel,
+          gold: this.SGB,
+          mark: '转出'+this.SGB
         })
+        this.$http.post(url+'transfer', form)
+        .then(response => {
+          console.log(response)
+          Toast({
+            message: response.data.msg,
+            position: 'bottom',
+            duration: 2000
+          })
+          if (response.data.code == 200) {
+            this.$router.push('/myProperty')
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        })  
       }
     }
   },
   mounted () {
     var way = parseInt(this.$route.params.way)
+    console.log(way)
     switch (way) {
       case 0:
         this.titleTxt = '释放'
