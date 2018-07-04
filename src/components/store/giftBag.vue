@@ -14,7 +14,7 @@
                 </div>
                 <p class="gift-name">{{eachGift.giftName}}</p>
                 <p class="gift-price">{{eachGift.giftPrice}}22</p>
-                <input type="radio" name="gift">
+                <input type="radio" :name="eachGift.giftBelong">
              </div>
           </div>
         </div>
@@ -32,25 +32,25 @@ export default {
               imgSrc: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
               giftName: '真艾宝',
               giftPrice: '180',
-              giftBelong: '1'
+              giftBelong: 1
             },
             {
               imgSrc: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
               giftName: '女装',
               giftPrice: '132',
-              giftBelong: '1'
+              giftBelong: 1
             },
             {
               imgSrc: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
               giftName: '男装',
               giftPrice: '20',
-              giftBelong: '1'
+              giftBelong: 1
             },
             {
               imgSrc: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
               giftName: '鞋子',
               giftPrice: '100',
-              giftBelong: '1'
+              giftBelong: 1
             }
           ],
           [
@@ -58,25 +58,25 @@ export default {
               imgSrc: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
               giftName: '童装',
               giftPrice: '270',
-              giftBelong: '2'
+              giftBelong: 2
             },
             {
               imgSrc: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
               giftName: '零食',
               giftPrice: '98',
-              giftBelong: '2'
+              giftBelong: 2
             },
             {
               imgSrc: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
               giftName: '家电',
               giftPrice: '1000',
-              giftBelong: '2'
+              giftBelong: 2
             },
             {
               imgSrc: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
               giftName: '数码',
               giftPrice: '800',
-              giftBelong: '2'
+              giftBelong: 2
             }
 
           ],
@@ -85,31 +85,31 @@ export default {
               imgSrc: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
               giftName: '男鞋',
               giftPrice: '99',
-              giftBelong: '3'
+              giftBelong: 3
             },
             {
               imgSrc: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
               giftName: '保健品',
               giftPrice: '321',
-              giftBelong: '3'
+              giftBelong: 3
             },
             {
               imgSrc: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
               giftName: '化妆品',
               giftPrice: '123',
-              giftBelong: '3'
+              giftBelong: 3
             },
             {
               imgSrc: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
               giftName: '毒品',
               giftPrice: '100000',
-              giftBelong: '3'
+              giftBelong: 3
             }
             /*{
               imgSrc: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
               giftName: '鞋子',
               giftPrice: '100',
-              giftBelong: '2'
+              giftBelong: 2
             }*/
           ]
         ],
