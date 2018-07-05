@@ -25,7 +25,7 @@
         </router-link>
       </li>
     </ul>
-    <applyPop @hidden="hiddenShow" v-show="applyPop_pop_up"></applyPop>
+    <applyPop @hidden="hiddenShow"  v-show="applyPop_pop_up"></applyPop>
   </div>
 </template>
 <style lang="less" scoped>

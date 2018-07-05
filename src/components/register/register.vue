@@ -3,7 +3,6 @@
     <h3 class="reg-title">SG星球注册</h3>
     <div class="reg-form">
       <div><span>推荐编号</span><input type="text" placeholder="" :readonly="true" v-model="invite_code"></div>
-      <div><span>真实姓名</span><input type="text" placeholder="请输入您的真实姓名" v-model="realName"></div>
       <div><span>手机号码</span><input type="number" placeholder="请输入手机号码" v-model="phoneNum"></div>
       <!-- <div><span>图片验证</span>
         <input type="text" placeholder="图片验证码" v-model="pic" class="verificationCode">
@@ -15,14 +14,15 @@
         <i :class="{'haveSend':isSend}" @click="sendCode">{{verificationCodeTxt}}</i>
       </div>
       <div><span>登录密码</span><input type="password" placeholder="字母数字组合" v-model="loginPsd"></div>
-      <!-- <div><span>支付密码</span><input type="password" placeholder="6位数字" v-model="applyPsd"></div> -->
+      <div><span>支付密码</span><input type="password" placeholder="6位数字" v-model="applyPsd"></div>
       <!-- <div  @click="cityPop">
         <span>所属地区</span>
         <input type="text" placeholder="请选择省 市 县" v-model="locations" :readonly="true">
       </div>
       <div><span>优品账号</span><input type="text" placeholder="请输入您的优品账号" v-model="YPAccount"></div>
-      <div><span>身份证号</span><input type="text" placeholder="请输入身份证号码" v-model="IDNumber"></div>
-      <div><span>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span><input type="text" placeholder="给自己起个名字吧~" v-model="nickName"></div> -->
+      <div><span>身份证号</span><input type="text" placeholder="请输入身份证号码" v-model="IDNumber"></div>-->
+      <div><span>真实姓名</span><input type="text" placeholder="请输入您的真实姓名" v-model="realName"></div>
+      <!-- <div><span>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span><input type="text" placeholder="给自己起个名字吧~" v-model="nickName"></div>  -->
     </div>
     <mt-button type="default" @click="register">注册</mt-button>
     <cityPop v-model="addressArr" @hidden="hiddenShow" v-show="cityPop_up"></cityPop>
@@ -36,12 +36,12 @@ import cityPop from '../comp/city.vue'
 export default {
   data () {
     return {
-      invite_code: 'U9RU3FC2',
+      invite_code: '',
       phoneNum: '',
       verificationCode: '',
       verificationCodeTxt: '发送验证码',
       loginPsd: '',
-      // applyPsd: '',
+      applyPsd: '',
       // locations: [],
       // YPAccount: '',
       realName: '',
@@ -60,6 +60,21 @@ export default {
   },
   components: {
     cityPop
+  },
+  created () {
+    // console.log(window.location.href)
+    let url = window.location.href.substring()
+    let arrObj = url.split('?')
+    if (url.indexOf('?') == -1) {
+      this.invite_code = 'U9RU3FC2'
+    } else {
+      let str = window.location.href.substring(location.href.indexOf('=')+1)
+      let recommend_code = str.split('&')[0]
+      this.invite_code = recommend_code
+      let contact_code = str.split('=')[1]
+      localStorage.setItem('recommend_code',recommend_code)
+      localStorage.setItem('contact_code',contact_code)
+    }
   },
   methods: {
     // 倒计时
@@ -171,12 +186,20 @@ export default {
         Toast('请输入6-16位密码')
         return false
       }
+      if (!this.applyPsd) {
+        Toast('请填写支付密码!')
+        return false
+      } else if (this.applyPsd.length != 6) {
+        Toast('支付密码只能是6位数字')
+        return false
+      }
       let form = this.$qs.stringify({
         invite_code: this.invite_code,
         password: this.loginPsd,
         code: this.verificationCode,
         phone: this.phoneNum,
-        realname: this.realName
+        realname: this.realName,
+        payment_password: this.applyPsd
       })
       this.$http.post(url+'register', form)
       .then(response => {

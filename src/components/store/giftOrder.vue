@@ -51,12 +51,14 @@
         去支付
       </div>
     </div>
+    <applyPop @hidden="hiddenShow" :password="password" @passwordClick="gotoPay" v-show="applyPop_pop_up"></applyPop>
   </div>
 </template>
 <script>
 import { url } from '../../assets/js/mobile.js'
 let token = localStorage.getItem('token')
 import { Toast } from 'mint-ui'
+import applyPop from '../comp/applyPop.vue'
 export default {
   data () {
     return {
@@ -67,8 +69,13 @@ export default {
       addressDetail: '',
       payment: '',
       giftBag: '',
-      pay_channel: ''
+      pay_channel: '',
+      password: [],
+      applyPop_pop_up: false
     }
+  },
+  components: {
+    applyPop
   },
   created () {
     this.$http.get(url + 'getDefaultAddress?token=' + token)
@@ -108,6 +115,10 @@ export default {
     popup () {
       this.popupVisible = true
     },
+    hiddenShow(){
+      let that = this;
+      that.applyPop_pop_up = false
+    },
     wx () {
       this.payment = '微信支付'
       this.pay_channel = 'wx'
@@ -119,29 +130,85 @@ export default {
       this.popupVisible = false
     },
     gotoPay () {
-       window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6f71648f90719a98&redirect_uri=http%3a%2f%2fsgxq.sugebei.com%2fpayment&response_type=code&scope=snsapi_base&state=1#wechat_redirect'
-      //  this.$router.push('/payment')
-      //  let code = location.href.substring(location.href.indexOf('=')+1,location.href.indexOf('&'))
-      //  localStorage.setItem('code',code)
       if (this.payment == '') {
         Toast('请选择支付方式')
         return false
       }
-      // this.$http.get(url + 'giftOrderCreate?token='+token+'&gift='+this.giftBag+'&address_id='+this.id+'&pay_channel=wx')
-      // 执行购买流程
-      // .then(response => {
+      let form = this.$qs.stringify({
+        token: token,
+        gift: this.giftBag,
+        address_id: this.id,
+        pay_channel: this.pay_channel
+      })
+      this.$http.post(url+'giftOrderCreate', form)
+      .then(response => {
+        console.log(response)
+        if (response.data.code == 200) {
+          if (this.pay_channel == 'wx') {
+            window.location.href = 'http://www.sugebei.com/giftOrderPay?token='+token+'&order_sn='+response.data.data
+            return false
+          }
+          if (this.pay_channel == 'gb') {
+            this.applyPop_pop_up = true
+            
+            // if (!this.applyPop_pop_up) {
+            //   console.log('1111')
+            //   // this.password = sessionStorage.getItem('password')
+            //   // console.log(this.password)
+            // }
+            
+            // let payment_password = this.password.replace(/,/g, "")
+            // console.log(payment_password.length)
+            // if (payment_password.length == 6) {
+            //   this.$http.get(url + 'giftOrderPay?token='+token+'&order_sn='+response.data.data+'&payment_password'+payment_password)
+            //     // 礼包订单支付
+            //   .then( order => {
+            //   console.log(order)
+            //     if (order.data.code == 500) {
+            //       Toast({
+            //         message: order.data.msg
+            //       })
+            //       return false
+            //     }
+            //     Toast({
+            //       message: order.data.msg,
+            //       position: 'bottom',
+            //       duration: 3000
+            //     })
+            //   })
+            //   .catch(error => {
+            //     console.log(error)
+            //     Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+            //   })
+            // }
+          }
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+      })
+      // if (this.pay_channel == 'wx') {
+      //   window.location.href = 'http://www.sugebei.com/giftOrderCreate?token='+token+'&gift='+this.giftBag+'&address_id='+this.id+'&pay_channel=wx'
+      //   window.location.href = 'http://www.sugebei.com/pay'
+      //   return false
+      // }
+      // if (this.pay_channel == 'gb') {
+      //   this.$http.get(url + 'giftOrderCreate?token='+token+'&gift='+this.giftBag+'&address_id='+this.id+'&pay_channel=gb')
+      //   执行购买流程
+      //   .then(response => {
       //   console.log(response.data)
       //   Toast({
-      //     message: response,
-      //     position: 'bottom',
-      //     duration: 5000000
+      //       message: response,
+      //       position: 'bottom',
+      //       duration: 5000000
+      //     })
       //   })
-      // })
-      // .catch(error => {
-      //   console.log(error)
-      //   Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-      // })
-      // window.location.href = 'http://www.sugebei.com/index.php/giftOrderCreate?token='+token+'&gift='+this.giftBag+'&address_id='+this.id+'&pay_channel=wx'
+      //   .catch(error => {
+      //     console.log(error)
+      //     Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+      //   })
+      // }
     }
   }
 }
