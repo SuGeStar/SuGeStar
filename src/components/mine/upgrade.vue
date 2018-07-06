@@ -8,11 +8,12 @@
     <div class="upgrade">
       <div class="cell-box">
         <mt-field label="推荐人编号" readonly v-model="recomID"></mt-field>
-        <mt-field label="推荐人姓名" readonly  v-model="recomName"></mt-field>
+        <mt-field label="节点人编号" readonly v-model="contact_code"></mt-field>
+        <!-- <mt-field label="推荐人姓名" readonly  v-model="recomName"></mt-field> -->
         <mt-field label="真实姓名" placeholder="请输入您的真实姓名" v-model="username"></mt-field>
       </div>
       <div class="btn-box">
-        <mt-button class="button">确认升级</mt-button>
+        <mt-button class="button" @click="upgrade">确认升级</mt-button>
       </div>
     </div>
   </div>
@@ -40,12 +41,49 @@
 }
 </style>
 <script>
+import { url } from '../../assets/js/mobile.js'
+let token = localStorage.getItem('token')
+import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
       recomID: 'AASAF',
+      contact_code: '',
       recomName: '张三',
-      username: ''
+      username: '',
+      baseUserInfo: JSON.parse(localStorage.getItem('userinfo'))
+    }
+  },
+  created () {
+    this.recomID = localStorage.getItem('recommend_code')
+    this.contact_code = localStorage.getItem('contact_code')
+    // this.recomName = this.baseUserInfo.realname
+    this.username = this.baseUserInfo.realname
+  },
+  methods: {
+    upgrade () {
+      let form = this.$qs.stringify({
+        apply_level: this.baseUserInfo.level,
+        token: token,
+        recommend_code: this.recomID,
+        contact_code: this.contact_code
+      })
+      this.$http.post(url+'apply', form)
+      .then(response => {
+        console.log(response)
+        Toast({
+          message: response.data.msg,
+          position: 'bottom',
+          duration: 2000
+        })
+        if (response.data.code == 200) {
+          
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+      })
     }
   }
 }

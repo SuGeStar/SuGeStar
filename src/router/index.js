@@ -271,7 +271,7 @@ export default new Router({
       component: giftOrder
     },
     {
-      path: '/payment/:id',
+      path: '/payment',
       name: 'payment',
       component: payment
     }

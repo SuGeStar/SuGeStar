@@ -2,10 +2,10 @@
   <div class="wrapper">
     <div class="applyPop">
       <div class="goods-psd">
-        <p class="apply-title">
+        <p style="margin: 0.2rem" class="apply-title">
           请输入支付密码
         </p>
-        <p style="margin: 0.2rem">确认支付 <span>{{password}}</span> </p>
+        <!-- <p style="margin: 0.2rem">确认支付 <span>{{password}}</span> </p> -->
         <div class="psd-container">
           <input class="psd-input" type="password" readonly v-for="(value,index) in passwordGroup" :key="index" :value="value.value">
         </div>
@@ -25,14 +25,14 @@ export default {
     return {
       popupVisible1: true,
       realInput: '',
-      password: '111',
+      // password: '111',
       passwordGroup: [],
       number: ['1','2','3','4','5','6','7','8','9','取消','0','删除'],
       pasgroup: [],
       currentInputIndex:-1
     }
   },
-  props: ['popup'],
+  props: ['password'],
   created() {
     this.initPasswordGroup();
   },
@@ -40,6 +40,11 @@ export default {
     currentInputIndex (val) {
       if(val == 5){
         console.log(this.pasgroup)
+        // sessionStorage.setItem('password',this.pasgroup)
+        this.$emit('hidden')
+        let password = this.pasgroup
+        // this.$emit('passwordClick',password)
+        // console.log(password)
       }else if(val <= -1){
         this.currentInputIndex = -1
       }
@@ -66,6 +71,8 @@ export default {
           this.pasgroup.push(value)
           this.currentInputIndex++
           this.passwordGroup[this.currentInputIndex].value = value
+          // let password = this.pasgroup
+          // this.$emit('passwordClick',this.pasgroup)
       }
     },
     initPasswordGroup () {
