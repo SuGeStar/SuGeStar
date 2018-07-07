@@ -39,12 +39,9 @@ export default {
   watch: {
     currentInputIndex (val) {
       if(val == 5){
-        console.log(this.pasgroup)
-        // sessionStorage.setItem('password',this.pasgroup)
         this.$emit('hidden')
-        let password = this.pasgroup
-        // this.$emit('passwordClick',password)
-        // console.log(password)
+        this.$emit('password',this.pasgroup)
+        console.log(this.pasgroup)
       }else if(val <= -1){
         this.currentInputIndex = -1
       }
@@ -71,8 +68,7 @@ export default {
           this.pasgroup.push(value)
           this.currentInputIndex++
           this.passwordGroup[this.currentInputIndex].value = value
-          // let password = this.pasgroup
-          // this.$emit('passwordClick',this.pasgroup)
+          // this.$emit('password',this.passwordGroup)
       }
     },
     initPasswordGroup () {

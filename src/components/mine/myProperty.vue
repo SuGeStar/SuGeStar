@@ -22,7 +22,9 @@
             </p>
           </div>
           <div class="pc-content">
-            <p class="pc-content-title">收支记录</p>
+            <router-link to="/record/star">
+              <p class="pc-content-title">收支记录</p>
+            </router-link>
             <!-- <ul>
               <li v-for="(list,index) in lists" :key="index">
                 <div class="list list-header">
@@ -52,15 +54,17 @@
         </mt-tab-container-item>
         <mt-tab-container-item :id="1" class="property-container">
           <div class="pc-head-container">
-            <p class="pc-head-title">金币总数</p>
+            <p class="pc-head-title">代币总数</p>
             <p class="pc-head-num"><span>{{gold}}</span><router-link :to="{path:'/smelting'}"><span class="smelting fr">释放/赠送/充值 >></span></router-link></p>
             <p class="pc-head-freeze">
-              冻结金币：{{gold}}
+              冻结代币：{{gold}}
               <i class="icon icon-lock"></i>
             </p>
           </div>
           <div class="pc-content">
-            <p class="pc-content-title">收支记录</p>
+            <router-link to="/record/gold">
+              <p class="pc-content-title record">收支记录</p>
+            </router-link>
             <router-link to="/deal">
               <p class="pc-content-title">交易列表</p>
             </router-link>
@@ -106,7 +110,7 @@ export default {
       freeze: '1000',
       gold: '1000',
       total: '1000',
-      tabTxt: ['星币', '金币'],
+      tabTxt: ['星币', '代币'],
       propertyContainer: [],
       lists: [
         {
@@ -143,6 +147,8 @@ export default {
         console.log(response.data)
         if (response.data.code == 200) {
           this.gold = response.data.data.gold
+          this.total = response.data.data.miners
+
         } else {
 
         }

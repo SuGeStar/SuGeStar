@@ -40,7 +40,9 @@ import team from '@/components/mine/team'
 import relation from '@/components/mine/relation'
 import relatShare from '@/components/mine/relatShare'
 import upgrade from '@/components/mine/upgrade'
+import demo from '@/components/mine/demo'
 import deal from '@/components/mine/deal'
+import record from '@/components/mine/record'
 import giftBag from '@/components/store/giftBag'
 import gift from '@/components/store/gift'
 import giftOrder from '@/components/store/giftOrder'
@@ -274,6 +276,16 @@ export default new Router({
       path: '/payment',
       name: 'payment',
       component: payment
+    },
+    {
+      path: '/record/:id', // 收支记录
+      name: 'record',
+      component: record
+    },
+    {
+      path: '/demo',
+      name: 'demo',
+      component: demo
     }
   ]
 })

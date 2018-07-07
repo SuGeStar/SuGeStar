@@ -17,7 +17,7 @@
           <div class="user-property-data">
             <ul>
               <li>
-                <p class="user-property-notice">金币</p>
+                <p class="user-property-notice">代币</p>
                 <p class="user-property-num">{{userSGK}}</p>
               </li>
               <li>
@@ -133,7 +133,7 @@ export default {
       userNickName: 'づ塟送じò ぴéā', // 用户昵称
       userOrder: '100203', // 用户排名
       userPV: '11002', // 用户原力值
-      userSGK: '', // 用户SG金币
+      userSGK: '', // 用户SG代币
       userST: '465465', // 用户SG星币
       baseUserInfo: JSON.parse(localStorage.getItem('userinfo')) // 用户个人信息
     }
@@ -154,6 +154,7 @@ export default {
         console.log(response.data)
         if (response.data.code == 200) {
           this.userSGK = response.data.data.gold
+          this.userST = response.data.data.miners
         } else {
 
         }

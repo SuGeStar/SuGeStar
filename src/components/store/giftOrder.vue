@@ -51,7 +51,7 @@
         去支付
       </div>
     </div>
-    <applyPop @hidden="hiddenShow" :password="password" @passwordClick="gotoPay" v-show="applyPop_pop_up"></applyPop>
+    <applyPop @hidden="hiddenShow"  @password="passwordGro" :password="password" v-show="applyPop_pop_up"></applyPop>
   </div>
 </template>
 <script>
@@ -129,6 +129,35 @@ export default {
       this.pay_channel = 'gb'
       this.popupVisible = false
     },
+    passwordGro (e) {
+      this.password = e
+      let order_sn = sessionStorage.getItem('order_sn')
+      if (this.password.length == 6) {
+        console.log('1111')
+        let payment_password = this.password.toString().replace(/,/g, "")
+        console.log(payment_password)
+        this.$http.get(url + 'giftOrderPay?token='+token+'&order_sn='+order_sn+'&payment_password='+payment_password)
+          // 礼包订单支付
+        .then( order => {
+        console.log(order)
+          if (order.data.code == 500) {
+            Toast({
+              message: order.data.msg
+            })
+            return false
+          }
+          Toast({
+            message: order.data.msg,
+            position: 'bottom',
+            duration: 3000
+          })
+        })
+        .catch(error => {
+          console.log(error)
+          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        })
+      }
+    },
     gotoPay () {
       if (this.payment == '') {
         Toast('请选择支付方式')
@@ -143,6 +172,7 @@ export default {
       this.$http.post(url+'giftOrderCreate', form)
       .then(response => {
         console.log(response)
+        sessionStorage.setItem('order_sn',response.data.data)
         if (response.data.code == 200) {
           if (this.pay_channel == 'wx') {
             window.location.href = 'http://www.sugebei.com/giftOrderPay?token='+token+'&order_sn='+response.data.data
@@ -150,37 +180,7 @@ export default {
           }
           if (this.pay_channel == 'gb') {
             this.applyPop_pop_up = true
-            
-            // if (!this.applyPop_pop_up) {
-            //   console.log('1111')
-            //   // this.password = sessionStorage.getItem('password')
-            //   // console.log(this.password)
-            // }
-            
-            // let payment_password = this.password.replace(/,/g, "")
-            // console.log(payment_password.length)
-            // if (payment_password.length == 6) {
-            //   this.$http.get(url + 'giftOrderPay?token='+token+'&order_sn='+response.data.data+'&payment_password'+payment_password)
-            //     // 礼包订单支付
-            //   .then( order => {
-            //   console.log(order)
-            //     if (order.data.code == 500) {
-            //       Toast({
-            //         message: order.data.msg
-            //       })
-            //       return false
-            //     }
-            //     Toast({
-            //       message: order.data.msg,
-            //       position: 'bottom',
-            //       duration: 3000
-            //     })
-            //   })
-            //   .catch(error => {
-            //     console.log(error)
-            //     Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-            //   })
-            // }
+            return false
           }
         }
       })
@@ -188,27 +188,6 @@ export default {
         console.log(error)
         Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
       })
-      // if (this.pay_channel == 'wx') {
-      //   window.location.href = 'http://www.sugebei.com/giftOrderCreate?token='+token+'&gift='+this.giftBag+'&address_id='+this.id+'&pay_channel=wx'
-      //   window.location.href = 'http://www.sugebei.com/pay'
-      //   return false
-      // }
-      // if (this.pay_channel == 'gb') {
-      //   this.$http.get(url + 'giftOrderCreate?token='+token+'&gift='+this.giftBag+'&address_id='+this.id+'&pay_channel=gb')
-      //   执行购买流程
-      //   .then(response => {
-      //   console.log(response.data)
-      //   Toast({
-      //       message: response,
-      //       position: 'bottom',
-      //       duration: 5000000
-      //     })
-      //   })
-      //   .catch(error => {
-      //     console.log(error)
-      //     Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-      //   })
-      // }
     }
   }
 }
