@@ -66,7 +66,7 @@ export default {
     let url = window.location.href.substring()
     let arrObj = url.split('?')
     if (url.indexOf('?') == -1) {
-      this.invite_code = 'U9RU3FC2'
+      this.invite_code = 'C4L63NB6'
     } else {
       let str = window.location.href.substring(location.href.indexOf('=')+1)
       let recommend_code = str.split('&')[0]

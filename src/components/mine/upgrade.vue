@@ -47,23 +47,26 @@ import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
-      recomID: 'AASAF',
-      contact_code: '',
+      recomID: 'C4L63NB6',
+      contact_code: '4J70MIUQ',
       recomName: '张三',
       username: '',
+      apply_level: 2,
       baseUserInfo: JSON.parse(localStorage.getItem('userinfo'))
     }
   },
   created () {
-    this.recomID = localStorage.getItem('recommend_code')
-    this.contact_code = localStorage.getItem('contact_code')
+    // this.recomID = localStorage.getItem('recommend_code')
+    // this.contact_code = localStorage.getItem('contact_code')
     // this.recomName = this.baseUserInfo.realname
     this.username = this.baseUserInfo.realname
+    // this.baseUserInfo.level = this.apply_level
+    // console.log(localStorage.userinfo)
   },
   methods: {
     upgrade () {
       let form = this.$qs.stringify({
-        apply_level: this.baseUserInfo.level,
+        apply_level: this.apply_level,
         token: token,
         recommend_code: this.recomID,
         contact_code: this.contact_code
@@ -77,7 +80,8 @@ export default {
           duration: 2000
         })
         if (response.data.code == 200) {
-          
+          localStorage.setItem('level',this.apply_level)
+          this.$router.push('/index')
         }
       })
       .catch(error => {

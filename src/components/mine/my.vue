@@ -97,7 +97,7 @@
             </router-link>
           </li>
            <li>
-            <router-link to="/giftBag">
+            <router-link to="/gift">
               <div class="store-list">
                 <div class="store-name">
                   <i class="icon icon-setting"></i>
@@ -135,7 +135,8 @@ export default {
       userPV: '11002', // 用户原力值
       userSGK: '', // 用户SG代币
       userST: '465465', // 用户SG星币
-      baseUserInfo: JSON.parse(localStorage.getItem('userinfo')) // 用户个人信息
+      baseUserInfo: JSON.parse(localStorage.getItem('userinfo')), // 用户个人信息
+      level: localStorage.getItem('level')
     }
   },
   created () {
@@ -143,10 +144,10 @@ export default {
       this.$router.push('/login')
     }
     this.userNickName = this.baseUserInfo.nickname;
-    if (this.baseUserInfo.level == 2) {
-      this.userIdent = '创 世 居 民';
+    if (this.level == 2) {
+      this.userIdent = '创 世 居 民'
     } else {
-      this.userIdent = '居 民';
+      this.userIdent = '居 民'
     }
     /*
     * 获得金币数量

@@ -47,7 +47,7 @@
               <p>旗下人数：<span>{{allpeo}}</span></p>
             </div>
           </div>
-          <div class="team-content">
+          <div class="team-content" v-show="teamFloor">
             <router-link :to="{path: '/relation/' + index}" class="floor" v-for="(progress,index) in progressBox" :key="index">
               <div class="team-floor">
                 第{{progress.floor}}维度
@@ -142,6 +142,7 @@ export default {
       invitpeo: "3",
       allpeo: "10",
       progressBox: [],
+      teamFloor: true
     }
   },
   components: {
@@ -192,6 +193,8 @@ export default {
           // this.progressBox = response.data.data
           for (let i = 0; i < response.data.data.length; i++) {
             if (response.data.data[i].percentage == 0) {
+              // console.log('11111')
+              this.teamFloor = false
               this.progressBox[i] = response.data.data[i]
             } else {
               this.progressBox = response.data.data

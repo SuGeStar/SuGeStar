@@ -29,7 +29,7 @@
       <div class="gift-list" @click="popup">
         <p>支付方式</p>
         <div class="item-input">
-          <input type="text" :id="pay_channel" :value="payment" readonly>
+          <input type="text" :id="pay_channel" :value="payment" readonly onfocus="this.blur()">
           <i class="icon icon-right"></i>
         </div>
       </div>
@@ -133,7 +133,6 @@ export default {
       this.password = e
       let order_sn = sessionStorage.getItem('order_sn')
       if (this.password.length == 6) {
-        console.log('1111')
         let payment_password = this.password.toString().replace(/,/g, "")
         console.log(payment_password)
         this.$http.get(url + 'giftOrderPay?token='+token+'&order_sn='+order_sn+'&payment_password='+payment_password)
@@ -145,12 +144,14 @@ export default {
               message: order.data.msg
             })
             return false
+          } else {
+            Toast({
+              message: order.data.msg,
+              position: 'bottom',
+              duration: 3000
+            })
+            this.$router.push('/index')
           }
-          Toast({
-            message: order.data.msg,
-            position: 'bottom',
-            duration: 3000
-          })
         })
         .catch(error => {
           console.log(error)
