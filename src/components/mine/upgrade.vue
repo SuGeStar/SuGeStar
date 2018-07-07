@@ -56,8 +56,8 @@ export default {
     }
   },
   created () {
-    // this.recomID = localStorage.getItem('recommend_code')
-    // this.contact_code = localStorage.getItem('contact_code')
+    this.recomID = localStorage.getItem('recommend_code')
+    this.contact_code = localStorage.getItem('contact_code')
     // this.recomName = this.baseUserInfo.realname
     this.username = this.baseUserInfo.realname
     // this.baseUserInfo.level = this.apply_level
