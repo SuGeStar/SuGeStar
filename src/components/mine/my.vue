@@ -139,18 +139,20 @@ export default {
     }
   },
   created () {
-    console.log(this.baseUserInfo)
+    if (!token) {
+      this.$router.push('/login')
+    }
     this.userNickName = this.baseUserInfo.nickname;
     if (this.baseUserInfo.level == 2) {
       this.userIdent = '创 世 居 民';
-    }else {
+    } else {
       this.userIdent = '居 民';
     }
     /*
     * 获得金币数量
     * */
     this.$http.get(url + 'availableGold?token=' + token)
-        .then(response => {
+      .then(response => {
         console.log(response.data)
         if (response.data.code == 200) {
           this.userSGK = response.data.data.gold
