@@ -118,7 +118,6 @@ import { Toast } from 'mint-ui'
 import footGuide from '../comp/footGuide.vue'
 import collecting from './collecting.vue'
 import { url } from '../../assets/js/mobile.js'
-let getGevel = localStorage.getItem('user_level')
 let token = localStorage.getItem('token')
 export default {
   data () {
@@ -142,33 +141,7 @@ export default {
       moregold: "350",
       invitpeo: "3",
       allpeo: "10",
-      progressBox: [
-        // {
-        //   floor: '1',
-        //   percentage: 100,
-        //   color: '#a288d2'
-        // },
-        // {
-        //   floor: '2',
-        //   percentage: 75,
-        //   color: '#03a8f7'
-        // },
-        // {
-        //   floor: '3',
-        //   percentage: 50,
-        //   color: '#f0b026'
-        // },
-        // {
-        //   floor: '4',
-        //   percentage: 25,
-        //   color: '#1ad3a7'
-        // },
-        // {
-        //   floor: '5',
-        //   percentage: 25,
-        //   color: '#1ad3a7'
-        // }
-      ]
+      progressBox: [],
     }
   },
   components: {
@@ -176,79 +149,76 @@ export default {
     collecting
   },
   methods: {
-    GetArr () {
-      setTimeout(() => {
-        this.arr = []
-      }, 0)
-    },
     getEnergy (id) {
       // 开采K矿
       let form = this.$qs.stringify({
         token: token,
         id: id
       })
-      this.$http.post(url+'get', form)
-      .then(response => {
-        console.log(response)
-        Toast({
-          message: response.data.msg,
-          position: 'middle',
-          duration: 2000
+      this.$http.post(url + 'get', form)
+        .then(response => {
+          console.log(response)
+          Toast({
+            message: response.data.msg,
+            position: 'middle',
+            duration: 2000
+          })
         })
-      })
-      .catch(error => {
-        console.log(error)
-      })
+        .catch(error => {
+          console.log(error)
+        })
     }
   },
   created () {
-    switch (getGevel) {
-      case '1':
-        this.level = 'SG星球居民'
-        break;
-      case '2':
-        this.level = 'SG青铜时代'
-        break;
-      case '3':
-        this.level = 'SG白银时代'
-        break;
-      case '4':
-        this.level = 'SG黄金时代'
-        break;
-      case '5':
-        this.level = 'SG钻石时代'
-        break;
+    if (token) {
+      this.$http.get(url + 'notGet?token=' + token)
+      // 未开采K矿
+        .then(response => {
+          console.log(response)
+          this.arr = response.data.data;
+        })
+        .catch(error => {
+          console.log(error)
+          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        })
     }
-    this.$http.get(url + 'notGet?token='+token)
-    // 未开采K矿
-    .then(response => {
-      console.log(response)
-      this.arr = response.data.data;
-    })
-    .catch(error => {
-      console.log(error)
-      Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-    })
-    this.GetArr()
-    this.$http.get(url + 'occupancyRate?token='+token)
-    // 团队看板占比
-    .then(response => {
-      console.log(response.data.data)
-      // this.progressBox = response.data.data
-      for (let i = 0; i < response.data.data.length; i++) {
-        if (response.data.data[i].percentage == 0) {
-          this.progressBox[i] = response.data.data[i]
-        } else {
-          this.progressBox = response.data.data
-        }
-      }
-    })
-    .catch(error => {
-      console.log(error)
-      Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-    })
     if (!token) {
+
+    } else {
+      this.$http.get(url + 'occupancyRate?token=' + token)
+      // 团队看板占比
+        .then(response => {
+          console.log(response.data.data)
+          // this.progressBox = response.data.data
+          for (let i = 0; i < response.data.data.length; i++) {
+            if (response.data.data[i].percentage == 0) {
+              this.progressBox[i] = response.data.data[i]
+            } else {
+              this.progressBox = response.data.data
+            }
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        })
+    }
+    /*if (!token) {
       this.$router.push('/login')
+    }*/
+  },
+  mounted () {
+    if (!token) {
+      this.arr = [
+        {
+          id: 1,
+          ore: '9.00'
+        },
+        {
+          id: 2,
+          ore: '8.00'
+        }
+      ]
     }
   }
 }
