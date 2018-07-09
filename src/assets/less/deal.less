@@ -2,7 +2,6 @@
 .deal{
   margin-top: 1rem;
   font-size: 0.26rem;
-  // background-color: #fff;
   color: #666;
   .image{
     margin-top: 0.2rem;
@@ -25,9 +24,15 @@
         .match-pop{
           .invit-info{
             margin-bottom: 0.2rem;
+            &.isStar{
+              margin-bottom: 0;
+            }
             .invit-name{
+              display: flex;
+              align-items: center;
               span{
                 color: #f0b026;
+                margin-right: 0.1rem;
               }
             }
           }
