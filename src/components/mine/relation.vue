@@ -13,26 +13,22 @@
             <div class="list-box tabbar">
               <div class="left-box">
                 <p>{{relation.realname}}</p>
-                <!-- <span>推:{{relation}}</span> -->
               </div>
               <div class="right-box" v-if="relation.left !== null && relation.right !== null">
                 <div class="box">
                   <p>{{relation.left.realname}}</p>
-                  <!-- <span>推:{{relation.left}}</span> -->
                 </div>
                 <div class="box">
                   <p>{{relation.right.realname}}</p>
-                  <!-- <span>推:{{relation.left}}</span> -->
                 </div>
               </div>
               <div class="right-box" v-if="relation.left == null || relation.right == null">
                 <div class="box">
                   <p v-if="relation.left !== null">{{relation.left.realname}}</p>
                   <p class="short" v-else>缺人</p>
-                  <!-- <span>推:{{relation.left}}</span> -->
                 </div>
                 <div class="box">
-                  <p v-if="relation.right !== null">{{relation.rignt.realname}}</p>
+                  <p v-if="relation.right !== null">{{relation.right.realname}}</p>
                   <p class="short" v-else @click="shortPeo(relation.id)">缺人</p>
                 </div>
               </div>
@@ -45,26 +41,22 @@
             <div class="list-box tabbar">
               <div class="left-box">
                 <p>{{relation.realname}}</p>
-                <!-- <span>推:{{relation}}</span> -->
               </div>
               <div class="right-box" v-if="relation.left !== null && relation.right !== null">
                 <div class="box">
                   <p>{{relation.left.realname}}</p>
-                  <!-- <span>推:{{relation.left}}</span> -->
                 </div>
                 <div class="box">
                   <p>{{relation.right.realname}}</p>
-                  <!-- <span>推:{{relation.left}}</span> -->
                 </div>
               </div>
               <div class="right-box" v-if="relation.left == null || relation.right == null">
                 <div class="box">
                   <p v-if="relation.left !== null">{{relation.left.realname}}</p>
                   <p class="short" v-else>缺人</p>
-                  <!-- <span>推:{{relation.left}}</span> -->
                 </div>
                 <div class="box">
-                  <p v-if="relation.right !== null">{{relation.rignt.realname}}</p>
+                  <p v-if="relation.right !== null">{{relation.right.realname}}</p>
                   <p class="short" v-else @click="shortPeo(relation.id)">缺人</p>
                 </div>
               </div>
@@ -80,6 +72,7 @@
 </style>
 <script>
 import { url } from '../../assets/js/mobile.js'
+import { Toast } from 'mint-ui'
 let token = localStorage.getItem('token')
 export default {
   data () {

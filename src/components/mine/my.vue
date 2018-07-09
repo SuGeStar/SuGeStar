@@ -118,6 +118,7 @@
   @import '../../assets/less/my.less';
 </style>
 <script>
+import { Toast } from 'mint-ui'
 import { url } from '../../assets/js/mobile.js'
 import footGuide from '../comp/footGuide.vue'
 // import { Navbar, TabItem } from 'mint-ui'
