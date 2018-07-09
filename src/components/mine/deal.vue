@@ -20,8 +20,8 @@
               <div class="invit-match">
                 <div class="match-pop">
                   <div class="invit-info">
-                    <p class="invit-name">由<span>{{into.buyer.realname}}</span>转入</p>
-                    <p class="invit-phone">{{into.buyer.phone}}</p>
+                    <p class="invit-name">由<span>{{into.saler.realname}}</span>转入</p>
+                    <p class="invit-phone">{{into.saler.phone}}</p>
                   </div>
                   <div class="invit-msg">
                     <p>{{into.mark}}</p>
