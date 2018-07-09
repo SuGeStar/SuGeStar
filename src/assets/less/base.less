@@ -1,0 +1,382 @@
+// out:false
+@import "./function.less";
+@main-color: #3981ff;
+/*媒体查询条件*/
+@media (max-width: 1442px) {
+  html {
+      font-size: 225px;
+  }
+}
+@media (max-width: 1282px) {
+  html {
+      font-size: 200px;
+  }
+}
+@media (max-width: 1026px) {
+  html {
+      font-size: 160px;
+  }
+}
+@media (max-width: 962px) {
+  html {
+      font-size: 150px;
+  }
+}
+@media (max-width: 952px) {
+  html {
+      font-size: 148.4375px;
+  }
+}
+@media (max-width: 902px) {
+  html {
+      font-size: 140.625px;
+  }
+}
+@media (max-width: 802px) {
+  html {
+      font-size: 125px;
+  }
+}
+@media (max-width: 775px) {
+  html {
+      font-size: 120.78125px;
+  }
+}
+@media (max-width: 770px) {
+  html {
+      font-size: 120px;
+  }
+}
+@media (max-width: 738px) {
+  html {
+      font-size: 115px;
+  }
+}
+@media (max-width: 734px) {
+  html {
+      font-size: 114.375px;
+  }
+}
+@media (max-width: 733px) {
+  html {
+      font-size: 114.21875px;
+  }
+}
+@media (max-width: 669px) {
+  html {
+      font-size: 104.21875px;
+  }
+}
+@media (max-width: 642px) {
+  html {
+      font-size: 100px;
+  }
+}
+@media (max-width: 602px) {
+  html {
+      font-size: 93.75px;
+  }
+}
+@media (max-width: 570px) {
+  html {
+      font-size: 88.75px;
+  }
+}
+@media (max-width: 535px) {
+  html {
+      font-size: 83.28125px;
+  }
+}
+@media (max-width: 437px) {
+  html {
+      font-size: 67.96875px;
+  }
+}
+@media (max-width: 416px) {
+  html {
+      font-size: 64.6875px;
+  }
+}
+@media (max-width: 413px) {
+  html {
+      font-size: 64.21875px;
+  }
+}
+@media (max-width: 386px) {
+  html {
+      font-size: 60px;
+  }
+}
+@media (max-width: 377px) {
+  html {
+      font-size: 58.59375px;
+  }
+}
+@media (max-width: 362px) {
+  html {
+      font-size: 56.25px;
+  }
+}
+@media (max-width: 322px) {
+  html {
+      font-size: 50px;
+  }
+}
+
+body {
+  color: #2c3e50;
+  background-color: #f7f7f7;
+  padding: 0;
+  margin: 0;
+}
+i {font-style:normal}
+a {
+  color: #2c3e50;
+  text-decoration-line: none;
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+}
+
+ul,li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6,pre,p {
+  margin: 0;
+}
+h1,h2,h3,h4,h5,h6{
+  font-weight: normal;
+}
+input {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+select,input {
+  vertical-align: middle
+}
+select,input,textarea {
+  font-size: 12px;
+  margin: 0
+}
+textarea {
+    resize: none
+}
+table {
+    border-collapse: collapse
+}
+
+/*清除数字输入框箭头*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -moz-appearance: textfield;
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+input[type=submit]{
+  -webkit-appearance: none;
+}
+input[type=number]{
+  -webkit-appearance: none !important;
+  -moz-appearance: textfield;
+}
+input:focus {
+  outline: none;
+}
+input[type=button],
+input[type=submit],
+input[type=file],
+input[type=checkbox],
+input[type=radio],
+input[type=number],
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.wrapper{
+  overflow: hidden;
+  font-size: .24rem;
+  .mint-header{
+    background-color: #fff;
+    color: #333;
+    font-size: 0.28rem;
+    height: 0.85rem;
+  }
+}
+.tabbar{
+  display: flex;
+  justify-content: space-between;
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+.clear{
+  clear: bottom;
+}
+.icon{
+  display: inline-block;
+  background: url(../image/icon.png) no-repeat;
+  background-size: 200px 200px;
+  &.icon-star {
+    width: 30px;
+    height: 30px;
+    background-position: 0px 0;
+  }
+  &.icon-shore {
+    width: 30px;
+    height: 30px;
+    background-position: 0px -30px;
+  }
+  &.icon-my {
+    width: 30px;
+    height: 30px;
+    background-position: 0px -60px;
+  }
+  &.icon-msg {
+    width: 30px;
+    height: 30px;
+    background-position: -60px 0;
+  }
+  &.icon-right {
+    width: 20px;
+    height: 20px;
+    background-position: -180px 0;
+  }
+  &.icon-wx {
+    width: 30px;
+    height: 30px;
+    background-position: 0 -90px;
+  }
+  &.icon-sgj {
+    width: 30px;
+    height: 30px;
+    background-position: -30px -90px;
+  }
+  &.icon-sgk {
+    width: 70px;
+    height: 30px;
+    background-position: 0 -120px;
+  }
+  &.icon-car {
+    width: 20px;
+    height: 20px;
+    background-position: -160px -40px;
+  }
+  &.icon-order {
+    width: 20px;
+    height: 20px;
+    background-position: -160px 0;
+  }
+  &.icon-search {
+    width: 20px;
+    height: 20px;
+    background-position: -160px -20px;
+  }
+  &.icon-back {
+    width: 20px;
+    height: 20px;
+    background-position: -180px -40px;
+  }
+  &.icon-delete {
+    width: 30px;
+    height: 30px;
+    background-position: 3px -150px;
+  }
+  &.icon-checkbox {
+    width: 20px;
+    height: 20px;
+    background-position: -160px -60px;
+    &.select {
+      width: 20px;
+      height: 20px;
+      background-position: -180px -60px;
+    }
+  }
+  &.icon-tips {
+    width: 20px;
+    height: 20px;
+    background-position: -160px -80px;
+  }
+  &.icon-pull {
+    width: 20px;
+    height: 20px;
+    background-position: -180px -80px;
+  }
+  &.icon-invit {
+    width: 20px;
+    height: 20px;
+    background-position: -120px -20px;
+  }
+  &.icon-recom {
+    width: 20px;
+    height: 20px;
+    background-position: -120px -40px;
+  }
+  &.icon-team {
+    width: 20px;
+    height: 20px;
+    background-position: -120px -60px;
+  }
+  &.icon-update {
+    width: 20px;
+    height: 20px;
+    background-position: -120px -80px;
+  }
+  &.icon-setting {
+    width: 20px;
+    height: 20px;
+    background-position: -140px 0;
+  }
+  &.icon-lock {
+    width: 20px;
+    height: 20px;
+    background-position: -140px -20px;
+  }
+}
+.active {
+  .icon-star {
+    background-position: -30px 0px;
+  }
+  .icon-shore {
+    background-position: -30px -30px;
+  }
+  .icon-my {
+    background-position: -30px -60px;
+  }
+}
+.moduleHead{
+  background-color: #ffffff;
+  color: black;
+  width: 100%;
+  height: .8rem;
+  text-align: center;
+  line-height: .8rem;
+  font-size: .29rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  a{
+    display: block;
+    position: absolute;
+    width: .4rem;
+    height: .4rem;
+    top: .2rem;
+    left: .2rem;
+    background: url('../image/back.png') no-repeat center;
+    background-size: auto .4rem;
+  }
+}

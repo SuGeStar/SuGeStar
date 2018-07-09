@@ -1,0 +1,108 @@
+// out:false
+.mint-header{
+  background-color: #1e1c4b;
+  color: #fff;
+}
+.speed{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: url(../image/speed-bg.png) no-repeat;
+  background-size: cover;
+  .speed-con{
+    margin-top: 1.3rem;
+    padding: 0 0.38rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 0.33rem;
+  }
+  .speed-line{
+    padding: 0.26rem 0;
+    img{
+      width: 100%;
+    }
+  }
+  .speed-buy{
+    h3{
+      color: #ffffff;
+      font-size: 0.29rem;
+      font-weight: normal;
+      text-align: center;
+      position: relative;
+    }
+    h3:after,h3:before{
+      content: '';
+      position: absolute;
+      width: 1.88rem;
+      height: 0.39rem;
+      top: 0;
+    }
+    h3:after{
+      background: url(../image/speed-right.png) no-repeat;
+      right: 0.32rem;
+    }
+    h3:before{
+      background: url(../image/speed-left.png) no-repeat;
+      left: 0.32rem;
+    }
+    .buy-box{
+      margin: 0.54rem auto;
+      width: 5.38rem;
+      height: 3.38rem;
+      padding: 0.45rem 0.31rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 0.09rem;
+      .box-input{
+        margin-bottom: 0.73rem;
+        margin-top: 0.3rem;
+        .buy-num{
+          margin-bottom: 0.6rem;
+          height: 0.41rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .buy-tit{
+            line-height: 0.51rem;
+            font-size: 0.27rem;
+            color: #ffffff;
+          }
+          .buy-int{
+            display: block;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            background-color: transparent;
+            height: 0.41rem;
+            color: #fff;
+            margin-left: 0.15rem;
+            padding-left: 0.15rem;
+            outline:none;
+            &::-webkit-input-placeholder {
+              color: #fff;
+              font-size: 0.25rem;
+            }
+            &:-moz-placeholder {
+                color: #fff;
+            }
+            &::-moz-placeholder {
+                color: #fff;
+            }
+            &:-ms-input-placeholder {
+                color: #fff;
+            }
+          }
+        }
+      }
+      .buy-btn{
+        display: block;
+        width: 2.82rem;
+        height: 0.68rem;
+        line-height: 0.68rem;
+        margin: 0 auto;
+        background:url(../image/speed-btn.png);
+        background-size: cover;
+        color: #fff;
+      }
+    }
+  }
+}

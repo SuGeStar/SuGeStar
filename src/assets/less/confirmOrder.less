@@ -1,0 +1,171 @@
+.clear_address_container{
+  margin-top: .8rem;
+  width: 94%;
+  padding: 0 3%;
+  height: 1.4rem;
+  background: #fefdeb;
+  border-top: 6px solid;
+  border-image: url('../image/address_line.png') 11 stretch;
+  .receiver_name{
+    height: 100%;
+    width: 20%;
+    text-align: center;
+    line-height: 1.4rem;
+    font-size: .27rem;
+  }
+  .receiver_address_container{
+    width: 78%;
+    height: 100%;
+    background: url('../image/right.png') no-repeat right center;
+    background-size: auto .3rem;
+    p{
+      font-size: .27rem;
+      padding-left: .2rem;
+      &.receiver_phone{
+        margin-top: .15rem;
+      }
+      &.receiver_address{
+        margin-top: .05rem;
+        width: 80%;
+        height: auto;
+        letter-spacing: 0.5px;
+        font-size: .23rem !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        -moz-box-orient: vertical;
+        -webkit-box-orient: vertical;
+      }
+    }
+  }
+}
+.clear_order_list_container {
+  width: 94%;
+  height: auto;
+  padding: 0 3%;
+  background: white;
+  margin-top: .2rem;
+  .each_order_list {
+    width: 100%;
+    height: 2rem;
+    overflow: hidden;
+    padding: .2rem 0;
+    border-top: 1px solid #ececec;
+    position: relative;
+    .eol_img {
+      width: 25%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img{
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
+    .eol_info {
+      width: 70%;
+      height: 100%;
+      .eol_name {
+        padding-left: .2rem;
+        width: 95%;
+        font-size: .26rem;
+        color: black;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        -moz-box-orient: vertical;
+        -webkit-box-orient: vertical;
+      }
+      .eol_type {
+        font-size: .23rem;
+        color: #ccc;
+        padding-left: .2rem;
+        margin-top: .13rem;
+      }
+      .eol_prices {
+        font-size: .3rem;
+        padding-left: .2rem;
+        color: #e79e56;
+      }
+    }
+    .eol_num{
+      position: absolute;
+      right: 0;
+      bottom: 0.2rem;
+      font-size: .28rem;
+      color: #9a9a9a;
+    }
+  }
+}
+.clear_money_container{
+  width: 94%;
+  height: auto;
+  padding: 0 3%;
+  background: white;
+  margin-top: .2rem;
+  margin-bottom: 1rem;
+  div{
+    width: 100%;
+    height: 1rem;
+    border-bottom: 1px solid #ececec;
+    line-height: 1rem;
+    font-size: .26rem;
+    span{
+      float: right;
+      font-size: .25rem;
+      color: #fb6400;
+      &.clearStrict {
+        font-size: .2rem !important;
+        color: #555555 !important;
+        margin-left: .2rem;
+      }
+    }
+  }
+}
+.went_apply{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: .9rem;
+  border-top: 1px solid #dfdfdf;
+  background: white;
+  .apple_total {
+    width: 75%;
+    height: 100%;
+    font-size: .28rem;
+    text-align: left;
+    text-indent: 1em;
+    line-height: .9rem;
+    color: #fb6400;
+    position: relative;
+    .applyPrice {
+      position: absolute;
+      right: 0.2rem;
+      top: 0;
+      p {
+        float: left;
+        text-align: right;
+        width: 100%;
+        height: .45rem;
+        line-height: .6rem;
+        &.applyPriceCommon {
+          line-height: .3rem !important;
+          font-size: .2rem;
+          color: #555;
+        }
+      }
+    }
+  }
+  .go_apply {
+    width: 25%;
+    height: 100%;
+    font-size: .29rem;
+    text-align: center;
+    line-height: .9rem;
+    background: #fb6400;
+    color: white;
+  }
+}

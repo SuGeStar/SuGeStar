@@ -1,0 +1,134 @@
+// out:false
+.mint-header{
+  background-color: #1e1c4b;
+  color: #fff;
+}
+.friend{
+  .friend-con{
+    position: absolute;
+    top: 0.85rem;
+    left: 0;
+    right: 0;
+    background: url(../image/friend-bg.png) no-repeat;
+    background-size: cover;
+    .friend-cls{
+      h3{
+        margin-top:  0.5rem;
+        color: #ffffff;
+        font-size: 0.29rem;
+        font-weight: normal;
+        text-align: center;
+        position: relative;
+      }
+      h3:after,h3:before{
+        content: '';
+        position: absolute;
+        width: 1.88rem;
+        height: 0.39rem;
+        top: 0;
+      }
+      h3:after{
+        background: url(../image/speed-right.png) no-repeat;
+        right: 0.32rem;
+      }
+      h3:before{
+        background: url(../image/speed-left.png) no-repeat;
+        left: 0.32rem;
+      }
+      .friend-box{
+        margin: 0.43rem auto;
+        width: 5.38rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 0.09rem;
+        padding: 0.45rem 0.31rem;
+        .invitation{
+          width: 75%;
+          margin: 0 auto;
+          text-align: center;
+          color: #fff;
+          line-height: 0.41rem;
+          &.fir-invit{
+            padding-bottom: 0.35rem;
+            border-bottom: 1px solid #ccc;
+          }
+          &.sec-invit{
+            padding-top: 0.35rem;
+          }
+          .invit-pople{
+            margin-bottom: 0.26rem;
+          }
+          .ylz-color{
+            color: #ff903d;
+          }
+        }
+        .invit-rule{
+          color: #fff;
+          font-size: 0.24rem;
+          line-height: 0.41rem;
+        }
+      }
+    }
+  }
+  .ivint-btn{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-radius: 0;
+    background: url(../image/invit-btn.png);
+    background-size: cover;
+    color: #fff;
+  }
+  .invit-pop{
+    width: 5.85rem;
+    height: 8.99rem;
+    background: url(../image/QR_bg.png) no-repeat center center;
+    background-size: cover;
+    text-align: center;
+    .invit-tit{
+      width: 80%;
+      margin-top: 0.5rem;
+    }
+    .friend-int{
+      display: block;
+      width: 100%;
+      border: none;
+      margin-top: 0.45rem;
+      background-color: transparent;
+      font-size: 0.67rem;
+      color: #b33bff;
+      text-align: center;
+      outline:none;
+    }
+    .copy-btn{
+      display: block;
+      width: 2.82rem;
+      height: 0.68rem;
+      line-height: 0.68rem;
+      margin: 0.25rem auto 0;
+      background:url(../image/speed-btn.png);
+      background-size: cover;
+      color: #fff;
+      border: none;
+    }
+    .invit-line{
+      margin: 0.25rem auto;
+      width: 80%;
+      border-bottom: 1px dashed #ccc;
+    }
+    .invit-qr{
+      line-height: 0.41rem;
+      .invit-img{
+        text-align: center;
+        padding-top: 0.22rem;
+        .img{
+          width: 2.7rem;
+          height: 2.73rem;
+        }
+      }
+    }
+  }
+}
+.relatShare{
+  background: url('../image/friend-bg.png') no-repeat;
+  background-size: cover;
+}

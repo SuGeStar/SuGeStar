@@ -1,0 +1,162 @@
+// out: false
+.store{
+  .store-head{
+    width: 6.4rem;
+    height: 3.35rem;
+    background:url("../image/my_bg.png") no-repeat center;
+    background-size: 100% auto;
+    border-top: 1px rgba(255, 255, 255, 0) solid;
+    box-sizing: border-box;
+    .store-head-center{
+      width: 0.85rem;
+      height: 0.85rem;
+      font-size: 0.27rem;
+      color: #ffffff;
+      border: 1px solid #fff;
+      border-radius: 100%;
+      text-align: center;
+      padding: 0.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // box-shadow: 1px 1px 1px #fff;
+      box-shadow: -1px 0 1px #fff, /*左边阴影*/
+             1px 0 1px #fff, /*右边阴影*/
+             0 -1px 1px #fff, /*顶部阴影*/
+            0 1px 1px #fff; /*底边阴影*/
+      // background: url("../image/head.png") no-repeat center;
+      background-size: 120% auto;
+      margin: .26rem auto 0;
+      position: relative;
+      p{
+        font-size: .22rem;
+        text-align: center;
+        padding-top: .13rem;
+      }
+    }
+    .user-nickname{
+      font-size: 0.26rem;
+      letter-spacing: 0.01rem;
+      color: #ffffff;
+      text-align: center;
+      margin-top: .26rem;
+    }
+    .user-order{
+      font-size: 0.22rem;
+      color: rgba(255, 255, 255, 0.4);
+      text-align: center;
+      margin-top: .26rem;
+    }
+    .user-property{
+      width: 5.9rem;
+      height: 2.35rem;
+      background-color: #ffffff;
+      box-shadow: 0.01rem 0.01rem 0.25rem 0rem rgba(0, 0, 0, 0.26);
+      border-radius: 0.09rem;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin:0.2rem auto 0;
+      .user-property-title{
+        width: 100%;
+        height: .8rem;
+        border-bottom: 1px #e8e8e8 solid;
+        line-height: .8rem;
+        background: url("../image/right.png") no-repeat 95% center;
+        background-size: auto .3rem;
+        p{
+          font-size: .27rem;
+          line-height: .8rem;
+          margin-left: .3rem;
+          padding-left: .4rem;
+          background: url("../image/assets.png") no-repeat left center;
+          background-size: .35rem .37rem;
+        }
+      }
+      .user-property-data{
+        width: 100%;
+        height: auto;
+        ul{
+          width: 100%;
+          height: auto;
+          overflow: hidden;
+          li{
+            width: 50%;
+            height: 1.55rem;
+            float: left;
+            text-align: center;
+            .user-property-notice{
+              font-size: .24rem;
+              margin-top: .38rem;
+            }
+            .user-property-num{
+              font-size: .26rem;
+              margin-top: .15rem;
+              color: #3d83ff;
+            }
+          }
+        }
+      }
+    }
+  }
+  .store-link{
+    width: 94%;
+    height: auto;
+    padding: 0.1rem 3%;
+    background: white;
+    margin-top: 2rem;
+    div{
+      width: 100%;
+      border-bottom: 1px #e8e8e8 solid;
+      height: .83rem;
+      line-height: .85rem;
+      background: url("../image/right.png") no-repeat
+      right center;
+      background-size: auto .32rem;
+      p{
+        margin-left: .2rem;
+        padding-left: .5rem;
+        font-size: .27rem;
+        &.user-real-name-authentication{
+          background: url("../image/authentication.png") no-repeat left center;
+          background-size:  auto .38rem;
+        }
+        &.user-set{
+          background: url("../image/set.png") no-repeat left center;
+          background-size:  auto .36rem;
+        }
+      }
+    }
+  }
+  .store-content{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    ul{
+      li{
+        background-color: #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 0.2rem;
+        font-size: 0.27rem;
+        &:nth-last-child(1),&:nth-last-child(2){
+          margin-top: 0.2rem;
+        }
+        &:nth-last-child(1),&:nth-last-child(2),&:nth-last-child(3){
+          border-bottom: none;
+        }
+        .store-list{
+          display: flex;
+          justify-content: space-between;
+          .store-name{
+            position: relative;
+            padding-left: 30px;
+            i{
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
