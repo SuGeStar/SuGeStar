@@ -239,15 +239,17 @@ export default {
       })
       this.$http.post(url+'addBankCard', form)
       .then(response => {
-        Toast({
-          message: response.data.msg,
-          position: 'bottom',
-          duration: 2000
-        })
+        // 添加银行卡
+        console.log(response)
         if (response.data.code == 200) {
           this.$router.push('/bindBankCard')
+        } else {
+          Toast({
+            message: response.data.msg,
+            position: 'bottom',
+            duration: 2000
+          })
         }
-        console.log(response)
       })
       .catch(error => {
         console.log(error)

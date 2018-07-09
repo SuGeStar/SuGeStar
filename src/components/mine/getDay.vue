@@ -10,7 +10,13 @@
         <img src="../../assets/image/nodata.png" alt="">
       </div>
       <ul>
-        <li v-for="(day,index) in dayList" :key="index"></li>
+        <li v-for="(day,index) in dayList" :key="index">
+          <div class="get-box">
+            <p>{{day.created_at}}</p>
+            <p>{{day.mark}}</p>
+          </div>
+          <p>星币：<span>{{day.ore}}</span></p>
+        </li>
       </ul> 
     </div>
   </div>
@@ -21,6 +27,29 @@
   .image{
     img{
       width: 100%;
+    }
+  }
+  ul{
+    li{
+      background-color: #fff;
+      padding: 0.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e8e8e8;
+      p{
+        span{
+          color:#f0b026;
+        }
+      }
+      &:last-child{
+        border-bottom: none;
+      }
+      .get-box{
+       p{
+         margin-bottom: 0.1rem;
+       }
+      }
     }
   }
 }
@@ -44,14 +73,22 @@ export default {
       this.$http.get(url + 'alreadyGetDay?token='+token+'&times='+times+'&page='+this.page)
       .then(response => {
         console.log(response)
-        if (response.data.data == '') {
-          this.isNull = true
-          return false
+        if (response.data.code == 200) {
+          if (response.data.data == '') {
+            this.isNull = true
+            return false
+          } else {
+            this.isNull = false
+            this.isStar = true
+            this.dayList = response.data.data
+            this.page++
+          }
         } else {
-          this.isNull = false
-          this.isStar = true
-          this.MonthList = response.data.data
-          this.page++
+          Toast({
+            message: response.data.msg,
+            position: 'bottom',
+            duration: 3000
+          })
         }
       })
       .catch(error => {

@@ -190,10 +190,8 @@ export default {
       // 团队看板占比
         .then(response => {
           console.log(response.data.data)
-          // this.progressBox = response.data.data
           for (let i = 0; i < response.data.data.length; i++) {
             if (response.data.data[i].percentage == 0) {
-              // console.log('11111')
               this.teamFloor = false
               this.progressBox[i] = response.data.data[i]
             } else {

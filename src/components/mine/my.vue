@@ -160,7 +160,11 @@ export default {
           this.userSGK = response.data.data.gold
           this.userST = response.data.data.miners
         } else {
-
+          Toast({
+            message: response.data.msg,
+            position: 'middle',
+            duration: 2000
+          })
         }
       })
       .catch(error => {
