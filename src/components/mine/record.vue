@@ -21,12 +21,26 @@
                 <div class="match-pop">
                   <div class="invit-info">
                     <p class="invit-phone">{{into.sn}}</p>
-                    <p class="invit-name">代币：<span>{{into.gold}}</span></p>
+                    <p class="invit-name">代币：<span>{{into.frozen_force}}</span></p>
                   </div>
                   <div class="invit-msg">
                     <p>{{into.mark}}</p>
                     <p class="invit-date">{{into.created_at}}</p>
                   </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ul v-show="isStar">
+            <li v-for="(month,item) in MonthList" :key="item">
+              <div class="invit-match">
+                <div class="match-pop">
+                  <router-link :to="{path:'/getDay',query:{times:month.times}}">
+                    <div class="invit-info isStar">
+                      <p class="invit-phone">{{month.times}}</p>
+                      <p class="invit-name">总收入：<span>{{month.total_ore}}</span> <i class="icon icon-right"></i> </p>
+                    </div>
+                  </router-link>
                 </div>
               </div>
             </li>
@@ -68,9 +82,11 @@ export default {
   data () {
     return {
       isNull: false,
+      isStar: false,
       selected: '1',
       intoList:[],
       list: [],
+      MonthList: [],
       url: this.$route.params.id
     }
   },
@@ -124,7 +140,8 @@ export default {
           return false
         } else {
           this.isNull = false
-          this.intoList = response.data.data
+          this.isStar = true
+          this.MonthList = response.data.data
         }
       })
       .catch(error => {

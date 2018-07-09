@@ -47,6 +47,7 @@ import giftBag from '@/components/store/giftBag'
 import gift from '@/components/store/gift'
 import giftOrder from '@/components/store/giftOrder'
 import payment from '@/components/store/payment'
+import getDay from '@/components/mine/getDay'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -286,6 +287,11 @@ export default new Router({
       path: '/demo',
       name: 'demo',
       component: demo
+    },
+    {
+      path: '/getDay',
+      name: 'getDay',
+      component: getDay
     }
   ]
 })
