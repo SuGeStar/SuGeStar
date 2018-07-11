@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <mt-header fixed title="绑定银行卡">
-      <a href="/set" slot="left">
+      <a href="javascript:window.history.go(-1)" slot="left">
         <mt-button icon="back"></mt-button>
       </a>
     </mt-header>
@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <router-link to="addBankCard">
+    <router-link to="/addBankCard">
       <div class="addBC">
         <img src="../../assets/image/add.png" alt="">
         <p>添加银行卡</p>

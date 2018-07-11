@@ -242,7 +242,7 @@ export default {
         // 添加银行卡
         console.log(response)
         if (response.data.code == 200) {
-          this.$router.push('/bindBankCard')
+          this.$router.replace('/bindBankCard')
         } else {
           Toast({
             message: response.data.msg,

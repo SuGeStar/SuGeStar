@@ -90,7 +90,7 @@ export default {
       ele.splice(idx, 1)
     },
     goAds () {
-      this.$router.push({
+      this.$router.replace({
         path: '/addAddress/add/'
       })
     }
@@ -100,7 +100,14 @@ export default {
     this.$http.get(url + 'myAddress?token='+token)
     .then(response => {
       console.log(response)
-      this.addressList = response.data.data
+      if (response.data.code == 200) {
+        this.addressList = response.data.data
+      } else if (response.data.code == 403) {
+        Toast({
+          message: response.data.msg
+        })
+        this.$router.push('/login')
+      }
     })
     .catch(error => {
       console.log(error)
