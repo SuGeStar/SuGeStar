@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <mt-header fixed title="绑定银行卡">
-      <a href="/set" slot="left">
+      <a href="javascript:window.history.go(-1)" slot="left">
         <mt-button icon="back"></mt-button>
       </a>
     </mt-header>
@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <router-link to="addBankCard">
+    <router-link to="/addBankCard">
       <div class="addBC">
         <img src="../../assets/image/add.png" alt="">
         <p>添加银行卡</p>
@@ -76,13 +76,14 @@ export default {
       this.$http.post(url+'delBank', form)
       .then(response => {
         console.log(response)
-        Toast({
-          message: response.data.msg,
-          position: 'bottom',
-          duration: 2000
-        })
         if (response.data.code == 200) {
           ele.splice(idx, 1)
+        } else {
+          Toast({
+            message: response.data.msg,
+            position: 'bottom',
+            duration: 2000
+          })
         }
       })
       .catch(error => {

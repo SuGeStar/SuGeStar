@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Toast } from 'mint-ui'
 // 接口url
 var url = 'http://www.sugebei.com/'
 // axios 配置
@@ -18,6 +19,22 @@ $$.prototype = {
     }).then(function (response) {
       fn(response)
       console.log(response)
+      if (response.data.code === 403) {
+        Toast({
+          message: response.data.msg,
+          position: 'bottom',
+          duration: 4000
+        })
+        localStorage.removeItem('token')
+        localStorage.removeItem('userinfo')
+        this.$router.push('/login')
+      } else {
+        Toast({
+          message: response.data.msg,
+          position: 'bottom',
+          duration: 2000
+        })
+      }
     })
       .catch(function (error) {
         console.log(error)

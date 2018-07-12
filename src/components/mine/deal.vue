@@ -62,6 +62,7 @@
 </style>
 
 <script>
+import { Toast } from 'mint-ui'
 import { url } from '../../assets/js/mobile.js'
 let token = localStorage.getItem('token')
 export default {
@@ -95,13 +96,31 @@ export default {
       this.$http.get(url + 'income?token='+token)
       .then(response => {
         console.log(response)
-        if (response.data.data == '') {
-          this.isNull = true
-          return false
-        } else {
-          this.isNull = false
-          this.intoList = response.data.data
+        if (response.data.code == 200) {
+          if (response.data.data == '') {
+            this.isNull = true
+            return false
+          } else {
+            this.isNull = false
+            this.intoList = response.data.data
+          }
         }
+        //  else if (response.data.code == 403) {
+        //   Toast({
+        //     message: response.data.msg,
+        //     position: 'bottom',
+        //     duration: 4000
+        //   })
+        //    localStorage.removeItem('token')
+        //    localStorage.removeItem('userinfo')
+        //    this.$router.push('/login')
+        // } else {
+        //   Toast({
+        //     message: response.data.msg,
+        //     position: 'bottom',
+        //     duration: 2000
+        //   })
+        // }
       })
       .catch(error => {
         console.log(error)

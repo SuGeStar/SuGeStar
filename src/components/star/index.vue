@@ -47,12 +47,12 @@
               <p>旗下人数：<span>{{allpeo}}</span></p>
             </div>
           </div>
-          <div class="team-content" v-show="teamFloor">
-            <router-link :to="{path: '/relation/' + index}" class="floor" v-for="(progress,index) in progressBox" :key="index">
+          <div class="team-content">
+            <router-link :to="{path: '/relation/' + index}" class="floor" v-for="(progress,index) in progressBox" :key="index" v-show="teamFloor">
               <div class="team-floor">
                 第{{progress.floor}}维度
               </div>
-              <vm-progress class="progress"  :percentage="progress.percentage" :text-inside="true" :stroke-width="18" :strokeColor="progress.color"></vm-progress>
+              <vm-progress class="progress"  :percentage="progress.percentage" :text-inside="true" :stroke-width="18"></vm-progress>
             </router-link>
           </div>
         </div>
@@ -78,11 +78,11 @@
               <div class="con-desc">
                 <div class="desc today">
                   <p>今日获得</p>
-                  <span>{{today_owen}}</span>
+                  <span>{{miners_today}}</span>
                 </div>
                 <div class="desc">
                   <p>累计获得</p>
-                  <span>{{all_owen}}</span>
+                  <span>{{miners_all}}</span>
                 </div>
               </div>
             </li>
@@ -124,6 +124,8 @@ export default {
     return {
       today_owen: '1000000',
       all_owen: '1000000',
+      miners_today: '',
+      miners_all: '',
       level: 'SG青铜时代',
       pv: '1000',
       k: '1000',
@@ -168,9 +170,49 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    dataMiners () {
+      this.$http.get(url + 'dataMiners?token=' + token)
+      // 今日星币及累计获得的星币数据
+      .then(response => {
+        console.log(response)
+        if (response.data.code == 200) {
+          this.miners_today = response.data.data.today
+          this.miners_all = response.data.data.total
+        } else if (response.data.code == 403) {
+          Toast({
+            message: response.data.msg
+          })
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+      })
+    },
+    dataGold () {
+      this.$http.get(url + 'dataGold?token=' + token)
+      // 今日星币及累计获得的星币数据
+      .then(response => {
+        console.log(response)
+        if (response.data.code == 200) {
+          this.today_owen = response.data.data.today
+          this.all_owen = response.data.data.total
+        } else if (response.data.code == 403) {
+          Toast({
+            message: response.data.msg
+          })
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+      })
     }
   },
   created () {
+    this.dataMiners()
+    this.dataGold()
     if (token) {
       this.$http.get(url + 'notGet?token=' + token)
       // 未开采K矿
@@ -190,12 +232,10 @@ export default {
       // 团队看板占比
         .then(response => {
           console.log(response.data.data)
-          // this.progressBox = response.data.data
           for (let i = 0; i < response.data.data.length; i++) {
             if (response.data.data[i].percentage == 0) {
-              // console.log('11111')
-              this.teamFloor = false
               this.progressBox[i] = response.data.data[i]
+              // this.teamFloor = false
             } else {
               this.progressBox = response.data.data
             }
