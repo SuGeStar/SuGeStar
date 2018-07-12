@@ -6,41 +6,22 @@
       </a>
     </mt-header>
     <div class="firInvit">
+      <div class="image" v-show="isNull">
+        <img src="../../assets/image/nodata.png" alt="">
+      </div>
        <div class="invit-list" v-for="index in items" :key="index.id">
          <div class="invit-match">
            <div class="match-pop">
              <div class="invit-info">
-              <p class="invit-name">{{index.name}}</p>
-              <p class="invit-phone">{{index.phone}}</p>
+              <p class="invit-name">{{index.info.realname}}</p>
+              <p class="invit-phone">{{index.info.phone}}</p>
             </div>
             <div class="invit-msg">
-              <p>{{index.date}}</p>
-              <p :class="[!!isPlace?'place':'']">{{index.place}}</p>
+              <p>{{index.created_at}}</p>
+              <p>{{index.info.level}}</p>
             </div>
            </div>
          </div>
-       </div>
-       <div class="invit-place">
-         <div class="invit-head">
-            <p class="invit-time">{{dats.date}}</p>
-            <p class="invit-people">总人数：{{dats.people}}
-              <i class="icon icon-pull"></i>
-            </p>
-          </div>
-         <div class="invit-list" v-for="index in items" :key="index.id">
-          <div class="invit-match">
-            <div class="match-pop">
-              <div class="invit-info">
-                <p class="invit-name">{{index.name}}</p>
-                <p class="invit-phone">{{index.phone}}</p>
-              </div>
-              <div class="invit-msg">
-                <p>{{index.date}}</p>
-                <p :class="[!!isPlace?'place':'']">{{index.place}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
        </div>
     </div>
   </div>
@@ -49,50 +30,51 @@
 @import '../../assets/less/firInvit.less';
 </style>
 <script>
+import api from '@/assets/js/api.js'
 export default {
   data () {
     return {
-      isPlace: true,
+      isNull: false,
+      page: 1,
       dats: {
         date: '2018-05',
         people: '20'
       },
-      items: [
-        {
-          name: '张三(创世居民)',
-          phone: '15515515500',
-          date: '2018-05-22',
-          place: 1
-        },
-        {
-          name: '张三(创世居民)',
-          phone: '15515515500',
-          date: '2018-05-22',
-          place: 1
-        },
-        {
-          name: '张三(创世居民)',
-          phone: '15515515500',
-          date: '2018-05-22',
-          place: 0
-        },
-        {
-          name: '张三(创世居民)',
-          phone: '15515515500',
-          date: '2018-05-22',
-          place: 0
-        }
-      ]
+      items: []
     }
   },
   created () {
-    for (let i = 0; i < this.items.length; i++) {
-      if (this.items[i].place == 1) {
-        this.items[i].place = '已安置'
-      } else {
-        this.items[i].place = '未安置'
-        this.isPlace = false
-      }
+    this.getList(1)
+  },
+  methods: {
+    getList (page) {
+      api.registers({
+        'page': page
+      })
+      .then ((res) => {
+        console.log(res)
+        if (res.data.length == 0) {
+          this.isNull = true
+        } else {
+          if (page == 1) {
+            this.items = res.data
+            this.page = 2
+          } else {
+            for (let x = 0; x < res.data.length; x++) {
+              this.items.push(res.data[i])
+            }
+            this.page++
+          }
+        }
+        
+        for (let i = 0; i < this.items.length; i++) {
+          if (this.items[i].info.level == 1) {
+            this.items[i].info.level = '居民'
+          } else {
+            this.items[i].info.level = '创世居民'
+          }
+        }
+      })
     }
   }
 }

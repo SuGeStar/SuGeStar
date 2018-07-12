@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="team-content" >
-        <router-link :to="{path: '/relation/' + index}" class="floor" v-for="(progress,index) in progressBox" :key="index">
+        <router-link :to="{path: '/relation/' + index}" :class="[isNull(index) ? 'nullFloor' : 'floor']" v-for="(progress,index) in progressBox" :key="index" > 
           <div class="team-floor">
             第{{progress.floor}}层
           </div>
@@ -29,6 +29,7 @@
 </style>
 
 <script>
+import api from '@/assets/js/api.js'
 export default {
   data() {
     return {
@@ -39,26 +40,31 @@ export default {
       allpeo: "10",
       progressBox: [
         {
+          id: 0,
           floor: '1',
           percentage: 100,
           color: '#a288d2'
         },
         {
+          id: 1,
           floor: '2',
           percentage: 75,
           color: '#03a8f7'
         },
         {
+          id: 2,
           floor: '3',
           percentage: 50,
           color: '#f0b026'
         },
         {
+          id: 3,
           floor: '4',
           percentage: 25,
           color: '#1ad3a7'
         },
         {
+          id: 4,
           floor: '5',
           percentage: 0,
           color: '#1ad3a7'
@@ -67,75 +73,25 @@ export default {
     };
   },
   mounted() {
-    // this.drawLine();
+    api.occupancyRate()
+      .then((res)=>{
+        console.log(res)
+        this.progressBox = res.data
+        this.progressBox[1].color = '#a288d2'
+        this.progressBox[2].color = '#f0b026'
+        this.progressBox[3].color = '#1ad3a7'
+        this.progressBox[4].color = '#03a8f7'
+        for (let i = 0; i < this.progressBox.length; i++) {
+          if (this.progressBox[i].percentage == 0) {
+            
+          }
+        }
+      })
   },
   methods: {
-    // drawLine() {
-    //   let mychart = this.$echarts.init(document.getElementById("echart"));
-    //   绘制图表
-    //   mychart.setOption({
-    //     title: {},
-    //     legend: {
-    //       data: []
-    //     },
-    //     calculable: true,
-    //     series: [
-    //       {
-    //         name: "我的团队",
-    //         type: "funnel",
-    //         left: "10%",
-    //         top: 10,
-    //         x2: 80,
-    //         bottom: 150,
-    //         width: "80%",
-    //         height: {totalHeight} - y - y2,
-    //         min: 0,
-    //         max: 100,
-    //         minSize: "40%",
-    //         maxSize: "100%",
-    //         sort: "ascending",
-    //         gap: 0,
-    //         label: {
-    //           normal: {
-    //             show: true,
-    //             position: "inside"
-    //           },
-    //           emphasis: {
-    //             textStyle: {
-    //               fontSize: 20
-    //             }
-    //           }
-    //         },
-    //         labelLine: {
-    //           normal: {
-    //             length: 0,
-    //             lineStyle: {
-    //               width: 1,
-    //               type: "solid"
-    //             }
-    //           }
-    //         },
-    //         itemStyle: {
-    //           normal: {
-    //             borderColor: "#fff",
-    //             borderWidth: 1
-    //           }
-    //         },
-    //         data: [
-    //           { value: 20, name: "第1层(满员)", id: 1},
-    //           { value: 40, name: "第二层(满员)", id: 2},
-    //           { value: 60, name: "第三层(缺3人)", id: 3},
-    //           { value: 80, name: "第四层(缺4人)", id: 4},
-    //           { value: 100, name: "第五层(缺5人)", id: 5}
-    //         ]
-    //       }
-    //     ]
-    //   });
-    //   mychart.on('click', function (params) {
-    //       console.log(params)
-    //       window.location.href = '/relation'
-    //   });
-    // }
+   isNull (index) {
+
+   }
   }
 };
 </script>

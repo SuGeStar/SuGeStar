@@ -11,6 +11,7 @@ import qs from 'qs'
 import echarts from 'echarts'
 // import VueResource from 'vue-resource'
 import mobile from './assets/js/mobile.js'
+import api from './assets/js/api.js'
 import Progress from 'vue-multiple-progress'
 
 Vue.config.productionTip = false
@@ -20,6 +21,7 @@ Vue.use(Progress)
 Vue.prototype.$http = axios
 Vue.prototype.$qs = qs
 Vue.prototype.$mobile = mobile
+Vue.prototype.$api = api
 Vue.prototype.$echarts = echarts
 /* eslint-disable no-new */
 new Vue({
