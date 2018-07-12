@@ -24,8 +24,8 @@
     </mt-swipe>
     <mt-swipe class="swiper1" :auto="0">
       <mt-swipe-item class="box">
-        <div v-for="classify in swiperBox" :key="classify.cid">
-          <router-link to="/classify">
+        <div v-for="(classify,_index) in swiperBox" :key="classify.cid">
+          <router-link :to="{path:'/classify/'+classify.cid+'/'+_index}">
             <img :src="getImg(classify.logo)">
             <p>{{classify.name}}</p>
           </router-link>

@@ -28,6 +28,9 @@
 			font-size: .22rem;
 			color: #999;
 			padding: 0.15rem 0;
+      p{
+        display: inline-block;
+      }
 			span{
 				font-size: .3rem;
 				color: #fb6400;
@@ -89,11 +92,29 @@
 	font-size: .3rem;
 	.buyicon{
 		height: 0.85rem;
+    width: 1rem;
 		border-right: 1px solid #ccc;
-		padding: 0 .4rem;
+    text-align: center;
+    position: relative;
+		//padding: 0 .4rem;
 		i{
 			margin-top: 0.15rem;
 		}
+    span{
+      display: inline-block;
+      width: .1rem;
+      height: .1rem;
+      color: white;
+      text-align: center;
+      line-height: .1rem;
+      background: #fb6400;
+      padding: .1rem;
+      border-radius: 50%;
+      font-size: .2rem;
+      position: absolute;
+      right: .1rem;
+      top: 0rem;
+    }
 	}
 	p{
 		width: 33.3333%;
@@ -131,6 +152,9 @@
 					color: #999;
 					p{
 						margin-bottom: 0.1rem;
+            i{
+             font-style: normal;
+            }
 					}
 					p:last-child{
 						margin-bottom: 0;
@@ -200,6 +224,22 @@
 			}
 			.spec-foot{
 				width: 100%;
+        div{
+          width: 100%;
+          height: .8rem;
+          display: flex;
+          justify-content: space-between;
+          p{
+            width: 50%;
+            text-align: center;
+            font-size: .27rem;
+            line-height: .8rem;
+          }
+          p:nth-child(2){
+            background: #fb6400;
+            color: white;
+          }
+        }
 				.default-btn{
 					width: 100%;
 					background-color: #fff;

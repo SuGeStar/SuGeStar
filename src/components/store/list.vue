@@ -10,14 +10,13 @@
       <div class="list-content">
         <ul>
           <li v-for="(listCont,index) in listBix" :key="index">
-            <router-link class="con-list" to="/details">
+            <router-link class="con-list" :to="{path:'/details/' + listCont.goods_id}">
               <div class="img-box">
-                <img :src="listCont.img" alt="">
+                <img :src="getImg(listCont.default_img)" alt="">
               </div>
               <div class="cont-box">
-                <h3>{{listCont.title}}</h3>
-                <p>{{listCont.price}}</p>
-                <span>{{listCont.skg}}</span>
+                <h3>{{listCont.goods_name}}</h3>
+                <p>星币:<span>{{listCont.spec.gold}}</span> + <i> ¥</i> <u>{{listCont.spec.cash}}</u></p>
               </div>
             </router-link>
           </li>
@@ -30,43 +29,28 @@
 @import '../../assets/less/list.less';
 </style>
 <script>
+import { url } from '../../assets/js/mobile.js'
 export default {
   data () {
     return {
       value: '',
-      listBix: [
-        {
-          img: 'http://www.sgyxmall.com//Upload/goods/store_76/2018-05-15/5afa8dd235575.jpg',
-          title: '2018夏新款水溶蕾丝半身裙高腰气质修身显瘦包臀中裙T3113啦啦啦',
-          price: '￥159.00',
-          skg: '或 ¥ 137.00 + 严选积分22.00'
-        },
-        {
-          img: 'http://www.sgyxmall.com//Upload/goods/store_76/2018-05-15/5afa8dd235575.jpg',
-          title: '2018夏新款水溶蕾丝半身裙高腰气质修身显瘦包臀中裙T3113啦啦啦',
-          price: '￥159.00',
-          skg: '或 ¥ 137.00 + 严选积分22.00'
-        },
-        {
-          img: 'http://www.sgyxmall.com//Upload/goods/store_76/2018-05-15/5afa8dd235575.jpg',
-          title: '2018夏新款水溶蕾丝半身裙高腰气质修身显瘦包臀中裙T3113啦啦啦',
-          price: '￥159.00',
-          skg: '或 ¥ 137.00 + 严选积分22.00'
-        },
-        {
-          img: 'http://www.sgyxmall.com//Upload/goods/store_76/2018-05-15/5afa8dd235575.jpg',
-          title: '2018夏新款水溶蕾丝半身裙高腰气质修身显瘦包臀中裙T3113啦啦啦',
-          price: '￥159.00',
-          skg: '或 ¥ 137.00 + 严选积分22.00'
-        },
-        {
-          img: 'http://www.sgyxmall.com//Upload/goods/store_76/2018-05-15/5afa8dd235575.jpg',
-          title: '2018夏新款水溶蕾丝半身裙高腰气质修身显瘦包臀中裙T3113啦啦啦',
-          price: '￥159.00',
-          skg: '或 ¥ 137.00 + 严选积分22.00'
-        }
-      ]
+      cid: 0,
+      listBix: [],
+      getImg (url) {
+        return 'http://img.sugebei.com' + url
+      }
     }
+  },
+  created () {
+    this.cid = this.$route.params.cid
+    this.$http.get(url + 'goodsList?cate_id=' + this.cid + '&page=1')
+      .then(res => {
+        this.listBix = res.data.data
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 </script>

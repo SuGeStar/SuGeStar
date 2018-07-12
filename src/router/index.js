@@ -94,12 +94,12 @@ export default new Router({
       component: store
     },
     {
-      path: '/list',
+      path: '/list/:cid',
       name: 'list',
       component: list
     },
     {
-      path: '/classify',
+      path: '/classify/:id/:idx',
       name: 'classify',
       component: classify
     },
@@ -199,7 +199,7 @@ export default new Router({
       component: resetPassword
     },
     {
-      path: '/details',
+      path: '/details/:goodsId',
       name: 'details',
       component: details
     },
