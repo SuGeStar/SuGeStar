@@ -76,6 +76,7 @@
 </style>
 
 <script>
+import { Toast } from 'mint-ui'
 import { url } from '../../assets/js/mobile.js'
 let token = localStorage.getItem('token')
 export default {
