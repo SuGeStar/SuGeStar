@@ -16,7 +16,7 @@
     <div class="classify-content">
       <div class="classify-left">
         <ul>
-          <li v-for="(classifyName,index) in classList" :key="index" :class="{active:index===ins}" @click="active(index)">
+          <li v-for="(classifyName,index) in classList" :key="index" :class="{active:index===ins}" @click="active(index,classifyName)">
             {{classifyName.name}}
           </li>
         </ul>
@@ -43,45 +43,12 @@
 <style lang="less" scoped>
 </style>
 <script>
+import { url } from '../../assets/js/mobile.js'
 export default {
   data () {
     return {
       ins: 0,
-      classList: [
-        {
-          name: '真艾宝'
-        },
-        {
-          name: '女装'
-        },
-        {
-          name: '男装'
-        },
-        {
-          name: '配件'
-        },
-        {
-          name: '居家'
-        },
-        {
-          name: '3C专区'
-        },
-        {
-          name: '洗护'
-        },
-        {
-          name: '饮食'
-        },
-        {
-          name: '婴童'
-        },
-        {
-          name: '餐厨'
-        },
-        {
-          name: '珠宝'
-        }
-      ],
+      classList: [],
       classBox: [
         {
           img: 'http://www.sgyxmall.com//Upload/category/2018-05-03/5aea7306f28c1.png',
@@ -103,10 +70,27 @@ export default {
     }
   },
   methods: {
-    active (num) {
-      console.log(num)
-      this.ins = num
+    active (idx, e) {
+      this.ins = idx
+      this.$http.get(url + '/cateList?cate_id=' + e.cid)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
+  },
+  created () {
+    // 获取商品一级分类
+    this.$http.get(url + 'cateList')
+      .then(response => {
+        console.log(response)
+        this.classList = response.data.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 }
 </script>
