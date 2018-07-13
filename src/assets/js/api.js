@@ -8,11 +8,23 @@ axios.defaults.timeout = 5000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 axios.defaults.baseURL = url
 
-export function Post(url, params) {
+export function Post (url, params) {
   return new Promise((resolve, reject) => {
     axios.post(url, params)
       .then(response => {
-        resolve(response.data)
+        if (response.data.code === 200) {
+          resolve(response.data)
+        } else if (response.data.code === 403) {
+          Toast({
+            message: '您在已经在其他地方登录，请重新登录',
+            position: 'bottom',
+            duration: 2000
+          })
+        } else {
+          Toast({
+            message: response.data.msg
+          })
+        }
       }, err => {
         reject(err)
       })
@@ -25,7 +37,17 @@ export function Get (url, params) {
   return new Promise((resolve, reject) => {
     axios.get(url, params)
       .then(response => {
-        resolve(response.data)
+        if (response.data.code === 200) {
+          resolve(response.data)
+        } else if (response.data.code === 403) {
+          Toast({
+            message: response.data.msg
+          })
+        } else {
+          Toast({
+            message: response.data.msg
+          })
+        }
       }, err => {
         reject(err)
         Toast({
@@ -42,6 +64,22 @@ export function Get (url, params) {
 }
 
 export default {
+  availableGold () {
+    // 获取可用金钱
+    return Get(`/availableGold?token=${token}`)
+  },
+  applyWithdraw (params) {
+    // 申请提现
+    return Post('/applyWithdraw', params)
+  },
+  withdrawList (params) {
+    // 提现列表
+    return Get(`/withdrawList?token=${token}&page=${params.page}`)
+  },
+  getBankDefault () {
+    // 获取默认银行卡信息
+    return Get(`/getBankDefault?token=${token}`)
+  },
   occupancyRate () {
     // 团队看板
     return Get(`/occupancyRate?token=${token}`)

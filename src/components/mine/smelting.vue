@@ -4,7 +4,7 @@
       <a href="javascript:window.history.go(-1)"></a>赠送/释放/充值
     </div>
     <div class="smelting-container">
-      <p>可用SG金币：<span>{{SGNum}}</span></p>
+      <p>可用SG代币：<span>{{SGNum}}</span></p>
       <p>释放/赠送/充值金币数量</p>
       <div class="smelting-withdraw">
         <span>¥</span><input type="number" v-model="smeltingNum">
@@ -19,6 +19,7 @@
 
 <script>
 import { Toast } from 'mint-ui'
+import api from '@/assets/js/api.js'
 export default {
   data () {
     return {
@@ -58,7 +59,11 @@ export default {
     }
   },
   mounted () {
-
+    api.availableGold()
+    .then((res) => {
+      console.log(res)
+      this.SGNum = res.data.gold
+    })
   }
 }
 </script>
