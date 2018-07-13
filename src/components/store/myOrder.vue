@@ -8,8 +8,8 @@
     </div>
     <div class="my-order-container">
       <!--所有订单-->
-      <div class="each-order-list-container">
-        <p class="shopName">澳中国际
+      <div class="each-order-list-container" v-for="(order,index) in orderList" :key="index">
+        <p class="shopName">{{order.product.brand}}
           <span class="fr DFK">待付款</span>
           <span class="fr DFH">待发货</span>
           <span class="fr YFH">已发货</span>
@@ -234,12 +234,19 @@
 </template>
 
 <script>
+let token = localStorage.getItem('token');
+import { url } from '../../assets/js/mobile.js';
+import { Toast } from 'mint-ui';
 export default {
   data () {
     return {
       orderTitle: ['全部', '待付款', '待发货', '已发货', '已完成', '退款'],
       isTab: true,
-      idx: 0
+      idx: 0,
+      orderList: [],
+      getImg (url) {
+        return 'http://img.sugebei.com' + url
+      }
     }
   },
   methods: {
@@ -277,7 +284,17 @@ export default {
     }
   },
   mounted () {
-    console.log(([][[]] + [])[+!![]] + ([] + {})[!+[] + !![]])
+  },
+  created () {
+    // 获得购买订单
+    this.$http.get(url + 'orderAll?token=' + token)
+      .then(res => {
+        console.log(res)
+        this.orderList = res.data.data;
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 </script>

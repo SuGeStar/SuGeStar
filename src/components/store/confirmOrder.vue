@@ -6,10 +6,10 @@
     </div>
     <router-link to="/addressManage/set">
       <div class="clear_address_container">
-        <p class="receiver_name fl">zhuzi</p>
+        <p class="receiver_name fl">{{buyerName}}</p>
         <div class="receiver_address_container fl">
-          <p class="receiver_phone">15738669091</p>
-          <p class="receiver_address">内蒙古 呼伦贝尔 根河市 离开的咖啡机 螺丝刀开房就 </p>
+          <p class="receiver_phone">{{buyerTel}}</p>
+          <p class="receiver_address">{{buyerAds}}</p>
         </div>
       </div>
     </router-link>
@@ -32,6 +32,7 @@
       <div>商品总金额：  <span class="clearStrict">星币 {{shopFinalGold}}  + ¥ {{shopFinalPrice}}</span> </div>
       <div>商品总数量：<span>{{shopData.shopCount}}</span></div>
       <div>运费：<span></span></div>
+      <div>留言：<input type="text" placeholder="（选填）请输入买家留言" v-model="buyerMsg"></div>
     </div>
     <!--去支付-->
     <div class="went_apply">
@@ -48,9 +49,15 @@
 <script>
 let token = localStorage.getItem('token')
 import { url } from '../../assets/js/mobile.js'
+import { MessageBox } from 'mint-ui'
 export default {
   data () {
     return {
+      buyerName: '',
+      buyerTel: '',
+      buyerAds: '',
+      AdsId: '',
+      buyerMsg: '',
       shopData: [],
       shopSinglePrice: '',
       shopSingleGold: '',
@@ -62,21 +69,53 @@ export default {
     }
   },
   methods: {
+    // 去支付
     goApply () {
-      // todo
+      var applyOrder = {
+        address_id: this.AdsId,
+        list: {
+          goods_id: this.shopData.shopInfo.goods_id,
+          num: this.shopData.shopCount,
+          spec_id: this.shopData.shopTypeId
+        },
+        color: this.shopData.shopColor,
+        remark: this.buyerMsg
+      }
+      localStorage.setItem('applyOrder', JSON.stringify(applyOrder))
       this.$router.push('/apply')
     }
   },
-  mounted () {
-    /*
-    * 获得用户默认收货地址 若没有默认地址 需要跳转到添加收货地址
-    * 获得商品结算清单 （可存储本地）
-    * */
-    // todo
-  },
   created () {
+    // 回去默认收货地址
+    this.$http.get(url + 'getDefaultAddress?token=' + token)
+      .then(res => {
+        console.log(res)
+        if (res.data.code === 500) {
+          MessageBox({
+            title: '提示',
+            message: '你还没有收货地址，是否去添加?',
+            showCancelButton: true
+          })
+            .then(ret => {
+              if (ret == 'confirm') {
+                this.$router.push({
+                  path: '/addressManage/set'
+                })
+              } else {
+                window.history.go(-1)
+              }
+            })
+        } else {
+          this.buyerName = res.data.data.name
+          this.buyerTel = res.data.data.phone
+          this.AdsId = res.data.data.id
+          this.buyerAds = res.data.data.province + ' ' + res.data.data.city + ' ' + res.data.data.area + ' ' + res.data.data.detail
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
     this.shopData = JSON.parse(localStorage.getItem('finalData'))
-    console.log(this.shopData)
     this.shopSinglePrice = this.shopData.shopInfo.spec[0].cash
     this.shopSingleGold = this.shopData.shopInfo.spec[0].gold
     this.shopFinalPrice = parseFloat(this.shopSinglePrice) * parseFloat(this.shopData.shopCount)

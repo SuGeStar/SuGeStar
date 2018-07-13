@@ -74,10 +74,10 @@
           </div>
           <div class="spec-foot">
            <div v-if="!whichWay">
-             <p>加入购物车</p>
-             <p>立即购买</p>
+             <p @click="defaultBtn(1)">加入购物车</p>
+             <p @click="defaultBtn(2)">立即购买</p>
            </div>
-            <mt-button type="default" @click="defaultBtn" class="default-btn" v-if="whichWay">确认</mt-button>
+            <mt-button type="default" @click="defaultBtn(0)" class="default-btn" v-if="whichWay">确认</mt-button>
           </div>
         </div>
       </div>
@@ -180,9 +180,14 @@ export default {
       }
     },
     // 确定按钮执行事件
-    defaultBtn () {
+    defaultBtn (e) {
       this.popupVisible = false
-      var did = this.whichDo
+      var did
+      if (e === 0) {
+        did = this.whichDo
+      } else {
+        did = e
+      }
       switch (did) {
         case 1:
           // 添加到购物车
@@ -192,7 +197,8 @@ export default {
             num: this.value,
             shop_id: this.goodsInfo.store_id,
             shop_name: this.goodsInfo.store_name,
-            spec_id: this.finalTypeId
+            spec_id: this.finalTypeId,
+            specification: this.finalColor
           })
           this.$http.post(url + 'addToCart', form)
             .then(res => {
@@ -238,6 +244,7 @@ export default {
         self.showPrice = self.goodsInfo.spec[0].cash
         self.showGold = self.goodsInfo.spec[0].gold
         self.finalColor = self.goodsInfo.color[0]
+        self.finalSize = self.goodsInfo.spec[0].size
         self.finalPrice = self.goodsInfo.spec[0].cash
         self.finalGold = self.goodsInfo.spec[0].gold
         self.finalTypeId = self.goodsInfo.spec[0].id
