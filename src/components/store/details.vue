@@ -1,4 +1,4 @@
-<template>
+ <template>
 <div class="wrapper">
     <mt-header fixed title="商品详情">
       <a href="javascript:history.go(-1);" slot="left">
@@ -101,6 +101,7 @@ export default {
       showPrice: 0,
       showGold: 0,
       finalColor: '',
+      finalSize: '',
       finalPrice: 0,
       finalGold: 0,
       finalTypeId: '',
@@ -145,6 +146,7 @@ export default {
     // 选择规格
     activeSpec (index, e) {
       this.spec = index
+      this.finalSize = e.size
       this.finalPrice = e.cash
       this.finalGold = e.gold
       this.number = e.stock
@@ -197,6 +199,7 @@ export default {
               console.log(res)
               if (res.data.code == 200) {
                 Toast('加入购物车成功!')
+                this.shopCarNum = this.shopCarNum + this.value
               }
             })
             .catch(err => {
@@ -205,16 +208,21 @@ export default {
           break;
         case 2:
           console.log('立即购买')
-          /*this.$router.push({
+          var finalData = {
+            shopCount: this.value,
+            shopPrice: this.finalPrice,
+            shopGold: this.finalGold,
+            shopColor: this.finalColor,
+            shopSize: this.finalSize,
+            shopInfo: this.goodsInfo,
+            shopTypeId: this.finalTypeId
+          }
+          localStorage.setItem('finalData',JSON.stringify(finalData))
+          this.$router.push({
             path: '/confirmOrder'
-          })*/
+          })
           break;
       }
-      /*console.log(this.finalColor)
-      console.log(this.finalTypeId)
-      console.log(this.value)
-      console.log(this.finalPrice)
-      console.log(this.finalGold)*/
     }
   },
   created () {
