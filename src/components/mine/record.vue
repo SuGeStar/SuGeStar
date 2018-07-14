@@ -12,27 +12,34 @@
       </mt-navbar>
       <mt-tab-container v-model="selected">
         <mt-tab-container-item id="1">
-          <div class="image" v-show="isNull">
-            <img src="../../assets/image/nodata.png" alt="">
-          </div>
           <ul>
-            <li v-for="(into,index) in intoList" :key="index">
-              <div class="invit-match">
-                <div class="match-pop">
-                  <div class="invit-info">
-                    <p class="invit-phone">{{into.sn}}</p>
-                    <p class="invit-name">代币：<span>{{into.frozen_force}}</span></p>
-                  </div>
-                  <div class="invit-msg">
-                    <p>{{into.mark}}</p>
-                    <p class="invit-date">{{into.created_at}}</p>
+            <li class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'rem' }">
+              <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
+                <div class="list" v-for="(into,index) in intoList" :key="index">
+                  <div class="invit-match">
+                    <div class="match-pop">
+                      <div class="invit-info">
+                        <p class="invit-phone">{{into.sn}}</p>
+                        <p class="invit-name">代币：<span>{{into.frozen_force}}</span></p>
+                      </div>
+                      <div class="invit-msg">
+                        <p>{{into.mark}}</p>
+                        <p class="invit-date">{{into.created_at}}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+                <div slot="bottom" class="mint-loadmore-bottom">
+                  <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
+                  <span v-show="bottomStatus === 'loading'">
+                    <mt-spinner type="snake"></mt-spinner>
+                  </span>
+                </div>
+              </mt-loadmore>
             </li>
           </ul>
           <ul v-show="isStar">
-            <li v-for="(month,item) in MonthList" :key="item">
+            <li class="list" v-for="(month,item) in MonthList" :key="item">
               <div class="invit-match">
                 <div class="match-pop">
                   <router-link :to="{path:'/getDay',query:{times:month.times}}">
@@ -47,11 +54,8 @@
           </ul>
         </mt-tab-container-item>
         <mt-tab-container-item id="2">
-          <div class="image" v-show="isNull">
-            <img src="../../assets/image/nodata.png" alt="">
-          </div>
           <ul>
-            <li v-for="(item,index) in list" :key="index">
+            <li class="list" v-for="(item,index) in list" :key="index">
               <div class="invit-match">
                 <div class="match-pop">
                   <div class="invit-info">
@@ -78,16 +82,21 @@
 <script>
 import { Toast } from 'mint-ui'
 import { url } from '../../assets/js/mobile.js'
+import api from '@/assets/js/api.js'
 let token = localStorage.getItem('token')
 export default {
   data () {
     return {
       isNull: false,
       isStar: false,
+      wrapperHeight: 0,
+      allLoaded: false,
       selected: '1',
       intoList:[],
       list: [],
       MonthList: [],
+      bottomStatus: '',
+      page: 1,
       url: this.$route.params.id
     }
   },
@@ -97,8 +106,7 @@ export default {
       return false
     }
     if (this.url == 'gold') {
-      console.log('2222')
-      this.goldInto()
+      this.goldInto(1)
       return false
     }
   },
@@ -111,7 +119,7 @@ export default {
           return false
         }
         if (value == 2) {
-          this.starOut()
+          this.starOut(1)
           return false
         }
         return false
@@ -119,7 +127,7 @@ export default {
       if (this.url == 'gold') {
         console.log(value)
         if (value == 1) {
-          this.goldInto()
+          this.goldInto(1)
           return false
         }
         if (value == 2) {
@@ -132,58 +140,69 @@ export default {
   },
   methods: {
     starInto () {
-      // 星币收入
-      this.$http.get(url + 'alreadyGetMonth?token='+token)
-      .then(response => {
-        console.log(response)
-        if (response.data.data == '') {
-          this.isNull = true
-          return false
+      // 星币收入(月)
+      api.alreadyGetMonth()
+      .then ((res) => {
+        if (res.data.length == 0) {
+          Toast ({
+            message: '没有数据啦~'
+          })
         } else {
-          this.isNull = false
           this.isStar = true
-          this.MonthList = response.data.data
+          this.MonthList = res.data
         }
       })
-      .catch(error => {
-        console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-      })
     },
-    starOut () {
+    starOut (page) {
       // 星币支出
-      this.$http.get(url + 'kbExpenses?token='+token)
-      .then(response => {
-        console.log(response)
-        if (response.data.data == '') {
-          this.isNull = true
-          return false
-        } else {
-          this.isNull = false
-          this.list = response.data.data
-        }
+      api.kbExpenses({
+        'page': page
       })
-      .catch(error => {
-        console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+      .then((res) => {
+        console.log(res)
+        if (res.data.length == 0) {
+          Toast({
+            message: '没有数据啦~',
+            position: 'bottom',
+            duration: 2000
+          });
+        } else {
+          if (page == 1) {
+            this.list = res.data
+            this.page = 2
+          } else {
+            for (let x = 0; x < res.data.length; x++) {
+              this.list.push(res.data[x])
+            }
+            this.page++
+          }
+        }
       })
     },
-    goldInto () {
+    goldInto (page) {
       // 金币收入
-      this.$http.get(url + 'profit?token='+token)
-      .then(response => {
-        console.log(response)
-        if (response.data.data == '') {
-          this.isNull = true
-          return false
-        } else {
-          this.isNull = false
-          this.intoList = response.data.data
-        }
+      api.profit({
+        'page': page
       })
-      .catch(error => {
-        console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+      .then((res) => {
+        console.log(res)
+        if(res.data.length == 0){
+          Toast({
+            message: '没有数据啦~',
+            position: 'bottom',
+            duration: 2000
+          })
+        } else {
+          if (page == 1) {
+            this.intoList = res.data
+            this.page = 2
+          } else {
+            for (let y = 0; y < res.data.length; y++) {
+              this.intoList.push(res.data[y])
+            }
+            this.page++
+          }
+        }
       })
     },
     goldOut () {
@@ -203,7 +222,17 @@ export default {
         console.log(error)
         Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
       })
-    }
+    },
+    loadBottom () {
+      setTimeout(() => {
+        this.starOut(this.page)
+        this.goldInto(this.page)
+        this.$refs.loadmore.onBottomLoaded();
+      }, 1500)
+    },
+    handleBottomChange(status) {
+      this.bottomStatus = status;
+    },
   }
 }
 </script>

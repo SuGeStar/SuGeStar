@@ -95,6 +95,10 @@ export default {
       api.getBankDefault()
       .then((res) => {
         // console.log(res)
+        if (res.data == null) {
+          this.$router.push('/bindBankCard')
+          return false
+        }
         let card = res.data.card
         this.bankName = res.data.bank
         this.bankCard = card.substr(card.length-4)
@@ -110,7 +114,7 @@ export default {
       if (this.password.length == 6) {
         let psw = this.password.toString().replace(/,/g, "")
         let form = this.$qs.stringify({
-          token: localStorage.getItem(token),
+          token: token,
           money: this.SGB,
           bank_id: this.id,
           mark: '提现备注',
@@ -119,6 +123,12 @@ export default {
         api.applyWithdraw(form)
         .then((res) => {
           console.log(res)
+          Toast({
+            message: res.msg,
+            position: 'bottom',
+            duration: 5000
+          })
+          this.$router.replace('/index')
         })
       }
     }

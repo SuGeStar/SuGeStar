@@ -41,10 +41,13 @@ export default {
       if(val == 5){
         this.$emit('hidden')
         this.$emit('password',this.pasgroup)
-        console.log(this.pasgroup)
+        this.pasgroup = []
+        this.initPasswordGroup ()
       }else if(val <= -1){
         this.currentInputIndex = -1
         this.$emit('hidden')
+        this.pasgroup = []
+        this.initPasswordGroup ()
       }
     }
   },

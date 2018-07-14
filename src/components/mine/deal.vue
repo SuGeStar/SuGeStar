@@ -16,7 +16,7 @@
             <img src="../../assets/image/nodata.png" alt="">
           </div>
           <ul>
-            <li v-for="(into,index) in intoList" :key="index">
+            <li class="list" v-for="(into,index) in intoList" :key="index">
               <div class="invit-match">
                 <div class="match-pop">
                   <div class="invit-info">
@@ -37,7 +37,7 @@
             <img src="../../assets/image/nodata.png" alt="">
           </div>
           <ul>
-            <li v-for="(item,index) in list" :key="index">
+            <li class="list" v-for="(item,index) in list" :key="index">
               <div class="invit-match">
                 <div class="match-pop">
                   <div class="invit-info">

@@ -20,6 +20,7 @@
 <script>
 import { Toast } from 'mint-ui'
 import api from '@/assets/js/api.js'
+let token = localStorage.getItem('token')
 export default {
   data () {
     return {
@@ -45,6 +46,16 @@ export default {
     },
     recharge () {
       this.judge()
+      let form = this.$qs.stringify({
+        token: token,
+        recharge_money: this.smeltingNum,
+        pay_channel: 'wx'
+      })
+      api.createRechargeOrder(form)
+      .then((res) => {
+        console.log(res)
+        window.location.href = 'http://www.sugebei.com/rechargeOrderPay?token='+token+'&order_sn='+res.data
+      })
     },
     judge () {
       var finalSmelting = this.smeltingNum
@@ -52,7 +63,11 @@ export default {
         Toast('数量不能为空!')
         return false
       }
-      if (parseInt(finalSmelting) > this.SGNum) {
+      let num = Number(finalSmelting)
+      if (!Number.isInteger(num)) {
+        Toast('请输入整数!')
+      }
+      if ((finalSmelting) > this.SGNum) {
         Toast('数量有误，请认真核对!')
         return false
       }
