@@ -13,7 +13,7 @@
       <mt-tab-container v-model="selected">
         <mt-tab-container-item id="1">
           <ul>
-            <li class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'rem' }">
+            <li class="page-loadmore-wrapper" ref="wrapper" >
               <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
                 <div class="list" v-for="(into,index) in intoList" :key="index">
                   <div class="invit-match">
@@ -55,19 +55,29 @@
         </mt-tab-container-item>
         <mt-tab-container-item id="2">
           <ul>
-            <li class="list" v-for="(item,index) in list" :key="index">
-              <div class="invit-match">
-                <div class="match-pop">
-                  <div class="invit-info">
-                    <p class="invit-phone">{{item.order_sn}}</p>
-                    <p class="invit-name">代币：<span>{{item.total_fee}}</span></p>
-                  </div>
-                  <div class="invit-msg">
-                    <p>{{item.subject}}</p>
-                    <p class="invit-date">{{item.created_at}}</p>
+            <li class="page-loadmore-wrapper">
+              <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
+                <div class="list" v-for="(item,index) in list" :key="index">
+                  <div class="invit-match">
+                    <div class="match-pop">
+                      <div class="invit-info">
+                        <p class="invit-phone">{{item.order_sn}}</p>
+                        <p class="invit-name">代币：<span>{{item.total_fee}}</span></p>
+                      </div>
+                      <div class="invit-msg">
+                        <p>{{item.subject}}</p>
+                        <p class="invit-date">{{item.created_at}}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+                <div slot="bottom" class="mint-loadmore-bottom">
+                  <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
+                  <span v-show="bottomStatus === 'loading'">
+                    <mt-spinner type="snake"></mt-spinner>
+                  </span>
+                </div>
+              </mt-loadmore>
             </li>
           </ul>
         </mt-tab-container-item>
@@ -100,6 +110,9 @@ export default {
       url: this.$route.params.id
     }
   },
+  mounted() {
+    // this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
+  },
   created () {
     if (this.url == 'star') {
       this.starInto()
@@ -131,9 +144,9 @@ export default {
           return false
         }
         if (value == 2) {
-          this.goldOut()
+          this.goldOut(1)
           return false
-        }s
+        }
         return false
       }
     }
@@ -205,28 +218,37 @@ export default {
         }
       })
     },
-    goldOut () {
+    goldOut (page) {
       // 金币支出
-      this.$http.get(url + 'expenses?token='+token)
-      .then(response => {
-        console.log(response)
-        if (response.data.data == '') {
-          this.isNull = true
-          return false
-        } else {
-          this.isNull = false
-          this.list = response.data.data
-        }
+      api.expenses({
+        'page': page
       })
-      .catch(error => {
-        console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+      .then ((res) => {
+        console.log(res)
+        if(res.data.length == 0){
+          Toast({
+            message: '没有数据啦~',
+            position: 'bottom',
+            duration: 2000
+          })
+        } else {
+          if (page == 1) {
+            this.list = res.data
+            this.page = 2
+          } else {
+            for (let Z = 0; Z < res.data.length; Z++) {
+              this.list.push(res.data[Z])
+            }
+            this.page++
+          }
+        }
       })
     },
     loadBottom () {
       setTimeout(() => {
-        this.starOut(this.page)
-        this.goldInto(this.page)
+        // this.starOut(this.page)
+        // this.goldInto(this.page)
+        // this.goldOut(this.page)
         this.$refs.loadmore.onBottomLoaded();
       }, 1500)
     },
