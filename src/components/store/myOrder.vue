@@ -39,16 +39,16 @@
           <div class="or_left fl"></div>
           <div class="or_right fl">
             <p><span>收货人：{{order.address.name}}</span> <span class="fr" style="color: black">{{order.address.phone}}</span></p>
-            <p><span>收货地址：{{order.address.detail}}</span></p>
+            <p><span>收货地址：{{order.address.province}} {{order.address.city}} {{order.address.area}} {{order.address.detail}}</span></p>
           </div>
         </div>
         <p class="applyTui">
-          <span class="fr" @click="cancelOrder()">取消订单</span>
-          <span class="fr" @click="orderApply()">去支付</span>
-          <span class="fr" @click="confirmReceipt()">确认收货</span>
-          <span class="fr" @click="applyReturnGoods()">申请退款</span>
-          <span class="fr" @click="logisticsQuery()">物流查询</span>
-          <span class="fr" @click="applyReturnGoodsDetail()">查看详情</span>
+          <span class="fr" @click="cancelOrder()" v-if="order.status ===1">取消订单</span>
+          <span class="fr" @click="orderApply()" v-if="order.status ===1">去支付</span>
+          <span class="fr" @click="confirmReceipt()" v-if="order.status ===2">确认收货</span>
+          <span class="fr" @click="applyReturnGoods()" v-if="order.status ===1">申请退款</span>
+          <span class="fr" @click="logisticsQuery()" v-if="order.status ===1">物流查询</span>
+          <span class="fr" @click="applyReturnGoodsDetail()" v-if="order.status ===1">查看详情</span>
         </p>
       </div>
       <!--&lt;!&ndash;待付款&ndash;&gt;
@@ -239,7 +239,7 @@ import { Toast } from 'mint-ui';
 export default {
   data () {
     return {
-      orderTitle: ['全部', '待付款', '待发货', '已发货', '已完成', '退款'],
+      orderTitle: ['待付款', '待发货', '已发货', '已完成', '退款'],
       isTab: true,
       idx: 0,
       orderList: [],
@@ -264,21 +264,18 @@ export default {
       this.idx = _idx;
       switch (_idx) {
         case 0:
-          this.way = 'orderAll';
-          break;
-        case 1:
           this.way = 'waitpay';
           break;
-        case 2:
+        case 1:
           this.way = 'waitreceive';
           break;
-        case 3:
+        case 2:
           this.way = 'completed';
           break;
-        case 4:
+        case 3:
           // this.way = 'refund';
           break;
-        case 5:
+        case 4:
           this.way = 'refund';
           break;
         default:
@@ -325,7 +322,7 @@ export default {
   },
   created () {
     // 获得购买订单
-    this.getOrderData('orderAll', 1)
+    this.getOrderData('waitpay', 1)
   }
 }
 </script>
