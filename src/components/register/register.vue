@@ -3,6 +3,7 @@
     <h3 class="reg-title">SG星球注册</h3>
     <div class="reg-form">
       <div><span>推荐编号</span><input type="text" placeholder="" :readonly="true" v-model="invite_code"></div>
+      <div><span>接点编号</span><input type="text" placeholder="" :readonly="true" v-model="contact_code"></div>
       <div><span>手机号码</span><input type="number" placeholder="请输入手机号码" v-model="phoneNum"></div>
       <!-- <div><span>图片验证</span>
         <input type="text" placeholder="图片验证码" v-model="pic" class="verificationCode">
@@ -37,6 +38,7 @@ export default {
   data () {
     return {
       invite_code: '',
+      contact_code: '',
       phoneNum: '',
       verificationCode: '',
       verificationCodeTxt: '发送验证码',
@@ -67,11 +69,13 @@ export default {
     let arrObj = url.split('?')
     if (url.indexOf('?') == -1) {
       this.invite_code = 'C4L63NB6'
+      this.contact_code = 'C4L63NB6'
     } else {
       let str = window.location.href.substring(location.href.indexOf('=')+1)
       let recommend_code = str.split('&')[0]
       this.invite_code = recommend_code
       let contact_code = str.split('=')[1]
+      this.contact_code = contact_code
       localStorage.setItem('recommend_code',recommend_code)
       localStorage.setItem('contact_code',contact_code)
     }
