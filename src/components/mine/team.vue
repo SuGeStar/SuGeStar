@@ -16,7 +16,7 @@
       <div class="team-content" >
         <router-link :to="{path: '/relation/' + index}" :class="[isNull(index) ? 'nullFloor' : 'floor']" v-for="(progress,index) in progressBox" :key="index" > 
           <div class="team-floor">
-            第{{progress.floor}}层
+            第{{progress.floor}}维度
           </div>
           <vm-progress class="progress"  :percentage="progress.percentage" :text-inside="true" :stroke-width="18" :strokeColor="progress.color"></vm-progress>
         </router-link>

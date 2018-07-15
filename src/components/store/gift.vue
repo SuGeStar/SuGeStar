@@ -11,19 +11,19 @@
         <li>
           <router-link to="/giftOrder/1">
             <p>礼包一</p>
-            <img src="../../assets/image/gift.png" alt="">
+            <img src="../../assets/image/gift_1.png" alt="">
           </router-link>
         </li>
         <li>
           <router-link to="/giftOrder/2">
             <p>礼包二</p>
-            <img src="../../assets/image/gift.png" alt="">
+            <img src="../../assets/image/gift_2.png" alt="">
           </router-link>
         </li>
         <li>
           <router-link to="/giftOrder/3">
             <p>礼包三</p>
-            <img src="../../assets/image/gift.png" alt="">
+            <img src="../../assets/image/gift_3.png" alt="">
           </router-link>
         </li>
       </ul>

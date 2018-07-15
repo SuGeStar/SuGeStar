@@ -147,7 +147,7 @@ export default {
       .then(response => {
         console.log(response.data)
         if (response.data.code == 200) {
-          this.gold = response.data.data.gold
+          this.gold = response.data.data.frozen_force
           this.total = response.data.data.miners
 
         } else {

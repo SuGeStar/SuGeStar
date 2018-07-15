@@ -52,7 +52,7 @@
               <div class="team-floor">
                 第{{progress.floor}}维度
               </div>
-              <vm-progress class="progress"  :percentage="progress.percentage" :text-inside="true" :stroke-width="18"></vm-progress>
+              <vm-progress class="progress"  :percentage="progress.percentage" :text-inside="true" :stroke-width="18" :strokeColor="progress.color"></vm-progress>
             </router-link>
           </div>
         </div>
@@ -60,7 +60,7 @@
       <!-- 大礼包 -->
         <div class="gift-box">
           <router-link to="/gift">
-            <img src="http://attach.bbs.miui.com/forum/201507/01/101024hpo6hqhvt77dhsqq.jpg" alt="">
+            <img src="../../assets/image/gift.png" alt="">
           </router-link>
         </div>
       <!-- 挖宝数据 -->
@@ -88,7 +88,7 @@
             </li>
             <li class="content-list">
               <div class="con-title">
-                金币
+                算力
                 <i class="icon icon-tips"></i>
               </div>
               <div class="con-desc">
@@ -122,10 +122,10 @@ let token = localStorage.getItem('token')
 export default {
   data () {
     return {
-      today_owen: '1000000',
-      all_owen: '1000000',
-      miners_today: '',
-      miners_all: '',
+      today_owen: '0',
+      all_owen: '0',
+      miners_today: '0',
+      miners_all: '0',
       level: 'SG青铜时代',
       pv: '1000',
       k: '1000',
@@ -192,7 +192,7 @@ export default {
     },
     dataGold () {
       this.$http.get(url + 'dataGold?token=' + token)
-      // 今日星币及累计获得的星币数据
+      // 今日代币及累计获得的代币数据
       .then(response => {
         console.log(response)
         if (response.data.code == 200) {
@@ -238,6 +238,10 @@ export default {
               // this.teamFloor = false
             } else {
               this.progressBox = response.data.data
+              this.progressBox[1].color = '#a288d2'
+              this.progressBox[2].color = '#f0b026'
+              this.progressBox[3].color = '#1ad3a7'
+              this.progressBox[4].color = '#03a8f7'
             }
           }
         })
