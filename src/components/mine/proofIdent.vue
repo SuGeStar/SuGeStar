@@ -30,6 +30,7 @@
 @import '../../assets/less/proofIdent.less';
 </style>
 <script>
+import api from '@/assets/js/api.js'
 import { Toast, MessageBox } from 'mint-ui';
 export default {
   data () {
@@ -46,7 +47,6 @@ export default {
   methods: {
     sendsms () {
       var regex = /^1(3|4|5|6|7|8|9)\d{9}$/
-      // var regex = /^(?=\d{11}$)^1(?:3\d|4[57]|5[^4\D]|66|7[^249\D]|8\d|9[89])\d{8}$/g;
       if (!regex.test(this.form.phone)) {
         Toast({
           message: '请输入正确的手机号码',
@@ -54,6 +54,8 @@ export default {
           duration: 2000
         });
         return false;
+      } else {
+        
       }
       this.$router.push({
         path: '/resetPassword/'+this.id

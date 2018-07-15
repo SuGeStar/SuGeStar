@@ -66,6 +66,14 @@ export function Get (url, params) {
 }
 
 export default {
+  sendSms (params) {
+    // 发送手机验证码
+    return Get(`/sendSms?phone=${params.phone}`)
+  },
+  apply (params) {
+    // 申请升级
+    return Post('/apply', params)
+  },
   availableGold () {
     // 获取可用金钱
     return Get(`/availableGold?token=${token}`)
@@ -125,5 +133,9 @@ export default {
   waitPlacement () {
     // 我的待安置
     return Get(`/waitPlacement?token=${token}`)
+  },
+  setNickname (params) {
+    // 修改昵称
+    return Post('/setNickname', params)
   }
 }

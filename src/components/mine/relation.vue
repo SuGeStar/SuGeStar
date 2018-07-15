@@ -29,7 +29,7 @@
                 </div>
                 <div class="box">
                   <p v-if="relation.right !== null">{{relation.right.realname}}</p>
-                  <p class="short" v-else @click="shortPeo(relation.id)">缺人</p>
+                  <p class="short" v-else @click="shortPeo(relation.id,relation.invite_code)">缺人</p>
                 </div>
               </div>
             </div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="box">
                   <p v-if="relation.right !== null">{{relation.right.realname}}</p>
-                  <p class="short" v-else @click="shortPeo(relation.id)">缺人</p>
+                  <p class="short" v-else @click="shortPeo(relation.id, relation.invite_code)">缺人</p>
                 </div>
               </div>
             </div>
@@ -88,6 +88,7 @@ export default {
       rightList: [],
       leftList: [],
       id: '',
+      invite_code: '',
       popupVisible1: false
     }
   },
@@ -113,13 +114,19 @@ export default {
     })
   },
   methods: {
-    shortPeo (e) {
+    shortPeo (e, code) {
       console.log(e)
+      console.log(code)
       this.popupVisible1 = true
       this.id = e
+      this.invite_code = code
     },
     place () {
       this.$router.push('/place')
+      this.$router.push({
+        name: 'place',
+        query: {invite_code: this.invite_code}
+      })
     },
     share (id) {
       console.log(id)

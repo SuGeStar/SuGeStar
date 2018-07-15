@@ -6,7 +6,7 @@
       </a>
     </mt-header>
     <div class="firInvit">
-      <div class="invit-list" v-for="(item,index) in items" :key="index"  @click="placeItem(item.id)">
+      <div class="invit-list" v-for="(item,index) in items" :key="index"  @click="placeItem(item.id,item.token)">
         <div class="invit-match">
           <div class="match-pop">
             <div class="invit-info">
@@ -27,11 +27,15 @@
 @import '../../assets/less/firInvit.less';
 </style>
 <script>
+import { Toast, MessageBox } from 'mint-ui'
 import api from '@/assets/js/api.js'
+let userinfo = JSON.parse(localStorage.getItem('userinfo'))
 export default {
   data () {
     return {
-      items: []
+      items: [],
+      token: '',
+      recommend_code: userinfo.invite_code
     }
   },
   created () {
@@ -56,7 +60,6 @@ export default {
         //   this.page++
         // }
       }
-      
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i].level == 1) {
           this.items[i].level = '居民'
@@ -65,14 +68,34 @@ export default {
         }
       }
     })
-    api.getRecordCode()
-    .then((data) => {
-      console.log(data)
-    })
   },
   methods: {
-    placeItem (e) {
+    placeItem (e,data) {
       console.log(e)
+      console.log(data)
+      let token = e + '.' + data
+      console.log(token)
+      let contact_code = this.$route.query.invite_code
+      let form = this.$qs.stringify({
+        token: token,
+        apply_level: 2,
+        recommend_code: this.recommend_code,
+        contact_code: contact_code,
+      })
+      MessageBox.confirm('确定执行此操作?').then(action => {
+        api.apply(form)
+        .then((res) => {
+          console.log(res)
+          Toast({
+            message: res.msg,
+            position: 'bottom',
+            duration: 2000
+          })
+          if (res.code == 200) {
+            this.$router.replace('/relation')
+          }
+        })
+      })
     }
   }
   
