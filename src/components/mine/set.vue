@@ -38,15 +38,20 @@
 </template>
 
 <script>
+let token = localStorage.getItem('token');
 export default {
   methods: {
     // 退出登录
     quitLogin: function () {
       localStorage.removeItem('token')
       localStorage.removeItem('userinfo')
-      this.$router.push({
-        path: '/login'
-      })
+      window.location.href = 'login'
+    }
+  },
+  created () {
+    // window.location.reload()
+    if (!token) {
+      this.$router.push('/login')
     }
   }
 }

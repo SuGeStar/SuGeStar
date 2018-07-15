@@ -24,17 +24,17 @@
     </mt-swipe>
     <mt-swipe class="swiper1" :auto="0">
       <mt-swipe-item class="box">
-        <div v-for="classify in swiperBox" :key="classify.id">
-          <router-link to="/classify">
-            <img :src="classify.img">
+        <div v-for="(classify,_index) in swiperBox" :key="classify.cid">
+          <router-link :to="{path:'/classify/'+classify.cid+'/'+_index}">
+            <img :src="getImg(classify.logo)">
             <p>{{classify.name}}</p>
           </router-link>
         </div>
       </mt-swipe-item>
-      <mt-swipe-item class="box">
-        <div class="swiper-box2" v-for="classify in swiperBox2" :key="classify.id">
+      <mt-swipe-item class="box" v-if="s2">
+        <div class="swiper-box2" v-for="classify in swiperBox2" :key="classify.cid">
           <router-link to="/classify">
-            <img :src="classify.img">
+            <img :src="getImg(classify.logo)">
             <p>{{classify.name}}</p>
           </router-link>
         </div>
@@ -94,6 +94,7 @@
 </style>
 <script>
 import footGuide from '../comp/footGuide.vue'
+import { url } from '../../assets/js/mobile.js'
 export default {
   components: {
     footGuide
@@ -104,66 +105,9 @@ export default {
       active: 'tab-container1',
       value: '',
       selected: '1',
-      swiperBox: [
-        {
-          img: 'http://sugemall.com/data/files/mall/gcategory/754.png',
-          name: '真艾宝'
-        },
-        {
-          img: 'http://sugemall.com/data/files/mall/gcategory/765.png',
-          name: '土特产专区'
-        },
-        {
-          img: 'http://sugemall.com/data/files/mall/gcategory/651.png',
-          name: '女装'
-        },
-        {
-          img: 'http://sugemall.com/data/files/mall/gcategory/606.png',
-          name: '男装'
-        },
-        {
-          img: 'http://sugemall.com/data/files/mall/gcategory/713.png',
-          name: '女鞋'
-        },
-        {
-          img: 'http://sugemall.com/data/files/mall/gcategory/702.png',
-          name: '男鞋'
-        },
-        {
-          img: 'http://sugemall.com/data/files/mall/gcategory/5.png',
-          name: '个护彩妆'
-        },
-        {
-          img: 'http://sugemall.com/data/files/mall/gcategory/4.png',
-          name: '精品箱包'
-        },
-      ],
-      swiperBox2: [
-        {
-          img: 'http://sugemall.com/data/files/mall/gcategory/588.png',
-          name: '珠宝配饰'
-        },
-        {
-          img: 'http://sugemall.com/data/files/mall/gcategory/11.png',
-          name: '童装/孕婴'
-        },
-        {
-          img: 'http://sugemall.com/data/files/mall/gcategory/10.png',
-          name: '数码家电'
-        },
-        {
-          img: 'http://sugemall.com/data/files/mall/gcategory/8.png',
-          name: '家居家纺'
-        },
-        {
-          img: 'http://sugemall.com/data/files/mall/gcategory/6.png',
-          name: '食全食美'
-        },
-        {
-          img: 'http://sugemall.com/data/files/mall/gcategory/9.png',
-          name: '汽车用品'
-        }
-      ],
+      s2: false,
+      swiperBox: [],
+      swiperBox2: [],
       newList: [
         {
           img: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
@@ -215,8 +159,33 @@ export default {
           sgk: '￥200+矿币36或',
           price: '￥236'
         }
-      ]
+      ],
+      getImg (url) {
+        return 'http://img.sugebei.com' + url
+      }
     }
+  },
+  created () {
+    // 获取商品一级分类
+    this.$http.get(url + 'cateList')
+      .then(response => {
+        let _len = response.data.data.length;
+        if (_len > 8) {
+          this.s2 = true
+          for (var i = 0; i < 8; i++) {
+            this.swiperBox.push((response.data.data)[i])
+          }
+          for (var j = 8; j < _len; j++) {
+            this.swiperBox2.push((response.data.data)[j])
+          }
+        } else {
+          this.s2 = false
+          this.swiperBox = response.data.data
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 }
 </script>

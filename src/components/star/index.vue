@@ -246,9 +246,6 @@ export default {
           Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
         })
     }
-    /*if (!token) {
-      this.$router.push('/login')
-    }*/
   },
   mounted () {
     if (!token) {

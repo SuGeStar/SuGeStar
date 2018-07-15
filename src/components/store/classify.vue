@@ -16,18 +16,18 @@
     <div class="classify-content">
       <div class="classify-left">
         <ul>
-          <li v-for="(classifyName,index) in classList" :key="index" :class="{active:index===ins}" @click="active(index)">
+          <li v-for="(classifyName,index) in classList" :key="index" :class="{active:index===ins}" @click="active(index,classifyName)">
             {{classifyName.name}}
           </li>
         </ul>
       </div>
       <div class="classify-right">
         <div class="content-box">
-          <img src="http://www.sgyxmall.com//Upload/category/2018-05-03/5aea6fee29278.jpg" alt="">
+          <img :src="getImg(AD)" alt="">
           <ul class="content-list">
             <li v-for="(classifyCont,index) in classBox" :key="index">
-              <router-link to="/list">
-                <img :src="classifyCont.img" alt="">
+              <router-link :to="{path:'/list/'+classifyCont.cid}">
+                <img :src="getImg(classifyCont.logo)" alt="">
                 <p>
                   {{classifyCont.name}}
                 </p>
@@ -43,70 +43,56 @@
 <style lang="less" scoped>
 </style>
 <script>
+import { url } from '../../assets/js/mobile.js'
 export default {
   data () {
     return {
       ins: 0,
-      classList: [
-        {
-          name: '真艾宝'
-        },
-        {
-          name: '女装'
-        },
-        {
-          name: '男装'
-        },
-        {
-          name: '配件'
-        },
-        {
-          name: '居家'
-        },
-        {
-          name: '3C专区'
-        },
-        {
-          name: '洗护'
-        },
-        {
-          name: '饮食'
-        },
-        {
-          name: '婴童'
-        },
-        {
-          name: '餐厨'
-        },
-        {
-          name: '珠宝'
-        }
-      ],
-      classBox: [
-        {
-          img: 'http://www.sgyxmall.com//Upload/category/2018-05-03/5aea7306f28c1.png',
-          name: '真艾宝'
-        },
-        {
-          img: 'http://www.sgyxmall.com//Upload/category/2018-05-03/5aea7306f28c1.png',
-          name: '真艾宝'
-        },
-        {
-          img: 'http://www.sgyxmall.com//Upload/category/2018-05-03/5aea7306f28c1.png',
-          name: '真艾宝'
-        },
-        {
-          img: 'http://www.sgyxmall.com//Upload/category/2018-05-03/5aea7306f28c1.png',
-          name: '真艾宝'
-        }
-      ]
+      classList: [],
+      firstId: 0,
+      AD: '',
+      classId: 0,
+      classIndex: 0,
+      classBox: [],
+      advImg: [],
+      getImg (url) {
+        return 'http://img.sugebei.com' + url
+      }
     }
   },
   methods: {
-    active (num) {
-      console.log(num)
-      this.ins = num
+    active (idx, e) {
+      this.ins = idx
+      this.getTwoClass(e.cid)
+      this.AD = (this.advImg)[idx]
+    },
+    getTwoClass (id) {
+      this.$http.get(url + '/cateList?cate_id=' + id)
+        .then(res => {
+          this.classBox = res.data.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
+  },
+  created () {
+    this.firstId = this.$route.params.id
+    this.classIndex = this.$route.params.idx
+    this.ins = parseInt(this.$route.params.idx)
+    // 获取商品一级分类
+    this.$http.get(url + 'cateList')
+      .then(response => {
+        this.classList = response.data.data
+        for (var i in this.classList) {
+          this.advImg.push((this.classList)[i].img)
+        }
+        this.getTwoClass(this.firstId)
+        this.AD = (this.advImg)[this.classIndex]
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 }
 </script>
