@@ -65,6 +65,14 @@
         </div>
       </div>
     </div>
+    <mt-popup v-model="popupVisible1" popup-transition="popup-fade" class="invit-pop">
+      <div class="popBtn" @click="place">
+        安置
+      </div>
+      <div class="popBtn" @click="share">
+        分享
+      </div>
+    </mt-popup>
   </div>
 </template>
 <style lang="less" scoped>
@@ -78,15 +86,26 @@ export default {
   data () {
     return {
       rightList: [],
-      leftList: []
+      leftList: [],
+      id: '',
+      popupVisible1: false
     }
   },
   created () {
     this.$http.get(url + 'branches?token='+token)
     .then(response => {
       console.log(response)
-      this.leftList = response.data.data.left
-      this.rightList = response.data.data.right
+      if (response.data.data.left[0].id == null && response.data.data.right[0].id == null) {
+        Toast({
+           message: '您还没有邀请好友升级哟~',
+           position: 'bottom',
+           duration: 2000
+        })
+        this.$router.replace('/my')
+      } else {
+        this.leftList = response.data.data.left
+        this.rightList = response.data.data.right
+      }
     })
     .catch(error => {
       console.log(error)
@@ -96,18 +115,18 @@ export default {
   methods: {
     shortPeo (e) {
       console.log(e)
+      this.popupVisible1 = true
+      this.id = e
+    },
+    place () {
+      this.$router.push('/place')
+    },
+    share (id) {
+      console.log(id)
       this.$router.push({
         name: 'relatShare',
-        params: {id: e}
+        params: {id: this.id}
       })
-      // this.$http.get(url + 'inviteLink?token='+token+'&contact_id='+e)
-      // .then(response => {
-      //   console.log(response)
-      // })
-      // .catch(error => {
-      //   console.log(error)
-      //   Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-      // })
     }
   }
 }

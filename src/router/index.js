@@ -48,6 +48,7 @@ import gift from '@/components/store/gift'
 import giftOrder from '@/components/store/giftOrder'
 import payment from '@/components/store/payment'
 import getDay from '@/components/mine/getDay'
+import place from '@/components/mine/place'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -292,6 +293,11 @@ export default new Router({
       path: '/getDay',
       name: 'getDay',
       component: getDay
+    },
+    {
+      path: '/place',
+      name: 'place',
+      component: place
     }
   ]
 })

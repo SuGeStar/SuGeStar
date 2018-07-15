@@ -121,5 +121,9 @@ export default {
   getRecordCode () {
     // 推荐码和节点人码
     return Get(`/getRecordCode?token=${token}`)
+  },
+  waitPlacement () {
+    // 我的待安置
+    return Get(`/waitPlacement?token=${token}`)
   }
 }
