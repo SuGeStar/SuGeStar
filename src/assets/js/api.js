@@ -66,6 +66,10 @@ export function Get (url, params) {
 }
 
 export default {
+  sendSms (params) {
+    // 发送手机验证码
+    return Get(`/sendSms?phone=${params.phone}`)
+  },
   availableGold () {
     // 获取可用金钱
     return Get(`/availableGold?token=${token}`)
