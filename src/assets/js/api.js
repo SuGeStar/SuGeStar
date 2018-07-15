@@ -117,5 +117,9 @@ export default {
   alreadyGetDay (params) {
     // 星币收入(天)
     return Get(`/alreadyGetDay?token=${token}&times=${params.time}&page=${params.page}`)
+  },
+  getRecordCode () {
+    // 推荐码和节点人码
+    return Get(`/getRecordCode?token=${token}`)
   }
 }

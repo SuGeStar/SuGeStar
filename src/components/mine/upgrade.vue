@@ -42,13 +42,14 @@
 </style>
 <script>
 import { url } from '../../assets/js/mobile.js'
+import api from '@/assets/js/api.js'
 let token = localStorage.getItem('token')
 import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
-      recomID: 'C4L63NB6',
-      contact_code: '4J70MIUQ',
+      recomID: '',
+      contact_code: '',
       recomName: '张三',
       username: '',
       apply_level: 2,
@@ -56,12 +57,13 @@ export default {
     }
   },
   created () {
-    this.recomID = localStorage.getItem('recommend_code')
-    this.contact_code = localStorage.getItem('contact_code')
-    // this.recomName = this.baseUserInfo.realname
     this.username = this.baseUserInfo.realname
-    // this.baseUserInfo.level = this.apply_level
-    // console.log(localStorage.userinfo)
+    api.getRecordCode()
+    .then ((res) => {
+      console.log(res)
+      this.recomID = res.data.recommend_code
+      this.contact_code = res.data.contact_code
+    })
   },
   methods: {
     upgrade () {

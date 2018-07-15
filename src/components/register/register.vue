@@ -68,8 +68,8 @@ export default {
     let url = window.location.href.substring()
     let arrObj = url.split('?')
     if (url.indexOf('?') == -1) {
-      this.invite_code = 'C4L63NB6'
-      this.contact_code = 'C4L63NB6'
+      this.invite_code = 'U9RU3FC2'
+      this.contact_code = 'U9RU3FC2'
     } else {
       let str = window.location.href.substring(location.href.indexOf('=')+1)
       let recommend_code = str.split('&')[0]
@@ -120,7 +120,7 @@ export default {
               position: 'bottom',
               duration: 2000
             });
-            this.ctimer(10)
+            this.ctimer(60)
           } else {
             Toast({
               message: response.data.message[0],
