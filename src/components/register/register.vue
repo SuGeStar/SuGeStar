@@ -199,6 +199,7 @@ export default {
       }
       let form = this.$qs.stringify({
         invite_code: this.invite_code,
+        contact_code: this.contact_code,
         password: this.loginPsd,
         code: this.verificationCode,
         phone: this.phoneNum,
