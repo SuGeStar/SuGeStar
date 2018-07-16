@@ -11,15 +11,17 @@
       <!-- tab-container -->
       <mt-tab-container v-model="selected">
         <mt-tab-container-item :id="0" class="property-container">
-          <div class="pc-head-container">
-            <p class="pc-head-title">星币总数</p>
-            <p class="pc-head-num"><span>{{total}}</span>
-            <!-- <router-link :to="{path:'/smelting/S'}"><span class="smelting fr"></span></router-link> -->
-            </p>
-            <p class="pc-head-freeze">
+          <div class="pc-head-container start">
+            <div>
+              <p class="pc-head-title">星币总数</p>
+              <p class="pc-head-num"><span>{{total}}</span>
+              <!-- <router-link :to="{path:'/smelting/S'}"><span class="smelting fr"></span></router-link> -->
+              </p>
+            </div>
+            <!-- <p class="pc-head-freeze">
               冻结星币：{{freeze}}
               <i class="icon icon-lock"></i>
-            </p>
+            </p> -->
           </div>
           <div class="pc-content">
             <router-link to="/record/star">
@@ -57,7 +59,7 @@
             <p class="pc-head-title">代币总数</p>
             <p class="pc-head-num"><span>{{gold}}</span><router-link :to="{path:'/smelting'}"><span class="smelting fr">释放/赠送/充值 >></span></router-link></p>
             <p class="pc-head-freeze">
-              冻结代币：{{gold}}
+              算力：{{frozen_force}}
               <i class="icon icon-lock"></i>
             </p>
           </div>
@@ -110,6 +112,7 @@ export default {
       selected: 0,
       freeze: '1000',
       gold: '1000',
+      frozen_force: '0',
       total: '1000',
       tabTxt: ['星币', '代币'],
       propertyContainer: [],
@@ -147,7 +150,8 @@ export default {
       .then(response => {
         console.log(response.data)
         if (response.data.code == 200) {
-          this.gold = response.data.data.frozen_force
+          this.gold = response.data.data.gold
+          this.frozen_force = response.data.data.frozen_force
           this.total = response.data.data.miners
 
         } else {

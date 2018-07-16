@@ -45,17 +45,20 @@ export default {
       this.$router.push('/release/1/'+this.smeltingNum)
     },
     recharge () {
-      this.judge()
-      let form = this.$qs.stringify({
-        token: token,
-        recharge_money: this.smeltingNum,
-        pay_channel: 'wx'
-      })
-      api.createRechargeOrder(form)
-      .then((res) => {
-        console.log(res)
-        window.location.href = 'http://www.sugebei.com/rechargeOrderPay?token='+token+'&order_sn='+res.data
-      })
+      if (!this.judge()) {
+        console.log('1111')
+      }else {
+          let form = this.$qs.stringify({
+          token: token,
+          recharge_money: this.smeltingNum,
+          pay_channel: 'wx'
+        })
+        api.createRechargeOrder(form)
+        .then((res) => {
+          console.log(res)
+          window.location.href = 'http://www.sugebei.com/rechargeOrderPay?token='+token+'&order_sn='+res.data
+        })
+      }
     },
     judge () {
       var finalSmelting = this.smeltingNum
