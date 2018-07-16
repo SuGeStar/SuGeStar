@@ -185,7 +185,7 @@ export default new Router({
       component: car
     },
     {
-      path: '/apply',
+      path: '/apply/:way',
       name: 'apply',
       component: apply
     },

@@ -15,13 +15,13 @@
       <li class="apply-way" @click="applyPop(1)">
         <router-link to="">
           <i class="icon icon-sgj"></i>
-          <p>SG金币支付</p>
+          <p>代币支付</p>
         </router-link>
       </li>
       <li class="apply-way" @click="applyPop(2)">
         <router-link to="">
           <i class="icon icon-sgk"></i>
-          <p>微信+SG矿币支付</p>
+          <p>微信+代币支付</p>
         </router-link>
       </li>
     </ul>
@@ -44,7 +44,8 @@ export default {
       applyWay: '',
       applyOrderCode: '',
       applyPsd: [],
-      finalPsd: ''
+      finalPsd: '',
+      way: ''
     }
   },
   components: {
@@ -52,46 +53,64 @@ export default {
   },
   methods: {
     applyPop (idx) {
-      this.finalOrder['token'] = token
-      switch (idx) {
-        case 0:
-          this.applyWay = 'wx'
-          this.finalOrder['pay_channel'] =  this.applyWay;
-          let form = this.$qs.stringify(this.finalOrder);
-          this.$http.post(url + 'createOrder', form)
-            .then(res => {
-              if (res.data.code === 200) {
-                this.applyOrderCode = res.data.data;
-                window.location.href = url + 'OrderPay?token=' + token + '&order_sn=' + this.applyOrderCode + '&payment_password=' + this.finalPsd
-              }
-            })
-            .catch(err => {
-              console.log(err)
-            })
-          break;
-        case 1:
-          this.applyWay = 'gb';
-          this.finalOrder['pay_channel'] =  this.applyWay;
-          this.applyPop_pop_up = true;
-          break;
-        case 2:
-          this.applyWay = 'wx_kb';
-          this.finalOrder['pay_channel'] =  this.applyWay;
-          let form2 = this.$qs.stringify(this.finalOrder);
-          this.$http.post(url + 'createOrder', form2)
-            .then(res => {
-              if (res.data.code === 200) {
-                this.applyOrderCode = res.data.data;
-                window.location.href = url + 'OrderPay?token=' + token + '&order_sn=' + this.applyOrderCode + '&payment_password=' + this.finalPsd
-              }
-            })
-            .catch(err => {
-              console.log(err)
-            })
-          break;
-        default:
-          return false;
+      console.log(this.way.way)
+      if (this.way.way == 0) {
+        this.finalOrder['token'] = token
+        switch (idx) {
+          case 0:
+            this.applyWay = 'wx'
+            this.finalOrder['pay_channel'] =  this.applyWay;
+            let form = this.$qs.stringify(this.finalOrder);
+            this.$http.post(url + 'createOrder', form)
+              .then(res => {
+                if (res.data.code === 200) {
+                  this.applyOrderCode = res.data.data;
+                  window.location.href = url + 'OrderPay?token=' + token + '&order_sn=' + this.applyOrderCode + '&payment_password=' + this.finalPsd
+                }
+              })
+              .catch(err => {
+                console.log(err)
+              })
+            break;
+          case 1:
+            this.applyWay = 'gb';
+            this.finalOrder['pay_channel'] =  this.applyWay;
+            this.applyPop_pop_up = true;
+            break;
+          case 2:
+            this.applyWay = 'wx_kb';
+            this.finalOrder['pay_channel'] =  this.applyWay;
+            let form2 = this.$qs.stringify(this.finalOrder);
+            this.$http.post(url + 'createOrder', form2)
+              .then(res => {
+                if (res.data.code === 200) {
+                  this.applyOrderCode = res.data.data;
+                  window.location.href = url + 'OrderPay?token=' + token + '&order_sn=' + this.applyOrderCode + '&payment_password=' + this.finalPsd
+                }
+              })
+              .catch(err => {
+                console.log(err)
+              })
+            break;
+          default:
+            return false;
+        }
+      } else if (this.way.way == 1) {
+        var c_orderSn = localStorage.getItem('orderSn');
+        console.log(c_orderSn)
+        switch (idx) {
+          case 0:
+            window.location.href = url + 'OrderPay?token=' + token + '&order_sn=' + c_orderSn + '&payment_password=' + this.finalPsd
+            break;
+          case 1:
+            break;
+          case 2:
+            break;
+          default:
+            return false;
+        }
       }
+
       //
     },
     passwordArr (e) {
@@ -132,6 +151,8 @@ export default {
   },
   created () {
     this.finalOrder = JSON.parse(localStorage.getItem('applyOrder'))
+    this.way = this.$route.params
+    console.log()
   }
 }
 </script>

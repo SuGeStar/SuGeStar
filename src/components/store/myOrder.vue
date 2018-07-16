@@ -30,9 +30,9 @@
         <div class="myOrderInfo">
           <p><span>订单编号：</span>{{order.sn}}</p>
           <p><span>下单时间：</span>{{order.created_at}}</p>
-          <p><span>支付合计：<i>10元+20积分</i></span></p>
-          <p><span>支付方式：</span>微信支付</p>
-          <p><span>快递单号：<input id="txt" value="12345678999" readonly></span><i @click="copyTxt()" class="copy">一键复制</i></p>
+          <p v-if="order.status !==1"><span>支付合计：<i>10元+20积分</i></span></p>
+          <p v-if="order.status !==1"><span>支付方式：</span>微信支付</p>
+          <p v-if="order.status !==1"><span>快递单号：<input id="txt" value="12345678999" readonly></span><i @click="copyTxt()" class="copy">一键复制</i></p>
           <p><span>运　　费：0</span></p>
         </div>
         <div class="myOrder_receive">
@@ -44,11 +44,11 @@
         </div>
         <p class="applyTui">
           <span class="fr" @click="cancelOrder()" v-if="order.status ===1">取消订单</span>
-          <span class="fr" @click="orderApply()" v-if="order.status ===1">去支付</span>
+          <span class="fr" @click="orderApply(order)" v-if="order.status ===1">去支付</span>
           <span class="fr" @click="confirmReceipt()" v-if="order.status ===2">确认收货</span>
-          <span class="fr" @click="applyReturnGoods()" v-if="order.status ===1">申请退款</span>
-          <span class="fr" @click="logisticsQuery()" v-if="order.status ===1">物流查询</span>
-          <span class="fr" @click="applyReturnGoodsDetail()" v-if="order.status ===1">查看详情</span>
+          <span class="fr" @click="applyReturnGoods()" v-if="order.status ===3">申请退款</span>
+          <span class="fr" @click="logisticsQuery()" v-if="order.status ===3">物流查询</span>
+          <span class="fr" @click="applyReturnGoodsDetail()" v-if="order.status ===5">查看详情</span>
         </p>
       </div>
       <!--&lt;!&ndash;待付款&ndash;&gt;
@@ -284,7 +284,15 @@ export default {
       this.getOrderData(this.way, 1)
     },
     cancelOrder () {},
-    orderApply () {},
+    // 去支付
+    orderApply (e) {
+      // console.log(e)
+      var orderId = e.id
+      this.$router.push({
+        path: '/apply/' + 1
+      });
+      localStorage.setItem('orderId', orderId)
+    },
     confirmReceipt () {},
     applyReturnGoods () {},
     logisticsQuery () {},
