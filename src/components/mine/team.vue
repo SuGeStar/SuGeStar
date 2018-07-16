@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="team-content" >
-        <router-link :to="{path: '/relation/' + index}" :class="[isNull(index) ? 'nullFloor' : 'floor']" v-for="(progress,index) in progressBox" :key="index" > 
+        <router-link :to="{path: '/relation'}" :class="[isNull(index) ? 'nullFloor' : 'floor']" v-for="(progress,index) in progressBox" :key="index" > 
           <div class="team-floor">
             第{{progress.floor}}维度
           </div>

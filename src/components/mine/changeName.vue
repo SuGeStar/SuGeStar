@@ -14,15 +14,42 @@
   </div>
 </template>
 <script>
+import { Toast } from 'mint-ui'
+import api from '@/assets/js/api.js'
+let token = localStorage.getItem('token')
 export default {
   data () {
     return {
-      value: ''
+      value: '',
+      baseUserInfo: JSON.parse(localStorage.getItem('userinfo'))
     }
   },
   methods: {
     change () {
-      console.log(this.value)
+      if (!this.value) {
+        Toast('昵称不能为空')
+      } else {
+        let form = this.$qs.stringify({
+          token: token,
+          nickname: this.value
+        })
+        api.setNickname(form)
+        .then((res) => {
+          console.log(res)
+          Toast({
+            message: res.msg,
+            position: 'bottom',
+            duration: 2000
+          })
+          if (res.code == 200) {
+            let baseUserInfo = this.baseUserInfo
+            baseUserInfo["nickname"] = this.value
+            localStorage.setItem('userinfo',JSON.stringify(baseUserInfo))
+            this.$router.replace('/set')
+          }
+        })
+      }
+      
     }
   }
 }

@@ -235,7 +235,7 @@ export default new Router({
       component: team
     },
     {
-      path: '/relation/:id',
+      path: '/relation',
       name: 'relation',
       component: relation
     },
