@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="team-content">
-            <router-link :to="{path: '/relation/' + index}" class="floor" v-for="(progress,index) in progressBox" :key="index" v-show="teamFloor">
+            <router-link :to="{path: '/relation'}" class="floor" v-for="(progress,index) in progressBox" :key="index" v-show="teamFloor">
               <div class="team-floor">
                 第{{progress.floor}}维度
               </div>
