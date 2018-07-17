@@ -32,7 +32,7 @@
           <p><span>下单时间：</span>{{order.created_at}}</p>
           <p v-if="order.status !==1"><span>支付合计：<i>10元+20积分</i></span></p>
           <p v-if="order.status !==1"><span>支付方式：</span>微信支付</p>
-          <p v-if="order.status !==1"><span>快递单号：<input id="txt" value="12345678999" readonly></span><i @click="copyTxt()" class="copy">一键复制</i></p>
+          <p v-if="order.status !==1||order.status !==2"><span>快递单号：<input id="txt" value="12345678999" readonly></span><i @click="copyTxt()" class="copy">一键复制</i></p>
           <p><span>运　　费：0</span></p>
         </div>
         <div class="myOrder_receive">
@@ -286,7 +286,6 @@ export default {
     cancelOrder () {},
     // 去支付
     orderApply (e) {
-      // console.log(e)
       var orderId = e.id
       this.$router.push({
         path: '/apply/' + 1

@@ -96,15 +96,44 @@ export default {
             return false;
         }
       } else if (this.way.way == 1) {
-        var c_orderSn = localStorage.getItem('orderSn');
-        console.log(c_orderSn)
+        var c_orderId = localStorage.getItem('orderId');
         switch (idx) {
           case 0:
-            window.location.href = url + 'OrderPay?token=' + token + '&order_sn=' + c_orderSn + '&payment_password=' + this.finalPsd
+            this.applyWay = 'wx'
+            let f1 = this.$qs.stringify({
+              token: token,
+              order_id: c_orderId,
+              pay_channel: this.applyWay
+            })
+            this.$http.post(url + 'payOrder', f1)
+              .then(res => {
+                if (res.data.code === 200) {
+                  window.location.href = url + 'OrderPay?token=' + token + '&order_sn=' + res.data.data + '&payment_password=' + this.finalPsd
+                }
+              })
+              .catch(err => {
+                console.log(err)
+              })
             break;
           case 1:
+            this.applyPop_pop_up = true;
             break;
           case 2:
+            this.applyWay = 'wx_kb';
+            let f3 = this.$qs.stringify({
+              token: token,
+              order_id: c_orderId,
+              pay_channel: this.applyWay
+            })
+            this.$http.post(url + 'payOrder', f3)
+              .then(res => {
+                if (res.data.code === 200) {
+                  window.location.href = url + 'OrderPay?token=' + token + '&order_sn=' + res.data.data + '&payment_password=' + this.finalPsd
+                }
+              })
+              .catch(err => {
+                console.log(err)
+              })
             break;
           default:
             return false;
@@ -116,33 +145,68 @@ export default {
     passwordArr (e) {
       this.applyPsd = e;
       this.finalPsd = this.applyPsd.toString().replace(/,/g, '');
-      let form1 = this.$qs.stringify(this.finalOrder);
-      this.$http.post(url + 'createOrder', form1)
-        .then(res => {
-          if (res.data.code === 200) {
-            this.applyOrderCode = res.data.data;
-            this.$http.get(url + 'OrderPay?token=' + token + '&order_sn=' + this.applyOrderCode + '&payment_password=' + this.finalPsd)
-              .then(resp => {
-                this.hiddenShow()
-                if (resp.data.code === 200) {
-                  Toast({
-                    message: resp.data.msg
-                  })
-                  this.$router.push('/myOrder')
-                } else {
-                  Toast({
-                    message: resp.data.msg
-                  })
-                }
-              })
-              .catch(error => {
-                console.log(error)
-              })
-          }
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      if (this.way.way == 0) {
+        let form1 = this.$qs.stringify(this.finalOrder);
+        this.$http.post(url + 'createOrder', form1)
+          .then(res => {
+            if (res.data.code === 200) {
+              this.applyOrderCode = res.data.data;
+              this.$http.get(url + 'OrderPay?token=' + token + '&order_sn=' + this.applyOrderCode + '&payment_password=' + this.finalPsd)
+                .then(resp => {
+                  this.hiddenShow()
+                  if (resp.data.code === 200) {
+                    Toast({
+                      message: resp.data.msg
+                    })
+                    this.$router.push('/myOrder')
+                  } else {
+                    Toast({
+                      message: resp.data.msg
+                    })
+                  }
+                })
+                .catch(error => {
+                  console.log(error)
+                })
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else if (this.way.way == 1){
+        var c_orderIds = localStorage.getItem('orderId');
+        this.applyWay = 'gb';
+        let f2 = this.$qs.stringify({
+          token: token,
+          order_id: c_orderIds,
+          pay_channel: this.applyWay
+        });
+        this.$http.post(url + 'payOrder', f2)
+          .then(res => {
+            if (res.data.code === 200) {
+              this.$http.get(url + 'OrderPay?token=' + token + '&order_sn=' + res.data.data + '&payment_password=' + this.finalPsd)
+                .then(resp => {
+                  this.hiddenShow()
+                  if (resp.data.code === 200) {
+                    Toast({
+                      message: resp.data.msg
+                    })
+                    this.$router.push('/myOrder')
+                  } else {
+                    Toast({
+                      message: resp.data.msg
+                    })
+                  }
+                })
+                .catch(error => {
+                  console.log(error)
+                })
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
     },
     hiddenShow () {
       let that = this;
