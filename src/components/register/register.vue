@@ -137,7 +137,6 @@ export default {
     },
     // 判断验证码是否正确
     code () {
-      console.log('111')
       this.$http.get(url + 'checkSmsCode?phone=' + this.phoneNum +'&code='+this.verificationCode)
         .then(response => {
         console.log(response)

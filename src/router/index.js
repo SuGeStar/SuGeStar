@@ -49,6 +49,7 @@ import giftOrder from '@/components/store/giftOrder'
 import payment from '@/components/store/payment'
 import getDay from '@/components/mine/getDay'
 import place from '@/components/mine/place'
+import revisePsd from '@/components/mine/revisePsd'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -190,12 +191,12 @@ export default new Router({
       component: apply
     },
     {
-      path: '/proofIdent/:id', // 验证身份
+      path: '/proofIdent', // 验证身份
       name: 'proofIdent',
       component: proofIdent
     },
     {
-      path: '/resetPassword/:id', // 重置密码
+      path: '/resetPassword/:phone', // 重置密码
       name: 'resetPassword',
       component: resetPassword
     },
@@ -298,6 +299,11 @@ export default new Router({
       path: '/place',
       name: 'place',
       component: place
+    },
+    {
+      path: '/revisePsd/:id',
+      name: 'revisePsd',
+      component: revisePsd
     }
   ]
 })

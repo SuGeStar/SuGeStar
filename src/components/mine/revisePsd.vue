@@ -1,24 +1,15 @@
 <template>
   <div class="wrapper">
-    <mt-header fixed title="重置密码">
+    <mt-header fixed title="修改密码">
       <a href="javascript:history.go(-1);" slot="left">
         <mt-button icon="back"></mt-button>
       </a>
     </mt-header>
     <div class="proofIdent">
-      <div class="proof-list">
-        <ul>
-          <li>1.验证身份</li>
-          <li class="proof-bg">2.重置密码</li>
-        </ul>
-      </div>
       <div class="regform">
         <ul class="reset-list">
-          <!-- <li>
-            <mt-field label="原密码" placeholder="请输入原密码" v-model="form.oldpsd" type="password" class="phone"></mt-field>
-          </li> -->
           <li>
-            <mt-field label="手机号" :value="form.phone"  type="number" class="phone" readonly></mt-field>
+            <mt-field label="原密码" placeholder="请输入原密码" v-model="form.oldpsd" @blur.native.capture="verifyCode" type="password" class="phone"></mt-field>
           </li>
           <li>
             <mt-field label="新密码" placeholder="请输入新密码" v-model="form.newpsd" type="password" class="phone"></mt-field>
@@ -34,6 +25,9 @@
 </template>
 <style lang="less" scoped>
 @import '../../assets/less/proofIdent.less';
+.proofIdent{
+  margin-top: 0.1rem;
+}
 .mint-cell{
   text-align: left;
 }
@@ -41,11 +35,11 @@
 <script>
 import { Toast } from 'mint-ui'
 import api from '@/assets/js/api.js'
+let token = localStorage.getItem('token')
 export default {
   data () {
     return {
       form: {
-        phone: '',
         oldpsd: '',
         newpsd: '',
         againpsd: ''
@@ -56,9 +50,20 @@ export default {
     }
   },
   created () {
-    this.form.phone = this.$route.params.phone
+
   },
   methods: {
+    verifyCode () {
+      let form = this.$qs.stringify({
+        token: token,
+        password: this.form.oldpsd
+      })
+      api.verifyPasswd(form)
+      .then((res) => {
+        console.log(res)
+      })
+      
+    },
     resetBtn () {
       // 只能为数字
       var regex = /[^\d]/g;
@@ -73,29 +78,21 @@ export default {
           });
         } else if (!regex.test(this.form.newpsd)) {
           // 调取重置支付密码接口
+
         }
       } else {
         // 调取重置登录密码接口
         // console.log('重置登录密码')
-        if (this.form.newpsd !== this.form.againpsd) {
-          Toast('您两次输入的密码不一致')
-        } else {
-          let form = this.$qs.stringify({
-            phone: this.$route.params.phone,
-            password: this.form.newpsd,
-            password_confirm: this.form.againpsd
-          })
-          api.forgetPassword(form)
-          .then((res) => {
-            console.log(res)
-            if (res.code == 200) {
-              Toast({
-                message: res.msg
-              })
-              this.$router.replace('/login')
-            }
-          })
-        }
+        let form = this.$qs.stringify({
+          token: token,
+          old_password: this.form.oldpsd,
+          password: this.form.newpsd,
+          password_confirm: this.form.againpsd
+        })
+        api.resetPassword(form)
+        .then((res) => {
+          console.log(res)
+        })
       }
     }
   }
