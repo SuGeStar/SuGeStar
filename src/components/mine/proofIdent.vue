@@ -18,8 +18,8 @@
             <mt-field label="手机号" placeholder="请输入手机号码" v-model="form.phone" type="tel" class="phone"></mt-field>
           </li>
           <li>
-            <mt-field label="验证码" placeholder="请输入您的验证码" v-model="form.verifyCode" class="verifyCode"></mt-field>
-            <mt-button v-bind:disabled="disabled" class="verifyCode-btn" type="default" @click="sendsms">{{verifyCodeBtnText}}</mt-button>
+            <mt-field label="验证码" placeholder="请输入您的验证码" @input="code" v-model="form.verifyCode" class="verifyCode"></mt-field>
+            <mt-button v-bind:disabled="disabled" class="verifyCode-btn" type="default" @click="sendsms">{{verificationCodeTxt}}</mt-button>
           </li>
         </ul>
       </div>
@@ -40,7 +40,7 @@ export default {
         verifyCode: ''
       },
       disabled: false,
-      verifyCodeBtnText: '获取验证码',
+      verificationCodeTxt: '获取验证码',
       id: this.$route.params.id
     }
   },
@@ -55,15 +55,67 @@ export default {
         });
         return false;
       } else {
+        api.sendSms({
+          'phone': this.form.phone
+        })
+        .then((res) => {
+          console.log(res)
+          if (res.code == 200) {
+            Toast({
+              message: res.msg
+            })
+            this.ctimer(60)
+          }
+        })
+      }
+      // this.$router.push({
+      //   path: '/resetPassword/'+this.id
+      // })
+    },
+    // 倒计时
+    ctimer (time) {
+      var t = time
+      var that = this
+      if (t > 0) {
+        this.isSend = true
+        this.verificationCodeTxt = t + 's后重发'
+        t--
+        setTimeout(function () {
+          that.ctimer(t)
+        }, 1000)
+      } else {
+        this.isSend = false
+        this.verificationCodeTxt = '获取验证码'
+      }
+    },
+    code() {
+      if (this.form.phone !== '') {
+        if (this.form.verifyCode.length == 4) {
+          // 判断验证码是否正确
+          api.checkSmsCode({
+            'phone': this.form.phone,
+            'code': this.form.verifyCode
+          })
+          .then ((res) => {
+            console.log(res)
+            if (res.code == 200) {
+              Toast({
+                message: res.msg
+              })
+              this.$router.push('/resetPassword/'+this.form.phone)
+            }
+          })
+        }
+      } else {
         
       }
-      this.$router.push({
-        path: '/resetPassword/'+this.id
-      })
+    },
+    checkCode () {
+      
     }
   },
   mounted () {
-    console.log(this.$route.params)
+    
   }
 }
 </script>

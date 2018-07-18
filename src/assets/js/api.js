@@ -53,7 +53,7 @@ export function Get (url, params) {
       }, err => {
         reject(err)
         Toast({
-          message: err.msg
+          message: '服务器出问题了~快去找程序员'
         })
       })
       .catch((error) => {
@@ -69,6 +69,10 @@ export default {
   sendSms (params) {
     // 发送手机验证码
     return Get(`/sendSms?phone=${params.phone}`)
+  },
+  checkSmsCode (params) {
+    // 检查手机验证码
+    return Get(`/checkSmsCode?phone=${params.phone}&code=${params.code}`)
   },
   apply (params) {
     // 申请升级
@@ -137,5 +141,29 @@ export default {
   setNickname (params) {
     // 修改昵称
     return Post('/setNickname', params)
+  },
+  forgetPassword (params) {
+    // 忘记登录密码
+    return Post('forgetPassword', params)
+  },
+  resetPassword (params) {
+    // 重置登录密码
+    return Post('resetPassword', params)
+  },
+  verifyPasswd (params) {
+    // 验证登录密码
+    return Post('verifyPasswd', params)
+  },
+  prompt () {
+    // 首页提示信息
+    return Get(`/prompt?token=${token}`)
+  },
+  recommendNum () {
+    // 直推人数
+    return Get(`/recommendNum?token=${token}`)
+  },
+  getSonNum () {
+    // 旗下人数
+    return Get(`/getSonNum?token=${token}`)
   }
 }

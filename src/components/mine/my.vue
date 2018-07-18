@@ -157,7 +157,7 @@ export default {
       .then(response => {
         console.log(response.data)
         if (response.data.code == 200) {
-          this.userSGK = response.data.data.frozen_force
+          this.userSGK = response.data.data.gold
           this.userST = response.data.data.miners
         } else {
           Toast({

@@ -13,12 +13,12 @@
         </router-link>
       </div>
       <div class="set-list">
-        <router-link :to="{path:'/proofIdent/1'}">
+        <router-link :to="{path:'/revisePsd/1'}">
           <p>修改登录密码</p>
         </router-link>
       </div>
       <div class="set-list">
-        <router-link :to="{path:'/proofIdent/2'}">
+        <router-link :to="{path:'/revisePsd/2'}">
           <p>修改支付密码</p>
         </router-link>
       </div>
@@ -45,7 +45,8 @@ export default {
     quitLogin: function () {
       localStorage.removeItem('token')
       localStorage.removeItem('userinfo')
-      window.location.href = 'login'
+      // window.location.href = 'login'
+      this.$router.replace('/login')
     }
   },
   created () {

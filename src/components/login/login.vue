@@ -6,7 +6,7 @@
       <div style="margin-top: .22rem"><span>密码</span><input type="password" placeholder="请输入密码" v-model="password"></div>
     </div>
     <button @click="login()">登录</button>
-    <p><router-link to=""><span class="fl">忘记密码？</span></router-link><router-link to="/register"><span class="fr">没有账号？立即注册</span></router-link></p>
+    <p><router-link to="/proofIdent"><span class="fl">忘记密码？</span></router-link><router-link to="/register"><span class="fr">没有账号？立即注册</span></router-link></p>
   </div>
 </template>
 <style lang="less" scoped>
@@ -39,6 +39,7 @@ export default {
             localStorage.setItem('level',response.data.data.userinfo.level)
             localStorage.setItem('token', response.data.data.token)
             window.location.href = '/index'
+            // this.$router.replace('/index')
           } else {
             Toast({
               message: response.data.msg,

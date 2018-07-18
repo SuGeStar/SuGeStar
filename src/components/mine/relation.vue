@@ -8,7 +8,7 @@
     <div class="relation">
       <div class="relation-box tabbar">
         <div class="relation-list">
-          <p class="title">左区</p>
+          <p class="title">α区</p>
           <div class="left-list" v-for="(relation,index) in leftList" :key="index">
             <div class="list-box tabbar">
               <div class="left-box">
@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="relation-list">
-          <p class="title">右区</p>
+          <p class="title">β区</p>
           <div class="left-list" v-for="(relation,index) in rightList" :key="index">
             <div class="list-box tabbar">
               <div class="left-box">
