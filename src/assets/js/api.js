@@ -154,6 +154,18 @@ export default {
     // 验证登录密码
     return Post('verifyPasswd', params)
   },
+  forgetPaymentPassword (params) {
+    // 忘记支付密码
+    return Post('forgetPaymentPassword', params)
+  },
+  verifyPaymentPasswd (params) {
+    // 验证支付密码
+    return Post('verifyPaymentPasswd', params)
+  },
+  resetPayment (params) {
+    // 重置支付密码
+    return Post('resetPayment', params)
+  },
   prompt () {
     // 首页提示信息
     return Get(`/prompt?token=${token}`)

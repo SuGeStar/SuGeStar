@@ -191,12 +191,12 @@ export default new Router({
       component: apply
     },
     {
-      path: '/proofIdent', // 验证身份
+      path: '/proofIdent/:id', // 验证身份
       name: 'proofIdent',
       component: proofIdent
     },
     {
-      path: '/resetPassword/:phone', // 重置密码
+      path: '/resetPassword/:id/:phone', // 重置密码
       name: 'resetPassword',
       component: resetPassword
     },

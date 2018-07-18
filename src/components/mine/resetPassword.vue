@@ -60,42 +60,57 @@ export default {
   },
   methods: {
     resetBtn () {
+      if (this.form.newpsd !== this.form.againpsd) {
+        Toast('您两次输入的密码不一致')
+        this.form.newpsd = ''
+        this.form.againpsd = ''
+        return false
+      }
+      let data = this.$qs.stringify({
+        phone: this.$route.params.phone,
+        password: this.form.newpsd,
+        password_confirm: this.form.againpsd
+      })
       // 只能为数字
       var regex = /[^\d]/g;
       if (this.id == 2) {
         // 判断是否为重置支付密码
-        console.log('重置支付密码')
-        if (this.form.newpsd.length !== 6){
+        if (this.form.newpsd.length !== 6 || regex.test(this.form.newpsd)){
           Toast({
             message: '请输入6位数字',
             position: 'middle',
             duration: 2000
           });
+          this.form.newpsd = ''
         } else if (!regex.test(this.form.newpsd)) {
-          // 调取重置支付密码接口
-        }
-      } else {
-        // 调取重置登录密码接口
-        // console.log('重置登录密码')
-        if (this.form.newpsd !== this.form.againpsd) {
-          Toast('您两次输入的密码不一致')
-        } else {
-          let form = this.$qs.stringify({
-            phone: this.$route.params.phone,
-            password: this.form.newpsd,
-            password_confirm: this.form.againpsd
-          })
-          api.forgetPassword(form)
+          // 调取忘记支付密码接口
+          api.forgetPaymentPassword(data)
           .then((res) => {
             console.log(res)
-            if (res.code == 200) {
-              Toast({
-                message: res.msg
-              })
-              this.$router.replace('/login')
-            }
+            Toast({
+              message: res.msg
+            })
+            this.$router.replace('/set')
           })
         }
+      } else {
+        // 调取忘记登录密码接口
+        // console.log('重置登录密码')
+        // let form = this.$qs.stringify({
+        //   phone: this.$route.params.phone,
+        //   password: this.form.newpsd,
+        //   password_confirm: this.form.againpsd
+        // })
+        api.forgetPassword(data)
+        .then((res) => {
+          console.log(res)
+          if (res.code == 200) {
+            Toast({
+              message: res.msg
+            })
+            this.$router.replace('/login')
+          }
+        })
       }
     }
   }

@@ -102,7 +102,7 @@ export default {
               Toast({
                 message: res.msg
               })
-              this.$router.push('/resetPassword/'+this.form.phone)
+              this.$router.push('/resetPassword/'+this.id+'/'+this.form.phone)
             }
           })
         }
