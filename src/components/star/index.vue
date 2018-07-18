@@ -41,7 +41,7 @@
         </div>
         <div class="content-box team">
           <div class="team-head">
-            <p>提示：第{{floor}}层另招募{{lesspeo}}人，即可拿到{{moregold}}金币</p>
+            <p>提示：{{promptTxt}}</p>
             <div class="team-exist">
               <p>直推人数：<span>{{invitpeo}}</span></p>
               <p>旗下人数：<span>{{allpeo}}</span></p>
@@ -118,6 +118,7 @@ import { Toast } from 'mint-ui'
 import footGuide from '../comp/footGuide.vue'
 import collecting from './collecting.vue'
 import { url } from '../../assets/js/mobile.js'
+import api from '@/assets/js/api.js'
 let token = localStorage.getItem('token')
 export default {
   data () {
@@ -127,6 +128,7 @@ export default {
       miners_today: '0',
       miners_all: '0',
       level: 'SG青铜时代',
+      promptTxt: '',
       pv: '1000',
       k: '1000',
       sg: '1000',
@@ -160,7 +162,7 @@ export default {
       })
       this.$http.post(url + 'get', form)
         .then(response => {
-          console.log(response)
+          // console.log(response)
           Toast({
             message: response.data.msg,
             position: 'middle',
@@ -175,7 +177,7 @@ export default {
       this.$http.get(url + 'dataMiners?token=' + token)
       // 今日星币及累计获得的星币数据
       .then(response => {
-        console.log(response)
+        // console.log(response)
         if (response.data.code == 200) {
           this.miners_today = response.data.data.today
           this.miners_all = response.data.data.total
@@ -194,7 +196,7 @@ export default {
       this.$http.get(url + 'dataGold?token=' + token)
       // 今日代币及累计获得的代币数据
       .then(response => {
-        console.log(response)
+        // console.log(response)
         if (response.data.code == 200) {
           this.today_owen = response.data.data.today
           this.all_owen = response.data.data.total
@@ -208,16 +210,41 @@ export default {
         console.log(error)
         Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
       })
+    },
+    recommend () {
+      // 获取直推人数
+      api.recommendNum()
+      .then((res) => {
+        this.invitpeo = res.data
+      })
+    },
+    getSonNum () {
+      // 旗下人数
+      api.getSonNum()
+      .then((res) => {
+        this.allpeo = res.data
+      })
+    },
+    prompt () {
+      // 提示信息
+      api.prompt()
+      .then((res) => {
+        console.log(res)
+        this.promptTxt = res.data
+      })
     }
   },
   created () {
     this.dataMiners()
     this.dataGold()
+    this.recommend()
+    this.getSonNum()
+    this.prompt()
     if (token) {
       this.$http.get(url + 'notGet?token=' + token)
       // 未开采K矿
         .then(response => {
-          console.log(response)
+          // console.log(response)
           this.arr = response.data.data;
         })
         .catch(error => {
@@ -231,7 +258,7 @@ export default {
       this.$http.get(url + 'occupancyRate?token=' + token)
       // 团队看板占比
         .then(response => {
-          console.log(response.data.data)
+          // console.log(response.data.data)
           for (let i = 0; i < response.data.data.length; i++) {
             if (response.data.data[i].percentage == 0) {
               this.progressBox[i] = response.data.data[i]

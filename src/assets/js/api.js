@@ -153,5 +153,17 @@ export default {
   verifyPasswd (params) {
     // 验证登录密码
     return Post('verifyPasswd', params)
+  },
+  prompt () {
+    // 首页提示信息
+    return Get(`/prompt?token=${token}`)
+  },
+  recommendNum () {
+    // 直推人数
+    return Get(`/recommendNum?token=${token}`)
+  },
+  getSonNum () {
+    // 旗下人数
+    return Get(`/getSonNum?token=${token}`)
   }
 }
