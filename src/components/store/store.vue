@@ -51,16 +51,15 @@
           <div class="content-box">
             <ul>
               <li class="content-list" v-for="item in newList" :key="item.id">
-                <img :src="item.img" alt="">
-                <p>
-                 {{item.desc}}
-                </p>
-                <p class="content-sgk">
-                  {{item.sgk}}
-                </p>
-                <span class="content-price">
-                  {{item.price}}
-                </span>
+                <router-link :to="{path:'/details/' + item.goods_id}">
+                  <img :src="getImg(item.default_img)" alt="">
+                  <p>
+                    {{item.goods_name}}
+                  </p>
+                  <p class="content-price">
+                    星币 <span>{{item.spec.gold}}</span> + ¥ <i>{{item.spec.cash}}</i>
+                  </p>
+                </router-link>
               </li>
             </ul>
           </div>
@@ -69,16 +68,15 @@
           <div class="content-box">
             <ul>
               <li class="content-list" v-for="item in goodsList" :key="item.id">
-                <img :src="item.img" alt="">
-                <p>
-                 {{item.desc}}
-                </p>
-                <p class="content-sgk">
-                  {{item.sgk}}
-                </p>
-                <span class="content-price">
-                  {{item.price}}
-                </span>
+                <router-link :to="{path:'/details/' + item.goods_id}">
+                  <img :src="getImg(item.default_img)" alt="">
+                  <p>
+                    {{item.goods_name}}
+                  </p>
+                  <p class="content-price">
+                    星币 <span>{{item.spec.gold}}</span> + ¥ <i>{{item.spec.cash}}</i>
+                  </p>
+                </router-link>
               </li>
             </ul>
           </div>
@@ -108,58 +106,8 @@ export default {
       s2: false,
       swiperBox: [],
       swiperBox2: [],
-      newList: [
-        {
-          img: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
-          desc: '复古原宿条纹外套女2017冬加加厚显加厚显加厚lalallalala',
-          sgk: '￥200+矿币36或',
-          price: '￥236'
-        },
-        {
-          img: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
-          desc: '复古原宿条纹外套女2017冬加加厚显加厚显加厚lalallalala',
-          sgk: '￥200+矿币36或',
-          price: '￥236'
-        },
-        {
-          img: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
-          desc: '复古原宿条纹外套女2017冬加加厚显加厚显加厚lalallalala',
-          sgk: '￥200+矿币36或',
-          price: '￥236'
-        },
-        {
-          img: 'http://ofkzpykzq.bkt.clouddn.com/goods_pic.png',
-          desc: '复古原宿条纹外套女2017冬加加厚显加厚显加厚lalallalala',
-          sgk: '￥200+矿币36或',
-          price: '￥236'
-        }
-      ],
-      goodsList: [
-        {
-          img: 'http://sugemall.com/data/files/store_20380/goods_151/small_201804191635518179.jpg',
-          desc: '复古原宿条纹外套女2017冬加加厚显加厚显加厚lalallalala',
-          sgk: '￥200+矿币36或',
-          price: '￥236'
-        },
-        {
-          img: 'http://sugemall.com/data/files/store_20380/goods_151/small_201804191635518179.jpg',
-          desc: '复古原宿条纹外套女2017冬加加厚显加厚显加厚lalallalala',
-          sgk: '￥200+矿币36或',
-          price: '￥236'
-        },
-        {
-          img: 'http://sugemall.com/data/files/store_20380/goods_151/small_201804191635518179.jpg',
-          desc: '复古原宿条纹外套女2017冬加加厚显加厚显加厚lalallalala',
-          sgk: '￥200+矿币36或',
-          price: '￥236'
-        },
-        {
-          img: 'http://sugemall.com/data/files/store_20380/goods_151/small_201804191635518179.jpg',
-          desc: '复古原宿条纹外套女2017冬加加厚显加厚显加厚lalallalala',
-          sgk: '￥200+矿币36或',
-          price: '￥236'
-        }
-      ],
+      newList: [],
+      goodsList: [],
       getImg (url) {
         return 'http://img.sugebei.com' + url
       }
@@ -185,6 +133,22 @@ export default {
       })
       .catch(error => {
         console.log(error)
+      })
+    // 获取今日上线数据
+    this.$http.get(url + 'goodsToday?page=' + 1)
+      .then(res => {
+        this.newList = res.data.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    // 获取精选好物数据
+    this.$http.get(url + 'goodsSelected?page=' + 1)
+      .then(res => {
+        this.goodsList = res.data.data
+      })
+      .catch(err => {
+        console.log(err)
       })
   }
 }

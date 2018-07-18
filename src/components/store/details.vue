@@ -30,7 +30,7 @@
       <router-link to="/car">
         <div class="buyicon">
           <span v-if="shopCarShow">{{shopCarNum}}</span>
-          <i class="icon icon-car"></i>
+          <i class="icon icon-car-d"></i>
         </div>
       </router-link>
       <p @click="format(1)">加入购物车</p>

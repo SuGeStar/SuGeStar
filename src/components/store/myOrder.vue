@@ -30,25 +30,25 @@
         <div class="myOrderInfo">
           <p><span>订单编号：</span>{{order.sn}}</p>
           <p><span>下单时间：</span>{{order.created_at}}</p>
-          <p><span>支付合计：<i>10元+20积分</i></span></p>
-          <p><span>支付方式：</span>微信支付</p>
-          <p><span>快递单号：<input id="txt" value="12345678999" readonly></span><i @click="copyTxt()" class="copy">一键复制</i></p>
+          <p v-if="order.status !==1"><span>支付合计：<i>10元+20积分</i></span></p>
+          <p v-if="order.status !==1"><span>支付方式：</span>微信支付</p>
+          <p v-if="order.status !==1"><span>快递单号：<input id="txt" value="12345678999" readonly></span><i @click="copyTxt()" class="copy">一键复制</i></p>
           <p><span>运　　费：0</span></p>
         </div>
         <div class="myOrder_receive">
           <div class="or_left fl"></div>
           <div class="or_right fl">
             <p><span>收货人：{{order.address.name}}</span> <span class="fr" style="color: black">{{order.address.phone}}</span></p>
-            <p><span>收货地址：{{order.address.detail}}</span></p>
+            <p><span>收货地址：{{order.address.province}} {{order.address.city}} {{order.address.area}} {{order.address.detail}}</span></p>
           </div>
         </div>
         <p class="applyTui">
-          <span class="fr" @click="cancelOrder()">取消订单</span>
-          <span class="fr" @click="orderApply()">去支付</span>
-          <span class="fr" @click="confirmReceipt()">确认收货</span>
-          <span class="fr" @click="applyReturnGoods()">申请退款</span>
-          <span class="fr" @click="logisticsQuery()">物流查询</span>
-          <span class="fr" @click="applyReturnGoodsDetail()">查看详情</span>
+          <span class="fr" @click="cancelOrder()" v-if="order.status ===1">取消订单</span>
+          <span class="fr" @click="orderApply(order)" v-if="order.status ===1">去支付</span>
+          <span class="fr" @click="confirmReceipt()" v-if="order.status ===2">确认收货</span>
+          <span class="fr" @click="applyReturnGoods()" v-if="order.status ===3">申请退款</span>
+          <span class="fr" @click="logisticsQuery()" v-if="order.status ===3">物流查询</span>
+          <span class="fr" @click="applyReturnGoodsDetail()" v-if="order.status ===5">查看详情</span>
         </p>
       </div>
       <!--&lt;!&ndash;待付款&ndash;&gt;
@@ -239,7 +239,7 @@ import { Toast } from 'mint-ui';
 export default {
   data () {
     return {
-      orderTitle: ['全部', '待付款', '待发货', '已发货', '已完成', '退款'],
+      orderTitle: ['待付款', '待发货', '已发货', '已完成', '退款'],
       isTab: true,
       idx: 0,
       orderList: [],
@@ -264,21 +264,18 @@ export default {
       this.idx = _idx;
       switch (_idx) {
         case 0:
-          this.way = 'orderAll';
-          break;
-        case 1:
           this.way = 'waitpay';
           break;
-        case 2:
+        case 1:
           this.way = 'waitreceive';
           break;
-        case 3:
+        case 2:
           this.way = 'completed';
           break;
-        case 4:
+        case 3:
           // this.way = 'refund';
           break;
-        case 5:
+        case 4:
           this.way = 'refund';
           break;
         default:
@@ -287,7 +284,15 @@ export default {
       this.getOrderData(this.way, 1)
     },
     cancelOrder () {},
-    orderApply () {},
+    // 去支付
+    orderApply (e) {
+      // console.log(e)
+      var orderId = e.id
+      this.$router.push({
+        path: '/apply/' + 1
+      });
+      localStorage.setItem('orderId', orderId)
+    },
     confirmReceipt () {},
     applyReturnGoods () {},
     logisticsQuery () {},
@@ -325,7 +330,7 @@ export default {
   },
   created () {
     // 获得购买订单
-    this.getOrderData('orderAll', 1)
+    this.getOrderData('waitpay', 1)
   }
 }
 </script>

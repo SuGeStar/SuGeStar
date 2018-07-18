@@ -82,7 +82,9 @@ export default {
         remark: this.buyerMsg
       }
       localStorage.setItem('applyOrder', JSON.stringify(applyOrder))
-      this.$router.push('/apply')
+      this.$router.push({
+        path: '/apply/' + 0
+      })
     }
   },
   created () {
