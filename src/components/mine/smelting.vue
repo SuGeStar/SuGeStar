@@ -45,15 +45,16 @@ export default {
       this.$router.push('/release/1/'+this.smeltingNum)
     },
     recharge () {
-      if (!this.judge()) {
-        console.log('1111')
+      if (this.smeltingNum == '') {
+        
       }else {
-          let form = this.$qs.stringify({
+        let form = this.$qs.stringify({
           token: token,
           recharge_money: this.smeltingNum,
           pay_channel: 'wx'
         })
         api.createRechargeOrder(form)
+        // 充值订单创建
         .then((res) => {
           console.log(res)
           window.location.href = 'http://www.sugebei.com/rechargeOrderPay?token='+token+'&order_sn='+res.data
@@ -61,13 +62,12 @@ export default {
       }
     },
     judge () {
-      var finalSmelting = this.smeltingNum
+      let finalSmelting = Number(this.smeltingNum)
       if (!finalSmelting) {
         Toast('数量不能为空!')
         return false
       }
-      let num = Number(finalSmelting)
-      if (!Number.isInteger(num)) {
+      if (!Number.isInteger(finalSmelting)) {
         Toast('请输入整数!')
       }
       if ((finalSmelting) > this.SGNum) {
@@ -75,6 +75,9 @@ export default {
         return false
       }
     }
+  },
+  created () {
+    
   },
   mounted () {
     api.availableGold()
