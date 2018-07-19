@@ -6,22 +6,22 @@
       </a>
     </mt-header>
     <ul class="apply">
-      <li class="apply-way" @click="applyPop(0)">
+      <!--<li class="apply-way" @click="applyPop(0)">
         <router-link to="">
           <i class="icon icon-wx"></i>
           <p>微信支付</p>
         </router-link>
-      </li>
+      </li>-->
       <li class="apply-way" @click="applyPop(1)">
         <router-link to="">
           <i class="icon icon-sgj"></i>
-          <p>代币支付</p>
+          <p>代币+星币支付</p>
         </router-link>
       </li>
       <li class="apply-way" @click="applyPop(2)">
         <router-link to="">
           <i class="icon icon-sgk"></i>
-          <p>微信+代币支付</p>
+          <p>微信+星币支付</p>
         </router-link>
       </li>
     </ul>
@@ -53,7 +53,6 @@ export default {
   },
   methods: {
     applyPop (idx) {
-      console.log(this.way.way)
       if (this.way.way == 0) {
         this.finalOrder['token'] = token
         switch (idx) {
@@ -73,7 +72,7 @@ export default {
               })
             break;
           case 1:
-            this.applyWay = 'gb';
+            this.applyWay = 'gb_kb';
             this.finalOrder['pay_channel'] =  this.applyWay;
             this.applyPop_pop_up = true;
             break;
@@ -175,7 +174,7 @@ export default {
           })
       } else if (this.way.way == 1){
         var c_orderIds = localStorage.getItem('orderId');
-        this.applyWay = 'gb';
+        this.applyWay = 'gb_kb';
         let f2 = this.$qs.stringify({
           token: token,
           order_id: c_orderIds,

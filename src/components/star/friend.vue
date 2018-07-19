@@ -105,7 +105,7 @@ export default {
     }
   },
   created () {
-    
+
   },
   methods: {
     invit () {
@@ -114,7 +114,6 @@ export default {
       this.popupVisible1 = true
     },
     copyBtn () {
-      console.log('222')
       this.$copyText(this.src).then(function (e) {
         Toast('复制成功')
         console.log(e)
