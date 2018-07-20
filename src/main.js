@@ -9,10 +9,10 @@ import './assets/less/base.less'
 import axios from 'axios'
 import qs from 'qs'
 import echarts from 'echarts'
-// import VueResource from 'vue-resource'
 import mobile from './assets/js/mobile.js'
 import api from './assets/js/api.js'
 import Progress from 'vue-multiple-progress'
+import Carousel3d from 'vue-carousel-3d'
 
 Vue.config.productionTip = false
 Vue.use(MintUI)
@@ -23,6 +23,7 @@ Vue.prototype.$qs = qs
 Vue.prototype.$mobile = mobile
 Vue.prototype.$api = api
 Vue.prototype.$echarts = echarts
+Vue.use(Carousel3d)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

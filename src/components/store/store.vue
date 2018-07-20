@@ -18,7 +18,18 @@
         </router-link>
       </div>
     </header>
-    <div class="head-con"></div>
+    <div class="head-con">
+      <div class="store-swiper">
+        <carousel-3d>
+          <slide :index="0">
+            Slide 1 Content
+          </slide>
+          <slide :index="1">
+            Slide 2 Content
+          </slide>
+        </carousel-3d>
+      </div>
+    </div>
     <div class="classify-container">
       <ul>
         <li v-for="(cls,index) in swiperBox" :key="index">
@@ -147,9 +158,12 @@
 <script>
 import footGuide from '../comp/footGuide.vue'
 import { url } from '../../assets/js/mobile.js'
+import { Carousel3d, Slide } from 'vue-carousel-3d'
 export default {
   components: {
-    footGuide
+    footGuide,
+    Carousel3d,
+    Slide
   },
   name: 'page-tab-container',
   data () {
