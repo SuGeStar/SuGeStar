@@ -1,7 +1,7 @@
 <template>
 <div class="wrapper">
   <div class="classify">
-    <header class="classify-top">
+    <!--<header class="classify-top">
       <a href="javascript:history.go(-1);" slot="left">
         <i class="icon icon-back back"></i>
       </a>
@@ -36,7 +36,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </div>
 </template>
@@ -61,7 +61,7 @@ export default {
     }
   },
   methods: {
-    active (idx, e) {
+    /*active (idx, e) {
       this.ins = idx
       this.getTwoClass(e.cid)
       this.AD = (this.advImg)[idx]
@@ -74,21 +74,22 @@ export default {
         .catch(err => {
           console.log(err)
         })
-    }
+    }*/
   },
   created () {
-    this.firstId = this.$route.params.id
+    /*this.firstId = this.$route.params.id
     this.classIndex = this.$route.params.idx
-    this.ins = parseInt(this.$route.params.idx)
+    this.ins = parseInt(this.$route.params.idx)*/
     // 获取商品一级分类
     this.$http.get(url + 'cateList')
       .then(response => {
-        this.classList = response.data.data
+        console.log(response)
+        /*this.classList = response.data.data
         for (var i in this.classList) {
           this.advImg.push((this.classList)[i].img)
         }
         this.getTwoClass(this.firstId)
-        this.AD = (this.advImg)[this.classIndex]
+        this.AD = (this.advImg)[this.classIndex]*/
       })
       .catch(error => {
         console.log(error)

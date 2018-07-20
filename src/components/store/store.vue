@@ -22,10 +22,16 @@
     <div class="classify-container">
       <ul>
         <li v-for="(cls,index) in swiperBox" :key="index">
-          <div><img :src="getImg(cls.logo)" alt=""></div>
-          <p>{{cls.name}}</p>
+          <router-link to="classify">
+            <div><img :src="getImg(cls.logo)" alt=""></div>
+            <p>{{cls.name}}</p>
+          </router-link>
         </li>
-        <li><div><img src="" alt=""></div><p>更多</p></li>
+        <li>
+          <router-link to="classify">
+            <div><img src="" alt=""></div><p>更多</p>
+          </router-link>
+        </li>
       </ul>
     </div>
     <!--logo图片位置-->
