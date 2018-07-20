@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Toast } from 'mint-ui'
 // 接口url
 var url = 'http://www.sugebei.com/'
+var imgUrl = 'http://img.sugebei.com/'
 let token = localStorage.getItem('token')
 // axios 配置
 axios.defaults.timeout = 5000
@@ -177,5 +178,14 @@ export default {
   getSonNum () {
     // 旗下人数
     return Get(`/getSonNum?token=${token}`)
+  },
+  present () {
+    // 礼包列表
+    return Get(`/present`)
+  },
+  presentGoods (params) {
+    //  礼包下商品
+    return Get(`/presentGoods?goods_type=${params.goods_type}`)
   }
 }
+export { imgUrl }

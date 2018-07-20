@@ -38,12 +38,12 @@ export default {
   },
   watch: {
     currentInputIndex (val) {
-      if(val == 5){
+      if (val == 5) {
         this.$emit('hidden')
         this.$emit('password',this.pasgroup)
         this.pasgroup = []
-        this.initPasswordGroup ()
-      }else if(val <= -1){
+        // this.initPasswordGroup ()
+      } else if (val <= -1) {
         this.currentInputIndex = -1
         this.$emit('hidden')
         this.pasgroup = []
@@ -63,18 +63,17 @@ export default {
         case '删除':
           this.pasgroup.pop()
           console.log(this.pasgroup)
-          if (this.pasgroup.length == 0) {
+          if (this.pasgroup.length == -1) {
             this.$emit('hidden')
             return false
           }
           // this.currentInputIndex 下标值,删除添加时改变
           this.passwordGroup[this.currentInputIndex].value = null
           this.currentInputIndex--
-          if (this.currentInputIndex == -1) {
+          if (this.currentInputIndex <= -1) {
             this.$emit('hidden')
             return false
           }
-          console.log(this.passwordGroup)
           break;
         default:
           this.pasgroup.push(value)

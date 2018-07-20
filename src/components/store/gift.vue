@@ -8,13 +8,13 @@
     <div class="gift">
       <div class="notice">购买须知：购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知</div>
       <ul>
-        <li>
-          <router-link to="/giftOrder/1">
-            <p>礼包一</p>
-            <img src="../../assets/image/gift_1.png" alt="">
+        <li v-for="(gift,index) in giftList" :key="index">
+          <router-link :to="'/giftOrder/'+gift.id+'/'+index">
+            <p>{{gift.name}}</p>
+            <img :src="imgUrl+gift.img" alt="">
           </router-link>
         </li>
-        <li>
+        <!-- <li>
           <router-link to="/giftOrder/2">
             <p>礼包二</p>
             <img src="../../assets/image/gift_2.png" alt="">
@@ -25,7 +25,7 @@
             <p>礼包三</p>
             <img src="../../assets/image/gift_3.png" alt="">
           </router-link>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
@@ -56,13 +56,22 @@
 }
 </style>
 <script>
-import { url } from '../../assets/js/mobile.js'
+import api from '../../assets/js/api.js'
+import {imgUrl} from '../../assets/js/api.js'
 let token = localStorage.getItem('token')
 export default {
   data () {
     return {
-      
+      giftList: [],
+      imgUrl: imgUrl
     }
+  },
+  created () {
+    api.present()
+    .then((res) => {
+      console.log(res)
+      this.giftList = res.data
+    })
   }
 }
 </script>
