@@ -8,6 +8,7 @@ import router from './router'
 import './assets/less/base.less'
 import axios from 'axios'
 import qs from 'qs'
+import Carousel3d from 'vue-carousel-3d'
 import echarts from 'echarts'
 // import VueResource from 'vue-resource'
 import mobile from './assets/js/mobile.js'
@@ -17,6 +18,7 @@ import Progress from 'vue-multiple-progress'
 Vue.config.productionTip = false
 Vue.use(MintUI)
 Vue.use(Progress)
+Vue.use(Carousel3d)
 // Vue.use(VueResource)
 Vue.prototype.$http = axios
 Vue.prototype.$qs = qs

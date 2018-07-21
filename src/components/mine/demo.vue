@@ -1,62 +1,40 @@
 <template>
 <div class="wrapper">
-  <div class="page-loadmore">
-    <h1 class="page-title">Pull up</h1>
-    <p class="page-loadmore-desc">在列表底部, 按住 - 上拉 - 释放可以获取更多数据</p>
-    <p class="page-loadmore-desc">此例请使用手机查看</p>
-    <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
-      <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
-        <ul class="page-loadmore-list">
-          <li v-for="item in list" :key="item.id" class="page-loadmore-listitem">{{ item }}</li>
-        </ul>
-        <div slot="bottom" class="mint-loadmore-bottom">
-          <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
-          <span v-show="bottomStatus === 'loading'">
-            <mt-spinner type="snake"></mt-spinner>
-          </span>
-        </div>
-      </mt-loadmore>
-    </div>
-  </div>
+  <carousel-3d :autoplay="true" :autoplay-timeout="5000" :display="3" :style="{height: slideHeight + 'px'}">
+    <slide v-for="(slide,i) in slides" :key="i" :index="i" :style="{width: slideWidth + 'px', height: slideHeight + 'px'}">
+      <img :src="slide.src">
+    </slide>
+  </carousel-3d>
 </div>
-  
 </template>
 
 <script type="text/babel">
   export default {
     data() {
       return {
-        list: [],
-        allLoaded: false,
-        bottomStatus: '',
-        wrapperHeight: 0
+        slideWidth: 300,
+        slideHeight: 200,
+        slides: [
+          {
+            src: 'http://c.hiphotos.baidu.com/image/pic/item/09fa513d269759eeef490028befb43166d22df3c.jpg'
+          },
+          {
+            src: 'http://f.hiphotos.baidu.com/image/pic/item/960a304e251f95cacc952852c5177f3e660952f5.jpg'
+          },
+          {
+            src: 'http://c.hiphotos.baidu.com/image/pic/item/a5c27d1ed21b0ef4b129b3b9d1c451da80cb3e17.jpg'
+          },
+        ]
       };
     },
     methods: {
-      handleBottomChange(status) {
-        this.bottomStatus = status;
-      },
-      loadBottom() {
-        setTimeout(() => {
-          let lastValue = this.list[this.list.length - 1];
-          if (lastValue < 40) {
-            for (let i = 1; i <= 10; i++) {
-              this.list.push(lastValue + i);
-            }
-          } else {
-            this.allLoaded = true;
-          }
-          this.$refs.loadmore.onBottomLoaded();
-        }, 1500);
-      }
+      
     },
     created() {
-      for (let i = 1; i <= 20; i++) {
-        this.list.push(i);
-      }
+      
     },
     mounted() {
-      this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
+      
     }
   };
 </script>
