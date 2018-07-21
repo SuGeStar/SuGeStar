@@ -101,7 +101,7 @@ export default new Router({
       component: list
     },
     {
-      path: '/classify/:id/:idx',
+      path: '/classify',
       name: 'classify',
       component: classify
     },

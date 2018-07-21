@@ -6,6 +6,7 @@
         <div class="inputBox">
           <label class="icon icon-search searchIcon" for="search"></label>
           <input type="text" id='search' placeholder='搜索商品' />
+          <button>确定</button>
         </div>
       </div>
       <div class="iconBox">
@@ -17,12 +18,65 @@
         </router-link>
       </div>
     </header>
-    <mt-swipe class="swiper" :show-indicators="false" :auto="4000">
+    <div class="head-con"></div>
+    <div class="classify-container">
+      <ul>
+        <li v-for="(cls,index) in swiperBox" :key="index">
+          <router-link to="classify">
+            <div><img :src="getImg(cls.logo)" alt=""></div>
+            <p>{{cls.name}}</p>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="classify">
+            <div><img src="" alt=""></div><p>更多</p>
+          </router-link>
+        </li>
+      </ul>
+    </div>
+    <!--logo图片位置-->
+    <div class='logo-img'>
+      <div class="logo-img-con">
+        <img src="../../assets/image/data_icon.png" alt="">
+        <div class="logo-title"><p>SG星球数据中心</p></div>
+      </div>
+    </div>
+    <!--品牌-->
+    <div class="band-goods-container">
+      <p class="band-goods-title"><span>品牌</span></p>
+      <div class="band-container">
+        <ul :style="{width: S_width + 'rem'}">
+          <li v-for="(sImg,index) in storeImg" :key="index">
+            <img :src="sImg.img" alt="">
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--精品-->
+    <div class="band-goods-container">
+      <p class="band-goods-title"><span>品牌</span></p>
+      <div class="goods-container">
+        <ul>
+          <li class="content-list" v-for="item in goodsList" :key="item.id">
+            <router-link :to="{path:'/details/' + item.goods_id}">
+              <img :src="getImg(item.default_img)" alt="">
+              <p>
+                {{item.goods_name}}
+              </p>
+              <p class="content-price">
+                星币 <span>{{item.spec.gold}}</span> + ¥ <i>{{item.spec.cash}}</i>
+              </p>
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--<mt-swipe class="swiper" :show-indicators="false" :auto="4000">
       <mt-swipe-item><img src="../../assets/image/banner01.png"></mt-swipe-item>
       <mt-swipe-item><img src="../../assets/image/banner02.png"></mt-swipe-item>
       <mt-swipe-item><img src="../../assets/image/banner01.png"></mt-swipe-item>
-    </mt-swipe>
-    <mt-swipe class="swiper1" :auto="0">
+    </mt-swipe>-->
+    <!--<mt-swipe class="swiper1" :auto="0">
       <mt-swipe-item class="box">
         <div v-for="(classify,_index) in swiperBox" :key="classify.cid">
           <router-link :to="{path:'/classify/'+classify.cid+'/'+_index}">
@@ -39,13 +93,13 @@
           </router-link>
         </div>
       </mt-swipe-item>
-    </mt-swipe>
-    <div class="content">
+    </mt-swipe>-->
+    <!--<div class="content">
       <mt-navbar v-model="selected">
         <mt-tab-item id="1">今日上新</mt-tab-item>
         <mt-tab-item id="2">精选好物</mt-tab-item>
       </mt-navbar>
-      <!-- tab-container -->
+      &lt;!&ndash; tab-container &ndash;&gt;
       <mt-tab-container v-model="selected">
         <mt-tab-container-item id="1">
           <div class="content-box">
@@ -82,7 +136,7 @@
           </div>
         </mt-tab-container-item>
       </mt-tab-container>
-    </div>
+    </div>-->
   </div>
   <footGuide></footGuide>
 </div>
@@ -108,16 +162,37 @@ export default {
       swiperBox2: [],
       newList: [],
       goodsList: [],
+      storeImg: [
+        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
+        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
+        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
+        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
+        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
+        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
+        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
+        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'}
+      ],
+      S_width: 0,
       getImg (url) {
         return 'http://img.sugebei.com' + url
       }
     }
   },
+  mounted () {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  handleScroll () {
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+    console.log(scrollTop)
+  },
   created () {
     // 获取商品一级分类
     this.$http.get(url + 'cateList')
       .then(response => {
-        let _len = response.data.data.length;
+        for (var i = 0; i < 4; i++) {
+          this.swiperBox.push((response.data.data)[i])
+        }
+        /*let _len = response.data.data.length;
         if (_len > 8) {
           this.s2 = true
           for (var i = 0; i < 8; i++) {
@@ -129,7 +204,7 @@ export default {
         } else {
           this.s2 = false
           this.swiperBox = response.data.data
-        }
+        }*/
       })
       .catch(error => {
         console.log(error)
@@ -150,6 +225,9 @@ export default {
       .catch(err => {
         console.log(err)
       })
+    console.log()
+    let _l = this.storeImg.length
+    this.S_width = _l * 1.28 + (_l - 1) * 0.26
   }
 }
 </script>
