@@ -1,7 +1,7 @@
 <template>
 <div class="wrapper">
   <div class="store">
-    <header>
+    <header :class="isHeight ? 'bgHeight' : ''">
       <div class="search-input">
         <div class="inputBox">
           <label class="icon icon-search searchIcon" for="search"></label>
@@ -18,14 +18,12 @@
         </router-link>
       </div>
     </header>
+    <!-- 轮播图 -->
     <div class="head-con">
       <div class="store-swiper">
-        <carousel-3d>
-          <slide :index="0">
-            Slide 1 Content
-          </slide>
-          <slide :index="1">
-            Slide 2 Content
+        <carousel-3d :autoplay="true" :autoplay-timeout="5000" :display="3" :style="{height: slideHeight + 'px'}">
+          <slide v-for="(slide,i) in slides" :key="i" :index="i" :style="{height: slideHeight + 'px'}">
+            <img :src="slide.src">
           </slide>
         </carousel-3d>
       </div>
@@ -154,6 +152,18 @@
 </template>
 <style lang="less" scoped>
   @import '../../assets/less/store.less';
+  .bgHeight{
+    background-color: #fff;
+  }
+  .carousel-3d-container {
+    margin: 0 auto;
+  .carousel-3d-slide {
+    padding: 0;
+    width: 300px;
+    height: 200px;
+    .title { font-size: 22px; }
+  }
+}
 </style>
 <script>
 import footGuide from '../comp/footGuide.vue'
@@ -186,6 +196,20 @@ export default {
         {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
         {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'}
       ],
+      slides: [
+          {
+            src: 'http://c.hiphotos.baidu.com/image/pic/item/09fa513d269759eeef490028befb43166d22df3c.jpg'
+          },
+          {
+            src: 'http://f.hiphotos.baidu.com/image/pic/item/960a304e251f95cacc952852c5177f3e660952f5.jpg'
+          },
+          {
+            src: 'http://c.hiphotos.baidu.com/image/pic/item/a5c27d1ed21b0ef4b129b3b9d1c451da80cb3e17.jpg'
+          },
+      ],
+      slideWidth: 200,
+      slideHeight: 250,
+      isHeight: false,
       S_width: 0,
       getImg (url) {
         return 'http://img.sugebei.com' + url
@@ -200,6 +224,7 @@ export default {
     console.log(scrollTop)
   },
   created () {
+    
     // 获取商品一级分类
     this.$http.get(url + 'cateList')
       .then(response => {
