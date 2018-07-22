@@ -16,14 +16,14 @@
           <i class="icon icon-right"></i>
         </div>
       </router-link>
-      <div class="gift-detail">
+      <div class="gift-detail" v-for="(list, index) in orderList" :key="index">
         <div class="image">
-          <img src="../../assets/image/goods_pic.png" alt="">
+          <img :src="imgUrl+list.img" alt="">
         </div>
         <div class="gift-desc">
-          <p>升级大礼包</p>
-          <span>{{giftBag}}</span>
-          <p class="price">￥700</p>
+          <p>{{list.goods_name}}</p>
+          <span>{{list.desc}}</span>
+          <p class="price">￥{{list.price}}</p>
         </div>
       </div>
       <div class="gift-list" @click="popup">
@@ -59,16 +59,20 @@ import { url } from '../../assets/js/mobile.js'
 let token = localStorage.getItem('token')
 import { Toast } from 'mint-ui'
 import applyPop from '../comp/applyPop.vue'
+import api from '../../assets/js/api.js'
+import {imgUrl} from '../../assets/js/api.js'
 export default {
   data () {
     return {
       popupVisible: false,
+      orderList: [],
+      imgUrl: imgUrl,
       id: '',
       name: '',
       phone: '',
       addressDetail: '',
-      payment: '',
       giftBag: '',
+      payment: '',
       pay_channel: '',
       password: [],
       applyPop_pop_up: false
@@ -81,7 +85,7 @@ export default {
     this.$http.get(url + 'getDefaultAddress?token=' + token)
     // 获取默认地址
     .then(response => {
-      console.log(response)
+      // console.log(response)
       if (response.data.code == 500) {
         Toast({
           message: response.data.msg
@@ -98,18 +102,14 @@ export default {
       console.log(error)
       Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
     })
-    if (this.$route.params.id == 1) {
+    if (this.$route.params.index == 0) {
       this.giftBag = '礼包一'
-      return false
-    }
-    if (this.$route.params.id == 2) {
+    } else if (this.$route.params.index == 1) {
       this.giftBag = '礼包二'
-      return false
-    }
-    if (this.$route.params.id == 3) {
+    } else if (this.$route.params.index == 2) {
       this.giftBag = '礼包三'
-      return false
     }
+    this.giftList()
   },
   methods: {
     popup () {
@@ -130,15 +130,16 @@ export default {
       this.popupVisible = false
     },
     passwordGro (e) {
+      // 支付盘
       this.password = e
       let order_sn = sessionStorage.getItem('order_sn')
       if (this.password.length == 6) {
         let payment_password = this.password.toString().replace(/,/g, "")
-        console.log(payment_password)
+        // console.log(payment_password)
         this.$http.get(url + 'giftOrderPay?token='+token+'&order_sn='+order_sn+'&payment_password='+payment_password)
           // 礼包订单支付
         .then( order => {
-        console.log(order)
+        // console.log(order)
           if (order.data.code == 500) {
             Toast({
               message: order.data.msg
@@ -160,19 +161,21 @@ export default {
       }
     },
     gotoPay () {
+      // 支付
       if (this.payment == '') {
         Toast('请选择支付方式')
         return false
       }
       let form = this.$qs.stringify({
         token: token,
-        gift: this.giftBag,
         address_id: this.id,
-        pay_channel: this.pay_channel
+        gift: this.giftBag,
+        pay_channel: this.pay_channel,
+        prentsent_id: this.$route.params.id
       })
       this.$http.post(url+'giftOrderCreate', form)
       .then(response => {
-        console.log(response)
+        // console.log(response)
         sessionStorage.setItem('order_sn',response.data.data)
         if (response.data.code == 200) {
           if (this.pay_channel == 'wx') {
@@ -183,11 +186,24 @@ export default {
             this.applyPop_pop_up = true
             return false
           }
+        } else {
+          Toast({
+            message: response.data.msg
+          })
         }
       })
       .catch(error => {
         console.log(error)
         Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+      })
+    },
+    giftList () {
+      api.presentGoods({
+        goods_type: this.$route.params.id
+      })
+      .then((res) => {
+        // console.log(res)
+        this.orderList = res.data
       })
     }
   }

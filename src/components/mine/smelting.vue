@@ -31,50 +31,93 @@ export default {
   },
   methods: {
     smelting () {
-      if (this.smeltingNum == '') {
-        this.judge()
+      let finalSmelting = Number(this.smeltingNum)
+      if (!finalSmelting) {
+        Toast('数量不能为空!')
+        this.smeltingNum = ''
         return false
       }
-      this.$router.push('/release/0/'+this.smeltingNum)
+      if (!Number.isInteger(finalSmelting)) {
+        Toast('请输入整数!')
+        this.smeltingNum = ''
+        return false
+      }
+      if ((finalSmelting) > this.SGNum) {
+        Toast('数量有误，请认真核对!')
+        this.smeltingNum = ''
+        return false
+      }
+      this.$router.push('/release/0/'+this.smeltingNum) 
     },
     give () {
-      if (this.smeltingNum == '') {
-        this.judge()
+      let finalSmelting = Number(this.smeltingNum)
+      if (!finalSmelting) {
+        Toast('数量不能为空!')
+        this.smeltingNum = ''
+        return false
+      }
+      if (!Number.isInteger(finalSmelting)) {
+        Toast('请输入整数!')
+        this.smeltingNum = ''
+        return false
+      }
+      if ((finalSmelting) > this.SGNum) {
+        Toast('数量有误，请认真核对!')
+        this.smeltingNum = ''
         return false
       }
       this.$router.push('/release/1/'+this.smeltingNum)
     },
     recharge () {
-      if (!this.judge()) {
-        console.log('1111')
-      }else {
-          let form = this.$qs.stringify({
-          token: token,
-          recharge_money: this.smeltingNum,
-          pay_channel: 'wx'
-        })
-        api.createRechargeOrder(form)
-        .then((res) => {
-          console.log(res)
-          window.location.href = 'http://www.sugebei.com/rechargeOrderPay?token='+token+'&order_sn='+res.data
-        })
-      }
-    },
-    judge () {
-      var finalSmelting = this.smeltingNum
+      let finalSmelting = Number(this.smeltingNum)
       if (!finalSmelting) {
         Toast('数量不能为空!')
+        this.smeltingNum = ''
         return false
       }
-      let num = Number(finalSmelting)
-      if (!Number.isInteger(num)) {
+      if (!Number.isInteger(finalSmelting)) {
         Toast('请输入整数!')
+        this.smeltingNum = ''
+        return false
       }
       if ((finalSmelting) > this.SGNum) {
         Toast('数量有误，请认真核对!')
+        this.smeltingNum = ''
+        return false
+      }
+      let form = this.$qs.stringify({
+        token: token,
+        recharge_money: this.smeltingNum,
+        pay_channel: 'wx'
+      })
+      api.createRechargeOrder(form)
+      // 充值订单创建
+      .then((res) => {
+        console.log(res)
+        window.location.href = 'http://www.sugebei.com/rechargeOrderPay?token='+token+'&order_sn='+res.data
+      })
+    },
+    judge () {
+      let finalSmelting = Number(this.smeltingNum)
+      if (!finalSmelting) {
+        Toast('数量不能为空!')
+        this.smeltingNum = ''
+        return false
+      }
+      if (!Number.isInteger(finalSmelting)) {
+        Toast('请输入整数!')
+        this.smeltingNum = ''
+        return false
+      }
+      if ((finalSmelting) > this.SGNum) {
+        Toast('数量有误，请认真核对!')
+        this.smeltingNum = ''
         return false
       }
     }
+  },
+  created () {
+    
   },
   mounted () {
     api.availableGold()

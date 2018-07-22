@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Toast } from 'mint-ui'
 // 接口url
 var url = 'http://www.sugebei.com/'
+var imgUrl = 'http://img.sugebei.com/'
 let token = localStorage.getItem('token')
 // axios 配置
 axios.defaults.timeout = 5000
@@ -154,6 +155,18 @@ export default {
     // 验证登录密码
     return Post('verifyPasswd', params)
   },
+  forgetPaymentPassword (params) {
+    // 忘记支付密码
+    return Post('forgetPaymentPassword', params)
+  },
+  verifyPaymentPasswd (params) {
+    // 验证支付密码
+    return Post('verifyPaymentPasswd', params)
+  },
+  resetPayment (params) {
+    // 重置支付密码
+    return Post('resetPayment', params)
+  },
   prompt () {
     // 首页提示信息
     return Get(`/prompt?token=${token}`)
@@ -165,5 +178,14 @@ export default {
   getSonNum () {
     // 旗下人数
     return Get(`/getSonNum?token=${token}`)
+  },
+  present () {
+    // 礼包列表
+    return Get(`/present`)
+  },
+  presentGoods (params) {
+    //  礼包下商品
+    return Get(`/presentGoods?goods_type=${params.goods_type}`)
   }
 }
+export { imgUrl }

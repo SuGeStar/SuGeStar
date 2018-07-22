@@ -23,6 +23,11 @@
         </router-link>
       </div>
       <div class="set-list">
+        <router-link :to="{path:'/proofIdent/2'}">
+          <p>忘记支付密码</p>
+        </router-link>
+      </div>
+      <div class="set-list">
         <router-link to="/information">
           <p>个人资料管理</p>
         </router-link>

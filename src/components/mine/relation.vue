@@ -122,9 +122,8 @@ export default {
       this.invite_code = code
     },
     place () {
-      this.$router.push('/place')
       this.$router.push({
-        name: 'place',
+        path: '/place',
         query: {invite_code: this.invite_code}
       })
     },

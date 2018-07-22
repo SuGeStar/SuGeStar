@@ -62,7 +62,8 @@
                     <div class="match-pop">
                       <div class="invit-info">
                         <p class="invit-phone">{{item.order_sn}}</p>
-                        <p class="invit-name">代币：<span>{{item.total_fee}}</span></p>
+                        <p v-if="!isStar" class="invit-name">代币：<span>{{item.total_fee}}</span></p>
+                        <p v-else class="invit-name">星币：<span>{{item.total_kb}}</span></p>
                       </div>
                       <div class="invit-msg">
                         <p>{{item.subject}}</p>
