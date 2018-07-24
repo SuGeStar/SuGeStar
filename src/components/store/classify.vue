@@ -2,17 +2,25 @@
 <div class="wrapper">
   <div class="classify">
     <header>
-      <span class="icon icon-back"></span>
-      <div>
-        <label  for="search" class="icon icon-search searchIcon"></label>
-        <input type="text" placeholder="搜索" id="search">
-        <button>确定</button>
+      <div class="search-input">
+        <a href="javascript:history.go(-1);" class="icon icon-back"></a>
+        <div class="inputBox">
+          <label  for="search" class="icon icon-search searchIcon"></label>
+          <input type="text" placeholder="搜索" id="search">
+          <button>确定</button>
+        </div>
       </div>
     </header>
     <div class="class-head">
       <div class="classify-list">
         <ul>
-          <li></li>
+          <li v-for="(classify,index) in classifyList" :key="index">
+            <router-link :to="{path: '/classifyList/'+classify.cid+'/'+classify.name}">
+              <div class="classify-card" >
+                <img :src="imgUrl + classify.img" alt="">
+              </div>
+            </router-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -22,34 +30,33 @@
 <style lang="less" scoped>
 </style>
 <script>
-import { url } from '../../assets/js/mobile.js'
+import { imgUrl } from '@/assets/js/api.js'
+import api from '@/assets/js/api.js'
 export default {
   data () {
     return {
       ins: 0,
-      classList: [],
+      classifyList: [],
       firstId: 0,
       AD: '',
       classId: 0,
       classIndex: 0,
       classBox: [],
       advImg: [],
-      getImg (url) {
-        return 'http://img.sugebei.com' + url
-      }
+      imgUrl: imgUrl
     }
   },
   methods: {
   },
   created () {
     // 获取商品一级分类
-    this.$http.get(url + 'cateList')
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    api.cateList({
+      cate_id: ''
+    })
+    .then((res) => {
+      console.log(res)
+      this.classifyList = res.data
+    })
   }
 }
 </script>

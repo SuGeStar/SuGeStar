@@ -50,6 +50,7 @@ import payment from '@/components/store/payment'
 import getDay from '@/components/mine/getDay'
 import place from '@/components/mine/place'
 import revisePsd from '@/components/mine/revisePsd'
+import classifyList from '@/components/store/classifyList'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -304,6 +305,11 @@ export default new Router({
       path: '/revisePsd/:id',
       name: 'revisePsd',
       component: revisePsd
+    },
+    {
+      path: '/classifyList/:id/:name',
+      name: 'classifyList',
+      component: classifyList
     }
   ]
 })

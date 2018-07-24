@@ -186,6 +186,10 @@ export default {
   presentGoods (params) {
     //  礼包下商品
     return Get(`/presentGoods?goods_type=${params.goods_type}`)
+  },
+  cateList (params) {
+    // 类型列表
+    return Get(`/cateList?cate_id=${params.cate_id}`)
   }
 }
 export { imgUrl }

@@ -1,7 +1,7 @@
 <template>
 <div class="wrapper">
   <div class="store">
-    <header :class="isHeight ? 'bgHeight' : ''">
+    <header  class="bgHeight">
       <div class="search-input">
         <div class="inputBox">
           <label class="icon icon-search searchIcon" for="search"></label>
@@ -28,7 +28,7 @@
         </carousel-3d>
       </div>
     </div>
-    <div class="classify-container">
+    <div class="classify-container" id="searchBar">
       <ul>
         <li v-for="(cls,index) in swiperBox" :key="index">
           <router-link to="classify">
@@ -153,7 +153,7 @@
 <style lang="less" scoped>
   @import '../../assets/less/store.less';
   .bgHeight{
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 1)
   }
   .carousel-3d-container {
     margin: 0 auto;
@@ -217,14 +217,19 @@ export default {
     }
   },
   mounted () {
+    // 给window添加一个滚动滚动监听事件
     window.addEventListener('scroll', this.handleScroll)
   },
   handleScroll () {
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    var offsetTop = document.querySelector('#searchBar').offsetTop;
     console.log(scrollTop)
+    console.log(offsetTop)
+  },
+  destroyed () {//离开该页面需要移除这个监听的事件
+    window.removeEventListener('scroll', this.handleScroll)
   },
   created () {
-    
     // 获取商品一级分类
     this.$http.get(url + 'cateList')
       .then(response => {
