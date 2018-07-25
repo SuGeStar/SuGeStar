@@ -190,6 +190,10 @@ export default {
   cateList (params) {
     // 类型列表
     return Get(`/cateList?cate_id=${params.cate_id}`)
+  },
+  goodsList (params) {
+    // 类型下商品列表
+    return Get(`/goodsList?cate_id=${params.cate_id}&page=${params.page}`)
   }
 }
 export { imgUrl }
