@@ -1,20 +1,51 @@
-// out:false
-.classifyList{
-  margin-top: 1rem;
-  .title{
-    ul {
+// out: false
+.storeDetial {
+  // margin-top: 0.85rem;
+  position: absolute;
+  top: 0.85rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem;
+    background-color: #fff;
+    border-top: 1px solid #ededed;
+    border-bottom: 1px solid #ededed;
+    .title-desc {
       display: flex;
-      justify-content: space-around;
-      background-color: #fff;
-      li {
-        padding: 0.2rem;
-        &.active{
-          border-bottom: 2px solid #3981ff;
+      align-items: center;
+      img{
+        width: 0.94rem;
+        height: 0.94rem;
+        border-radius: 100%;
+        margin-right: 0.2rem;
+      }
+      .title-box {
+        p {
+          font-size: 0.27rem;
+          color: #333333;
+          margin-bottom: 0.1rem;
+        }
+        span {
+          color: #999999;
         }
       }
     }
+    .title-eval {
+      p {
+        color: #999999;
+        margin-bottom: 0.1rem;
+      }
+      span {
+        color: #3d83ff;
+      }
+    }
   }
-  .classify-box{
+  .store-box {
+    background-color: #fff;
     ul{
       display: flex;
       justify-content: space-between;
@@ -23,7 +54,7 @@
       li{
         width: 49%;
         margin-bottom: .15rem;
-        border: 1px solid #ccc;
+        border: 1px solid #ededed;
         border-radius: 5px;
         background-color: #fff;
         img{

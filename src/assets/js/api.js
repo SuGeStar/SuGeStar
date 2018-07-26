@@ -194,6 +194,14 @@ export default {
   goodsList (params) {
     // 类型下商品列表
     return Get(`/goodsList?cate_id=${params.cate_id}&page=${params.page}`)
+  },
+  brandList () {
+    // 品牌列表
+    return Get(`/brandList`)
+  },
+  brandGoodsList (params) {
+    // 品牌下商品列表
+    return Get(`/brandGoodsList?brand_id=${params.brand_id}&page=${params.page}`)
   }
 }
 export { imgUrl }

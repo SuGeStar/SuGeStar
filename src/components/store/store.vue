@@ -31,7 +31,7 @@
     <div class="classify-container" id="searchBar">
       <ul>
         <li v-for="(cls,index) in swiperBox" :key="index">
-          <router-link to="classify">
+          <router-link :to="{path: '/classifyList/'+cls.cid+'/'+cls.name}">
             <div><img :src="getImg(cls.logo)" alt=""></div>
             <p>{{cls.name}}</p>
           </router-link>
@@ -56,14 +56,16 @@
       <div class="band-container">
         <ul :style="{width: S_width + 'rem'}">
           <li v-for="(sImg,index) in storeImg" :key="index">
-            <img :src="sImg.img" alt="">
+            <router-link :to="{path: '/storeDetial/'+sImg.id}">
+              <img :src="getImg(sImg.logo)" alt="">
+            </router-link>
           </li>
         </ul>
       </div>
     </div>
     <!--精品-->
     <div class="band-goods-container">
-      <p class="band-goods-title"><span>品牌</span></p>
+      <p class="band-goods-title"><span>精品</span></p>
       <div class="goods-container">
         <ul>
           <li class="content-list" v-for="item in goodsList" :key="item.id">
@@ -253,10 +255,12 @@ export default {
       .catch(error => {
         console.log(error)
       })
-    // 获取今日上线数据
-    this.$http.get(url + 'goodsToday?page=' + 1)
+    // 品牌
+    this.$http.get(url + 'brandList')
       .then(res => {
-        this.newList = res.data.data
+        console.log(res)
+        this.storeImg = res.data.data
+        // this.newList = res.data.data
       })
       .catch(err => {
         console.log(err)

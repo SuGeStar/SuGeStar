@@ -10,7 +10,7 @@
       <!-- 标题 -->
       <div class="title">
         <ul>
-          <li v-for="(title,index) in classify" :key="index" :id="index">{{title.name}}</li>
+          <li v-for="(title,index) in classify" :key="index" :id="title.cid" :class="{active:index===nowIndex}" @click="goodsList(title.cid,page,index)">{{title.name}}</li>
         </ul>
       </div>
       <div>
@@ -52,13 +52,14 @@ export default {
       S_width: 0,
       newList: [],
       page: 0,
+      nowIndex: 0,
+      cid: '',
       imgUrl: imgUrl
     }
   },
   created () {
     this.title = this.$route.params.name
     this.classTit()
-    this.goodsList(1)
   },
   methods: {
     classTit () {
@@ -66,17 +67,20 @@ export default {
         cate_id: this.$route.params.id
       })
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         this.classify = res.data
+        this.cid = this.classify[0].cid
+        this.goodsList(this.cid, 1, 0)
       })
     },
-    goodsList (page) {
+    goodsList (cid, page, index) {
+      this.nowIndex = index
       api.goodsList({
-        cate_id: 2,
+        cate_id: cid,
         page: page
       })
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         this.newList = res.data
       })
     },

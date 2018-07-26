@@ -51,6 +51,7 @@ import getDay from '@/components/mine/getDay'
 import place from '@/components/mine/place'
 import revisePsd from '@/components/mine/revisePsd'
 import classifyList from '@/components/store/classifyList'
+import storeDetial from '@/components/store/storeDetial'
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -310,6 +311,11 @@ export default new Router({
       path: '/classifyList/:id/:name',
       name: 'classifyList',
       component: classifyList
+    },
+    {
+      path: '/storeDetial/:id',
+      name: 'storeDetial',
+      component: storeDetial
     }
   ]
 })
