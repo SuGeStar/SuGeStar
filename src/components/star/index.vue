@@ -229,7 +229,7 @@ export default {
       // 提示信息
       api.prompt()
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         this.promptTxt = res.data
       })
     }

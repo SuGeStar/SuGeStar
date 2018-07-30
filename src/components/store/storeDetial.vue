@@ -76,7 +76,7 @@ export default {
         page: page
       })
       .then ((res) => {
-        console.log(res)
+        // console.log(res)
         this.brand = res.data.brand
         this.newList = res.data.goods
       })

@@ -66,7 +66,7 @@ export default {
       }
     },
     deleteIt (ele, idx, ads) {
-      console.log(ads.id)
+      // console.log(ads.id)
       // 删除地址
       let form = this.$qs.stringify({
         address_id: ads.id,
@@ -74,7 +74,7 @@ export default {
       })
       this.$http.post(url + 'delMyAddress',form)
       .then(response => {
-        console.log(response)
+        // console.log(response)
         Toast({
           message: response.data.msg,
           position: 'middle',
@@ -99,7 +99,7 @@ export default {
     // 获取收货地址
     this.$http.get(url + 'myAddress?token='+token)
     .then(response => {
-      console.log(response)
+      // console.log(response)
       if (response.data.code == 200) {
         this.addressList = response.data.data
       } else if (response.data.code == 403) {

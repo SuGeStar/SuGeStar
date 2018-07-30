@@ -23,7 +23,7 @@
       <div class="store-swiper">
         <carousel-3d :autoplay="true" :autoplay-timeout="5000" :display="3" :style="{height: slideHeight + 'px'}">
           <slide v-for="(slide,i) in slides" :key="i" :index="i" :style="{height: slideHeight + 'px'}">
-            <img :src="slide.src">
+            <img :src="getImg(slide.pic)">
           </slide>
         </carousel-3d>
       </div>
@@ -189,10 +189,19 @@ export default {
       .catch(error => {
         console.log(error)
       })
+    // 轮播图
+    this.$http.get(url + 'slides')
+      .then(res => {
+        console.log(res)
+        this.slides = res.data.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
     // 品牌
     this.$http.get(url + 'brandList')
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.storeImg = res.data.data
         // this.newList = res.data.data
       })

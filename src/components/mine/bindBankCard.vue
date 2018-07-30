@@ -75,7 +75,7 @@ export default {
       })
       this.$http.post(url+'delBank', form)
       .then(response => {
-        console.log(response)
+        // console.log(response)
         if (response.data.code == 200) {
           ele.splice(idx, 1)
         } else {
@@ -100,7 +100,7 @@ export default {
       })
       this.$http.post(url+'setBankDefault', form)
       .then(response => {
-        console.log(response)
+        // console.log(response)
         Toast({
           message: response.data.msg,
           position: 'bottom',
@@ -116,7 +116,7 @@ export default {
     this.$http.get(url + 'getBankcard?token='+token)
     // 获取银行卡列表
     .then(response => {
-      console.log(response)
+      // console.log(response)
       this.cardList = response.data.data
       for (var i = 0; i < this.cardList.length; i++) {
         this.cardList[i].cardImg = response.data.data[i].logo.bank_logo

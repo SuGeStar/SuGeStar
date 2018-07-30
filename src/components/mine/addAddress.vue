@@ -100,10 +100,9 @@ export default {
         Toast('请填写邮编！')
         return false
       }
-      console.log(this.setDefault())
+      // console.log(this.setDefault())
       if (this.setDefault()) {
-        console.log('1111')
-        console.log(this.is_default)
+        // console.log(this.is_default)
       }
       let form = this.$qs.stringify({
         name: this.receiver,
@@ -118,7 +117,7 @@ export default {
       })
       this.$http.post(url+'adressAdd', form)
       .then(response => {
-        console.log(response)
+        // console.log(response)
         Toast({
           message: response.data.msg,
           position: 'middle',

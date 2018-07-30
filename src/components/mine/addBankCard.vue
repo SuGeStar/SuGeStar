@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     bankselcet (index) {
-      console.log(index)
+      // console.log(index)
       this.bank = this.bankList[index].bank_name
       this.box = false
     },
@@ -240,7 +240,7 @@ export default {
       this.$http.post(url+'addBankCard', form)
       .then(response => {
         // 添加银行卡
-        console.log(response)
+        // console.log(response)
         if (response.data.code == 200) {
           this.$router.replace('/bindBankCard')
         } else {
