@@ -21,8 +21,8 @@
     <!-- 轮播图 -->
     <div class="head-con">
       <div class="store-swiper">
-        <carousel-3d :autoplay="true" :autoplay-timeout="5000" :display="3" :style="{height: slideHeight + 'px'}">
-          <slide v-for="(slide,i) in slides" :key="i" :index="i" :style="{height: slideHeight + 'px'}">
+        <carousel-3d :autoplay="true" :autoplay-timeout="5000" :display="3" :style="{height: slideHeight + 'rem'}">
+          <slide v-for="(slide,i) in slides" :key="i" :index="i" :style="{height: slideHeight + 'rem'}">
             <img :src="slide.src">
           </slide>
         </carousel-3d>
@@ -141,8 +141,8 @@ export default {
             src: 'http://c.hiphotos.baidu.com/image/pic/item/a5c27d1ed21b0ef4b129b3b9d1c451da80cb3e17.jpg'
           },
       ],
-      slideWidth: 200,
-      slideHeight: 250,
+      slideWidth: 5,
+      slideHeight: 1.5,
       isHeight: false,
       S_width: 0,
       getImg (url) {
@@ -158,7 +158,7 @@ export default {
     console.log(scrollTop)
   },
   created () {
-    
+
     // 获取商品一级分类
     this.$http.get(url + 'cateList')
       .then(response => {
