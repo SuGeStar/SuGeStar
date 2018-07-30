@@ -1,7 +1,7 @@
 <template>
 <div class="wrapper">
   <div class="store">
-    <header :class="isHeight ? 'bgHeight' : ''">
+    <header  class="bgHeight">
       <div class="search-input">
         <div class="inputBox">
           <label class="icon icon-search searchIcon" for="search"></label>
@@ -28,10 +28,10 @@
         </carousel-3d>
       </div>
     </div>
-    <div class="classify-container">
+    <div class="classify-container" id="searchBar">
       <ul>
         <li v-for="(cls,index) in swiperBox" :key="index">
-          <router-link to="classify">
+          <router-link :to="{path: '/classifyList/'+cls.cid+'/'+cls.name}">
             <div><img :src="getImg(cls.logo)" alt=""></div>
             <p>{{cls.name}}</p>
           </router-link>
@@ -56,14 +56,16 @@
       <div class="band-container">
         <ul :style="{width: S_width + 'rem'}">
           <li v-for="(sImg,index) in storeImg" :key="index">
-            <img :src="sImg.img" alt="">
+            <router-link :to="{path: '/storeDetial/'+sImg.id}">
+              <img :src="getImg(sImg.logo)" alt="">
+            </router-link>
           </li>
         </ul>
       </div>
     </div>
     <!--精品-->
     <div class="band-goods-container">
-      <p class="band-goods-title"><span>品牌</span></p>
+      <p class="band-goods-title"><span>精品</span></p>
       <div class="goods-container">
         <ul>
           <li class="content-list" v-for="item in goodsList" :key="item.id">
@@ -87,7 +89,7 @@
 <style lang="less" scoped>
   @import '../../assets/less/store.less';
   .bgHeight{
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 1)
   }
   .carousel-3d-container {
     margin: 0 auto;
@@ -146,19 +148,24 @@ export default {
       isHeight: false,
       S_width: 0,
       getImg (url) {
-        return 'http://img.sugebei.com' + url
+        return 'http://img.sugebei.com/' + url
       }
     }
   },
   mounted () {
+    // 给window添加一个滚动滚动监听事件
     window.addEventListener('scroll', this.handleScroll)
   },
   handleScroll () {
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    var offsetTop = document.querySelector('#searchBar').offsetTop;
     console.log(scrollTop)
+    console.log(offsetTop)
+  },
+  destroyed () {//离开该页面需要移除这个监听的事件
+    window.removeEventListener('scroll', this.handleScroll)
   },
   created () {
-
     // 获取商品一级分类
     this.$http.get(url + 'cateList')
       .then(response => {
@@ -182,10 +189,12 @@ export default {
       .catch(error => {
         console.log(error)
       })
-    // 获取今日上线数据
-    this.$http.get(url + 'goodsToday?page=' + 1)
+    // 品牌
+    this.$http.get(url + 'brandList')
       .then(res => {
-        this.newList = res.data.data
+        console.log(res)
+        this.storeImg = res.data.data
+        // this.newList = res.data.data
       })
       .catch(err => {
         console.log(err)
