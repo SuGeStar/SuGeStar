@@ -4,11 +4,13 @@
     <header>
       <div class="search-input">
         <a href="javascript:history.go(-1);" class="icon icon-back"></a>
-        <div class="inputBox">
-          <label  for="search" class="icon icon-search searchIcon"></label>
-          <input type="text" placeholder="搜索" id="search">
-          <button>确定</button>
-        </div>
+        <router-link to="/search">
+          <div class="inputBox">
+            <label  for="search" class="icon icon-search searchIcon"></label>
+            <input type="text" placeholder="搜索" id="search">
+            <button>确定</button>
+          </div>
+        </router-link>
       </div>
     </header>
     <div class="class-head">

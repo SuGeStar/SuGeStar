@@ -3,11 +3,13 @@
   <div class="store">
     <header  class="bgHeight">
       <div class="search-input">
-        <div class="inputBox">
-          <label class="icon icon-search searchIcon" for="search"></label>
-          <input type="text" id='search' placeholder='搜索商品' />
-          <button>确定</button>
-        </div>
+        <router-link to="/search">
+          <div class="inputBox">
+            <label class="icon icon-search searchIcon" for="search"></label>
+            <input type="text" v-model="search" id='search' placeholder='搜索商品' />
+            <button @click="determine">确定</button>
+          </div>
+        </router-link>
       </div>
       <div class="iconBox">
         <router-link to="/car">
@@ -116,22 +118,14 @@ export default {
     return {
       active: 'tab-container1',
       value: '',
+      search: '',
       selected: '1',
       s2: false,
       swiperBox: [],
       swiperBox2: [],
       newList: [],
       goodsList: [],
-      storeImg: [
-        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
-        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
-        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
-        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
-        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
-        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
-        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'},
-        {img: 'http://www.sgyxmall.com/Upload/goods/store_163/2018-07-11/5b4561440be31.jpg'}
-      ],
+      storeImg: [],
       slides: [
           {
             src: 'http://c.hiphotos.baidu.com/image/pic/item/09fa513d269759eeef490028befb43166d22df3c.jpg'
@@ -192,7 +186,7 @@ export default {
     // 轮播图
     this.$http.get(url + 'slides')
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.slides = res.data.data
       })
       .catch(err => {
@@ -216,9 +210,14 @@ export default {
       .catch(err => {
         console.log(err)
       })
-    console.log()
     let _l = this.storeImg.length
     this.S_width = _l * 1.28 + (_l - 1) * 0.26
+  },
+  methods: {
+    determine () {
+      // 搜索
+      
+    }
   }
 }
 </script>

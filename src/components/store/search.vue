@@ -2,43 +2,41 @@
   <div class="wrapper">
     <div class="search">
       <header>
-        <a class="icon icon-back" href="javascript:history.go(-1);"></a>
+        <a class="icon icon-back-b" href="javascript:history.go(-1);"></a>
         <div class="search-input">
           <div class="inputBox">
             <label class="icon icon-search searchIcon" for="search"></label>
-            <input type="text" id='search' placeholder='搜索商品' />
+            <input type="text" id='search' v-model="key_words" placeholder='搜索商品' />
           </div>
         </div>
-        <button class="search-button" @click="search">取消</button>
+        <button class="search-button" @click="search">确定</button>
       </header>
       <div class="content">
-        <div class="cont-box">
-          <p>历史搜索</p>
-          <div class="search-desc">
-            <span>
-              真艾宝
-            </span>
-            <span>
-              羽绒服
-            </span>
-            <span>
-              棉袄
-            </span>
+        <div class="cont-box hot-search" v-show="isHot">
+          <p>热门搜索</p>
+          <div class="search-hot">
+            <input type="button" @click="hotA" v-model="hot1">
+            <input type="button" @click="hotB" v-model="hot2">
+            <input type="button" @click="hotC" v-model="hot3">
           </div>
         </div>
-        <div class="cont-box hot-search">
-          <p>热门搜索</p>
-          <div class="search-desc">
-            <span>
-              真艾宝
-            </span>
-            <span>
-              羽绒服
-            </span>
-            <span>
-              棉袄
-            </span>
-          </div>
+        <div class="search-list">
+          <ul>
+            <li class="is-null" v-show="isNull">
+              <img src="../../assets/image/nodata.png" alt="">
+            </li>
+            <li v-for="(item,index) in searchList" :key="index">
+              <router-link :to="{path: '/details/'+item.goods_id}" class="search-box">
+                <div class="search-img">
+                  <img :src="imgUrl + item.default_img" alt="">
+                </div>
+                <div class="search-desc">
+                  <p class="search-title">{{item.goods_name}}</p>
+                  <p class="search-price">星币 <span>{{item.spec.gold}}</span> +￥ <i>{{item.spec.cash}}</i></p>
+                </div>
+              </router-link>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -49,20 +47,51 @@
 </style>
 
 <script>
+import { imgUrl } from '../../assets/js/api.js'
+import api from '../../assets/js/api.js'
 export default {
   data () {
     return {
-      value: ''
+      isHot: true,
+      isNull: false,
+      hot1: '真艾宝',
+      hot2: '羽绒服',
+      hot3: '棉袄',
+      value: '',
+      key_words: '',
+      imgUrl: imgUrl,
+      searchList: []
     };
   },
   computed: {
-    filterResult() {
-      return this.defaultResult.filter(value => new RegExp(this.value, 'i').test(value));
-    }
+    
   },
   methods: {
     search () {
-      console.log('11111')
+      api.search({
+        key_words: this.key_words
+      })
+      .then((res) => {
+        this.isHot = false
+        if (res.data.length == 0) {
+          this.isNull = true
+        } else {
+          this.isNull = false
+          this.searchList = res.data
+        }
+      })
+    },
+    hotA () {
+      this.key_words = this.hot1
+      this.search() 
+    },
+    hotB () {
+      this.key_words = this.hot2
+      this.search() 
+    },
+    hotC () {
+      this.key_words = this.hot3
+      this.search() 
     }
   }
 }
