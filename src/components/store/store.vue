@@ -26,6 +26,7 @@
         <carousel-3d :autoplay="true" :autoplay-timeout="5000" :display="3" :style="{height: slideHeight + 'px'}">
           <slide v-for="(slide,i) in slides" :key="i" :index="i" :style="{height: slideHeight + 'px'}">
             <img :src="getImg(slide.pic)">
+            <!-- <img :src="slide.pic"> -->
           </slide>
         </carousel-3d>
       </div>
@@ -128,13 +129,13 @@ export default {
       storeImg: [],
       slides: [
           {
-            src: 'http://c.hiphotos.baidu.com/image/pic/item/09fa513d269759eeef490028befb43166d22df3c.jpg'
+            pic: 'http://c.hiphotos.baidu.com/image/pic/item/09fa513d269759eeef490028befb43166d22df3c.jpg'
           },
           {
-            src: 'http://f.hiphotos.baidu.com/image/pic/item/960a304e251f95cacc952852c5177f3e660952f5.jpg'
+            pic: 'http://f.hiphotos.baidu.com/image/pic/item/960a304e251f95cacc952852c5177f3e660952f5.jpg'
           },
           {
-            src: 'http://c.hiphotos.baidu.com/image/pic/item/a5c27d1ed21b0ef4b129b3b9d1c451da80cb3e17.jpg'
+            pic: 'http://c.hiphotos.baidu.com/image/pic/item/a5c27d1ed21b0ef4b129b3b9d1c451da80cb3e17.jpg'
           },
       ],
       slideWidth: 5,
@@ -186,7 +187,7 @@ export default {
     // 轮播图
     this.$http.get(url + 'slides')
       .then(res => {
-        // console.log(res)
+        console.log(res)
         this.slides = res.data.data
       })
       .catch(err => {
