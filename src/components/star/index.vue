@@ -41,16 +41,16 @@
         </div>
         <div class="content-box team">
           <div class="team-head">
-            <p>提示：{{promptTxt}}</p>
+            <p>提示：第{{floor}}层另招募{{lesspeo}}人，即可拿到{{moregold}}金币</p>
             <div class="team-exist">
               <p>直推人数：<span>{{invitpeo}}</span></p>
               <p>旗下人数：<span>{{allpeo}}</span></p>
             </div>
           </div>
           <div class="team-content">
-            <router-link :to="{path: '/relation'}" class="floor" v-for="(progress,index) in progressBox" :key="index" v-show="teamFloor">
+            <router-link :to="{path: '/relation/' + index}" class="floor" v-for="(progress,index) in progressBox" :key="index">
               <div class="team-floor">
-                第{{progress.floor}}维度
+                第{{progress.floor}}层
               </div>
               <vm-progress class="progress"  :percentage="progress.percentage" :text-inside="true" :stroke-width="18" :strokeColor="progress.color"></vm-progress>
             </router-link>
@@ -60,7 +60,7 @@
       <!-- 大礼包 -->
         <div class="gift-box">
           <router-link to="/gift">
-            <img src="../../assets/image/gift.png" alt="">
+            <img src="http://attach.bbs.miui.com/forum/201507/01/101024hpo6hqhvt77dhsqq.jpg" alt="">
           </router-link>
         </div>
       <!-- 挖宝数据 -->
@@ -78,17 +78,17 @@
               <div class="con-desc">
                 <div class="desc today">
                   <p>今日获得</p>
-                  <span>{{miners_today}}</span>
+                  <span>{{today_owen}}</span>
                 </div>
                 <div class="desc">
                   <p>累计获得</p>
-                  <span>{{miners_all}}</span>
+                  <span>{{all_owen}}</span>
                 </div>
               </div>
             </li>
             <li class="content-list">
               <div class="con-title">
-                算力
+                金币
                 <i class="icon icon-tips"></i>
               </div>
               <div class="con-desc">
@@ -118,17 +118,14 @@ import { Toast } from 'mint-ui'
 import footGuide from '../comp/footGuide.vue'
 import collecting from './collecting.vue'
 import { url } from '../../assets/js/mobile.js'
-import api from '@/assets/js/api.js'
+let getGevel = localStorage.getItem('user_level')
 let token = localStorage.getItem('token')
 export default {
   data () {
     return {
-      today_owen: '0',
-      all_owen: '0',
-      miners_today: '0',
-      miners_all: '0',
+      today_owen: '1000000',
+      all_owen: '1000000',
       level: 'SG青铜时代',
-      promptTxt: '',
       pv: '1000',
       k: '1000',
       sg: '1000',
@@ -145,8 +142,34 @@ export default {
       moregold: "350",
       invitpeo: "3",
       allpeo: "10",
-      progressBox: [],
-      teamFloor: true
+      progressBox: [
+        // {
+        //   floor: '1',
+        //   percentage: 100,
+        //   color: '#a288d2'
+        // },
+        // {
+        //   floor: '2',
+        //   percentage: 75,
+        //   color: '#03a8f7'
+        // },
+        // {
+        //   floor: '3',
+        //   percentage: 50,
+        //   color: '#f0b026'
+        // },
+        // {
+        //   floor: '4',
+        //   percentage: 25,
+        //   color: '#1ad3a7'
+        // },
+        // {
+        //   floor: '5',
+        //   percentage: 25,
+        //   color: '#1ad3a7'
+        // }
+      ],
+      wLogin: 0
     }
   },
   components: {
@@ -155,142 +178,82 @@ export default {
   },
   methods: {
     getEnergy (id) {
+      console.log(token)
+      if (!token) {
+        this.wLogin = 0
+        return false;
+      }else {
+        this.wLogin = 1
+      }
+    /*  console.log(token)
       // 开采K矿
       let form = this.$qs.stringify({
         token: token,
         id: id
       })
-      this.$http.post(url + 'get', form)
-        .then(response => {
-          // console.log(response)
-          Toast({
-            message: response.data.msg,
-            position: 'middle',
-            duration: 2000
-          })
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    },
-    dataMiners () {
-      this.$http.get(url + 'dataMiners?token=' + token)
-      // 今日星币及累计获得的星币数据
+      console.log(form)
+      this.$http.post(url+'get', form)
       .then(response => {
-        // console.log(response)
-        if (response.data.code == 200) {
-          this.miners_today = response.data.data.today
-          this.miners_all = response.data.data.total
-        } else if (response.data.code == 403) {
-          Toast({
-            message: response.data.msg
-          })
-        }
+        console.log(response)
+        Toast({
+          message: response.data.msg,
+          position: 'middle',
+          duration: 2000
+        })
       })
       .catch(error => {
         console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-      })
-    },
-    dataGold () {
-      this.$http.get(url + 'dataGold?token=' + token)
-      // 今日代币及累计获得的代币数据
-      .then(response => {
-        // console.log(response)
-        if (response.data.code == 200) {
-          this.today_owen = response.data.data.today
-          this.all_owen = response.data.data.total
-        } else if (response.data.code == 403) {
-          Toast({
-            message: response.data.msg
-          })
-        }
-      })
-      .catch(error => {
-        console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-      })
-    },
-    recommend () {
-      // 获取直推人数
-      api.recommendNum()
-      .then((res) => {
-        this.invitpeo = res.data
-      })
-    },
-    getSonNum () {
-      // 旗下人数
-      api.getSonNum()
-      .then((res) => {
-        this.allpeo = res.data
-      })
-    },
-    prompt () {
-      // 提示信息
-      api.prompt()
-      .then((res) => {
-        console.log(res)
-        this.promptTxt = res.data
-      })
+      })*/
     }
   },
   created () {
-    this.dataMiners()
-    this.dataGold()
-    this.recommend()
-    this.getSonNum()
-    this.prompt()
-    if (token) {
-      this.$http.get(url + 'notGet?token=' + token)
-      // 未开采K矿
-        .then(response => {
-          // console.log(response)
-          this.arr = response.data.data;
-        })
-        .catch(error => {
-          console.log(error)
-          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-        })
+    switch (getGevel) {
+      case '1':
+        this.level = 'SG星球居民'
+        break;
+      case '2':
+        this.level = 'SG青铜时代'
+        break;
+      case '3':
+        this.level = 'SG白银时代'
+        break;
+      case '4':
+        this.level = 'SG黄金时代'
+        break;
+      case '5':
+        this.level = 'SG钻石时代'
+        break;
     }
-    if (!token) {
-
-    } else {
-      this.$http.get(url + 'occupancyRate?token=' + token)
-      // 团队看板占比
-        .then(response => {
-          // console.log(response.data.data)
-          for (let i = 0; i < response.data.data.length; i++) {
-            if (response.data.data[i].percentage == 0) {
-              this.progressBox[i] = response.data.data[i]
-              // this.teamFloor = false
-            } else {
-              this.progressBox = response.data.data
-              this.progressBox[1].color = '#a288d2'
-              this.progressBox[2].color = '#f0b026'
-              this.progressBox[3].color = '#1ad3a7'
-              this.progressBox[4].color = '#03a8f7'
-            }
-          }
-        })
-        .catch(error => {
-          console.log(error)
-          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-        })
-    }
-  },
-  mounted () {
-    if (!token) {
-      this.arr = [
-        {
-          id: 1,
-          ore: '9.00'
-        },
-        {
-          id: 2,
-          ore: '8.00'
-        }
-      ]
-    }
+    this.$http.get(url + 'notGet?token='+token)
+    // 未开采K矿
+    .then(response => {
+      console.log(response)
+      this.arr = response.data.data;
+    })
+    .catch(error => {
+      console.log(error)
+      Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+    })
+    // this.$http.get(url + 'occupancyRate?token='+token)
+    // // 团队看板占比
+    // .then(response => {
+    //   console.log(response.data.data)
+    //   // this.progressBox = response.data.data
+    //   for (let i = 0; i < response.data.data.length; i++) {
+    //     if (response.data.data[i].percentage == 0) {
+    //       this.progressBox[i] = response.data.data[i]
+    //     } else {
+    //       this.progressBox = response.data.data
+    //     }
+    //   }
+    // })
+    // .catch(error => {
+    //   console.log(error)
+    //   Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+    // })
+    /*if (!token) {
+      this.$router.push('/login')
+    }*/
   }
 }
 </script>

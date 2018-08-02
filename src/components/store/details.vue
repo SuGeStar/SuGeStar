@@ -155,7 +155,6 @@ export default {
     // 商品数量加
     numSub () {
       if (this.value <= 1) {
-        console.log('1111')
         Toast({
           message: '当前已是最小成交数量',
           position: 'bottom',
@@ -202,7 +201,7 @@ export default {
           })
           this.$http.post(url + 'addToCart', form)
             .then(res => {
-              console.log(res)
+              // console.log(res)
               if (res.data.code == 200) {
                 Toast('加入购物车成功!')
                 this.shopCarNum = this.shopCarNum + this.value

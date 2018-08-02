@@ -49,19 +49,66 @@
       color: #999;
       line-height: .7rem;
     }
-    .search-desc{
-      span{
-        font-size: .25rem;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: .15rem;
-        padding: .1rem .2rem;
-        margin-right: .15rem;
-        margin-bottom: .15rem;
-      }
-    }
     &.hot-search{
       margin-top: 0.2rem;
+      .search-hot {
+        input {
+          font-size: .25rem;
+          margin-right: .15rem;
+          background-color: #fff;
+          padding: 0.1rem .2rem;
+          border: 1px solid #ccc;
+          border-radius: .15rem;
+        }
+      }
+    }
+  }
+  .search-list {
+    margin-top: 0.2rem;
+    ul{
+      .is-null {
+        padding: 0;
+        width: 100%;
+        img {
+          width: 100%;
+        }
+      }
+      li{
+        background-color: #fff;
+        padding: 0.2rem;
+        border-bottom: 1px solid #ececec;
+        &:last-child{
+          border-bottom: none;
+        }
+        .search-box{
+          display: flex;
+          align-items: center;
+          .search-img{
+            width: 45%;
+            img{
+              width: 100%;
+            }
+          }
+          .search-desc {
+            margin-left: 0.2rem;
+            .search-title {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+            }
+            .search-price {
+              margin: 0.1rem 0;
+              color: #999999;
+              span {
+                color: #ff8c37;
+                font-size: .25rem;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

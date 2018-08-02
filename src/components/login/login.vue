@@ -33,7 +33,7 @@ export default {
         })
         this.$http.post(url+'login', form)
         .then(response => {
-          console.log(response)
+          // console.log(response)
           if (response.data.code == 200) {
             localStorage.setItem('userinfo',JSON.stringify(response.data.data.userinfo))
             localStorage.setItem('level',response.data.data.userinfo.level)

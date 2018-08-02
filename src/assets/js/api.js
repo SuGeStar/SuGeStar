@@ -202,6 +202,10 @@ export default {
   brandGoodsList (params) {
     // 品牌下商品列表
     return Get(`/brandGoodsList?brand_id=${params.brand_id}&page=${params.page}`)
+  },
+  search (params) {
+    //  搜索
+    return Get(`/search?key_words=${params.key_words}`)
   }
 }
 export { imgUrl }

@@ -79,7 +79,7 @@ export default {
   },
   watch: {
     selected (value) {
-      console.log(value);
+      // console.log(value);
       if (value == 1) {
         this.into()
         return false
@@ -95,7 +95,7 @@ export default {
       // 转入列表
       this.$http.get(url + 'income?token='+token)
       .then(response => {
-        console.log(response)
+        // console.log(response)
         if (response.data.code == 200) {
           if (response.data.data == '') {
             this.isNull = true
@@ -131,7 +131,7 @@ export default {
       // 转出列表
       this.$http.get(url + 'outlay?token='+token)
       .then(response => {
-        console.log(response)
+        // console.log(response)
         if (response.data.data == '') {
           this.isNull = true
           return false
