@@ -38,7 +38,7 @@
       <div class="payment">
         <ul>
           <li @click="wx"> <i class="icon icon-wx"></i> 微信支付</li>
-          <li @click="gb"> <i class="icon icon-sgj"></i> 代币支付</li>
+          <li @click="gb"> <i class="icon icon-sgd"></i> 代币支付</li>
         </ul>
       </div>
     </mt-popup>
