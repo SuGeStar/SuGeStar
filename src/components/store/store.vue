@@ -23,7 +23,7 @@
     <!-- 轮播图 -->
     <div class="head-con">
       <div class="store-swiper">
-        <carousel-3d :autoplay="true" :autoplay-timeout="5000" :display="3" :style="{height: slideHeight + 'px'}">
+        <carousel-3d :autoplay="true" :autoplay-timeout="1000" :display="3" :style="{height: slideHeight + 'px'}">
           <slide v-for="(slide,i) in slides" :key="i" :index="i" :style="{height: slideHeight + 'px'}">
             <img :src="getImg(slide.pic)">
             <!-- <img :src="slide.pic"> -->
@@ -127,20 +127,10 @@ export default {
       newList: [],
       goodsList: [],
       storeImg: [],
-      slides: [
-          {
-            pic: 'http://c.hiphotos.baidu.com/image/pic/item/09fa513d269759eeef490028befb43166d22df3c.jpg'
-          },
-          {
-            pic: 'http://f.hiphotos.baidu.com/image/pic/item/960a304e251f95cacc952852c5177f3e660952f5.jpg'
-          },
-          {
-            pic: 'http://c.hiphotos.baidu.com/image/pic/item/a5c27d1ed21b0ef4b129b3b9d1c451da80cb3e17.jpg'
-          },
-      ],
-      slideWidth: 5,
-      slideHeight: 1.5,
-      isHeight: false,
+      slides: [],
+      slideWidth: 600,
+      slideHeight: 150,
+      isHeight: true,
       S_width: 0,
       getImg (url) {
         return 'http://img.sugebei.com/' + url
@@ -154,10 +144,8 @@ export default {
   handleScroll () {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
     var offsetTop = document.querySelector('#searchBar').offsetTop;
-    console.log(scrollTop)
-    console.log(offsetTop)
   },
-  destroyed () {//离开该页面需要移除这个监听的事件
+  destroyed () { // 离开该页面需要移除这个监听的事件
     window.removeEventListener('scroll', this.handleScroll)
   },
   created () {
@@ -167,19 +155,6 @@ export default {
         for (var i = 0; i < 4; i++) {
           this.swiperBox.push((response.data.data)[i])
         }
-        /*let _len = response.data.data.length;
-        if (_len > 8) {
-          this.s2 = true
-          for (var i = 0; i < 8; i++) {
-            this.swiperBox.push((response.data.data)[i])
-          }
-          for (var j = 8; j < _len; j++) {
-            this.swiperBox2.push((response.data.data)[j])
-          }
-        } else {
-          this.s2 = false
-          this.swiperBox = response.data.data
-        }*/
       })
       .catch(error => {
         console.log(error)
@@ -217,7 +192,7 @@ export default {
   methods: {
     determine () {
       // 搜索
-      
+
     }
   }
 }
