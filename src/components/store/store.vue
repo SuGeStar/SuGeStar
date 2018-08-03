@@ -23,8 +23,8 @@
     <!-- 轮播图 -->
     <div class="head-con">
       <div class="store-swiper">
-        <carousel-3d :autoplay="true" :autoplay-timeout="5000" :display="3" :style="{height: slideHeight + 'px'}">
-          <slide v-for="(slide,i) in slides" :key="i" :index="i" :style="{height: slideHeight + 'px'}">
+        <carousel-3d :autoplay="true" :autoplay-timeout="5000" :display="3" style="border: none" :style="{height: slideHeight + 'px'}">
+          <slide v-for="(slide,i) in slides" :key="i" :index="i" style="border: none" :style="{height: slideHeight + 'px'}">
             <img :src="getImg(slide.pic)">
           </slide>
         </carousel-3d>
@@ -93,6 +93,9 @@
   .bgHeight{
     background-color: rgba(255, 255, 255, 1)
   }
+  .store-swiper{
+    padding-top: 0.2rem;
+  }
   .carousel-3d-container {
     margin: 0 auto;
   .carousel-3d-slide {
@@ -137,8 +140,9 @@ export default {
             src: 'http://c.hiphotos.baidu.com/image/pic/item/a5c27d1ed21b0ef4b129b3b9d1c451da80cb3e17.jpg'
           },
       ],
-      slideWidth: 200,
-      slideHeight: 250,
+      slideWidth: 300,
+      childWidth: 300,
+      slideHeight: 200,
       isHeight: false,
       S_width: 0,
       getImg (url) {
