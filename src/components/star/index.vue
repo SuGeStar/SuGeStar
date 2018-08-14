@@ -13,11 +13,9 @@
         <collecting :energy = 'arr' @energyClick ='getEnergy'></collecting>
         <div class="index-classfiy">
           <ul class="list">
-            <li>
-              <router-link to="/myProperty">
-                <img src="../../assets/image/index-zichan.png" alt="">
-                <p>我的资产</p>
-              </router-link>
+            <li @click="getStar">
+              <img src="../../assets/image/index-zichan.gif" alt="">
+              <p>星钻红包</p>
             </li>
             <li>
               <router-link to="/miji">
@@ -35,7 +33,7 @@
         </div>
       </div>
       <!-- 团队看板 -->
-      <div class="index-box">
+      <!--<div class="index-box">
         <div class="box-title">
           <h3>团队看板</h3>
         </div>
@@ -56,7 +54,7 @@
             </router-link>
           </div>
         </div>
-      </div>
+      </div>-->
       <!-- 大礼包 -->
         <div class="gift-box">
           <router-link to="/gift">
@@ -231,6 +229,13 @@ export default {
       .then((res) => {
         // console.log(res)
         this.promptTxt = res.data
+      })
+    },
+    getStar () {
+      Toast({
+        message: '红包还在制作中，请稍等..',
+        position: 'middle',
+        duration: 2000
       })
     }
   },
