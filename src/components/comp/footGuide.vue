@@ -3,7 +3,7 @@
     <router-link to="/index" active-class="active">
       <mt-tab-item id="home">
         <i slot="icon" class="icon icon-star"></i>
-        SG星球
+        YC星球
       </mt-tab-item>
     </router-link>
     <router-link to="/store" active-class="active">

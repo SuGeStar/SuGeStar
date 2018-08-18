@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <mt-header fixed title="关系列表">
+    <mt-header fixed title="星球区块">
       <a href="javascript:history.go(-1);" slot="left">
         <mt-button icon="back"></mt-button>
       </a>
@@ -25,11 +25,11 @@
               <div class="right-box" v-if="relation.left == null || relation.right == null">
                 <div class="box">
                   <p v-if="relation.left !== null">{{relation.left.realname}}</p>
-                  <p class="short" v-else>缺人</p>
+                  <p class="short" v-else>发现者</p>
                 </div>
                 <div class="box">
                   <p v-if="relation.right !== null">{{relation.right.realname}}</p>
-                  <p class="short" v-else @click="shortPeo(relation.id,relation.invite_code)">缺人</p>
+                  <p class="short" v-else @click="shortPeo(relation.id,relation.invite_code)">探索者</p>
                 </div>
               </div>
             </div>
@@ -53,11 +53,11 @@
               <div class="right-box" v-if="relation.left == null || relation.right == null">
                 <div class="box">
                   <p v-if="relation.left !== null">{{relation.left.realname}}</p>
-                  <p class="short" v-else>缺人</p>
+                  <p class="short" v-else>发现者</p>
                 </div>
                 <div class="box">
                   <p v-if="relation.right !== null">{{relation.right.realname}}</p>
-                  <p class="short" v-else @click="shortPeo(relation.id, relation.invite_code)">缺人</p>
+                  <p class="short" v-else @click="shortPeo(relation.id, relation.invite_code)">探索者</p>
                 </div>
               </div>
             </div>

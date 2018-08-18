@@ -5,83 +5,75 @@
         <mt-button icon="back"></mt-button>
       </a>
     </mt-header>
-    <div class="details">
-      <mt-swipe class="det-swiper" :show-indicators="false" :auto="4000">
-        <mt-swipe-item v-for="(swiper,index) in swiperBox" :key="index">
-          <img cover :src="getImg(swiper)" alt="">
-        </mt-swipe-item>
-      </mt-swipe>
-      <div class="det-info">
+  <div class="swiperContianer">
+    <div class="swiperCenter">
+      <div class="the-swiper">
+        <mt-swipe class="det-swiper" :show-indicators="true" :auto="4000">
+          <mt-swipe-item v-for="(swiper,index) in swiperBox" :key="index">
+            <img cover :src="getImg(swiper)" alt="">
+          </mt-swipe-item>
+        </mt-swipe>
+      </div>
+      <div class="the-txt">
         <h3>{{goodsInfo.goods_name}}</h3>
-        <div class="det-price">结算价：<p>星币 <span>{{showGold}}</span> + ¥ <span>{{showPrice}}</span></p></div>
+        <p>星币 <span>{{showGold}}</span> + ¥ <span>{{showPrice}}</span></p>
+        <s>¥ 3000</s>
+        <button @click="format(2)">立即购买</button>
       </div>
-      <div class="det-format" @click="format(0)">
-        <p>选择数量规格</p>
-        <i class="icon icon-right"></i>
-      </div>
-      <div class="det-details">
-        <h3 class="details-title">商品详情</h3>
-        <div class="details-imgBox">
-          <img v-for="(img,index) in imgBox" :key="index" :src="getImg(img)" alt="">
+    </div>
+  </div>
+  <div class="detail-pic">
+    <p><span></span>图文详情</p>
+    <div class="details-imgBox">
+      <img v-for="(img,index) in imgBox" :key="index" :src="getImg(img)" alt="">
+    </div>
+  </div>
+  <mt-popup v-model="popupVisible" class="deta-pop" position="bottom">
+    <div class="spec-box">
+      <div class="spec">
+        <div class="spec-header">
+          <div class="spec-imgBox">
+            <img :src="getImg(goodsInfo.default_img)" alt="">
+          </div>
+          <div class="spec-info">
+            <p>星币 <span class="spec-pic">{{finalGold}}</span> +¥ <span class="spec-pic">{{finalPrice}}</span></p>
+            <p><i>库存</i>: <span class="spec-num">{{number}}</span></p>
+          </div>
+        </div>
+        <div class="spec-con">
+          <div class="goods-sku">
+            <div class="goods-skuColor">
+              <p>{{goodsInfo.color_name}}</p>
+              <div class="con-gg">
+                <span v-for="(skuItem,index) in colorList" :key="index" :class="{active:index===color}" @click="active(index,skuItem)">{{skuItem}}</span>
+              </div>
+            </div>
+            <div class="goods-skuColor">
+              <p>{{goodsInfo.size_name}}</p>
+              <div class="con-gg">
+                <span v-for="(skuItem,index) in specList" :key="index" :class="{active:index===spec}" @click="activeSpec(index,skuItem)">{{skuItem.size}}</span>
+              </div>
+            </div>
+            <div class="con-buy">
+              <p>购买数量</p>
+              <div class="esc-count">
+                <p class="cti-sub cti" @click="numSub">-</p>
+                <input type="number" class="cti-number" readonly="" :value="value">
+                <p class="cti-add cti" @click="numAdd">+</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spec-foot">
+          <div>
+            <p @click="defaultBtn(1)"><span>加入购物车</span></p>
+            <p @click="defaultBtn(2)"><span class="buy-now">立即购买</span></p>
+          </div>
+          <!--<mt-button type="default" @click="defaultBtn(0)" class="default-btn" v-if="whichWay">确认</mt-button>-->
         </div>
       </div>
     </div>
-    <div class="footer-box">
-      <router-link to="/car">
-        <div class="buyicon">
-          <span v-if="shopCarShow">{{shopCarNum}}</span>
-          <i class="icon icon-car"></i>
-        </div>
-      </router-link>
-      <p @click="format(1)">加入购物车</p>
-      <p @click="format(2)" class="deta-buy">立即购买</p>
-    </div>
-    <mt-popup v-model="popupVisible" class="deta-pop" position="bottom">
-      <div class="spec-box">
-        <div class="spec">
-          <div class="spec-header">
-            <div class="spec-imgBox">
-              <img :src="getImg(goodsInfo.default_img)" alt="">
-            </div>
-            <div class="spec-info">
-              <p>结算价: <i>星币 <span class="spec-pic">{{finalGold}}</span></i> + <i>¥ <span class="spec-pic">{{finalPrice}}</span></i> </p>
-              <p>库存: <span class="spec-num">{{number}}</span></p>
-            </div>
-          </div>
-          <div class="spec-con">
-            <div class="goods-sku">
-              <div class="goods-skuColor">
-                <p>{{goodsInfo.color_name}}</p>
-                <div class="con-gg">
-                  <span v-for="(skuItem,index) in colorList" :key="index" :class="{active:index===color}" @click="active(index,skuItem)">{{skuItem}}</span>
-                </div>
-              </div>
-              <div class="goods-skuColor">
-                <p>{{goodsInfo.size_name}}</p>
-                <div class="con-gg">
-                  <span v-for="(skuItem,index) in specList" :key="index" :class="{active:index===spec}" @click="activeSpec(index,skuItem)">{{skuItem.size}}</span>
-                </div>
-              </div>
-              <div class="con-buy">
-                <p>购买数量</p>
-                <div class="esc-count">
-                  <p class="cti-sub cti" @click="numSub">-</p>
-                  <input type="number" class="cti-number" readonly="" :value="value">
-                  <p class="cti-add cti" @click="numAdd">+</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="spec-foot">
-           <div v-if="!whichWay">
-             <p @click="defaultBtn(1)">加入购物车</p>
-             <p @click="defaultBtn(2)">立即购买</p>
-           </div>
-            <mt-button type="default" @click="defaultBtn(0)" class="default-btn" v-if="whichWay">确认</mt-button>
-          </div>
-        </div>
-      </div>
-    </mt-popup>
+  </mt-popup>
 </div>
 </template>
 <style lang="less" scoped>

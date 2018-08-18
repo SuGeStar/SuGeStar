@@ -56,7 +56,7 @@
         </mt-tab-container-item>
         <mt-tab-container-item :id="1" class="property-container">
           <div class="pc-head-container">
-            <p class="pc-head-title">代币总数</p>
+            <p class="pc-head-title">星钻总数</p>
             <p class="pc-head-num"><span>{{gold}}</span><router-link :to="{path:'/smelting'}"><span class="smelting fr">释放/赠送/充值 >></span></router-link></p>
             <p class="pc-head-freeze">
               算力：{{frozen_force}}
@@ -114,7 +114,7 @@ export default {
       gold: '1000',
       frozen_force: '0',
       total: '1000',
-      tabTxt: ['星币', '代币'],
+      tabTxt: ['星币', '星钻'],
       propertyContainer: [],
       lists: [
         {

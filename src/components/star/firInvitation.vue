@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <mt-header fixed title="我的邀请">
+    <mt-header fixed title="发现者部落">
       <a href="javascript:history.go(-1);" slot="left">
         <mt-button icon="back"></mt-button>
       </a>
@@ -76,7 +76,7 @@ export default {
             this.page++
           }
         }
-        
+
         for (let i = 0; i < this.items.length; i++) {
           if (this.items[i].info.level == 1) {
             this.items[i].info.level = '居民'

@@ -20,7 +20,7 @@
             <li>
               <router-link to="/miji">
                 <img src="../../assets/image/index-miji.png" alt="">
-                <p>星球秘籍</p>
+                <p>星球动态</p>
               </router-link>
             </li>
             <li>
@@ -84,7 +84,7 @@
                 </div>
               </div>
             </li>
-            <li class="content-list">
+            <!--<li class="content-list">
               <div class="con-title">
                 算力
                 <i class="icon icon-tips"></i>
@@ -99,7 +99,7 @@
                   <span>{{all_owen}}</span>
                 </div>
               </div>
-            </li>
+            </li>-->
           </ul>
         </div>
       </div>

@@ -64,9 +64,10 @@
         </div>
         <div class="invit-qr">
           <div class="invit-desc">
-            <p>我是"{{name}}"</p>
-            <p>是SG星球的{{number}}位居民</p>
-            <p>我在SG星球等你，不见不散</p>
+            <p>我是YC星球发现者</p>
+            <p>是YC星球的{{number}}位居民</p>
+            <p>邀请你共同参与YC星球的区块开发</p>
+            <p>我在YC星球等你，不见不散</p>
           </div>
           <div class="invit-img">
             <img class="img" :src="src" alt=""/>
@@ -90,7 +91,7 @@ export default {
   data () {
     return {
       name: '张三',
-      number: '12345',
+      number: '100156',
       popupVisible1: false,
       copy: '123456789',
       src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png',

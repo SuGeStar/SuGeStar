@@ -17,7 +17,7 @@
           <div class="user-property-data">
             <ul>
               <li>
-                <p class="user-property-notice">代币</p>
+                <p class="user-property-notice">星钻</p>
                 <p class="user-property-num">{{userSGK}}</p>
               </li>
               <li>
@@ -46,7 +46,7 @@
               <div class="store-list">
                 <div class="store-name">
                   <i class="icon icon-invit"></i>
-                  我的邀请
+                  发现者部落
                 </div>
                 <i class="icon icon-right"></i>
               </div>
@@ -57,18 +57,18 @@
               <div class="store-list">
                 <div class="store-name">
                   <i class="icon icon-recom"></i>
-                  我的推荐
+                  探索者部落
                 </div>
                 <i class="icon icon-right"></i>
               </div>
             </router-link>
           </li>
           <li>
-            <router-link to="/team">
+            <router-link to="/relation">
               <div class="store-list">
                 <div class="store-name">
                   <i class="icon icon-team"></i>
-                  我的团队
+                  星球区块
                 </div>
                 <i class="icon icon-right"></i>
               </div>
@@ -79,7 +79,7 @@
               <div class="store-list">
                 <div class="store-name">
                   <i class="icon icon-update"></i>
-                  升级
+                  创建我的星球区块
                 </div>
                 <i class="icon icon-right"></i>
               </div>
@@ -101,7 +101,7 @@
               <div class="store-list">
                 <div class="store-name">
                   <i class="icon icon-setting"></i>
-                  大礼包
+                  星球礼包
                 </div>
                 <i class="icon icon-right"></i>
               </div>

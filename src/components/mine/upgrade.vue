@@ -13,7 +13,7 @@
         <mt-field label="真实姓名" placeholder="请输入您的真实姓名" v-model="username"></mt-field>
       </div>
       <div class="btn-box">
-        <mt-button class="button" @click="upgrade">确认升级</mt-button>
+        <mt-button class="button" @click="upgrade">确认创建</mt-button>
       </div>
     </div>
   </div>
