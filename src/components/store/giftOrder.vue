@@ -38,7 +38,7 @@
       <div class="payment">
         <ul>
           <li @click="wx"> <i class="icon icon-wx"></i> 微信支付</li>
-          <li @click="gb"> <i class="icon icon-sgd"></i> 代币支付</li>
+          <li @click="gb"> <i class="icon icon-sgd"></i> 星钻支付</li>
         </ul>
       </div>
     </mt-popup>
@@ -125,7 +125,7 @@ export default {
       this.popupVisible = false
     },
     gb () {
-      this.payment = '代币支付'
+      this.payment = '星钻支付'
       this.pay_channel = 'gb'
       this.popupVisible = false
     },
