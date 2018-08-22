@@ -23,8 +23,8 @@
             </div>
           </div>
           <div slot="bottom" class="mint-loadmore-bottom">
-            <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
-            <span v-show="bottomStatus === 'loading'">
+            <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }" class="add-more">上拉加载更多</span>
+            <span v-show="bottomStatus === 'loading'" class="add-more-logo">
               <mt-spinner type="snake"></mt-spinner>
             </span>
           </div>
@@ -57,36 +57,35 @@ export default {
       api.registers({
         'page': page
       })
-      .then ((res) => {
-        console.log(res)
-        if (res.data.length == 0) {
-          Toast({
-            message: '没有数据啦~',
-            position: 'bottom',
-            duration: 2000
-          });
-        } else {
-          if (page == 1) {
-            this.items = res.data
-            this.page = 2
+        .then((res) => {
+          console.log(res)
+          if (res.data.length == 0) {
+            Toast({
+              message: '没有数据啦~',
+              position: 'bottom',
+              duration: 2000
+            });
           } else {
-            for (let x = 0; x < res.data.length; x++) {
-              this.items.push(res.data[x])
+            if (page == 1) {
+              this.items = res.data
+              this.page = 2
+            } else {
+              for (let x = 0; x < res.data.length; x++) {
+                this.items.push(res.data[x])
+              }
+              this.page++
             }
-            this.page++
           }
-        }
-
-        for (let i = 0; i < this.items.length; i++) {
-          if (this.items[i].info.level == 1) {
-            this.items[i].info.level = '居民'
-          } else {
-            this.items[i].info.level = '创世居民'
+          for (let i = 0; i < this.items.length; i++) {
+            if (this.items[i].info.level == 1) {
+              this.items[i].info.level = '居民'
+            } else {
+              this.items[i].info.level = '创世居民'
+            }
           }
-        }
-      })
+        })
     },
-    handleBottomChange(status) {
+    handleBottomChange (status) {
       this.bottomStatus = status;
     },
     loadBottom () {

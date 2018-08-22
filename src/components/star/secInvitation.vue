@@ -23,8 +23,8 @@
             </div>
           </div>
           <div slot="bottom" class="mint-loadmore-bottom">
-            <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
-            <span v-show="bottomStatus === 'loading'">
+            <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop'}" class="add-more">下拉加载刷新</span>
+            <span v-show="bottomStatus === 'loading'" class="add-more-logo">
               <mt-spinner type="snake"></mt-spinner>
             </span>
           </div>

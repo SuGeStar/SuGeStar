@@ -92,12 +92,9 @@
 </template>
 <style lang="less" scoped>
   @import '../../assets/less/store.less';
-  .bgHeight{
-    background-color: rgba(255, 255, 255, 1)
-  }
   .store-swiper{
     /*padding-top: 1.5rem;*/
-    margin-top: .7rem;
+    margin-top: 1rem;
     z-index: 999999;
   }
 .carousel-3d-slide{

@@ -12,7 +12,7 @@
 		z-index: 1000;
 		.search-input{
 			padding: .19rem;
-			width: 70%;
+			width: 68%;
 			.inputBox{
 				border-radius: 0.09rem;
 				padding-left: 0.19rem;
@@ -61,7 +61,7 @@
   .head-con{
     width: 6.4rem;
     height: 3.55rem;
-    margin-top: 0.85rem;
+    //margin-top: 0.85rem;
     background:url("../image/banner_bg1.png") no-repeat center;
     background-size: 100% auto;
     border-top: 1px rgba(255, 255, 255, 0) solid;
@@ -74,7 +74,7 @@
   .aaa{
     //background: url("../image/storebg.jpg") no-repeat center;
     background-size: 100% 100%;
-    padding-top: .36rem;
+    padding-top: 1.1rem;
     .classify-container{
       width: 5.72rem;
       height: 1.36rem;
@@ -190,20 +190,24 @@
           li{
             float: left;
             height: 1.5rem;
-            //margin-left: 0.2rem;
-            min-width: 2.2rem;
-            border: 1px rgba(229, 229, 229, 0.2) solid;
+            margin-left: 0.2rem;
+            min-width: 1.5rem;
+            border: 1px #e5e5e5 solid;
             box-sizing: border-box;
-            border-radius: .25rem;
+            border-radius: 5px;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
             &:first-child{
               margin-left: 0;
             }
             img{
               display: block;
               height: 1.28rem;
+              width: auto;
+              max-width: 1.5rem;
+              max-height: 1.5rem;
               margin: 0 auto;
               //max-width: 2.2rem;
             }
@@ -223,14 +227,16 @@
           flex-wrap: wrap;
           justify-content: space-between;
           .content-list{
-            width: 49%;
-            margin-bottom: .15rem;
+            width: 48%;
+            margin-bottom: .2rem;
+            border: 1px #e5e5e5 solid;
+            border-radius: 5px;
             img{
               width: 100%;
               border-radius: 5px;
             }
             p{
-              width: 100%;
+              width: 90%;
               overflow : hidden;
               text-overflow: ellipsis;
               display: -webkit-box;
