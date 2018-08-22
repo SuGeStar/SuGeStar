@@ -20,12 +20,12 @@
         </router-link>
       </div>
     </header>
-    <!-- 轮播图 -->
+     <!--轮播图 -->
     <div class="head-con">
       <div class="store-swiper">
-        <carousel-3d :autoplay="false" :autoplay-timeout="5000" :display="3" style="border: none" :style="{height: slideHeight + 'px'}">
-          <slide v-for="(slide,i) in slides" :key="i" :index="i" style="border: none" :style="{height: 120 + 'px', width: 90 + '%',marginLeft: 5 + '%',borderRadius: 0.1 +'rem'}">
-            <img :src="getImg(slide.pic)">
+        <carousel-3d :autoplay="true" :autoplay-timeout="5000" :display="3" style="border: none" :style="{height: slideHeight + 'px'}">
+          <slide v-for="(slide,i) in slides" :key="i" :index="i" style="border: none" :style="{height: 180 + 'px', width: 98 + '%',marginLeft: 1 + '%',borderRadius: 0.1 +'rem'}">
+            <img :src="getImg(slide.pic)" class="swiper-imgs">
           </slide>
         </carousel-3d>
       </div>
@@ -97,7 +97,14 @@
   }
   .store-swiper{
     /*padding-top: 1.5rem;*/
-    margin-top: 1.5rem;
+    margin-top: .7rem;
+    z-index: 999999;
+  }
+.carousel-3d-slide{
+  z-index: 999999;
+}
+  .swiper-imgs{
+    z-index: 9999999;
   }
   .carousel-3d-container {
     margin: 0 auto;
@@ -144,7 +151,7 @@ export default {
           },
       ],
       slideWidth: 200,
-      slideHeight: 120,
+      slideHeight: 190,
       isHeight: false,
       S_width: 0,
       getImg (url) {

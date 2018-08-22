@@ -50,7 +50,7 @@ export default {
         y: bolly,                                                           //目标偏离左上角的垂直位置
         origin: { x: "center", y: "center" },                               //确定中心店
         image: require("../../assets/image/index-tiqu.png"),                //图片地址
-        width: 30                                                           //指定图片大小
+        width: 25                                                          //指定图片大小
       });
       this.canvas.addChild(boll);                                             //调用oCanvas实例addChild方法，传入需要绘制至canvas上的oCanvas对象
       var bollText = this.canvas.display.text({                               //同上，调用text方法，建立文字对象
@@ -98,8 +98,8 @@ export default {
           y: position[index].y,
           origin: { x: "center", y: "center" },
           image: require("../../assets/image/index-zuanshi.png"),         //图片地址
-          width: 28, //宽度大小
-          height: 28
+          width: 35, //宽度大小
+          height: 35
         });
         let randomNum = randomArray[index];
         createAninmal(canvasObj['image' + index], 'element.abs_y == position[index].y ? position[index].y - '+randomNum+': position[index].y', index, '', createAninmal);  //调用创建动画函数

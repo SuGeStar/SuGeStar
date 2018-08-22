@@ -7,24 +7,30 @@
   left: 0;
   right: 0;
   .title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    overflow: hidden;
     padding: 0.2rem;
     background-color: #fff;
     border-top: 1px solid #ededed;
     border-bottom: 1px solid #ededed;
     .title-desc {
-      display: flex;
-      align-items: center;
-      img{
-        width: 0.94rem;
-        min-height: .94rem;
-        max-height: .94rem;
+      .title-img{
+        width:15%;
+        float: left;
+        height: 1rem;
         border-radius: 50%;
-        margin-right: 0.2rem;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img{
+          display: block;
+          width: auto;
+          height: 60%;
+        }
       }
       .title-box {
+        width:82%;
+        float: right;
         p {
           font-size: 0.27rem;
           color: #333333;
