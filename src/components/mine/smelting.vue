@@ -4,8 +4,8 @@
       <a href="javascript:window.history.go(-1)"></a>赠送/释放/充值
     </div>
     <div class="smelting-container">
-      <p>可用SG代币：<span>{{SGNum}}</span></p>
-      <p>释放/赠送/充值金币数量</p>
+      <p>可用星钻：<span>{{SGNum}}</span></p>
+      <p>释放/赠送/充值数量</p>
       <div class="smelting-withdraw">
         <span>¥</span><input type="number" v-model="smeltingNum">
       </div>
@@ -47,7 +47,7 @@ export default {
         this.smeltingNum = ''
         return false
       }
-      this.$router.push('/release/0/'+this.smeltingNum) 
+      this.$router.push('/release/0/'+this.smeltingNum)
     },
     give () {
       let finalSmelting = Number(this.smeltingNum)
@@ -117,7 +117,7 @@ export default {
     }
   },
   created () {
-    
+
   },
   mounted () {
     api.availableGold()

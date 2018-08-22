@@ -64,7 +64,7 @@
         </div>
         <div class="invit-qr">
           <div class="invit-desc">
-            <p>我是YC星球发现者</p>
+            <p>我是YC星球{{levelTxt}}{{name}}</p>
             <p>是YC星球的{{number}}位居民</p>
             <p>邀请你共同参与YC星球的区块开发</p>
             <p>我在YC星球等你，不见不散</p>
@@ -102,16 +102,22 @@ export default {
       second: {
         pople: '1000',
         ylz: '1000'
-      }
+      },
+      levelTxt: ''
     }
   },
   created () {
-
+    this.name = userinfo.realname;
+    if (userinfo.level === 1) {
+      this.levelTxt = '发现者'
+    } else {
+      this.levelTxt = '探索者'
+    }
   },
   methods: {
     invit () {
       this.copy = userinfo.invite_code
-      this.src = url + 'registerLink?token='+ token
+      this.src = url + 'registerLink?token=' + token
       this.popupVisible1 = true
     },
     copyBtn () {

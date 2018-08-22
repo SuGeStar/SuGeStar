@@ -23,65 +23,67 @@
     <!-- 轮播图 -->
     <div class="head-con">
       <div class="store-swiper">
-        <carousel-3d :autoplay="true" :autoplay-timeout="5000" :display="3" style="border: none" :style="{height: slideHeight + 'px'}">
-          <slide v-for="(slide,i) in slides" :key="i" :index="i" style="border: none" :style="{height: slideHeight + 'px'}">
+        <carousel-3d :autoplay="false" :autoplay-timeout="5000" :display="3" style="border: none" :style="{height: slideHeight + 'px'}">
+          <slide v-for="(slide,i) in slides" :key="i" :index="i" style="border: none" :style="{height: 120 + 'px', width: 90 + '%',marginLeft: 5 + '%',borderRadius: 0.1 +'rem'}">
             <img :src="getImg(slide.pic)">
           </slide>
         </carousel-3d>
       </div>
     </div>
-    <div class="classify-container" id="searchBar">
-      <ul>
-        <li v-for="(cls,index) in swiperBox" :key="index">
-          <router-link :to="{path: '/classifyList/'+cls.cid+'/'+cls.name}">
-            <div><img :src="getImg(cls.logo)" alt=""></div>
-            <p>{{cls.name}}</p>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="classify">
-            <div><img src="" alt=""></div><p>更多</p>
-          </router-link>
-        </li>
-      </ul>
-    </div>
-    <!--logo图片位置-->
-    <div class='logo-img'>
-      <div class="logo-img-con">
-        <img src="../../assets/image/data_icon.png" alt="">
-        <div class="logo-title"><p>SG星球数据中心</p></div>
-      </div>
-    </div>
-    <!--品牌-->
-    <div class="band-goods-container">
-      <p class="band-goods-title"><span>品牌</span></p>
-      <div class="band-container">
-        <ul :style="{width: S_width + 'rem'}">
-          <li v-for="(sImg,index) in storeImg" :key="index">
-            <router-link :to="{path: '/storeDetial/'+sImg.id}">
-              <img :src="getImg(sImg.logo)" alt="">
-            </router-link>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <!--精品-->
-    <div class="band-goods-container">
-      <p class="band-goods-title"><span>精品</span></p>
-      <div class="goods-container">
+    <div class="aaa">
+      <div class="classify-container" id="searchBar">
         <ul>
-          <li class="content-list" v-for="item in goodsList" :key="item.id">
-            <router-link :to="{path:'/details/' + item.goods_id}">
-              <img :src="getImg(item.default_img)" alt="">
-              <p>
-                {{item.goods_name}}
-              </p>
-              <p class="content-price">
-                星币 <span>{{item.spec.gold}}</span> + ¥ <i>{{item.spec.cash}}</i>
-              </p>
+          <li v-for="(cls,index) in swiperBox" :key="index">
+            <router-link :to="{path: '/classifyList/'+cls.cid+'/'+cls.name}">
+              <div><img :src="getImg(cls.logo)" alt=""></div>
+              <p>{{cls.name}}</p>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="classify">
+              <div><img src="" alt=""></div><p>更多</p>
             </router-link>
           </li>
         </ul>
+      </div>
+      <!--logo图片位置-->
+      <div class='logo-img'>
+        <div class="logo-img-con">
+          <img src="../../assets/image/data_icon.png" alt="">
+          <div class="logo-title"><p>SG星球数据中心</p></div>
+        </div>
+      </div>
+      <!--品牌-->
+      <div class="band-goods-container">
+        <p class="band-goods-title"><span>品牌</span></p>
+        <div class="band-container">
+          <ul :style="{width: S_width + 'rem'}">
+            <li v-for="(sImg,index) in storeImg" :key="index">
+              <router-link :to="{path: '/storeDetial/'+sImg.id}">
+                <img :src="getImg(sImg.logo)" alt="">
+              </router-link>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--精品-->
+      <div class="band-goods-container">
+        <p class="band-goods-title"><span>精品</span></p>
+        <div class="goods-container">
+          <ul>
+            <li class="content-list" v-for="item in goodsList" :key="item.id">
+              <router-link :to="{path:'/details/' + item.goods_id}">
+                <img :src="getImg(item.default_img)" alt="">
+                <p>
+                  {{item.goods_name}}
+                </p>
+                <p class="content-price">
+                  星币 <span>{{item.spec.gold}}</span> + ¥ <i>{{item.spec.cash}}</i>
+                </p>
+              </router-link>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -94,14 +96,15 @@
     background-color: rgba(255, 255, 255, 1)
   }
   .store-swiper{
-    padding-top: 0.2rem;
+    /*padding-top: 1.5rem;*/
+    margin-top: 1.5rem;
   }
   .carousel-3d-container {
     margin: 0 auto;
   .carousel-3d-slide {
     padding: 0;
     width: 300px;
-    height: 200px;
+    /*height: 200px;*/
     .title { font-size: 22px; }
   }
 }
@@ -140,9 +143,8 @@ export default {
             src: 'http://c.hiphotos.baidu.com/image/pic/item/a5c27d1ed21b0ef4b129b3b9d1c451da80cb3e17.jpg'
           },
       ],
-      slideWidth: 300,
-      childWidth: 300,
-      slideHeight: 200,
+      slideWidth: 200,
+      slideHeight: 120,
       isHeight: false,
       S_width: 0,
       getImg (url) {
@@ -220,7 +222,7 @@ export default {
   methods: {
     determine () {
       // 搜索
-      
+
     }
   }
 }

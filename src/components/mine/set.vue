@@ -51,7 +51,7 @@ export default {
       localStorage.removeItem('token')
       localStorage.removeItem('userinfo')
       // window.location.href = 'login'
-      this.$router.replace('/login')
+      this.$router.push('/login')
     }
   },
   created () {

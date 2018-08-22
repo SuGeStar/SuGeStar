@@ -98,8 +98,8 @@ export default {
           y: position[index].y,
           origin: { x: "center", y: "center" },
           image: require("../../assets/image/index-zuanshi.png"),         //图片地址
-          width: 25, //宽度大小
-          height: 20
+          width: 28, //宽度大小
+          height: 28
         });
         let randomNum = randomArray[index];
         createAninmal(canvasObj['image' + index], 'element.abs_y == position[index].y ? position[index].y - '+randomNum+': position[index].y', index, '', createAninmal);  //调用创建动画函数

@@ -1,6 +1,6 @@
 <template>
   <div class="reg-container">
-    <h3 class="reg-title">SG星球注册</h3>
+    <h3 class="reg-title">YC星球区块创建</h3>
     <div class="reg-form">
       <div><span>推荐编号</span><input type="text" placeholder="" :readonly="true" v-model="invite_code"></div>
       <div><span>接点编号</span><input type="text" placeholder="" :readonly="true" v-model="contact_code"></div>
@@ -25,7 +25,7 @@
       <div><span>真实姓名</span><input type="text" placeholder="请输入您的真实姓名" v-model="realName"></div>
       <!-- <div><span>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span><input type="text" placeholder="给自己起个名字吧~" v-model="nickName"></div>  -->
     </div>
-    <mt-button type="default" @click="register">注册</mt-button>
+    <mt-button type="default" @click="register">创建</mt-button>
     <cityPop v-model="addressArr" @hidden="hiddenShow" v-show="cityPop_up"></cityPop>
   </div>
 </template>

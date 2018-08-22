@@ -57,7 +57,7 @@ export default {
       detail: '', // 详细地址
       getAds: '',
       code: '', // 邮编
-      is_default: '', 
+      is_default: '',
       address: '',
       cityPop_up: false,
       z_tel: /^1(3|4|5|6|7|8|9)\d{9}$/,
@@ -89,10 +89,9 @@ export default {
     setDefault () {
       if (this.is_default === 0 || this.is_default == false) {
         this.is_default = 1
-      }else {
+      } else {
         this.is_default = 0
       }
-      
       return(this.is_default)
     },
     addAds () {
@@ -138,26 +137,26 @@ export default {
         area: this.addressArea[2],
         is_default: this.is_default
       })
-    // 编辑收货地址
+      // 编辑收货地址
       this.$http.post(url+'addressEdit', form)
-      .then(response => {
-        console.log(response)
-        Toast({
-          message: response.data.msg,
-          position: 'middle',
-          duration: 2000
+        .then(response => {
+          console.log(response)
+          Toast({
+            message: response.data.msg,
+            position: 'middle',
+            duration: 2000
+          })
+          this.$router.back(-1)
         })
-        this.$router.back(-1)
-      })
-      .catch(error => {
-        console.log(error)
-        // Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-        Toast({
-          message: response.data.msg,
-          position: 'middle',
-          duration: 2000
+        .catch(error => {
+          console.log(error)
+          // Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+          Toast({
+            message: response.data.msg,
+            position: 'middle',
+            duration: 2000
+          })
         })
-      })
     }
   }
 }

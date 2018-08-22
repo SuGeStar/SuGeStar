@@ -64,7 +64,7 @@
       <!-- 挖宝数据 -->
       <div class="index-box">
         <div class="box-title">
-          <h3>挖宝数据</h3>
+          <h3>挖矿数据</h3>
         </div>
         <div class="content-box">
           <ul>
@@ -172,64 +172,68 @@ export default {
         })
     },
     dataMiners () {
-      this.$http.get(url + 'dataMiners?token=' + token)
-      // 今日星币及累计获得的星币数据
-      .then(response => {
-        // console.log(response)
-        if (response.data.code == 200) {
-          this.miners_today = response.data.data.today
-          this.miners_all = response.data.data.total
-        } else if (response.data.code == 403) {
-          Toast({
-            message: response.data.msg
+      if (token) {
+        this.$http.get(url + 'dataMiners?token=' + token)
+        // 今日星币及累计获得的星币数据
+          .then(response => {
+            // console.log(response)
+            if (response.data.code == 200) {
+              this.miners_today = response.data.data.today
+              this.miners_all = response.data.data.total
+            } else if (response.data.code == 403) {
+              Toast({
+                message: response.data.msg
+              })
+            }
           })
-        }
-      })
-      .catch(error => {
-        console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-      })
+          .catch(error => {
+            console.log(error)
+            Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+          })
+      }
     },
     dataGold () {
-      this.$http.get(url + 'dataGold?token=' + token)
-      // 今日代币及累计获得的代币数据
-      .then(response => {
-        // console.log(response)
-        if (response.data.code == 200) {
-          this.today_owen = response.data.data.today
-          this.all_owen = response.data.data.total
-        } else if (response.data.code == 403) {
-          Toast({
-            message: response.data.msg
+      if (token) {
+        this.$http.get(url + 'dataGold?token=' + token)
+        // 今日代币及累计获得的代币数据
+          .then(response => {
+            // console.log(response)
+            if (response.data.code == 200) {
+              this.today_owen = response.data.data.today
+              this.all_owen = response.data.data.total
+            } else if (response.data.code == 403) {
+              Toast({
+                message: response.data.msg
+              })
+            }
           })
-        }
-      })
-      .catch(error => {
-        console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-      })
+          .catch(error => {
+            console.log(error)
+            Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+          })
+      }
     },
     recommend () {
       // 获取直推人数
       api.recommendNum()
-      .then((res) => {
-        this.invitpeo = res.data
-      })
+        .then((res) => {
+          this.invitpeo = res.data
+        })
     },
     getSonNum () {
       // 旗下人数
       api.getSonNum()
-      .then((res) => {
-        this.allpeo = res.data
-      })
+        .then((res) => {
+          this.allpeo = res.data
+        })
     },
     prompt () {
       // 提示信息
       api.prompt()
-      .then((res) => {
-        // console.log(res)
-        this.promptTxt = res.data
-      })
+        .then((res) => {
+          // console.log(res)
+          this.promptTxt = res.data
+        })
     },
     getStar () {
       Toast({
@@ -257,7 +261,7 @@ export default {
           Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
         })
     }
-    if (!token) {
+    /*if (!token) {
 
     } else {
       this.$http.get(url + 'occupancyRate?token=' + token)
@@ -281,7 +285,7 @@ export default {
           console.log(error)
           Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
         })
-    }
+    }*/
   },
   mounted () {
     if (!token) {
