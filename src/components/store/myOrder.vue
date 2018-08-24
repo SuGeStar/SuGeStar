@@ -9,7 +9,7 @@
     <div class="my-order-container">
       <!--所有订单-->
       <div class="each-order-list-container" v-for="(order,index) in orderList" :key="index">
-        <p class="shopName">{{order.product.store_name}}</p>
+        <p class="shopName">{{order.product.goods_name}}</p>
         <div class="each-order-list">
           <div class="eol-img fl">
             <img :src="getImg(order.product.default_img)" alt="">
@@ -180,6 +180,7 @@ export default {
           } else {
             this.noData = false;
             this.orderList = res.data.data;
+            console.log(this.orderList)
           }
         })
         .catch(err => {

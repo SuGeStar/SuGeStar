@@ -9,7 +9,7 @@
     <div class="classifyList">
       <!-- 标题 -->
       <div class="title">
-        <ul>
+        <ul :style="{width: width + 'rem'}">
           <li v-for="(title,index) in classify" :key="index" :id="title.cid" :class="{active:index===nowIndex}" @click="goodsList(title.id,page,index)">{{title.name}}</li>
         </ul>
       </div>
@@ -18,7 +18,7 @@
           <mt-tab-container-item v-for="(title,index) in classify" :key="index"  :id="index">
             <ul>
               <li v-for="(goods,index) in newList" :key="index">
-                <router-link class="goods-box" to="/">
+                <router-link class="goods-box" :to="{path:'/details/' + goods.id}">
                   <img :src=" imgUrl + goods.default_img" alt="">
                   <div class="goods-txt">
                     <p>{{goods.goods_name}}</p>
@@ -54,7 +54,8 @@ export default {
       page: 0,
       nowIndex: 0,
       cid: '',
-      imgUrl: imgUrl
+      imgUrl: imgUrl,
+      width: 0
     }
   },
   created () {
@@ -67,12 +68,13 @@ export default {
       api.cateList({
         cate_id: this.$route.params.id
       })
-      .then((res) => {
-        // console.log(res)
-        this.classify = res.data
-        this.cid = this.classify[0].id
-        this.goodsList(this.cid, 1, 0)
-      })
+        .then((res) => {
+          // console.log(res)
+          this.classify = res.data
+          this.cid = this.classify[0].id
+          this.goodsList(this.cid, 1, 0)
+          this.width = this.classify.length * 1.5
+        })
     },
     goodsList (cid, page, index) {
       this.nowIndex = index
@@ -80,11 +82,11 @@ export default {
         cate_id: cid,
         page: page
       })
-      .then((res) => {
-        // console.log(res)
-        this.newList = res.data
-      })
-    },
+        .then((res) => {
+          // console.log(res)
+          this.newList = res.data
+        })
+    }
   }
 }
 </script>

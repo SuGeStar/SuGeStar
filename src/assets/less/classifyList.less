@@ -2,17 +2,26 @@
 .classifyList{
   margin-top: 1rem;
   .title{
+    height: .8rem;
+    overflow: scroll;
     ul {
-      display: flex;
-      justify-content: space-around;
+      width: 18rem;
+      height: .8rem;
       background-color: #fff;
       li {
-        padding: 0.2rem;
+        height: .75rem;
+        line-height: .8rem;
+        width: 1.5rem!important;
+        float: left;
+        text-align: center;
         &.active{
-          border-bottom: 2px solid #3981ff;
+          border-bottom:.05rem solid #3981ff;
         }
       }
     }
+  }
+  .title::-webkit-scrollbar{
+    display: none;
   }
   .classify-box{
     ul{
