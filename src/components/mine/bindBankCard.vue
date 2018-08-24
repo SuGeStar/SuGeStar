@@ -38,32 +38,7 @@ export default {
   data () {
     return {
       id: '',
-      cardList: [
-        {
-          cardImg: '',
-          cardName: '中国建设银行（储蓄卡）',
-          cardNum: '**** **** **** 760',
-          def: '1'
-        },
-        {
-          cardImg: '',
-          cardName: '中国工商银行（储蓄卡）',
-          cardNum: '**** **** **** 760',
-          def: '0'
-        },
-        {
-          cardImg: '',
-          cardName: '中国农业银行（储蓄卡）',
-          cardNum: '**** **** **** 760',
-          def: '0'
-        },
-        {
-          cardImg: '',
-          cardName: '中国银行（储蓄卡）',
-          cardNum: '**** **** **** 760',
-          def: '0'
-        }
-      ]
+      cardList: []
     }
   },
   methods: {
@@ -74,22 +49,22 @@ export default {
         bank_id: id
       })
       this.$http.post(url+'delBank', form)
-      .then(response => {
-        // console.log(response)
-        if (response.data.code == 200) {
-          ele.splice(idx, 1)
-        } else {
-          Toast({
-            message: response.data.msg,
-            position: 'bottom',
-            duration: 2000
-          })
-        }
-      })
-      .catch(error => {
-        console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-      })
+        .then(response => {
+          // console.log(response)
+          if (response.data.code == 200) {
+            ele.splice(idx, 1)
+          } else {
+            Toast({
+              message: response.data.msg,
+              position: 'bottom',
+              duration: 2000
+            })
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        })
     },
     // 设置默认
     setDef (id) {
@@ -98,18 +73,18 @@ export default {
         token: token,
         bank_id: id
       })
-      this.$http.post(url+'setBankDefault', form)
-      .then(response => {
-        // console.log(response)
-        Toast({
-          message: response.data.msg,
-          position: 'bottom',
-          duration: 2000
+      this.$http.post(url + 'setBankDefault', form)
+        .then(response => {
+          // console.log(response)
+          Toast({
+            message: response.data.msg,
+            position: 'bottom',
+            duration: 2000
+          })
         })
-      })
-      .catch(error => {
-        console.log(error)
-      })
+        .catch(error => {
+          console.log(error)
+        })
     }
   },
   mounted () {

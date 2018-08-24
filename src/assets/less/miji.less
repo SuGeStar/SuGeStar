@@ -1,7 +1,7 @@
 // out:false
 .mint-header{
-  background-color: #1e1c4b;
-  color: #fff;
+  background-color: #fff;
+  color: #000;
 }
 .miji{
   img{
@@ -24,6 +24,36 @@
       padding: 0.26rem;
       padding-top: 0;
       color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
+.dynamicContainer{
+  position: absolute;
+  top: .85rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background:url("../image/treng_bg.png") no-repeat center;
+  background-size: 100% 100%;
+  .dynamicTxt{
+    width: 3.92rem;
+    height: 1.11rem;
+    margin: .96rem auto .81rem;
+    background: url("../image/dynamicTxt.png") no-repeat center;
+    background-size: 100%;
+  }
+  .treng_pic{
+    width: 5.89rem;
+    height: 2.05rem;
+    margin: 0 auto .45rem;
+    &.treng_pic1{
+      background: url("../image/treng_pic1.png") no-repeat center;
+      background-size: 100% ;
+    }
+    &.treng_pic2{
+      background: url("../image/treng_pic2.png") no-repeat center;
+      background-size: 100%;
     }
   }
 }

@@ -203,7 +203,7 @@ export default {
         console.log(err)
       })
     // 品牌
-    this.$http.get(url + 'brandList')
+    this.$http.get(url + 'brandList/1')
       .then(res => {
         // console.log(res)
         this.storeImg = res.data.data
@@ -213,7 +213,7 @@ export default {
         console.log(err)
       })
     // 获取精选好物数据
-    this.$http.get(url + 'goodsSelected?page=' + 1)
+    this.$http.get(url + 'goodsSelected/' + 1)
       .then(res => {
         this.goodsList = res.data.data
       })

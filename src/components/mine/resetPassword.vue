@@ -69,11 +69,18 @@ export default {
       let data = this.$qs.stringify({
         phone: this.$route.params.phone,
         password: this.form.newpsd,
-        password_confirm: this.form.againpsd
+        password_confirmation: this.form.againpsd
       })
+
       // 只能为数字
       var regex = /[^\d]/g;
       if (this.id == 2) {
+        let dataP = this.$qs.stringify({
+          phone: this.$route.params.phone,
+          password: this.form.newpsd,
+          password_confirmation: this.form.againpsd,
+          token: localStorage.getItem('token')
+        })
         // 判断是否为重置支付密码
         if (this.form.newpsd.length !== 6 || regex.test(this.form.newpsd)){
           Toast({
@@ -84,33 +91,27 @@ export default {
           this.form.newpsd = ''
         } else if (!regex.test(this.form.newpsd)) {
           // 调取忘记支付密码接口
-          api.forgetPaymentPassword(data)
-          .then((res) => {
-            console.log(res)
-            Toast({
-              message: res.msg
+          api.forgetPaymentPassword(dataP)
+            .then((res) => {
+              console.log(res)
+              Toast({
+                message: res.msg
+              })
+              this.$router.replace('/set')
             })
-            this.$router.replace('/set')
-          })
         }
       } else {
         // 调取忘记登录密码接口
-        // console.log('重置登录密码')
-        // let form = this.$qs.stringify({
-        //   phone: this.$route.params.phone,
-        //   password: this.form.newpsd,
-        //   password_confirm: this.form.againpsd
-        // })
         api.forgetPassword(data)
-        .then((res) => {
-          console.log(res)
-          if (res.code == 200) {
-            Toast({
-              message: res.msg
-            })
-            this.$router.replace('/login')
-          }
-        })
+          .then((res) => {
+            console.log(res)
+            if (res.code === 200) {
+              Toast({
+                message: res.msg
+              })
+              this.$router.replace('/login')
+            }
+          })
       }
     }
   }

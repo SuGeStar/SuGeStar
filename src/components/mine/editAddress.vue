@@ -47,7 +47,7 @@ let token = localStorage.getItem('token')
 export default {
   data () {
     return {
-      btnTxt: '确认增加',
+      btnTxt: '确认编辑',
       receiver: '', // 收货人
       phone: '', // 电话
       addressArea: [], // 地区
@@ -70,7 +70,7 @@ export default {
   created () {
     this.receiver = this.$route.params.name,
     this.phone = this.$route.params.phone,
-    this.addressArea = this.$route.params.addressArea,
+    this.addressArea = this.$route.params.addressArea[0] + ' ' + '' + this.$route.params.addressArea[1] + ' ' + this.$route.params.addressArea[2],
     this.detail = this.$route.params.detail,
     this.code = this.$route.params.postcode,
     this.is_default = this.$route.params.is_default
@@ -119,12 +119,11 @@ export default {
         Toast('请填写邮编！')
         return false
       }
-      if ( this.is_default == false) {
+      if (this.is_default == false) {
         this.is_default = 0
       } else {
         this.is_default = 1
       }
-      console.log(this.is_default)
       let form = this.$qs.stringify({
         id: this.$route.params.id,
         name: this.receiver,
@@ -132,15 +131,15 @@ export default {
         postcode: this.code,
         detail: this.detail,
         token: token,
-        province: this.addressArea[0],
-        city: this.addressArea[1],
-        area: this.addressArea[2],
+        province: this.addressArea.split(' ')[0],
+        city: this.addressArea.split(' ')[1],
+        area: this.addressArea.split(' ')[2],
         is_default: this.is_default
       })
       // 编辑收货地址
-      this.$http.post(url+'addressEdit', form)
+      this.$http.post(url + 'addressEdit', form)
         .then(response => {
-          console.log(response)
+          // console.log(response)
           Toast({
             message: response.data.msg,
             position: 'middle',

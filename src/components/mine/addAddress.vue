@@ -101,9 +101,9 @@ export default {
         return false
       }
       // console.log(this.setDefault())
-      if (this.setDefault()) {
-        // console.log(this.is_default)
-      }
+      // if (this.setDefault()) {
+      //   // console.log(this.is_default)
+      // }
       let form = this.$qs.stringify({
         name: this.receiver,
         phone: this.phone,
@@ -115,17 +115,17 @@ export default {
         area: this.addressArea.split(' ')[2],
         is_default: this.is_default
       })
-      this.$http.post(url+'adressAdd', form)
-      .then(response => {
-        // console.log(response)
-        Toast({
-          message: response.data.msg,
-          position: 'middle',
-          duration: 2000
+      this.$http.post(url + 'adressAdd', form)
+        .then(response => {
+          // console.log(response)
+          Toast({
+            message: response.data.msg,
+            position: 'middle',
+            duration: 2000
+          })
+          this.$router.back(-1)
         })
-        this.$router.back(-1)
-      })
-      .catch(error => {
+        .catch(error => {
         console.log(error)
         Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
       })
@@ -144,24 +144,6 @@ export default {
   created () {
   },
   mounted () {
-    // if (this.way === 'modify') {
-    //   this.title = '修改收货地址'
-    //   this.btnTxt = '确认修改'
-    //   this.receiver = modify_.name;
-    //   this.phone = modify_.phone;
-    //   this.addressArea = modify_.province + modify_.city + modify_.area;
-    //   this.detail = modify_.detail;
-    //   this.code = modify_.postcode;
-    //   this.is_default = modify_.is_default
-    //   if (modify_.is_default === 1) {
-    //     this.is_default = true
-    //   } else {
-    //     this.is_default = false
-    //   }
-    // } else {
-    //   this.title = '新增收货地址'
-    //   this.btnTxt = '确认增加'
-    // }
   }
 }
 </script>

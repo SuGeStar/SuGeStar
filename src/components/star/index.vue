@@ -192,7 +192,7 @@ export default {
           })
       }
     },
-    dataGold () {
+    /*dataGold () {
       if (token) {
         this.$http.get(url + 'dataGold?token=' + token)
         // 今日代币及累计获得的代币数据
@@ -212,8 +212,8 @@ export default {
             Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
           })
       }
-    },
-    recommend () {
+    },*/
+    /*recommend () {
       // 获取直推人数
       api.recommendNum()
         .then((res) => {
@@ -234,7 +234,7 @@ export default {
           // console.log(res)
           this.promptTxt = res.data
         })
-    },
+    },*/
     getStar () {
       Toast({
         message: '红包还在制作中，请稍等..',
@@ -245,10 +245,10 @@ export default {
   },
   created () {
     this.dataMiners()
-    this.dataGold()
-    this.recommend()
-    this.getSonNum()
-    this.prompt()
+    // this.dataGold()
+    // this.recommend()
+    // this.getSonNum()
+    // this.prompt()
     if (token) {
       this.$http.get(url + 'notGet?token=' + token)
       // 未开采K矿

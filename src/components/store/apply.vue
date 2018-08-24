@@ -15,7 +15,7 @@
       <li class="apply-way" @click="applyPop(1)">
         <router-link to="">
           <i class="icon icon-sgj"></i>
-          <p>代币+星币支付</p>
+          <p>星钻+星币支付</p>
         </router-link>
       </li>
       <li class="apply-way" @click="applyPop(2)">

@@ -63,11 +63,23 @@
 export default {
   data () {
     return {
-      identity: '创世居民',
-      name: '张三',
-      recomid: 'ADVVB',
-      phone: '18235564565'
+      userInfo: JSON.parse(localStorage.getItem('userinfo')),
+      identity: '',
+      name: '',
+      recomid: '',
+      phone: ''
     }
+  },
+  created () {
+    console.log(localStorage.getItem('userinfo'))
+    if (this.userInfo.level === 2) {
+      this.identity = '创世居民'
+    } else {
+      this.identity = '居民'
+    }
+    this.name = this.userInfo.realname
+    this.recomid = this.userInfo.invite_code
+    this.phone = this.userInfo.phone
   }
 }
 </script>

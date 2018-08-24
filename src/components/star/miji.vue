@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
-    <mt-header fixed title="星球秘籍">
+    <mt-header fixed title="星球动态">
       <a href="javascript:history.go(-1);" slot="left">
         <mt-button icon="back"></mt-button>
       </a>
     </mt-header>
-    <div class="miji">
+    <!--<div class="miji">
       <img src="../../assets/image/miji-bg.png">
       <ul class="miji-content">
         <li>
@@ -69,6 +69,11 @@
           </div>
         </li>
       </ul>
+    </div>-->
+    <div class="dynamicContainer">
+      <div class="dynamicTxt"></div>
+      <div class="treng_pic1 treng_pic"></div>
+      <div class="treng_pic2 treng_pic"></div>
     </div>
   </div>
 </template>

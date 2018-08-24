@@ -64,7 +64,7 @@ export default {
       shopFinalPrice: 0,
       shopFinalGold: 0,
       getImg (url) {
-        return 'http://img.sugebei.com' + url
+        return 'http://img.sugebei.com/' + url
       }
     }
   },
@@ -74,7 +74,7 @@ export default {
       var applyOrder = {
         address_id: this.AdsId,
         list: {
-          goods_id: this.shopData.shopInfo.goods_id,
+          goods_id: this.shopData.shopInfo.id,
           num: this.shopData.shopCount,
           spec_id: this.shopData.shopTypeId
         },
@@ -118,8 +118,8 @@ export default {
         console.log(err)
       })
     this.shopData = JSON.parse(localStorage.getItem('finalData'))
-    this.shopSinglePrice = this.shopData.shopInfo.spec[0].cash
-    this.shopSingleGold = this.shopData.shopInfo.spec[0].gold
+    this.shopSinglePrice = this.shopData.shopInfo.specs[0].cash
+    this.shopSingleGold = this.shopData.shopInfo.specs[0].gold
     this.shopFinalPrice = parseFloat(this.shopSinglePrice) * parseFloat(this.shopData.shopCount)
     this.shopFinalGold = parseFloat(this.shopSingleGold) * parseFloat(this.shopData.shopCount)
   }

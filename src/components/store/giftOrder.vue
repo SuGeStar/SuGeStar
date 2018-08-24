@@ -173,26 +173,26 @@ export default {
         pay_channel: this.pay_channel,
         prentsent_id: this.$route.params.id
       })
-      this.$http.post(url+'giftOrderCreate', form)
-      .then(response => {
-        // console.log(response)
-        sessionStorage.setItem('order_sn',response.data.data)
-        if (response.data.code == 200) {
-          if (this.pay_channel == 'wx') {
-            window.location.href = 'http://www.sugebei.com/giftOrderPay?token='+token+'&order_sn='+response.data.data
-            return false
+      this.$http.post(url + 'giftOrderCreate', form)
+        .then(response => {
+          console.log(response)
+          sessionStorage.setItem('order_sn', response.data.data)
+          if (response.data.code === 200) {
+            if (this.pay_channel === 'wx') {
+              window.location.href = 'http://www.sugebei.com/giftOrderPay?token='+token+'&order_sn='+response.data.data
+              return false
+            }
+            if (this.pay_channel === 'gb') {
+              this.applyPop_pop_up = true
+              return false
+            }
+          } else {
+            Toast({
+              message: response.data.msg
+            })
           }
-          if (this.pay_channel == 'gb') {
-            this.applyPop_pop_up = true
-            return false
-          }
-        } else {
-          Toast({
-            message: response.data.msg
-          })
-        }
-      })
-      .catch(error => {
+        })
+        .catch(error => {
         console.log(error)
         Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
       })

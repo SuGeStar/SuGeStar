@@ -70,42 +70,42 @@ export default {
           token: token,
           phone: this.sendTel,
           gold: this.SGB,
-          mark: '转出'+this.SGB
+          mark: '转出' + this.SGB
         })
         this.$http.post(url+'transfer', form)
-        .then(response => {
-          console.log(response)
-          Toast({
-            message: response.data.msg,
-            position: 'bottom',
-            duration: 2000
+          .then(response => {
+            // console.log(response)
+            Toast({
+              message: response.data.msg,
+              position: 'bottom',
+              duration: 2000
+            })
+            if (response.data.code == 200) {
+              this.$router.push('/myProperty')
+            }
           })
-          if (response.data.code == 200) {
-            this.$router.push('/myProperty')
-          }
-        })
-        .catch(error => {
-          console.log(error)
-          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-        })  
+          .catch(error => {
+            console.log(error)
+            Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+          })
       }
     },
     getBank () {
       // 获取默认银行卡
       api.getBankDefault()
-      .then((res) => {
-        // console.log(res)
-        if (res.data == null) {
-          this.$router.push('/bindBankCard')
-          return false
-        }
-        let card = res.data.card
-        this.bankName = res.data.bank
-        this.bankCard = card.substr(card.length-4)
-        this.id = res.data.id
-      })
+        .then((res) => {
+          // console.log(res)
+          if (res.data == null) {
+            this.$router.push('/bindBankCard')
+            return false
+          }
+          let card = res.data.card
+          this.bankName = res.data.bank
+          this.bankCard = card.substr(card.length-4)
+          this.id = res.data.id
+        })
     },
-    hiddenShow(){
+    hiddenShow () {
       let that = this;
       that.applyPop_pop_up = false
     },
@@ -121,15 +121,23 @@ export default {
           payment_password: psw
         })
         api.applyWithdraw(form)
-        .then((res) => {
-          console.log(res)
-          Toast({
-            message: res.msg,
-            position: 'bottom',
-            duration: 5000
+          .then((res) => {
+            console.log(res)
+            if (res.code == 200) {
+              Toast({
+                message: res.msg,
+                position: 'bottom',
+                duration: 5000
+              })
+              this.$router.replace('/index')
+            } else {
+              Toast({
+                message: res.msg,
+                position: 'bottom',
+                duration: 5000
+              })
+            }
           })
-          this.$router.replace('/index')
-        })
       }
     }
   },

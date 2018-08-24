@@ -74,7 +74,7 @@ export default {
       })
       this.$http.post(url + 'delMyAddress',form)
       .then(response => {
-        // console.log(response)
+        console.log(response)
         Toast({
           message: response.data.msg,
           position: 'middle',
@@ -97,22 +97,22 @@ export default {
   },
   created () {
     // 获取收货地址
-    this.$http.get(url + 'myAddress?token='+token)
-    .then(response => {
-      // console.log(response)
-      if (response.data.code == 200) {
-        this.addressList = response.data.data
-      } else if (response.data.code == 403) {
-        Toast({
-          message: response.data.msg
-        })
-        this.$router.push('/login')
-      }
-    })
-    .catch(error => {
-      console.log(error)
-      Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-    })
+    this.$http.get(url + 'myAddress/1?token=' + token)
+      .then(response => {
+        console.log(response)
+       if (response.data.code == 200) {
+          this.addressList = response.data.data
+        } else if (response.data.code == 403) {
+          Toast({
+            message: response.data.msg
+          })
+          this.$router.push('/login')
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+      })
   }
 }
 </script>

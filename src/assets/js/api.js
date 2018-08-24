@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Toast } from 'mint-ui'
 // 接口url
-var url = 'http://www.sugebei.com/'
+var url = 'http://ycstar.test/api/'
 var imgUrl = 'http://img.sugebei.com/'
 let token = localStorage.getItem('token')
 // axios 配置
@@ -105,11 +105,11 @@ export default {
   },
   registers (params) {
     // 我的邀请
-    return Get(`/registers?token=${token}&page=${params.page}`)
+    return Get(`/registers/${params.page}?token=${token}`)
   },
   upgrades (params) {
     // 我的推荐
-    return Get(`/upgrades?token=${token}&page=${params.page}`)
+    return Get(`/upgrades/${params.page}?token=${token}`)
   },
   profit (params) {
     // 代币收入
@@ -117,19 +117,19 @@ export default {
   },
   expenses (params) {
     // 代币支出
-    return Get(`/expenses?token=${token}&page=${params.page}`)
+    return Get(`/expenses/${params.page}?token=${token}`)
   },
   kbExpenses (params) {
     // 星币支出
-    return Get(`/kbExpenses?token=${token}&page=${params.page}`)
+    return Get(`/kbExpenses/${params.page}?token=${token}`)
   },
   alreadyGetMonth () {
     // 星币收入(月)
-    return Get(`/alreadyGetMonth?token=${token}`)
+    return Get(`/alreadyGetMonth/1?token=${token}`)
   },
   alreadyGetDay (params) {
     // 星币收入(天)
-    return Get(`/alreadyGetDay?token=${token}&times=${params.time}&page=${params.page}`)
+    return Get(`/alreadyGetDay/${params.page}?token=${token}&times=${params.time}`)
   },
   getRecordCode () {
     // 推荐码和节点人码
@@ -137,7 +137,7 @@ export default {
   },
   waitPlacement () {
     // 我的待安置
-    return Get(`/waitPlacement?token=${token}`)
+    return Get(`/waitPlacement/1?token=${token}`)
   },
   setNickname (params) {
     // 修改昵称
@@ -167,18 +167,6 @@ export default {
     // 重置支付密码
     return Post('resetPayment', params)
   },
-  prompt () {
-    // 首页提示信息
-    return Get(`/prompt?token=${token}`)
-  },
-  recommendNum () {
-    // 直推人数
-    return Get(`/recommendNum?token=${token}`)
-  },
-  getSonNum () {
-    // 旗下人数
-    return Get(`/getSonNum?token=${token}`)
-  },
   present () {
     // 礼包列表
     return Get(`/present`)
@@ -201,7 +189,7 @@ export default {
   },
   brandGoodsList (params) {
     // 品牌下商品列表
-    return Get(`/brandGoodsList?brand_id=${params.brand_id}&page=${params.page}`)
+    return Get(`/brandGoodsList/${params.page}?brand_id=${params.brand_id}`)
   },
   search (params) {
     //  搜索

@@ -112,9 +112,9 @@ export default {
     },
     bankPull () {
       // 获取开户行列表
-      this.$http.get(url + 'bankList')
+      this.$http.get(url + 'banksList')
       .then(response => {
-        // console.log(response)
+        console.log(response)
         this.bankList = response.data.data
       })
       .catch(error => {
@@ -187,7 +187,7 @@ export default {
       if (this.username == '') {
         Toast('请输入持卡人姓名');
         return false
-      } 
+      }
       if (!this.phoneNum) {
         Toast('请填写电话号码!')
         return false

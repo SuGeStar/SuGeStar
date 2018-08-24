@@ -105,7 +105,7 @@ export default {
             token: token,
             old_password: this.form.oldpsd,
             password: this.form.newpsd,
-            password_confirm: this.form.againpsd
+            password_confirmation: this.form.againpsd
           })
           api.resetPayment(form)
           .then((res) => {
@@ -122,7 +122,7 @@ export default {
           token: token,
           old_password: this.form.oldpsd,
           password: this.form.newpsd,
-          password_confirm: this.form.againpsd
+          password_confirmation: this.form.againpsd
         })
         api.resetPassword(form)
         .then((res) => {
@@ -135,7 +135,7 @@ export default {
           this.$router.replace('/login')
         })
       }
-      
+
     }
   }
 }

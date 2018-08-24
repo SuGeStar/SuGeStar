@@ -92,10 +92,10 @@ export default {
       })
       api.createRechargeOrder(form)
       // 充值订单创建
-      .then((res) => {
-        console.log(res)
-        window.location.href = 'http://www.sugebei.com/rechargeOrderPay?token='+token+'&order_sn='+res.data
-      })
+        .then((res) => {
+          console.log(res)
+          // window.location.href = 'http://ycstar.test/api/rechargeOrderPay?token=' + token + ' &order_sn=' + res.data
+        })
     },
     judge () {
       let finalSmelting = Number(this.smeltingNum)

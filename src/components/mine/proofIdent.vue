@@ -96,26 +96,25 @@ export default {
             'phone': this.form.phone,
             'code': this.form.verifyCode
           })
-          .then ((res) => {
-            console.log(res)
-            if (res.code == 200) {
-              Toast({
-                message: res.msg
-              })
-              this.$router.push('/resetPassword/'+this.id+'/'+this.form.phone)
-            }
-          })
+            .then ((res) => {
+              console.log(res)
+              if (res.code == 200) {
+                Toast({
+                  message: res.msg
+                })
+                this.$router.push('/resetPassword/'+this.id+'/'+this.form.phone)
+              }
+            })
         }
       } else {
-        
       }
     },
     checkCode () {
-      
+
     }
   },
   mounted () {
-    
+
   }
 }
 </script>

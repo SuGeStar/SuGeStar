@@ -17,7 +17,7 @@
       <div class="the-txt">
         <h3>{{goodsInfo.goods_name}}</h3>
         <p>星币 <span>{{showGold}}</span> + ¥ <span>{{showPrice}}</span></p>
-        <s>¥ 3000</s>
+        <s>¥ {{totalPrice}}</s>
         <button @click="format(2)">立即购买</button>
       </div>
     </div>
@@ -108,8 +108,9 @@ export default {
       whichDo: 0,
       shopCarNum: 0,
       shopCarShow: true,
+      totalPrice: '',
       getImg (url) {
-        return 'http://img.sugebei.com' + url
+        return 'http://img.sugebei.com/' + url
       }
     }
   },
@@ -182,9 +183,10 @@ export default {
       switch (did) {
         case 1:
           // 添加到购物车
+          // console.log(this.goodsInfo)
           let form = this.$qs.stringify({
             token: token,
-            product_id: this.goodsInfo.goods_id,
+            product_id: this.goodsInfo.id,
             num: this.value,
             shop_id: this.goodsInfo.store_id,
             shop_name: this.goodsInfo.store_name,
@@ -231,15 +233,16 @@ export default {
         self.swiperBox = self.goodsInfo.main_img
         self.imgBox = self.goodsInfo.detail_img
         self.colorList = self.goodsInfo.color
-        self.specList = self.goodsInfo.spec
-        self.showPrice = self.goodsInfo.spec[0].cash
-        self.showGold = self.goodsInfo.spec[0].gold
+        self.specList = self.goodsInfo.specs
+        self.showPrice = self.goodsInfo.specs[0].cash
+        self.showGold = self.goodsInfo.specs[0].gold
         self.finalColor = self.goodsInfo.color[0]
-        self.finalSize = self.goodsInfo.spec[0].size
-        self.finalPrice = self.goodsInfo.spec[0].cash
-        self.finalGold = self.goodsInfo.spec[0].gold
-        self.finalTypeId = self.goodsInfo.spec[0].id
-        self.number = self.goodsInfo.spec[0].stock
+        self.finalSize = self.goodsInfo.specs[0].size
+        self.finalPrice = self.goodsInfo.specs[0].cash
+        self.finalGold = self.goodsInfo.specs[0].gold
+        self.finalTypeId = self.goodsInfo.specs[0].id
+        self.number = self.goodsInfo.specs[0].stock
+        self.totalPrice = self.goodsInfo.specs[0].total
       })
       .catch(err => {
         console.log(err)

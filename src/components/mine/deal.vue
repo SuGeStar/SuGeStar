@@ -93,57 +93,40 @@ export default {
   methods: {
     into () {
       // 转入列表
-      this.$http.get(url + 'income?token='+token)
-      .then(response => {
-        // console.log(response)
-        if (response.data.code == 200) {
+      this.$http.get(url + 'income/1?token='+token)
+        .then(response => {
+          // console.log(response)
+          if (response.data.code == 200) {
+            if (response.data.data == '') {
+              this.isNull = true
+              return false
+            } else {
+              this.isNull = false
+              this.intoList = response.data.data
+            }
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        })
+    },
+    out () { // 转出列表
+      this.$http.get(url + 'outlay/1?token='+token)
+        .then(response => {
+          // console.log(response)
           if (response.data.data == '') {
             this.isNull = true
             return false
           } else {
             this.isNull = false
-            this.intoList = response.data.data
+            this.list = response.data.data
           }
-        }
-        //  else if (response.data.code == 403) {
-        //   Toast({
-        //     message: response.data.msg,
-        //     position: 'bottom',
-        //     duration: 4000
-        //   })
-        //    localStorage.removeItem('token')
-        //    localStorage.removeItem('userinfo')
-        //    this.$router.push('/login')
-        // } else {
-        //   Toast({
-        //     message: response.data.msg,
-        //     position: 'bottom',
-        //     duration: 2000
-        //   })
-        // }
-      })
-      .catch(error => {
-        console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-      })
-    },
-    out () {
-      // 转出列表
-      this.$http.get(url + 'outlay?token='+token)
-      .then(response => {
-        // console.log(response)
-        if (response.data.data == '') {
-          this.isNull = true
-          return false
-        } else {
-          this.isNull = false
-          this.list = response.data.data
-        }
-      })
-      .catch(error => {
-        console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-      })
+        })
+        .catch(error => {
+          console.log(error)
+          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        })
     }
   }
 }

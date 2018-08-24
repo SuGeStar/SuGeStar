@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <mt-header fixed title="店铺详情">
+    <mt-header fixed :title="brand.name">
       <a href="javascript:history.go(-1);" slot="left">
         <mt-button icon="back"></mt-button>
       </a>
@@ -12,7 +12,7 @@
             <img :src="imgUrl + brand.logo" alt="">
           </div>
           <div class="title-box">
-            <p>{{brand.nick_name}}</p>
+            <p>{{brand.name}}</p>
             <span>{{brand.desc}}</span>
           </div>
         </div>
@@ -20,7 +20,7 @@
       <div class="store-box">
         <ul>
           <li v-for="(goods,index) in newList" class="store-list" :key="index">
-              <router-link class="goods-box" :to="{path:'/details/' + goods.goods_id}">
+              <router-link class="goods-box" :to="{path:'/details/' + goods.spec.goods_id}">
                 <img :src=" imgUrl + goods.default_img" alt="">
                 <div class="goods-txt">
                   <p>{{goods.goods_name}}</p>

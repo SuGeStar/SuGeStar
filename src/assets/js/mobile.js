@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { Toast } from 'mint-ui'
 // 接口url
-var url = 'http://www.sugebei.com/'
+var url = 'http://ycstar.test/api/'
+var urlImg = 'http://ycstar.test/'
 
 // axios 配置
 axios.defaults.timeout = 5000
