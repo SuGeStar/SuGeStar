@@ -181,7 +181,7 @@ export default {
   },
   goodsList (params) {
     // 类型下商品列表
-    return Get(`/goodsList?cate_id=${params.cate_id}&page=${params.page}`)
+    return Get(`/goodsList/${params.page}?cate_id=${params.cate_id}`)
   },
   brandList () {
     // 品牌列表

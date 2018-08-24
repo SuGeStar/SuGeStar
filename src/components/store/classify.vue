@@ -17,9 +17,9 @@
       <div class="classify-list">
         <ul>
           <li v-for="(classify,index) in classifyList" :key="index">
-            <router-link :to="{path: '/classifyList/'+classify.cid+'/'+classify.name}">
+            <router-link :to="{path: '/classifyList/'+classify.id+'/'+classify.name}">
               <div class="classify-card" >
-                <img :src="imgUrl + classify.img" alt="">
+                <img :src="imgUrl + classify.logo" alt="">
               </div>
             </router-link>
           </li>

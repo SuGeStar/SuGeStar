@@ -72,7 +72,7 @@
         <div class="goods-container">
           <ul>
             <li class="content-list" v-for="item in goodsList" :key="item.id">
-              <router-link :to="{path:'/details/' + item.goods_id}">
+              <router-link :to="{path:'/details/' + item.id}">
                 <img :src="getImg(item.default_img)" alt="">
                 <p>
                   {{item.goods_name}}
