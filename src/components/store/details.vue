@@ -24,6 +24,9 @@
   </div>
   <div class="detail-pic">
     <p><span></span>图文详情</p>
+    <div class="detail-table">
+      <i v-for="(ifo , index) in info" :key="index"><span>{{ifo.key}}</span><span>{{ifo.value}}</span></i>
+    </div>
     <div class="details-imgBox">
       <img v-for="(img,index) in imgBox" :key="index" :src="getImg(img)" alt="">
     </div>
@@ -69,7 +72,6 @@
             <p @click="defaultBtn(1)"><span>加入购物车</span></p>
             <p @click="defaultBtn(2)"><span class="buy-now">立即购买</span></p>
           </div>
-          <!--<mt-button type="default" @click="defaultBtn(0)" class="default-btn" v-if="whichWay">确认</mt-button>-->
         </div>
       </div>
     </div>
@@ -109,6 +111,8 @@ export default {
       shopCarNum: 0,
       shopCarShow: true,
       totalPrice: '',
+      info: [],
+      row: 0,
       getImg (url) {
         return 'http://img.sugebei.com/' + url
       }
@@ -243,6 +247,7 @@ export default {
         self.finalTypeId = self.goodsInfo.specs[0].id
         self.number = self.goodsInfo.specs[0].stock
         self.totalPrice = self.goodsInfo.specs[0].total
+        self.info = self.goodsInfo.infos
       })
       .catch(err => {
         console.log(err)

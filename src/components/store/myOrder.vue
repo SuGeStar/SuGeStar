@@ -64,7 +64,7 @@ export default {
       way: 'orderAll',
       noData: false,
       getImg (url) {
-        return 'http://img.sugebei.com' + url
+        return 'http://img.sugebei.com/' + url
       }
     }
   },
