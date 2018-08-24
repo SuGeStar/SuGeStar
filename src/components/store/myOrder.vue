@@ -171,7 +171,7 @@ export default {
     * 参数二：页数
     * */
     getOrderData (way, page) {
-      this.$http.get(url + way + '?token=' + token + '&page=' + page)
+      this.$http.get(url + way + '/' + page + '?token=' + token)
         .then(res => {
           console.log(res)
           let noGoods = res.data.data == '' || res.data.data == undefined || res.data.data == null
