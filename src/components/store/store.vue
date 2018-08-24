@@ -35,13 +35,13 @@
         <ul>
           <li v-for="(cls,index) in swiperBox" :key="index">
             <router-link :to="{path: '/classifyList/'+cls.cid+'/'+cls.name}">
-              <div><img :src="getImg(cls.logo)" alt=""></div>
+              <div><img :src="getImg(cls.img)" alt=""></div>
               <p>{{cls.name}}</p>
             </router-link>
           </li>
           <li>
             <router-link to="classify">
-              <div><img src="" alt=""></div><p>更多</p>
+              <div><img src="../../assets/image/icon5.png" alt=""></div><p>更多</p>
             </router-link>
           </li>
         </ul>
