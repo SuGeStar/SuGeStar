@@ -51,6 +51,8 @@ import place from '@/components/mine/place'
 import revisePsd from '@/components/mine/revisePsd'
 import classifyList from '@/components/store/classifyList'
 import storeDetial from '@/components/store/storeDetial'
+import sdZone from '@/components/store/sdZone'
+
 Vue.use(Router)
 Vue.use(VueClipboard)
 
@@ -310,6 +312,11 @@ export default new Router({
       path: '/storeDetial/:id',
       name: 'storeDetial',
       component: storeDetial
+    },
+    {
+      path: '/sdZone',
+      name: 'sdZone',
+      component: sdZone
     }
   ]
 })

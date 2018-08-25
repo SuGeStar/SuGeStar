@@ -48,10 +48,12 @@
       </div>
       <!--logo图片位置-->
       <div class='logo-img'>
-        <div class="logo-img-con">
-          <img src="../../assets/image/data_icon.png" alt="">
-          <div class="logo-title"><p>SG星球数据中心</p></div>
-        </div>
+        <router-link to="sdZone">
+          <div class="logo-img-con">
+            <img src="../../assets/image/data_icon.png" alt="">
+            <div class="logo-title"><p>YC星钻专区</p></div>
+          </div>
+        </router-link>
       </div>
       <!--品牌-->
       <div class="band-goods-container">
@@ -97,7 +99,7 @@
     margin-top: 1rem;
     z-index: 999999;
   }
-.carousel-3d-slide{
+  .carousel-3d-slide{
   z-index: 999999;
 }
   .swiper-imgs{
@@ -117,6 +119,7 @@
 import footGuide from '../comp/footGuide.vue'
 import { url } from '../../assets/js/mobile.js'
 import { Carousel3d, Slide } from 'vue-carousel-3d'
+// import { InfiniteScroll } from 'mint-ui';
 export default {
   components: {
     footGuide,
@@ -151,6 +154,9 @@ export default {
       slideHeight: 190,
       isHeight: false,
       S_width: 0,
+      loading: true,
+      page: 1,
+      abc: 10,
       getImg (url) {
         return 'http://img.sugebei.com/' + url
       }
@@ -158,17 +164,9 @@ export default {
   },
   mounted () {
     // 给window添加一个滚动滚动监听事件
-    window.addEventListener('scroll', this.handleScroll)
+
   },
-  handleScroll () {
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-    var offsetTop = document.querySelector('#searchBar').offsetTop;
-    console.log(scrollTop)
-    console.log(offsetTop)
-  },
-  destroyed () {//离开该页面需要移除这个监听的事件
-    window.removeEventListener('scroll', this.handleScroll)
-  },
+
   created () {
     // 获取商品一级分类
     this.$http.get(url + 'cateList')
@@ -222,12 +220,15 @@ export default {
       })
     let _l = this.storeImg.length
     this.S_width = _l * 1.28 + (_l - 1) * 0.26
+    // this.scrollBtm()
+    // window.addEventListener('scroll', scrollBtm)
+    // window.removeEventListener('scroll' , scrollBtm)
   },
   methods: {
     determine () {
       // 搜索
 
-    }
+    },
   }
 }
 </script>

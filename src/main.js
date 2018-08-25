@@ -18,6 +18,7 @@ Vue.config.productionTip = false
 Vue.use(MintUI)
 Vue.use(Progress)
 Vue.use(Carousel3d)
+// Vue.use(InfiniteScroll);
 // Vue.use(VueResource)
 Vue.prototype.$http = axios
 Vue.prototype.$qs = qs

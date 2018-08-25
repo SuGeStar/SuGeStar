@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Toast } from 'mint-ui'
 // 接口url
-var url = 'http://ycstar.sugebei.com/api/'
+var url = 'http://www.sugebei.com/api/'
 var imgUrl = 'http://img.sugebei.com/'
 let token = localStorage.getItem('token')
 // axios 配置
@@ -190,6 +190,10 @@ export default {
   brandGoodsList (params) {
     // 品牌下商品列表
     return Get(`/brandGoodsList/${params.page}?brand_id=${params.brand_id}`)
+  },
+  zoneList (params) {
+    // 品牌下商品列表
+    return Get(`/starCateList`)
   },
   search (params) {
     //  搜索
