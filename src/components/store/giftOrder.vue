@@ -171,7 +171,7 @@ export default {
         address_id: this.id,
         gift: this.giftBag,
         pay_channel: this.pay_channel,
-        prentsent_id: this.$route.params.id
+        present_id: this.$route.params.id
       })
       this.$http.post(url + 'giftOrderCreate', form)
         .then(response => {
@@ -179,7 +179,7 @@ export default {
           sessionStorage.setItem('order_sn', response.data.data)
           if (response.data.code === 200) {
             if (this.pay_channel === 'wx') {
-              window.location.href = 'http://www.sugebei.com/giftOrderPay?token='+token+'&order_sn='+response.data.data
+              window.location.href = url + 'giftOrderPay?token=' + token + '&order_sn=' + response.data.data
               return false
             }
             if (this.pay_channel === 'gb') {

@@ -14,7 +14,7 @@
           </div>
           <div class="car-content" v-for="(cars,index) in shop.child" :key="cars.id">
             <div class="check-box">
-              <input class="" :id="cars.id" type="radio" name="cart-checkbox">
+              <input class="" :id="cars.id" type="radio" name="cart-checkbox"  @click="getCarId(cars)">
               <label class="cart-checkbox" :for="cars.id"></label>
             </div>
             <div class="img-box">
@@ -47,7 +47,7 @@
         <p>或{{totmony}}+严选积分{{totsgk}}</p>
       </div>
     </div>
-    <div class="foot-sure">
+    <div class="foot-sure" @click="clear()">
       结算
     </div>
   </div>
@@ -66,8 +66,9 @@ export default {
       totPrice: '100',
       totmony: '￥10',
       totsgk: '90',
+      carId: '',
       getImg (url) {
-        return 'http://img.sugebei.com' + url
+        return 'http://img.sugebei.com/' + url
       }
     }
   },
@@ -95,9 +96,25 @@ export default {
           duration: 2000
         });
       }
+    },
+    clear () {
+      console.log(this.carId)
+    },
+    getCarId (e) {
+      console.log(e)
+      var finalData = {
+        shopCount: e.num,
+        shopPrice: e.spec.cash,
+        shopGold: e.spec.gold,
+        shopColor: e.specification,
+        shopSize: e.spec.size,
+        shopInfo: e,
+        shopTypeId: this.finalTypeId
+      }
     }
   },
   created () {
+    console.log(this.carId)
     // 获取购物车信息
     this.$http.get(url + 'cartList?token=' + token)
       .then(res => {

@@ -51,7 +51,7 @@
         <router-link to="sdZone">
           <div class="logo-img-con">
             <img src="../../assets/image/data_icon.png" alt="">
-            <div class="logo-title"><p>YC星钻专区</p></div>
+            <div class="logo-title"><p>YC星球商品数据中心</p></div>
           </div>
         </router-link>
       </div>

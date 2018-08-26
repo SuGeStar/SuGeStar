@@ -80,11 +80,6 @@ export default {
         this.smeltingNum = ''
         return false
       }
-      if ((finalSmelting) > this.SGNum) {
-        Toast('数量有误，请认真核对!')
-        this.smeltingNum = ''
-        return false
-      }
       let form = this.$qs.stringify({
         token: token,
         recharge_money: this.smeltingNum,
@@ -94,7 +89,7 @@ export default {
       // 充值订单创建
         .then((res) => {
           console.log(res)
-          // window.location.href = 'http://ycstar.test/api/rechargeOrderPay?token=' + token + ' &order_sn=' + res.data
+          window.location.href = 'http://ycstar.test/api/rechargeOrderPay?token=' + token + ' &order_sn=' + res.data
         })
     },
     judge () {

@@ -76,7 +76,8 @@ export default {
         list: {
           goods_id: this.shopData.shopInfo.id,
           num: this.shopData.shopCount,
-          spec_id: this.shopData.shopTypeId
+          spec_id: this.shopData.shopTypeId,
+          order_from: 1
         },
         color: this.shopData.shopColor,
         remark: this.buyerMsg

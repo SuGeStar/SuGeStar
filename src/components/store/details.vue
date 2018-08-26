@@ -210,7 +210,6 @@ export default {
             })
           break;
         case 2:
-          console.log('立即购买')
           var finalData = {
             shopCount: this.value,
             shopPrice: this.finalPrice,
