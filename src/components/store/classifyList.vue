@@ -62,6 +62,7 @@ export default {
     console.log(this.$route.params)
     this.title = this.$route.params.name
     this.classTit()
+    this.clsAdd()
   },
   methods: {
     classTit () {
@@ -86,6 +87,19 @@ export default {
           // console.log(res)
           this.newList = res.data
         })
+    },
+    clsAdd () {
+      window.addEventListener('cl', () => {
+        this.clsScroll()
+      })
+    },
+    clsScroll () {
+      var st = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
+      console.log(st + window.innerHeight)
+      console.log(document.body.offsetHeight)
+      // if (st + window.innerHeight + 1 > document.body.offsetHeight) {
+      //
+      // }
     }
   }
 }

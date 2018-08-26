@@ -34,7 +34,7 @@
       <div class="classify-container" id="searchBar">
         <ul>
           <li v-for="(cls,index) in swiperBox" :key="index">
-            <router-link :to="{path: '/classifyList/'+cls.cid+'/'+cls.name}">
+            <router-link :to="{path: '/classifyList/'+cls.id+'/'+cls.name}">
               <div><img :src="getImg(cls.img)" alt=""></div>
               <p>{{cls.name}}</p>
             </router-link>
@@ -85,6 +85,8 @@
               </router-link>
             </li>
           </ul>
+          <span class="add-mores" v-if="addMoreLogo"><mt-spinner :type="3" color="#000">.</mt-spinner></span>
+          <p class="no-more" v-if="!addMoreLogo">没有更多了...</p>
         </div>
       </div>
     </div>
@@ -99,7 +101,7 @@
     margin-top: 1rem;
     z-index: 999999;
   }
-  .carousel-3d-slide{
+.carousel-3d-slide{
   z-index: 999999;
 }
   .swiper-imgs{
@@ -154,9 +156,10 @@ export default {
       slideHeight: 190,
       isHeight: false,
       S_width: 0,
-      loading: true,
+      loading: false,
       page: 1,
-      abc: 10,
+      isScroll: true,
+      addMoreLogo: true,
       getImg (url) {
         return 'http://img.sugebei.com/' + url
       }
@@ -166,7 +169,12 @@ export default {
     // 给window添加一个滚动滚动监听事件
 
   },
-
+  beforeDestroy () {
+    // window.removeEventListener('scroll', () => {
+    //   this._st()
+    // })
+    this.isScroll = false
+  },
   created () {
     // 获取商品一级分类
     this.$http.get(url + 'cateList')
@@ -220,15 +228,40 @@ export default {
       })
     let _l = this.storeImg.length
     this.S_width = _l * 1.28 + (_l - 1) * 0.26
-    // this.scrollBtm()
-    // window.addEventListener('scroll', scrollBtm)
-    // window.removeEventListener('scroll' , scrollBtm)
+
+    this.scrollBottom()
   },
   methods: {
     determine () {
       // 搜索
 
     },
+    scrollBottom () {
+      window.addEventListener('scroll', () => {
+        this._st()
+      })
+    },
+    _st () {
+      if (this.isScroll) {
+        var st = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
+        if (st + window.innerHeight + 1 > document.body.offsetHeight) {
+          this.page += 1
+          this.$http.get(url + 'goodsSelected/' + this.page)
+            .then(res => {
+              for (var i in res.data.data) {
+                this.goodsList.push((res.data.data)[i])
+              }
+              if (res.data.data == '') {
+                this.isScroll = false
+                this.addMoreLogo = false
+              }
+            })
+            .catch(err => {
+              console.log(err)
+            })
+        }
+      }
+    }
   }
 }
 </script>

@@ -151,6 +151,7 @@ export default {
     footGuide,
     collecting
   },
+
   methods: {
     getEnergy (id) {
       // 开采K矿
