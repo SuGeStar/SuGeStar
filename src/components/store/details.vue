@@ -100,7 +100,7 @@ export default {
       finalGold: 0,
       finalTypeId: '',
       number: '5',
-      popupVisible: false,
+      popupVisible: true,
       imgBox: [],
       color: 0,
       spec: 0,
@@ -211,13 +211,28 @@ export default {
           break;
         case 2:
           var finalData = {
+            // 商品数量
             shopCount: this.value,
+            // 选中状态下商品单价--现金
             shopPrice: this.finalPrice,
+            //  选中状态下商品单价--星币
             shopGold: this.finalGold,
+            // 选中的颜色（状态1）
             shopColor: this.finalColor,
+            // 选中的尺寸（状态2）
             shopSize: this.finalSize,
-            shopInfo: this.goodsInfo,
-            shopTypeId: this.finalTypeId
+            // 商品ID
+            shopId: this.goodsInfo.id,
+            // 商品状态2 ID
+            shopTypeId: this.finalTypeId,
+            // 商品默认图片
+            shopImg: this.goodsInfo.default_img,
+            // 商品名字
+            shopName: this.goodsInfo.goods_name,
+            // 商品状态1名称
+            shopTypeName1: this.goodsInfo.color_name,
+            // 商品状态2名称
+            shopTypeName2: this.goodsInfo.size_name
           }
           localStorage.setItem('finalData',JSON.stringify(finalData))
           this.$router.push({

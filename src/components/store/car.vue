@@ -7,14 +7,14 @@
   </mt-header>
   <div class="car">
     <ul class="car-box">
-      <li class="list-box" v-for="(shop,index) in carList" :key="shop.id">
+      <li class="list-box" v-for="(shop, index) in carList" :key="index">
         <div class="car-list">
           <div class="car-title">
             {{shop.shop_name}}
           </div>
-          <div class="car-content" v-for="(cars,index) in shop.child" :key="cars.id">
+          <div class="car-content" v-for="(cars, index) in shop.child" :key="index" >
             <div class="check-box">
-              <input class="" :id="cars.id" type="radio" name="cart-checkbox"  @click="getCarId(cars)">
+              <input class="" :id="cars.id" type="radio" name="cart-checkbox"  @click="getCarId(cars)" v-model="checked">
               <label class="cart-checkbox" :for="cars.id"></label>
             </div>
             <div class="img-box">
@@ -24,9 +24,9 @@
               <h3>{{cars.goods.goods_name}}</h3>
               <p class="info-desc">{{cars.goods.color_name}}：{{cars.specification}}，{{cars.goods.size_name}}：{{cars.spec.size}}</p>
               <div class="esc-count">
-                <p class="cti-sub cti" @click="numSub">-</p>
+                <p class="cti-sub cti" @click="numSubAdd(cars,false)">-</p>
                 <input type="number" class="cti-number" readonly="" :value="cars.num">
-                <p class="cti-add cti" @click="numAdd">+</p>
+                <p class="cti-add cti" @click="numSubAdd(cars,true)">+</p>
               </div>
               <p class="car-price">星币 <span>{{cars.spec.gold}} + ¥ {{cars.spec.cash}}</span></p>
             </div>
@@ -43,8 +43,7 @@
     <div class="foot-total">
       <span>合计:</span>
       <div class="total-price">
-        <p>{{totPrice}}元</p>
-        <p>或{{totmony}}+严选积分{{totsgk}}</p>
+        <p>星币{{totalGold}} + ¥ {{totalPrice}}</p>
       </div>
     </div>
     <div class="foot-sure" @click="clear()">
@@ -63,54 +62,116 @@ export default {
       carList: [],
       number: '5',
       isSelect: true,
-      totPrice: '100',
-      totmony: '￥10',
-      totsgk: '90',
+      totalPrice: 0,
+      totalGold: 0,
       carId: '',
+      checkGoods: {},
       getImg (url) {
         return 'http://img.sugebei.com/' + url
       }
     }
   },
   methods: {
-    numSub () {
-      if (this.result <= 1) {
-        Toast({
-          message: '当前已是最小成交数量',
-          position: 'bottom',
-          duration: 2000
-        })
+    /*
+    * 购物车数量的增加减少
+    * */
+    numSubAdd (item, bool) {
+      // console.log(item)
+      if (bool) {
+        item.num++;
       } else {
-        this.result--;
-        this.$emit('input', {res: this.result, other: '--'})
+        item.num--;
+        if (item.num <= 1) {
+          item.num = 1;
+        }
       }
-    },
-    numAdd () {
-      if (this.result < this.number) {
-        this.result++;
-        this.$emit('input', {res: this.result, other: '++'})
-      } else {
-        Toast({
-          message: '已达到最大购买数量',
-          position: 'bottom',
-          duration: 2000
-        });
-      }
+      this.goodsCheck()
     },
     clear () {
-      console.log(this.carId)
+      console.log(this.checkGoods)
+      var finalData = {
+
+      }
+     /* this.$router.push({
+        path: '/confirmOrder'
+      })*/
+    },
+    /*
+    * 选中
+    * */
+    goodsCheck () {
+      let store = this.carList
+      store.forEach(storeItem => {
+        let goods = storeItem.child;
+        goods.forEach(goodsItem => {
+          console.log(goodsItem)
+          if (goodsItem.checked) {
+            console.log(goodsItem)
+          }
+        })
+        // console.log(storeItem)
+      })
+      /*store.forEach(this.carList, function (storItem) {
+        console.log(storItem)
+        /!*storItem.child.forEach(storItem.child, function (goodsItem) {
+          if (goodsItem.checked) {
+            console.log(goodsItem)
+          }
+        })*!/
+      })*/
     },
     getCarId (e) {
-      console.log(e)
-      var finalData = {
+      this.totalPrice = parseFloat(parseFloat(e.num) * parseFloat(e.spec.cash)).toFixed(2)
+      this.totalGold = parseFloat(parseFloat(e.num) * parseFloat(e.spec.gold)).toFixed(2)
+      this.checkGoods = {
+        // 商品数量
         shopCount: e.num,
+        // 选中状态下商品单价--现金
         shopPrice: e.spec.cash,
+        //  选中状态下商品单价--星币
         shopGold: e.spec.gold,
+        // 选中的颜色（状态1）
         shopColor: e.specification,
+        // 选中的尺寸（状态2）
         shopSize: e.spec.size,
-        shopInfo: e,
-        shopTypeId: this.finalTypeId
+        // 商品ID
+        shopId: e.goods.id,
+        // 商品状态2 ID
+        shopTypeId: e.spec.id,
+        // 商品默认图片
+        shopImg: e.goods.default_img,
+        // 商品名字
+        shopName: e.goods.goods_name,
+        // 商品状态1名称
+        shopTypeName1: e.goods.color_name,
+        // 商品状态2名称
+        shopTypeName2: e.goods.size_name
       }
+      // var finalData = {
+      //   // 商品数量
+      //   shopCount: e.num,
+      //   // 选中状态下商品单价--现金
+      //   shopPrice: e.spec.cash,
+      //   //  选中状态下商品单价--星币
+      //   shopGold: e.spec.gold,
+      //   // 选中的颜色（状态1）
+      //   shopColor: e.specification,
+      //   // 选中的尺寸（状态2）
+      //   shopSize: e.spec.size,
+      //   // 商品ID
+      //   shopId: e.goods.id,
+      //   // 商品状态2 ID
+      //   shopTypeId: e.spec.id,
+      //   // 商品默认图片
+      //   shopImg: e.goods.default_img,
+      //   // 商品名字
+      //   shopName: e.goods.goods_name,
+      //   // 商品状态1名称
+      //   shopTypeName1: e.goods.color_name,
+      //   // 商品状态2名称
+      //   shopTypeName2: e.goods.size_name
+      // }
+      // localStorage.setItem('finalData', JSON.stringify(finalData))
     }
   },
   created () {

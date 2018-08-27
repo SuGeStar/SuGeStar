@@ -17,11 +17,11 @@
     <div class="clear_order_list_container">
       <div class="each_order_list ng-scope">
       <div class="eol_img fl">
-        <img :src="getImg(shopData.shopInfo.default_img)">
+        <img :src="getImg(shopData.shopImg)">
       </div>
       <div class="eol_info fl">
-        <p class="eol_name">{{shopData.shopInfo.goods_name}}</p>
-        <p class="eol_type" style="width: 4.2rem;height: .3rem;overflow: hidden">{{shopData.shopInfo.color_name}}：{{shopData.shopColor}}，{{shopData.shopInfo.size_name}}：{{shopData.shopSize}}</p>
+        <p class="eol_name">{{shopData.shopName}}</p>
+        <p class="eol_type" style="width: 4.2rem;height: .3rem;overflow: hidden">{{shopData.shopTypeName1}}：{{shopData.shopColor}}，{{shopData.shopTypeName2}}：{{shopData.shopSize}}</p>
         <p class="eol_prices">星币：<span>{{shopSingleGold}}</span> + ¥ {{shopSinglePrice}}</p>
       </div>
       <span class="eol_num">X {{shopData.shopCount}}</span>
@@ -74,7 +74,7 @@ export default {
       var applyOrder = {
         address_id: this.AdsId,
         list: {
-          goods_id: this.shopData.shopInfo.id,
+          goods_id: this.shopData.shopId,
           num: this.shopData.shopCount,
           spec_id: this.shopData.shopTypeId,
           order_from: 1
@@ -119,8 +119,9 @@ export default {
         console.log(err)
       })
     this.shopData = JSON.parse(localStorage.getItem('finalData'))
-    this.shopSinglePrice = this.shopData.shopInfo.specs[0].cash
-    this.shopSingleGold = this.shopData.shopInfo.specs[0].gold
+    console.log(this.shopData)
+    this.shopSinglePrice = this.shopData.shopPrice
+    this.shopSingleGold = this.shopData.shopGold
     this.shopFinalPrice = parseFloat(this.shopSinglePrice) * parseFloat(this.shopData.shopCount)
     this.shopFinalGold = parseFloat(this.shopSingleGold) * parseFloat(this.shopData.shopCount)
   }
