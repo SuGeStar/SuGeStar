@@ -121,7 +121,8 @@
 import footGuide from '../comp/footGuide.vue'
 import { url } from '../../assets/js/mobile.js'
 import { Carousel3d, Slide } from 'vue-carousel-3d'
-// import { InfiniteScroll } from 'mint-ui';
+import api from '@/assets/js/api.js'
+let token = localStorage.getItem('token')
 export default {
   components: {
     footGuide,
@@ -228,8 +229,8 @@ export default {
       })
     let _l = this.storeImg.length
     this.S_width = _l * 1.28 + (_l - 1) * 0.26
-
     this.scrollBottom()
+    this.GetShopCarNum()
   },
   methods: {
     determine () {
@@ -241,6 +242,9 @@ export default {
         this._st()
       })
     },
+    /*
+    * 下拉记载更多
+    * */
     _st () {
       if (this.isScroll) {
         var st = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
@@ -260,6 +264,18 @@ export default {
               console.log(err)
             })
         }
+      }
+    },
+    // 获得购物车数量
+    GetShopCarNum () {
+      if (token) {
+        api.getShopCarNum(token)
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+          })
       }
     }
   }

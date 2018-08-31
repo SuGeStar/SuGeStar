@@ -197,7 +197,18 @@ export default {
   },
   search (params) {
     //  搜索
-    return Get(`/search?key_words=${params.key_words}`)
+    return Get(`/goodsSearch/1?key_words=${params.key_words}`)
+  },
+  getShopCarList (params) {
+    // 获取购物车列表
+    return Get(`/cartList?token=${params}`)
+  },
+  deleteShopCar (params) {
+    // 删除购物车
+    return Post(`/deleteFromCart`, params)
+  },
+  getShopCarNum (params) {
+    return Get(`/numCart?token=${params}`)
   }
 }
 export { imgUrl }

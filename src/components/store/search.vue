@@ -26,7 +26,7 @@
               <img src="../../assets/image/nodata.png" alt="">
             </li>
             <li v-for="(item,index) in searchList" :key="index">
-              <router-link :to="{path: '/details/'+item.goods_id}" class="search-box">
+              <router-link :to="{path: '/details/'+item.id}" class="search-box">
                 <div class="search-img">
                   <img :src="imgUrl + item.default_img" alt="">
                 </div>
@@ -64,34 +64,34 @@ export default {
     };
   },
   computed: {
-    
+
   },
   methods: {
     search () {
       api.search({
         key_words: this.key_words
       })
-      .then((res) => {
-        this.isHot = false
-        if (res.data.length == 0) {
-          this.isNull = true
-        } else {
-          this.isNull = false
-          this.searchList = res.data
-        }
-      })
+        .then((res) => {
+          this.isHot = false
+          if (res.data.length == 0) {
+            this.isNull = true
+          } else {
+            this.isNull = false
+            this.searchList = res.data
+          }
+        })
     },
     hotA () {
       this.key_words = this.hot1
-      this.search() 
+      this.search()
     },
     hotB () {
       this.key_words = this.hot2
-      this.search() 
+      this.search()
     },
     hotC () {
       this.key_words = this.hot3
-      this.search() 
+      this.search()
     }
   }
 }
