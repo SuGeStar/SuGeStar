@@ -38,7 +38,7 @@ export default {
               localStorage.setItem('userinfo', JSON.stringify(response.data.data.userinfo))
               localStorage.setItem('level', response.data.data.userinfo.level)
               localStorage.setItem('token', response.data.data.token)
-              window.location.href = ''
+              window.location.href = '/index'
               // this.$router.push('/index')
             } else {
               Toast({
