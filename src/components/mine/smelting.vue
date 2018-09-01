@@ -20,6 +20,7 @@
 <script>
 import { Toast } from 'mint-ui'
 import api from '@/assets/js/api.js'
+import { url } from '../../assets/js/mobile.js'
 let token = localStorage.getItem('token')
 export default {
   data () {
@@ -89,7 +90,7 @@ export default {
       // 充值订单创建
         .then((res) => {
           console.log(res)
-          window.location.href = 'http://ycstar.test/api/rechargeOrderPay?token=' + token + ' &order_sn=' + res.data
+          window.location.href = url + 'rechargeOrderPay?token=' + token + ' &order_sn=' + res.data
         })
     },
     judge () {
