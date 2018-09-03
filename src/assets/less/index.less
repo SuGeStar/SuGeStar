@@ -9,13 +9,48 @@
   bottom: 1rem;
   background: url("../image/newBG.jpg") no-repeat center;
   background-size: 100% 100%;
+  .index-user-info{
+    width: 5rem;
+    height: .4rem;
+    border-radius: .2rem;
+    background: #4D0177;
+    position: absolute;
+    top: 0.1rem;
+    right: .1rem;
+    overflow: hidden;
+    span{
+      display: inline-block;
+      height: 100%;
+      width: 1rem;
+      color: white;
+      line-height: .4rem;
+      padding-left: .2rem;
+    }
+    marquee{
+      height: 100%;
+      width: 2.8rem;
+      color: white;
+      p{
+        height: 100%;
+        line-height: .4rem;
+      }
+    }
+    i{
+      display: inline-block;
+      float: right;
+      height: 100%;
+      background: white;
+      line-height: .4rem;
+      font-size: .2rem;
+      padding: 0 .1rem;
+      color: #4D0177;
+    }
+  }
   .index-bg{
     position: relative;
     margin-bottom: 0.8rem;
     .canvas{
-      //position: absolute;
-      margin-top: 0.2rem;
-      //left: 0;
+      margin-top: 0.6rem;
       background: url("../image/XINGQIU.png") no-repeat center;
       background-size: 100% auto;
     }
@@ -51,13 +86,13 @@
     }
   }
   .index-box{
-    width: 90%;
+    width: 95%;
     background:#4D0177;
     border-radius: .25rem;
-    padding-top: .13rem;
+    padding: .13rem 0 .2rem;
     position: absolute;
     bottom: 1.4rem;
-    left: 5%;
+    left: 2.5%;
     .box-title{
       text-align: center;
       h3{
@@ -84,25 +119,41 @@
       }
     }
     .data-box{
-      width: 90%;
+      width: 95%;
       margin: .2rem auto 0;
       display: flex;
       justify-content: space-around;
       align-items: center;
       .data-list{
         width: 26%;
-        height: 1.7rem;
+        height: auto;
         background: rgba(0, 0, 0, 0.3);
         border-radius: .15rem;
-        padding: 0 2%;
-        img{
-          display: block;
-          width: .4rem;
-          height: auto;
-          margin: .1rem auto;
+        padding: 0 2% 2%;
+        .data-logo{
+          width: 1rem;
+          height: .5rem;
+          line-height: .5rem;
+          text-align: center;
+          color: white;
+          margin: .1rem auto 0!important;
+          img{
+            display: inline-block;
+            width: .4rem;
+            height: auto;
+            //margin: .1rem auto;
+            float: left;
+          }
+          span{
+            float: right;
+            display: inline-block;
+            height: .5rem;
+            line-height: .5rem;
+          }
         }
+
         p{
-          font-size: .16rem;
+          font-size: .25rem;
           &.data-title{
             color: white;
             text-align: left;

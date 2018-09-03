@@ -212,6 +212,10 @@ export default {
   },
   getShopCarNum (params) {
     return Get(`/numCart?token=${params}`)
+  },
+  getUserTreasure (params) {
+    // 获取用户财富
+    return Get(`/availableGold?token=${params}`)
   }
 }
 export { imgUrl }

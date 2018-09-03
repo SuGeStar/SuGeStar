@@ -3,7 +3,14 @@
     <div class="index">
       <!--基本信息-->
       <div class="index-user-info">
-
+        <span class="fl">公告：</span>
+        <marquee  direction="up" scrolldelay="500">
+          <p>这是1个滚动消息我是一个跟hard的员工</p>
+          <p>这是2个滚动消息</p>
+          <p>这是3个滚动消息</p>
+          <p>这是4个滚动消息</p>
+        </marquee>
+        <i>更多 >></i>
       </div>
       <!-- 钻石区域 -->
       <div class="index-bg">
@@ -16,25 +23,30 @@
         </div>
         <div class="data-box">
           <div class="data-list">
-            <img src="../../assets/image/index-zuanshi.png" alt="">
-            <p class="data-title">今日获得</p>
-            <p class="data-data">2.0125</p>
-            <p class="data-title">累计获得</p>
-            <p class="data-data">100266</p>
+            <router-link to="/myProperty">
+              <div class="data-logo">
+                <img src="../../assets/image/jinbi.png" alt=""><span>星币</span>
+              </div>
+              <p class="data-data">{{ownerGold}}</p>
+            </router-link>
           </div>
           <div class="data-list">
-            <img src="../../assets/image/index-zuanshi.png" alt="">
-            <p class="data-title">今日获得</p>
+            <div class="data-logo">
+              <img src="../../assets/image/yl.png" alt=""><span>算力</span>
+            </div>
             <p class="data-data">2.0125</p>
-            <p class="data-title">累计获得</p>
-            <p class="data-data">100266</p>
           </div>
           <div class="data-list">
-            <img src="../../assets/image/index-zuanshi.png" alt="">
-            <p class="data-title">今日获得</p>
-            <p class="data-data">2.0125</p>
-            <p class="data-title">累计获得</p>
-            <p class="data-data">100266</p>
+            <router-link to="/myProperty">
+              <div class="data-logo">
+                <img src="../../assets/image/index-zuanshi.png" alt=""><span>星钻</span>
+              </div>
+              <p class="data-data">{{ownerMoney}}</p>
+             <!-- <p class="data-title">今日获得</p>
+              <p class="data-data">2.0125</p>
+              <p class="data-title">累计获得</p>
+              <p class="data-data">100266</p>-->
+            </router-link>
           </div>
         </div>
       </div>
@@ -96,7 +108,10 @@ export default {
       invitpeo: "3",
       allpeo: "10",
       progressBox: [],
-      teamFloor: true
+      teamFloor: true,
+      ownerGold: 0,
+      ownerMoney: 0,
+      ownerPower: 0
     }
   },
   components: {
@@ -275,6 +290,15 @@ export default {
           Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
         })
     }*/
+    /*
+    * 获得金币数量
+    * */
+    api.getUserTreasure(token)
+      .then(res => {
+        // console.log(res)
+        this.ownerGold = res.data.miners
+        this.ownerMoney = res.data.gold
+      })
   },
   mounted () {
     if (!token) {
