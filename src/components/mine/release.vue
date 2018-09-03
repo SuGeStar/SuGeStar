@@ -9,6 +9,10 @@
       <div class="smelting-withdraw" v-if="isS">
         <span class="account_s">账号：</span><input type="number" v-model="sendTel">
       </div>
+      <p v-if="isF">请输入释放数量</p>
+      <div class="smelting-withdraw" v-if="isF">
+        <span class="account_s">数量：</span><input type="number" v-model="sendTel">
+      </div>
       <router-link to="/bindBankCard" v-if="isR">
         <div class="chose-bank" >到账银行卡 <span>{{bankName}}(尾号{{bankCard}})</span></div>
       </router-link>
@@ -32,6 +36,7 @@ export default {
       titleTxt: '释放',
       isS: false,
       isR: false,
+      isF: false,
       id: '',
       bankName: '',
       bankCard: '',
@@ -49,7 +54,7 @@ export default {
       if (this.isR) {
         if (this.SGB < 500) {
           Toast('释放代币不能小于500')
-        } else if (this.SGB%100 !== 0) {
+        } else if (this.SGB % 100 !== 0) {
           Toast('释放代币需是100的倍数')
         } else {
           this.applyPop_pop_up = true
@@ -89,9 +94,40 @@ export default {
             Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
           })
       }
+      // 星币释放
+      if (this.isF) {
+        if (!this.sendTel) {
+          Toast('数量不能为空！！！')
+          return false
+        }
+        this.applyPop_pop_up = true
+        // 赠送金币
+        /*let form = this.$qs.stringify({
+          token: token,
+          phone: this.sendTel,
+          gold: this.SGB,
+          mark: '转出' + this.SGB
+        })
+        this.$http.post(url + 'transfer', form)
+          .then(response => {
+            // console.log(response)
+            Toast({
+              message: response.data.msg,
+              position: 'bottom',
+              duration: 2000
+            })
+            if (response.data.code == 200) {
+              this.$router.push('/myProperty')
+            }
+          })
+          .catch(error => {
+            console.log(error)
+            Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+          })*/
+      }
     },
+    // 获取默认银行卡
     getBank () {
-      // 获取默认银行卡
       api.getBankDefault()
         .then((res) => {
           // console.log(res)
@@ -111,6 +147,73 @@ export default {
     },
     passwordGro (e) {
       this.password = e
+      console.log(e)
+      var way = parseInt(this.$route.params.way)
+      switch (way) {
+        case 0:
+          if (this.password.length == 6) {
+            let psw = this.password.toString().replace(/,/g, "")
+            let form = this.$qs.stringify({
+              token: token,
+              money: this.SGB,
+              bank_id: this.id,
+              mark: '提现备注',
+              payment_password: psw
+            })
+            api.applyWithdraw(form)
+              .then((res) => {
+                console.log(res)
+                if (res.code == 200) {
+                  Toast({
+                    message: res.msg,
+                    position: 'bottom',
+                    duration: 5000
+                  })
+                  this.$router.replace('/index')
+                } else {
+                  Toast({
+                    message: res.msg,
+                    position: 'bottom',
+                    duration: 5000
+                  })
+                }
+              })
+          }
+          break
+        case 2:
+          if (this.password.length == 6) {
+            let psw = this.password.toString().replace(/,/g, "")
+            let form = this.$qs.stringify({
+              token: token,
+              miners: this.SGB,
+              payment_password: psw
+            })
+            api.force(form)
+              .then((res) => {
+                console.log(res)
+                if (res.code == 200) {
+                  Toast({
+                    message: res.msg,
+                    position: 'bottom',
+                    duration: 5000
+                  })
+                  // this.$router.replace('/index')
+                } else {
+                  Toast({
+                    message: res.msg,
+                    position: 'bottom',
+                    duration: 5000
+                  })
+                }
+              })
+          }
+          break
+        case 3:
+
+          break
+        default:
+          return false
+      }
       if (this.password.length == 6) {
         let psw = this.password.toString().replace(/,/g, "")
         let form = this.$qs.stringify({
@@ -152,6 +255,14 @@ export default {
         break
       case 1:
         this.titleTxt = '赠送'
+        this.isS = true
+        break
+      case 2:
+        this.titleTxt = '释放'
+        this.isF = true
+        break
+      case 3:
+        this.titleTxt = '转增'
         this.isS = true
         break
       default:

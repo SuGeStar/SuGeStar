@@ -17,15 +17,15 @@ export default {
       ],                                 //个数与位置对应关系数组
       position:
         [
-          { x: 50, y: 70 },
-          { x: 100, y: 130 },
-          { x: 75, y: 180 },
-          { x: 170, y: 90 },
-          { x: 220, y: 120 },
-          { x: 270, y: 60 },
-          { x: 330, y: 110 },
-          { x: 260, y: 160 },
-          { x: 320, y: 200 }
+          { x: 100, y: 185 },
+          { x: 75, y: 125 },
+          { x: 140, y: 260 },
+          { x: 145, y: 70 },
+          { x: 180, y: 160 },
+          { x: 223, y: 80 },
+          { x: 295, y: 100 },
+          { x: 215, y: 240 },
+          { x: 290, y: 230 }
         ]                                  //砖石位置数组
     }
   },
@@ -33,7 +33,7 @@ export default {
   mounted() {
     let canvas = document.querySelector('canvas')                               //获取canvas dom节点
     canvas.width = window.innerWidth;                                           //canvas定宽
-    canvas.height = window.innerHeight / 2.5;                                   //canvas定高
+    canvas.height = window.innerHeight / 2;                                   //canvas定高
     this.createCanvas(window.innerWidth, window.innerHeight / 2.5);            //调用createCanvas方法，传入宽高
   },
   watch: {
@@ -49,8 +49,8 @@ export default {
         x: bollx,                                                           //目标偏离左上角的水平位置
         y: bolly,                                                           //目标偏离左上角的垂直位置
         origin: { x: "center", y: "center" },                               //确定中心店
-        image: require("../../assets/image/index-tiqu.png"),                //图片地址
-        width: 25                                                          //指定图片大小
+        // image: require("../../assets/image/index-tiqu.png"),                //图片地址
+        width: 0                                                          //指定图片大小
       });
       this.canvas.addChild(boll);                                             //调用oCanvas实例addChild方法，传入需要绘制至canvas上的oCanvas对象
       var bollText = this.canvas.display.text({                               //同上，调用text方法，建立文字对象
@@ -58,7 +58,7 @@ export default {
         y: bolly +30,
         origin: { x: "center", y: "center" },
         font: "normal 14px Arial",                                           //字体
-        text: "正在提取中...",                                               //文本内容
+        // text: "正在提取中...",                                               //文本内容
         fill: "#ccc"                                                        //颜色
       });
       var isState=1;                                                          //星球旋转一周的次数
@@ -98,8 +98,8 @@ export default {
           y: position[index].y,
           origin: { x: "center", y: "center" },
           image: require("../../assets/image/index-zuanshi.png"),         //图片地址
-          width: 35, //宽度大小
-          height: 35
+          width: 30, //宽度大小
+          height: 25
         });
         let randomNum = randomArray[index];
         createAninmal(canvasObj['image' + index], 'element.abs_y == position[index].y ? position[index].y - '+randomNum+': position[index].y', index, '', createAninmal);  //调用创建动画函数

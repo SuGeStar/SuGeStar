@@ -52,6 +52,7 @@ import revisePsd from '@/components/mine/revisePsd'
 import classifyList from '@/components/store/classifyList'
 import storeDetial from '@/components/store/storeDetial'
 import sdZone from '@/components/store/sdZone'
+import force from '@/components/mine/force'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -317,6 +318,11 @@ export default new Router({
       path: '/sdZone',
       name: 'sdZone',
       component: sdZone
+    },
+    {
+      path: '/force',
+      name: 'force',
+      component: force
     }
   ]
 })

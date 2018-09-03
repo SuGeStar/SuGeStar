@@ -1,109 +1,61 @@
 <template>
   <div class="wrapper">
     <div class="index">
-      <!-- 背景图 -->
+      <!--基本信息-->
+      <div class="index-user-info">
+
+      </div>
+      <!-- 钻石区域 -->
       <div class="index-bg">
-        <img src="../../assets/image/index-bg.png" alt="">
-        <div class="index-msg">
-          <router-link to="/store">
-            <i class="icon icon-msg"></i>
-          </router-link>
-        </div>
-        <!--<canvas id="canvas" class="canvas"></canvas>-->
         <collecting :energy = 'arr' @energyClick ='getEnergy'></collecting>
-        <div class="index-classfiy">
-          <ul class="list">
-            <li @click="getStar">
-              <img src="../../assets/image/index-zichan.gif" alt="">
-              <p>星钻红包</p>
-            </li>
-            <li>
-              <router-link to="/miji">
-                <img src="../../assets/image/index-miji.png" alt="">
-                <p>星球动态</p>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="/friend">
-                <img src="../../assets/image/index-friend.png" alt="">
-                <p>邀请好友</p>
-              </router-link>
-            </li>
-          </ul>
-        </div>
       </div>
       <!-- 团队看板 -->
-      <!--<div class="index-box">
-        <div class="box-title">
-          <h3>团队看板</h3>
-        </div>
-        <div class="content-box team">
-          <div class="team-head">
-            <p>提示：{{promptTxt}}</p>
-            <div class="team-exist">
-              <p>直推人数：<span>{{invitpeo}}</span></p>
-              <p>旗下人数：<span>{{allpeo}}</span></p>
-            </div>
-          </div>
-          <div class="team-content">
-            <router-link :to="{path: '/relation'}" class="floor" v-for="(progress,index) in progressBox" :key="index" v-show="teamFloor">
-              <div class="team-floor">
-                第{{progress.floor}}维度
-              </div>
-              <vm-progress class="progress"  :percentage="progress.percentage" :text-inside="true" :stroke-width="18" :strokeColor="progress.color"></vm-progress>
-            </router-link>
-          </div>
-        </div>
-      </div>-->
-      <!-- 大礼包 -->
-        <div class="gift-box">
-          <router-link to="/gift">
-            <img src="../../assets/image/gift.png" alt="">
-          </router-link>
-        </div>
-      <!-- 挖宝数据 -->
       <div class="index-box">
         <div class="box-title">
-          <h3>挖矿数据</h3>
+          <h3>星球资源</h3>
         </div>
-        <div class="content-box">
-          <ul>
-            <li class="content-list">
-              <div class="con-title">
-                星币
-                <i class="icon icon-tips"></i>
-              </div>
-              <div class="con-desc">
-                <div class="desc today">
-                  <p>今日获得</p>
-                  <span>{{miners_today}}</span>
-                </div>
-                <div class="desc">
-                  <p>累计获得</p>
-                  <span>{{miners_all}}</span>
-                </div>
-              </div>
-            </li>
-            <!--<li class="content-list">
-              <div class="con-title">
-                算力
-                <i class="icon icon-tips"></i>
-              </div>
-              <div class="con-desc">
-                <div class="desc today">
-                  <p>今日获得</p>
-                  <span>{{today_owen}}</span>
-                </div>
-                <div class="desc">
-                  <p>累计获得</p>
-                  <span>{{all_owen}}</span>
-                </div>
-              </div>
-            </li>-->
-          </ul>
+        <div class="data-box">
+          <div class="data-list">
+            <img src="../../assets/image/index-zuanshi.png" alt="">
+            <p class="data-title">今日获得</p>
+            <p class="data-data">2.0125</p>
+            <p class="data-title">累计获得</p>
+            <p class="data-data">100266</p>
+          </div>
+          <div class="data-list">
+            <img src="../../assets/image/index-zuanshi.png" alt="">
+            <p class="data-title">今日获得</p>
+            <p class="data-data">2.0125</p>
+            <p class="data-title">累计获得</p>
+            <p class="data-data">100266</p>
+          </div>
+          <div class="data-list">
+            <img src="../../assets/image/index-zuanshi.png" alt="">
+            <p class="data-title">今日获得</p>
+            <p class="data-data">2.0125</p>
+            <p class="data-title">累计获得</p>
+            <p class="data-data">100266</p>
+          </div>
         </div>
       </div>
-      <!-- 底部 -->
+      <div class="star-explain">
+        <div class="explain-list"  @click="getStar">
+          <img src="../../assets/image/index-zichan.gif" alt="">
+          <p>星钻红包</p>
+        </div>
+        <div class="explain-list">
+          <router-link to="/miji">
+            <img src="../../assets/image/index-miji.png" alt="">
+            <p>星球动态</p>
+          </router-link>
+        </div>
+        <div class="explain-list">
+          <router-link to="/friend">
+            <img src="../../assets/image/index-friend.png" alt="">
+            <p>邀请好友</p>
+          </router-link>
+        </div>
+      </div>
       <footGuide></footGuide>
     </div>
   </div>
@@ -255,7 +207,43 @@ export default {
       // 未开采K矿
         .then(response => {
           // console.log(response)
-          this.arr = response.data.data;
+          // this.arr = response.data.data;
+          this.arr = [{
+            id: 1,
+            ore: '1.00'
+          },
+          {
+            id: 2,
+            ore: '2.00'
+          },
+          {
+            id: 3,
+            ore: '3.00'
+          },
+          {
+            id: 4,
+            ore: '4.00'
+          },
+          {
+            id: 5,
+            ore: '5.00'
+          },
+          {
+            id: 6,
+            ore: '6.00'
+          },
+          {
+            id: 7,
+            ore: '7.00'
+          },
+          {
+            id: 8,
+            ore: '8.00'
+          },
+          {
+            id: 9,
+            ore: '9.00'
+          }]
         })
         .catch(error => {
           console.log(error)

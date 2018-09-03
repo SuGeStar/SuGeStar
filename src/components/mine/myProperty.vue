@@ -11,13 +11,9 @@
       <!-- tab-container -->
       <mt-tab-container v-model="selected">
         <mt-tab-container-item :id="0" class="property-container">
-          <div class="pc-head-container start">
-            <div>
-              <p class="pc-head-title">星币总数</p>
-              <p class="pc-head-num"><span>{{total}}</span>
-              <!-- <router-link :to="{path:'/smelting/S'}"><span class="smelting fr"></span></router-link> -->
-              </p>
-            </div>
+          <div class="pc-head-container">
+            <p class="pc-head-title">星币总数</p>
+            <p class="pc-head-num"><span>{{total}}</span><router-link :to="{path:'/force'}"><span class="smelting fr">释放/转增 >></span></router-link></p>
             <!-- <p class="pc-head-freeze">
               冻结星币：{{freeze}}
               <i class="icon icon-lock"></i>
@@ -27,31 +23,6 @@
             <router-link to="/record/star">
               <p class="pc-content-title">收支记录</p>
             </router-link>
-            <!-- <ul>
-              <li v-for="(list,index) in lists" :key="index">
-                <div class="list list-header">
-                  <div>
-                    <span>{{list.date}}</span>
-                    <span>总收入：{{list.total}}</span>
-                  </div>
-                  <i class="icon icon-pull"></i>
-                </div>
-                <div class="list list-content">
-                  <div class="list-subnav">
-                    <p>日常领取</p>
-                    <span>{{list.time}}</span>
-                  </div>
-                  <p>{{list.earn}}</p>
-                </div>
-                <div class="list list-content">
-                  <div class="list-subnav">
-                    <p>邀请收益</p>
-                    <span>2018-05-22 15:06</span>
-                  </div>
-                  <p>+0.0001</p>
-                </div>
-              </li>
-            </ul> -->
           </div>
         </mt-tab-container-item>
         <mt-tab-container-item :id="1" class="property-container">

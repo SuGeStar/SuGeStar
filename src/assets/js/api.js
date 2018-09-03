@@ -80,12 +80,15 @@ export default {
     return Post('/apply', params)
   },
   availableGold () {
-    // 获取可用金钱
+    // 获取可用星钻
     return Get(`/availableGold?token=${token}`)
   },
   applyWithdraw (params) {
     // 申请提现
     return Post('/applyWithdraw', params)
+  },
+  applyForce (params) {
+    return Post('/freed', params)
   },
   withdrawList (params) {
     // 提现列表

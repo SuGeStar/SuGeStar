@@ -100,7 +100,7 @@ export default {
       finalGold: 0,
       finalTypeId: '',
       number: '5',
-      popupVisible: true,
+      popupVisible: false,
       imgBox: [],
       color: 0,
       spec: 0,
