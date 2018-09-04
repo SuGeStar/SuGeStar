@@ -4,7 +4,7 @@
       <!--基本信息-->
       <div class="index-user-info">
         <span class="fl">公告：</span>
-        <marquee  direction="up" scrolldelay="500">
+        <marquee  direction="left" scrolldelay="500">
           <p>这是1个滚动消息我是一个跟hard的员工</p>
           <p>这是2个滚动消息</p>
           <p>这是3个滚动消息</p>
