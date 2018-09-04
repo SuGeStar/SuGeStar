@@ -5,10 +5,10 @@
       <div><span>推荐编号</span><input type="text" placeholder="" :readonly="true" v-model="invite_code"></div>
       <div><span>接点编号</span><input type="text" placeholder="" :readonly="true" v-model="contact_code"></div>
       <div><span>手机号码</span><input type="number" placeholder="请输入手机号码" v-model="phoneNum"></div>
-      <!-- <div><span>图片验证</span>
+       <div><span>图片验证</span>
         <input type="text" placeholder="图片验证码" v-model="pic" class="verificationCode">
         <img :src="imgSrc" alt="" @click="changePic()">
-      </div> -->
+      </div>
       <div>
         <span>验&nbsp;证&nbsp;&nbsp;码</span>
         <input type="number" placeholder="手机验证码" @blur="code" v-model="verificationCode" class="verificationCode">
@@ -56,7 +56,7 @@ export default {
       // 身份证
       // z_idNumber: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
       cityPop_up: false,
-      // imgSrc: 'http://www.sugebei.com/verify',
+      imgSrc: 'http://www.sgyxmall.com/index.php?s=/Api/User/code',
       pic: ''
     }
   },
@@ -112,51 +112,51 @@ export default {
         return false
       } else {
         this.$http.get(url + 'sendSms?phone=' + this.phoneNum )
-        .then(response => {
-          console.log(response)
-          if (response.data.code == 200) {
-            Toast({
-              message: '发送成功',
-              position: 'bottom',
-              duration: 2000
-            });
-            this.ctimer(60)
-          } else {
-            Toast({
-              message: response.data.message[0],
-              position: 'bottom',
-              duration: 2000
-            });
-          }
-        })
-        .catch(error => {
-          Toast('服务器开小差啦（ﾉ´д｀）快去告诉程序猿~');
-          console.log(error);
-        })
+          .then(response => {
+            console.log(response)
+            if (response.data.code == 200) {
+              Toast({
+                message: '发送成功',
+                position: 'bottom',
+                duration: 2000
+              });
+              this.ctimer(60)
+            } else {
+              Toast({
+                message: response.data.message[0],
+                position: 'bottom',
+                duration: 2000
+              });
+            }
+          })
+          .catch(error => {
+            Toast('服务器开小差啦（ﾉ´д｀）快去告诉程序猿~');
+            console.log(error);
+          })
       }
     },
     // 判断验证码是否正确
     code () {
       this.$http.get(url + 'checkSmsCode?phone=' + this.phoneNum +'&code='+this.verificationCode)
         .then(response => {
-        console.log(response)
-        if (response.data.code == 200) {
-          Toast({
-            message: response.data.msg,
-            position: 'bottom',
-            duration: 2000
-          })
-        } else {
-          Toast({
-            message: response.data.msg,
-            position: 'bottom',
-            duration: 2000
-          });
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
+          console.log(response)
+          if (response.data.code == 200) {
+            Toast({
+              message: response.data.msg,
+              position: 'bottom',
+              duration: 2000
+            })
+          } else {
+            Toast({
+              message: response.data.msg,
+              position: 'bottom',
+              duration: 2000
+            });
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     // 所属地区
     hiddenShow (e) {
@@ -206,30 +206,30 @@ export default {
         payment_password: this.applyPsd
       })
       this.$http.post(url+'register', form)
-      .then(response => {
-        console.log(response)
-        Toast({
-          message: response.data.msg,
-          position: 'bottom',
-          duration: 2000
+        .then(response => {
+          console.log(response)
+          Toast({
+            message: response.data.msg,
+            position: 'bottom',
+            duration: 2000
+          })
+          if (response.data.code == 200) {
+            this.$router.push('/login')
+          }
         })
-        if (response.data.code == 200) {
-          this.$router.push('/login')
-        }
-      })
-      .catch(error => {
-        console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-      })
+        .catch(error => {
+          console.log(error)
+          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        })
     },
     cityPop () {
       this.cityPop_up = true
-     }
+    },
     // 请求图片验证
-    // changePic () {
-    //   var time = new Date().getTime()
-    //   this.imgSrc = 'http://www.sugebei.com/verify/' + time
-    // }
+    changePic () {
+      var time = new Date().getTime()
+      this.imgSrc = 'http://www.sgyxmall.com/index.php?s=/Api/User/code/' + time
+    }
   },
   mounted () {
   }
