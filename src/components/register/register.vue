@@ -5,10 +5,10 @@
       <div><span>推荐编号</span><input type="text" placeholder="" :readonly="true" v-model="invite_code"></div>
       <div><span>接点编号</span><input type="text" placeholder="" :readonly="true" v-model="contact_code"></div>
       <div><span>手机号码</span><input type="number" placeholder="请输入手机号码" v-model="phoneNum"></div>
-       <div><span>图片验证</span>
+       <!--<div><span>图片验证</span>
         <input type="text" placeholder="图片验证码" v-model="pic" class="verificationCode">
         <img :src="imgSrc" alt="" @click="changePic()">
-      </div>
+      </div>-->
       <div>
         <span>验&nbsp;证&nbsp;&nbsp;码</span>
         <input type="number" placeholder="手机验证码" @blur="code" v-model="verificationCode" class="verificationCode">
@@ -56,7 +56,7 @@ export default {
       // 身份证
       // z_idNumber: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
       cityPop_up: false,
-      imgSrc: 'http://www.sgyxmall.com/index.php?s=/Api/User/code',
+      // imgSrc: 'http://www.sgyxmall.com/index.php?s=/Api/User/code',
       pic: ''
     }
   },
@@ -224,12 +224,12 @@ export default {
     },
     cityPop () {
       this.cityPop_up = true
-    },
+    }
     // 请求图片验证
-    changePic () {
+    /*changePic () {
       var time = new Date().getTime()
       this.imgSrc = 'http://www.sgyxmall.com/index.php?s=/Api/User/code/' + time
-    }
+    }*/
   },
   mounted () {
   }
