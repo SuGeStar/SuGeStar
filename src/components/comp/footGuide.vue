@@ -24,4 +24,8 @@
 .tabbar{
   justify-content: space-around;
 }
+.mint-tab-item{
+padding:0!important;
+}
+
 </style>

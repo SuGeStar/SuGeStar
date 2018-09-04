@@ -34,7 +34,7 @@
             <div class="data-logo">
               <img src="../../assets/image/yl.png" alt=""><span>算力</span>
             </div>
-            <p class="data-data">2.0125</p>
+            <p class="data-data">{{ownerPower}}</p>
           </div>
           <div class="data-list">
             <router-link to="/myProperty">
@@ -204,11 +204,18 @@ export default {
         })
     },*/
     getStar () {
-      Toast({
+      let form = this.$qs.stringify({
+        token: token
+      });
+      api.getEveryDayGold(form)
+        .then(res => {
+          console.log(res)
+        })
+      /*Toast({
         message: '红包还在制作中，请稍等..',
         position: 'middle',
         duration: 2000
-      })
+      })*/
     }
   },
   created () {
@@ -298,6 +305,7 @@ export default {
         // console.log(res)
         this.ownerGold = res.data.miners
         this.ownerMoney = res.data.gold
+        this.ownerPower = res.data.power
       })
   },
   mounted () {

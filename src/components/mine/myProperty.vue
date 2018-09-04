@@ -23,6 +23,12 @@
             <router-link to="/record/star">
               <p class="pc-content-title">收支记录</p>
             </router-link>
+            <router-link to="/deal/1">
+              <p class="pc-content-title">交易列表</p>
+            </router-link>
+            <router-link to="/releaseRecord">
+              <p class="pc-content-title">释放记录</p>
+            </router-link>
           </div>
         </mt-tab-container-item>
         <mt-tab-container-item :id="1" class="property-container">
@@ -38,7 +44,7 @@
             <router-link to="/record/gold">
               <p class="pc-content-title record">收支记录</p>
             </router-link>
-            <router-link to="/deal">
+            <router-link to="/deal/2">
               <p class="pc-content-title">交易列表</p>
             </router-link>
             <!-- <ul>

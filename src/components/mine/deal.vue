@@ -71,11 +71,21 @@ export default {
       isNull: false,
       selected: '1',
       intoList:[],
-      list: []
+      list: [],
+      type: this.$route.params.type
     }
   },
   created () {
     this.into();
+    let type = parseInt(this.type)
+    switch (type) {
+      case 1:
+        break;
+      case 2:
+        break;
+      default:
+        return false
+    }
   },
   watch: {
     selected (value) {
@@ -93,7 +103,7 @@ export default {
   methods: {
     into () {
       // 转入列表
-      this.$http.get(url + 'income/1?token='+token)
+      this.$http.get(url + 'income/1?token=' + token)
         .then(response => {
           // console.log(response)
           if (response.data.code == 200) {

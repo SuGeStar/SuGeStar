@@ -216,6 +216,14 @@ export default {
   getUserTreasure (params) {
     // 获取用户财富
     return Get(`/availableGold?token=${params}`)
+  },
+  getEveryDayGold (params) {
+    // 点击获取每天星钻红包
+    return Post(`/getRedPacket`, params)
+  },
+  starToPowerRec (params) {
+    // 星币转算力记录
+    return Get(`/freedList/${params.page}?token=${params.token}`)
   }
 }
 export { imgUrl }

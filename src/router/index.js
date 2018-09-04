@@ -53,6 +53,7 @@ import classifyList from '@/components/store/classifyList'
 import storeDetial from '@/components/store/storeDetial'
 import sdZone from '@/components/store/sdZone'
 import force from '@/components/mine/force'
+import releaseRecord from '@/components/mine/releaseRecord'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -265,7 +266,7 @@ export default new Router({
       component: giftBag
     },
     {
-      path: '/deal', // 交易列表
+      path: '/deal/:type', // 交易列表
       name: 'deal',
       component: deal
     },
@@ -323,6 +324,11 @@ export default new Router({
       path: '/force',
       name: 'force',
       component: force
+    },
+    {
+      path: '/releaseRecord', // 星币转算力记录 （星币释放记录）
+      name: 'releaseRecord',
+      component: releaseRecord
     }
   ]
 })

@@ -52,7 +52,7 @@ export default {
         // image: require("../../assets/image/index-tiqu.png"),                //图片地址
         width: 0                                                          //指定图片大小
       });
-      this.canvas.addChild(boll);                                             //调用oCanvas实例addChild方法，传入需要绘制至canvas上的oCanvas对象
+      // this.canvas.addChild(boll);         // this.canvas.addChild(boll);                                             //调用oCanvas实例addChild方法，传入需要绘制至canvas上的oCanvas对象
       var bollText = this.canvas.display.text({                               //同上，调用text方法，建立文字对象
         x: bollx,
         y: bolly +30,
@@ -74,8 +74,8 @@ export default {
           }
         })
       };
-      bollAnimal();                                                           //调用动画函数
-      this.canvas.addChild(bollText);                                         //添加
+      //bollAnimal();                                                           //调用动画函数
+      // this.canvas.addChild(bollText);                                         //添加
     },
     drawEnergy (enerayItems) {
       let self = this,                                                       //提前保存this对象 此时this指当前vue组件实例，供之后使用
