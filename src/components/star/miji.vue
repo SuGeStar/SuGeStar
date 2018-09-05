@@ -72,7 +72,7 @@
     </div>-->
     <div class="dynamicContainer">
       <div class="dynamicTxt"></div>
-      <div class="treng_pic1 treng_pic"></div>
+      <router-link to="/starBase"><div class="treng_pic1 treng_pic"></div></router-link>
       <div class="treng_pic2 treng_pic"></div>
     </div>
   </div>
