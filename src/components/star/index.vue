@@ -39,7 +39,7 @@
           <div class="data-list">
             <router-link to="/myProperty">
               <div class="data-logo">
-                <img src="../../assets/image/index-zuanshi.png" alt=""><span>星钻</span>
+                <img src="../../assets/image/xz.png" alt=""><span>星钻</span>
               </div>
               <p class="data-data">{{ownerMoney}}</p>
              <!-- <p class="data-title">今日获得</p>
@@ -229,8 +229,8 @@ export default {
       // 未开采K矿
         .then(response => {
           // console.log(response)
-          // this.arr = response.data.data;
-          this.arr = [{
+          this.arr = response.data.data;
+         /* this.arr = [{
             id: 1,
             ore: '1.00'
           },
@@ -265,7 +265,7 @@ export default {
           {
             id: 9,
             ore: '9.00'
-          }]
+          }]*/
         })
         .catch(error => {
           console.log(error)

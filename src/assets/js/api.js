@@ -92,7 +92,7 @@ export default {
   },
   withdrawList (params) {
     // 提现列表
-    return Get(`/withdrawList?token=${token}&page=${params.page}`)
+    return Get(`/withdrawList/${params.page}?token=${token}`)
   },
   createRechargeOrder (params) {
     // 充值订单创建
@@ -223,7 +223,31 @@ export default {
   },
   starToPowerRec (params) {
     // 星币转算力记录
-    return Get(`/freedList/${params.page}?token=${params.token}`)
+    return Get(`/freedList/${params.page}?token=${token}`)
+  },
+  transfer (params) {
+    // 星币、星钻转账
+    return Post(`/transfer`, params)
+  },
+  starCoinIncome (params) {
+    // 星币转入列表
+    return Get(`/starCoinIncome/${params.page}?token=${token}`)
+  },
+  starCoinOutlay (params) {
+    // 星币转出列表
+    return Get(`/starCoinOutlay/${params.page}?token=${token}`)
+  },
+  income (params) {
+    // 星钻转入列表
+    return Get(`/income/${params.page}?token=${token}`)
+  },
+  outlay (params) {
+    // 星钻转出列表
+    return Get(`/outlay/${params.page}?token=${token}`)
+  },
+  powerReturnList (params) {
+    // 算力每日定反记录
+    return Get(`/powerReturnList/${params.page}?token=${token}`)
   }
 }
 export { imgUrl }

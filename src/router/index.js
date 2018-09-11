@@ -55,6 +55,8 @@ import sdZone from '@/components/store/sdZone'
 import force from '@/components/mine/force'
 import releaseRecord from '@/components/mine/releaseRecord'
 import starBase from '@/components/star/starBase'
+import powerReceiveRecord from '@/components/mine/powerReceiveRecord'
+import withdrawalRecord from '@/components/mine/withdrawalRecord'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -317,12 +319,12 @@ export default new Router({
       component: storeDetial
     },
     {
-      path: '/sdZone',
+      path: '/sdZone', // YC星钻精选
       name: 'sdZone',
       component: sdZone
     },
     {
-      path: '/force',
+      path: '/force', // 星币释放/转增
       name: 'force',
       component: force
     },
@@ -335,6 +337,16 @@ export default new Router({
       path: '/starBase', // 星球基地
       name: 'starBase',
       component: starBase
+    },
+    {
+      path: '/powerReceiveRecord', // 原力每日定反记录
+      name: 'powerReceiveRecord',
+      component: powerReceiveRecord
+    },
+    {
+      path: '/withdrawalRecord', // 提现记录
+      name: 'withdrawalRecord',
+      component: withdrawalRecord
     }
   ]
 })

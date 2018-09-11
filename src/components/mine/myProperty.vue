@@ -47,6 +47,12 @@
             <router-link to="/deal/2">
               <p class="pc-content-title">交易列表</p>
             </router-link>
+            <router-link to="/powerReceiveRecord">
+              <p class="pc-content-title">分红记录</p>
+            </router-link>
+            <router-link to="/withdrawalRecord">
+              <p class="pc-content-title">释放记录</p>
+            </router-link>
             <!-- <ul>
               <li v-for="(list,index) in lists" :key="index">
                 <div class="list list-header">

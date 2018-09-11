@@ -64,24 +64,27 @@
 <script>
 import { Toast } from 'mint-ui'
 import { url } from '../../assets/js/mobile.js'
+import api from '@/assets/js/api.js'
 let token = localStorage.getItem('token')
 export default {
   data () {
     return {
       isNull: false,
       selected: '1',
-      intoList:[],
+      intoList: [],
       list: [],
-      type: this.$route.params.type
+      type: this.$route.params.type,
+      page: 1
     }
   },
   created () {
-    this.into();
     let type = parseInt(this.type)
     switch (type) {
       case 1:
+        this.getS_BList_income();
         break;
       case 2:
+        this.getS_ZList_income();
         break;
       default:
         return false
@@ -89,53 +92,118 @@ export default {
   },
   watch: {
     selected (value) {
-      // console.log(value);
-      if (value == 1) {
-        this.into()
-        return false
-      }
-      if (value == 2) {
-        this.out()
-        return false
+      var val = parseInt(value)
+      let types = parseInt(this.type)
+      switch (val) {
+        case 1:
+          if (types === 1) {
+            this.getS_BList_income()
+            return false
+          }
+          if (types === 2) {
+            this.getS_ZList_income()
+            return false
+          }
+          break;
+        case 2:
+          if (types === 1) {
+            this.getS_BList_out()
+            return false
+          }
+          if (types === 2) {
+            this.getS_ZList_out()
+            return false
+          }
+          break;
+        default:
+          return false;
       }
     }
   },
   methods: {
-    into () {
-      // 转入列表
-      this.$http.get(url + 'income/1?token=' + token)
-        .then(response => {
-          // console.log(response)
-          if (response.data.code == 200) {
-            if (response.data.data == '') {
+    // 星币转出列表----------------out
+    getS_BList_out () {
+      api.starCoinOutlay({
+        token: token,
+        page: this.page
+      })
+        .then(res => {
+          if (res.code === 200) {
+            if (res.data == '') {
               this.isNull = true
               return false
             } else {
               this.isNull = false
-              this.intoList = response.data.data
+              this.list = res.data
             }
           }
         })
-        .catch(error => {
-          console.log(error)
-          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        .catch(err => {
+          console.log(err)
         })
     },
-    out () { // 转出列表
-      this.$http.get(url + 'outlay/1?token='+token)
-        .then(response => {
-          // console.log(response)
-          if (response.data.data == '') {
-            this.isNull = true
-            return false
-          } else {
-            this.isNull = false
-            this.list = response.data.data
+    // 星币转入列表----------------income
+    getS_BList_income () {
+      api.starCoinIncome({
+        token: token,
+        page: this.page
+      })
+        .then(res => {
+          if (res.code === 200) {
+            if (res.data == '') {
+              this.isNull = true
+              return false
+            } else {
+              this.isNull = false
+              this.intoList = res.data
+            }
           }
         })
-        .catch(error => {
-          console.log(error)
-          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 星钻转出列表----------------out
+    getS_ZList_out () {
+      api.outlay({
+        token: token,
+        page: this.page
+      })
+        .then(res => {
+          if (res.code === 200) {
+            if (res.data == '') {
+              this.isNull = true
+              return false
+            } else {
+              this.isNull = false
+              this.list = res.data
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 星钻转入列表----------------income
+    getS_ZList_income () {
+      api.income({
+        token: token,
+        page: this.page
+      })
+        .then(res => {
+          if (res.code === 200) {
+            if (res.data == '') {
+              this.isNull = true
+              return false
+            } else {
+              this.isNull = false
+              this.intoList = res.data
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          // Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
         })
     }
   }

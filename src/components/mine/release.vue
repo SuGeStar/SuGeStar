@@ -42,7 +42,8 @@ export default {
       bankCard: '',
       applyPop_pop_up: false,
       password: [],
-      sendTel: ''
+      sendTel: '',
+      linkWay: parseInt(this.$route.params.way)
     }
   },
   components: {
@@ -50,6 +51,7 @@ export default {
   },
   methods: {
     releaseBtn () {
+      console.log(this.$route.params)
       // 释放
       if (this.isR) {
         if (this.SGB < 500) {
@@ -71,44 +73,20 @@ export default {
           return false
         }
         // 赠送金币
-        let form = this.$qs.stringify({
-          token: token,
-          phone: this.sendTel,
-          gold: this.SGB,
-          mark: '转出' + this.SGB
-        })
-        this.$http.post(url+'transfer', form)
-          .then(response => {
-            // console.log(response)
-            Toast({
-              message: response.data.msg,
-              position: 'bottom',
-              duration: 2000
-            })
-            if (response.data.code == 200) {
-              this.$router.push('/myProperty')
-            }
-          })
-          .catch(error => {
-            console.log(error)
-            Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-          })
-      }
-      // 星币释放
-      if (this.isF) {
-        if (!this.sendTel) {
-          Toast('数量不能为空！！！')
-          return false
-        }
         this.applyPop_pop_up = true
-        // 赠送金币
         /*let form = this.$qs.stringify({
           token: token,
           phone: this.sendTel,
           gold: this.SGB,
           mark: '转出' + this.SGB
         })
-        this.$http.post(url + 'transfer', form)
+        if (this.linkWay === 1) {
+          console.log('星钻转账')
+        }
+        if (this.linkWay === 3) {
+          console.log('星币转账')
+        }*/
+        /*this.$http.post(url+'transfer', form)
           .then(response => {
             // console.log(response)
             Toast({
@@ -147,12 +125,11 @@ export default {
     },
     passwordGro (e) {
       this.password = e
-      console.log(e)
       var way = parseInt(this.$route.params.way)
-      switch (way) {
-        case 0:
-          if (this.password.length == 6) {
-            let psw = this.password.toString().replace(/,/g, "")
+      let psw = this.password.toString().replace(/,/g, '')
+      if (this.password.length === 6) {
+        switch (way) {
+          case 0:
             let form = this.$qs.stringify({
               token: token,
               money: this.SGB,
@@ -163,13 +140,13 @@ export default {
             api.applyWithdraw(form)
               .then((res) => {
                 console.log(res)
-                if (res.code == 200) {
+                if (res.code === 200) {
                   Toast({
                     message: res.msg,
                     position: 'bottom',
                     duration: 5000
                   })
-                  this.$router.replace('/index')
+                  this.$router.replace('/withdrawalRecord')
                 } else {
                   Toast({
                     message: res.msg,
@@ -178,43 +155,47 @@ export default {
                   })
                 }
               })
-          }
-          break
-        case 2:
-          if (this.password.length == 6) {
-            let psw = this.password.toString().replace(/,/g, "")
-            let form = this.$qs.stringify({
+            break
+          case 2:
+            let form1 = this.$qs.stringify({
               token: token,
-              miners: this.SGB,
+              phone: this.sendTel,
+              gold: this.SGB,
+              mark: '转出' + this.SGB + '星钻。',
+              transfer_from: 1,
               payment_password: psw
             })
-            api.force(form)
-              .then((res) => {
+            api.transfer(form1)
+              .then(res => {
                 console.log(res)
-                if (res.code == 200) {
-                  Toast({
-                    message: res.msg,
-                    position: 'bottom',
-                    duration: 5000
-                  })
-                  // this.$router.replace('/index')
-                } else {
-                  Toast({
-                    message: res.msg,
-                    position: 'bottom',
-                    duration: 5000
-                  })
-                }
               })
-          }
-          break
-        case 3:
-
-          break
-        default:
-          return false
+              .catch(err => {
+                console.log(err)
+              })
+            break
+          case 3:
+            let form2 = this.$qs.stringify({
+              token: token,
+              phone: this.sendTel,
+              gold: this.SGB,
+              mark: '转出' + this.SGB + '星币。',
+              transfer_from: 2,
+              payment_password: psw
+            })
+            api.transfer(form2)
+              .then(res => {
+                console.log(res)
+              })
+              .catch(err => {
+                console.log(err)
+              })
+            break
+          default:
+            return false
+        }
       }
-      if (this.password.length == 6) {
+
+      /*if (this.password.length == 6) {
         let psw = this.password.toString().replace(/,/g, "")
         let form = this.$qs.stringify({
           token: token,
@@ -241,12 +222,11 @@ export default {
               })
             }
           })
-      }
+      }*/
     }
   },
   mounted () {
     var way = parseInt(this.$route.params.way)
-    // console.log(way)
     switch (way) {
       case 0:
         this.titleTxt = '释放'
@@ -256,10 +236,6 @@ export default {
       case 1:
         this.titleTxt = '赠送'
         this.isS = true
-        break
-      case 2:
-        this.titleTxt = '释放'
-        this.isF = true
         break
       case 3:
         this.titleTxt = '转增'

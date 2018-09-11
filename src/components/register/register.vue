@@ -25,7 +25,7 @@
       <div><span>真实姓名</span><input type="text" placeholder="请输入您的真实姓名" v-model="realName"></div>
       <!-- <div><span>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span><input type="text" placeholder="给自己起个名字吧~" v-model="nickName"></div>  -->
     </div>
-    <mt-button type="default" @click="register">创建</mt-button>
+    <mt-button type="default" @click="register">开启我的星球建设</mt-button>
     <cityPop v-model="addressArr" @hidden="hiddenShow" v-show="cityPop_up"></cityPop>
   </div>
 </template>
