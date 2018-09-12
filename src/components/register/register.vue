@@ -4,28 +4,36 @@
     <div class="reg-form">
       <div><span>推荐编号</span><input type="text" placeholder="" :readonly="true" v-model="invite_code"></div>
       <div><span>接点编号</span><input type="text" placeholder="" :readonly="true" v-model="contact_code"></div>
-      <div><span>手机号码</span><input type="number" placeholder="请输入手机号码" v-model="phoneNum"></div>
+      <div>
+        <!--<span>手机号码</span>-->
+        <input type="number" placeholder="请输入手机号码" v-model="phoneNum"></div>
        <!--<div><span>图片验证</span>
         <input type="text" placeholder="图片验证码" v-model="pic" class="verificationCode">
         <img :src="imgSrc" alt="" @click="changePic()">
       </div>-->
       <div>
-        <span>验&nbsp;证&nbsp;&nbsp;码</span>
+        <!--<span>验&nbsp;证&nbsp;&nbsp;码</span>-->
         <input type="number" placeholder="手机验证码" @blur="code" v-model="verificationCode" class="verificationCode">
         <i :class="{'haveSend':isSend}" @click="sendCode">{{verificationCodeTxt}}</i>
       </div>
-      <div><span>登录密码</span><input type="password" placeholder="字母数字组合" v-model="loginPsd"></div>
-      <div><span>支付密码</span><input type="password" placeholder="6位数字" v-model="applyPsd"></div>
+      <div>
+        <!--<span>登录密码</span>-->
+        <input type="password" placeholder="字母数字组合" v-model="loginPsd"></div>
+      <div>
+        <!--<span>支付密码</span>-->
+        <input type="password" placeholder="6位数字" v-model="applyPsd"></div>
       <!-- <div  @click="cityPop">
         <span>所属地区</span>
         <input type="text" placeholder="请选择省 市 县" v-model="locations" :readonly="true">
       </div>
       <div><span>优品账号</span><input type="text" placeholder="请输入您的优品账号" v-model="YPAccount"></div>
       <div><span>身份证号</span><input type="text" placeholder="请输入身份证号码" v-model="IDNumber"></div>-->
-      <div><span>真实姓名</span><input type="text" placeholder="请输入您的真实姓名" v-model="realName"></div>
+      <div>
+        <!--<span>真实姓名</span>-->
+        <input type="text" placeholder="请输入您的真实姓名" v-model="realName"></div>
       <!-- <div><span>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span><input type="text" placeholder="给自己起个名字吧~" v-model="nickName"></div>  -->
     </div>
-    <mt-button type="default" @click="register">开启我的星球建设</mt-button>
+    <button  @click="register">开启我的星球建设</button>
     <cityPop v-model="addressArr" @hidden="hiddenShow" v-show="cityPop_up"></cityPop>
   </div>
 </template>

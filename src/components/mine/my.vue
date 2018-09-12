@@ -21,6 +21,10 @@
                 <p class="user-property-num">{{userSGK}}</p>
               </li>
               <li>
+                <p class="user-property-notice">算力力</p>
+                <p class="user-property-num">{{userPOW}}</p>
+              </li>
+              <li>
                 <p class="user-property-notice">星币</p>
                 <p class="user-property-num">{{userST}}</p>
               </li>
@@ -135,6 +139,7 @@ export default {
       userOrder: '100203', // 用户排名
       userPV: '11002', // 用户原力值
       userSGK: '', // 用户SG代币
+      userPOW: 0, // 用户算力
       userST: '465465', // 用户SG星币
       baseUserInfo: JSON.parse(localStorage.getItem('userinfo')), // 用户个人信息
       level: localStorage.getItem('level')
@@ -159,6 +164,7 @@ export default {
         if (response.data.code == 200) {
           this.userSGK = response.data.data.gold
           this.userST = response.data.data.miners
+          this.userPOW = response.data.data.power
         } else {
           Toast({
             message: response.data.msg,

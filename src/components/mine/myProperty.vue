@@ -13,7 +13,8 @@
         <mt-tab-container-item :id="0" class="property-container">
           <div class="pc-head-container">
             <p class="pc-head-title">星币总数</p>
-            <p class="pc-head-num"><span>{{total}}</span><router-link :to="{path:'/force'}"><span class="smelting fr">释放/转增 >></span></router-link></p>
+            <p class="pc-head-num">{{total}}</p>
+            <p class="pc-head-smelting"><router-link :to="{path:'/force'}"><span class="smelting fr">释放/转增 >></span></router-link></p>
             <!-- <p class="pc-head-freeze">
               冻结星币：{{freeze}}
               <i class="icon icon-lock"></i>
@@ -21,37 +22,38 @@
           </div>
           <div class="pc-content">
             <router-link to="/record/star">
-              <p class="pc-content-title">收支记录</p>
+              <p class="pc-content-title"><i class="icon icon-receive-record"></i>收支记录</p>
             </router-link>
             <router-link to="/deal/1">
-              <p class="pc-content-title">交易列表</p>
+              <p class="pc-content-title"><i class="icon icon-trade-record"></i>交易列表</p>
             </router-link>
             <router-link to="/releaseRecord">
-              <p class="pc-content-title">释放记录</p>
+              <p class="pc-content-title"><i class="icon icon-smelting-record"></i>释放记录</p>
             </router-link>
           </div>
         </mt-tab-container-item>
         <mt-tab-container-item :id="1" class="property-container">
           <div class="pc-head-container">
             <p class="pc-head-title">星钻总数</p>
-            <p class="pc-head-num"><span>{{gold}}</span><router-link :to="{path:'/smelting'}"><span class="smelting fr">释放/赠送/充值 >></span></router-link></p>
-            <p class="pc-head-freeze">
+            <p class="pc-head-num"><span>{{gold}}</span></p>
+            <p class="pc-head-smelting"><router-link :to="{path:'/smelting'}"><span class="smelting fr">释放/赠送/充值 >></span></router-link></p>
+            <!--<p class="pc-head-freeze">
               算力：{{frozen_force}}
               <i class="icon icon-lock"></i>
-            </p>
+            </p>-->
           </div>
           <div class="pc-content">
             <router-link to="/record/gold">
-              <p class="pc-content-title record">收支记录</p>
+              <p class="pc-content-title record"><i class="icon icon-receive-record"></i>收支记录</p>
             </router-link>
             <router-link to="/deal/2">
-              <p class="pc-content-title">交易列表</p>
+              <p class="pc-content-title"><i class="icon icon-trade-record"></i>交易列表</p>
             </router-link>
             <router-link to="/powerReceiveRecord">
-              <p class="pc-content-title">分红记录</p>
+              <p class="pc-content-title"><i class="icon icon-bonus-record"></i>分红记录</p>
             </router-link>
             <router-link to="/withdrawalRecord">
-              <p class="pc-content-title">释放记录</p>
+              <p class="pc-content-title"><i class="icon icon-smelting-record"></i>释放记录</p>
             </router-link>
             <!-- <ul>
               <li v-for="(list,index) in lists" :key="index">

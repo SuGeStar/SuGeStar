@@ -1,10 +1,29 @@
 // out:false
+.wrapper{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../image/relation_bg.jpg") no-repeat center;
+  background-size: 100% 100%;
+}
+.moduleHead{
+  background: none;
+  color: white;
+}
+.mint-navbar{
+  background: none;
+}
 .property-tab{
   margin-top: .81rem;
-  border-top: 1px #e8e8e8 solid;
+  border-top: 1px rgba(232, 232, 232, 0.44) solid;
 }
 .asc{
   font-size: .26rem!important;
+  color: #e2e2e2;
 }
 .property-container{
   width: 100%;
@@ -12,29 +31,47 @@
   margin-top: .05rem;
 }
 .pc-head-container{
-  height: 2.18rem;
-  background: url("../image/assets_bg.png") no-repeat center;
+  height: 3rem;
+  //background: url("../image/assets_bg.png") no-repeat center;
   position: relative;
+  border-bottom: 1px rgba(177, 177, 177, 0.46) solid;
+}
+.mint-navbar .mint-tab-item.is-selected {
+  border-bottom: 3px solid rgba(192, 71, 255, 0);
+  color: #c047ff;
+  margin-bottom: -3px;
 }
 .pc-head-container p{
   font-size: .26rem;
   color: white;
   padding:.2rem 0 .2rem .3rem;
   //width: 100%;
+  &.pc-head-num{
+    text-align: center;
+    font-size: .41rem;
+    padding:.5rem 0 .2rem .3rem;
+    color: #ffa169;
+  }
+  &.pc-head-smelting{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    .smelting{
+      font-size: .24rem!important;
+      margin-right: .5rem;
+      color: #ff8c37;
+    }
+  }
 }
 .pc-head-title{
-  font-size: 0.2rem!important;
+  font-size: 0.27rem!important;
   color: rgba(255, 255, 255, 0.9)!important;
 }
-.pc-head-num span:nth-child(1){
-  font-size: .3rem;
-  letter-spacing: 1px;
-}
-.smelting{
-  font-size: .2rem!important;
-  margin-right: .2rem;
-  color: white;
-}
+//.pc-head-num span:nth-child(1){
+//  font-size: .3rem;
+//  letter-spacing: 1px;
+//}
+
 .pc-head-freeze{
   position: relative;
   width: 100%;
@@ -113,12 +150,23 @@
 .pc-content{
   margin-top: 0.2rem;
   .pc-content-title{
-    padding: 0.2rem;
-    background-color: #fff;
-    border-bottom: 1px solid #e8e8e8;
-    // &:last-child{
-    //   border-bottom: none;
-    // }
+    height: .7rem;
+    line-height: .7rem;
+    border-bottom: 1px solid rgba(232, 232, 232, 0.2);
+    color: #e2e2e2;
+    font-size: .25rem;
+    position: relative;
+    text-indent: 2.5em;
+    background: url("../image/right1.png") no-repeat center right;
+    width: 94%;
+    padding: 0 3%;
+    background-size: auto .5rem;
+    i{
+      margin:0 .15rem 0 0;
+      position: absolute;
+      bottom: 0.2rem;
+      left: .2rem;
+    }
   }
   ul{
     li{

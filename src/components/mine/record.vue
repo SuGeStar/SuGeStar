@@ -20,7 +20,7 @@
                     <div class="match-pop">
                       <div class="invit-info">
                         <p class="invit-phone">{{into.sn}}</p>
-                        <p class="invit-name">代币：<span>{{into.frozen_force}}</span></p>
+                        <p class="invit-name">星钻：<span>{{into.gold}}</span></p>
                       </div>
                       <div class="invit-msg">
                         <p>{{into.mark}}</p>
@@ -62,7 +62,7 @@
                     <div class="match-pop">
                       <div class="invit-info">
                         <p class="invit-phone">{{item.order_sn}}</p>
-                        <p v-if="!isStar" class="invit-name">代币：<span>{{item.total_fee}}</span></p>
+                        <p v-if="!isStar" class="invit-name">星钻：<span>{{item.total_fee}}</span></p>
                         <p v-else class="invit-name">星币：<span>{{item.total_kb}}</span></p>
                       </div>
                       <div class="invit-msg">
