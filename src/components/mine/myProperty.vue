@@ -147,10 +147,14 @@ export default {
         console.log(error)
         Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
       })
+    let selectNum = localStorage.getItem('selectMy')
+    if (selectNum) {
+      this.selected = parseInt(selectNum)
+    }
   },
   watch: {
     selected (value) {
-      console.log(value);
+      localStorage.setItem('selectMy', value)
     }
   },
   methods: {

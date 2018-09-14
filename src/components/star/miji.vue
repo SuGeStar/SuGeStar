@@ -73,7 +73,7 @@
     <div class="dynamicContainer">
       <div class="dynamicTxt"></div>
       <router-link to="/starBase"><div class="treng_pic1 treng_pic"></div></router-link>
-      <div class="treng_pic2 treng_pic"></div>
+      <router-link to="/starSecret"><div class="treng_pic2 treng_pic"></div></router-link>
     </div>
   </div>
 </template>

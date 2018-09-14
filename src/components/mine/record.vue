@@ -127,7 +127,7 @@ export default {
   watch: {
     selected (value) {
       if (this.url == 'star') {
-      console.log(value);
+        console.log(value);
         if (value == 1) {
           this.starInto()
           return false
@@ -156,94 +156,94 @@ export default {
     starInto () {
       // 星币收入(月)
       api.alreadyGetMonth()
-      .then ((res) => {
-        if (res.data.length == 0) {
-          Toast ({
-            message: '没有数据啦~'
-          })
-        } else {
-          this.isStar = true
-          this.MonthList = res.data
-        }
-      })
+        .then ((res) => {
+          if (res.data.length == 0) {
+            Toast ({
+              message: '没有数据啦~'
+            })
+          } else {
+            this.isStar = true
+            this.MonthList = res.data
+          }
+        })
     },
     starOut (page) {
       // 星币支出
       api.kbExpenses({
         'page': page
       })
-      .then((res) => {
-        console.log(res)
-        if (res.data.length == 0) {
-          Toast({
-            message: '没有数据啦~',
-            position: 'bottom',
-            duration: 2000
-          });
-        } else {
-          if (page == 1) {
-            this.list = res.data
-            this.page = 2
+        .then((res) => {
+          console.log(res)
+          if (res.data.length == 0) {
+            Toast({
+              message: '没有数据啦~',
+              position: 'bottom',
+              duration: 2000
+            });
           } else {
-            for (let x = 0; x < res.data.length; x++) {
-              this.list.push(res.data[x])
+            if (page == 1) {
+              this.list = res.data
+              this.page = 2
+            } else {
+              for (let x = 0; x < res.data.length; x++) {
+                this.list.push(res.data[x])
+              }
+              this.page++
             }
-            this.page++
           }
-        }
-      })
+        })
     },
     goldInto (page) {
       // 金币收入
       api.profit({
         'page': page
       })
-      .then((res) => {
-        console.log(res)
-        if(res.data.length == 0){
-          Toast({
-            message: '没有数据啦~',
-            position: 'bottom',
-            duration: 2000
-          })
-        } else {
-          if (page == 1) {
-            this.intoList = res.data
-            this.page = 2
+        .then((res) => {
+          console.log(res)
+          if (res.data.length == 0) {
+            Toast({
+              message: '没有数据啦~',
+              position: 'bottom',
+              duration: 2000
+            })
           } else {
-            for (let y = 0; y < res.data.length; y++) {
-              this.intoList.push(res.data[y])
+            if (page == 1) {
+              this.intoList = res.data
+              this.page = 2
+            } else {
+              for (let y = 0; y < res.data.length; y++) {
+                this.intoList.push(res.data[y])
+              }
+              this.page++
             }
-            this.page++
           }
-        }
-      })
+        })
     },
     goldOut (page) {
       // 金币支出
       api.expenses({
         'page': page
       })
-      .then ((res) => {
-        console.log(res)
-        if(res.data.length == 0){
-          Toast({
-            message: '没有数据啦~',
-            position: 'bottom',
-            duration: 2000
-          })
-        } else {
-          if (page == 1) {
-            this.list = res.data
-            this.page = 2
+        .then ((res) => {
+          console.log(res)
+          if(res.data.length == 0){
+            Toast({
+              message: '没有数据啦~',
+              position: 'bottom',
+              duration: 2000
+            })
           } else {
-            for (let Z = 0; Z < res.data.length; Z++) {
-              this.list.push(res.data[Z])
+            if (page == 1) {
+              this.list = res.data
+              this.page = 2
+            } else {
+              for (let Z = 0; Z < res.data.length; Z++) {
+                this.list.push(res.data[Z])
+              }
+              this.page++
             }
-            this.page++
           }
-        }
-      })
+        })
     },
     loadBottom () {
       setTimeout(() => {

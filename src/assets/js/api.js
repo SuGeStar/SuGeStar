@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Toast } from 'mint-ui'
 // 接口url
-var url = 'http://www.sugebei.com/api/'
+var url = 'http://www.nyycstar.com/api/'
 var imgUrl = 'http://img.sugebei.com/'
 let token = localStorage.getItem('token')
 // axios 配置

@@ -8,8 +8,8 @@
       <mt-loadmore :bottom-method="loadRCBottom" @bottom-status-change="handleRCBottomChange" :bottom-all-loaded="allLoaded" ref="">
         <div class="rec-list" v-for="(eachRec ,index) in recList" :key="index">
           <div class="rec-center">
-            <p><span class="fl"><i>数额：</i>{{eachRec.total}}</span><span class="fr"><i>星钻消耗：</i>{{eachRec.handling_fee}}</span></p>
-            <p><i>说明：</i>{{eachRec.mark}}</p>
+            <p><span class="fl"><i>释放数额：</i>{{eachRec.money}}</span><span class="fr"><i>状态：</i>{{eachRec.status}}</span></p>
+            <p><i>操作账户：</i>{{eachRec.bank_card.card}} <span>({{eachRec.bank_card.bank_code_name}})</span></p>
             <p><i>释放时间：</i>{{eachRec.created_at}}</p>
           </div>
         </div>
@@ -60,5 +60,5 @@ export default {
 </script>
 
 <style scoped lang="less">
-
+  @import '../../assets/less/releaseRecord.less';
 </style>

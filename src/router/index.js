@@ -57,6 +57,7 @@ import releaseRecord from '@/components/mine/releaseRecord'
 import starBase from '@/components/star/starBase'
 import powerReceiveRecord from '@/components/mine/powerReceiveRecord'
 import withdrawalRecord from '@/components/mine/withdrawalRecord'
+import starSecret from '@/components/star/starSecret'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -347,6 +348,11 @@ export default new Router({
       path: '/withdrawalRecord', // 提现记录
       name: 'withdrawalRecord',
       component: withdrawalRecord
+    },
+    {
+      path: '/starSecret', // 星球秘籍
+      name: 'starSecret',
+      component: starSecret
     }
   ]
 })

@@ -21,7 +21,7 @@
                 <p class="user-property-num">{{userSGK}}</p>
               </li>
               <li>
-                <p class="user-property-notice">算力力</p>
+                <p class="user-property-notice">算力</p>
                 <p class="user-property-num">{{userPOW}}</p>
               </li>
               <li>
@@ -177,6 +177,7 @@ export default {
         console.log(error)
         Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
       })
+    localStorage.removeItem('selectMy')
   }
 }
 </script>

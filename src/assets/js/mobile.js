@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Toast } from 'mint-ui'
 // 接口url
-var url = 'http://www.sugebei.com/api/'
+var url = 'http://www.nyycstar.com/api/'
 
 // axios 配置
 axios.defaults.timeout = 5000

@@ -52,7 +52,7 @@
       </div>
       <div class="star-explain">
         <div class="explain-list"  @click="getStar">
-          <img src="../../assets/image/index-zichan.gif" alt="">
+          <img src="../../assets/image/index-zichan.png" alt="">
           <p>星钻红包</p>
         </div>
         <div class="explain-list">
