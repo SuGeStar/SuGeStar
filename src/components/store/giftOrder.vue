@@ -16,7 +16,7 @@
           <i class="icon icon-right"></i>
         </div>
       </router-link>
-      <div class="gift-detail" v-for="(list, index) in orderList" :key="index">
+      <div class="gift-detail" v-for="(list, index) in orderList" :key="index" @click="popGiftBag(list)">
         <div class="image">
           <img :src="imgUrl+list.img" alt="">
         </div>
@@ -42,6 +42,12 @@
         </ul>
       </div>
     </mt-popup>
+    <mt-popup v-model="giftBagPop" position="bottom" class="mint-popup">
+        <div class="giftBagList">
+          <img :src="imgUrl+gImg" alt="" v-for="(gImg, index) in giftBagDetail" :key="index">
+          <button @click="popGiftBagF">已了解</button>
+        </div>
+    </mt-popup>
     <div class="footer">
       <div class="footer-price">
         <p>应支付：</p>
@@ -65,6 +71,7 @@ export default {
   data () {
     return {
       popupVisible: false,
+      giftBagPop: false,
       orderList: [],
       imgUrl: imgUrl,
       id: '',
@@ -75,7 +82,8 @@ export default {
       payment: '',
       pay_channel: '',
       password: [],
-      applyPop_pop_up: false
+      applyPop_pop_up: false,
+      giftBagDetail: ['image/497c05e01f6235ff52b3cf01a435e179.jpg']
     }
   },
   components: {
@@ -84,24 +92,24 @@ export default {
   created () {
     this.$http.get(url + 'getDefaultAddress?token=' + token)
     // 获取默认地址
-    .then(response => {
-      // console.log(response)
-      if (response.data.code == 500) {
-        Toast({
-          message: response.data.msg
-        })
-        this.$router.push('/addressManage/set')
-        return false
-      }
-      this.id = response.data.data.id
-      this.name = response.data.data.name
-      this.phone = response.data.data.phone
-      this.addressDetail = response.data.data.province + response.data.data.city + response.data.data.area + response.data.data.detail
-    })
-    .catch(error => {
-      console.log(error)
-      Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-    })
+      .then(response => {
+        // console.log(response)
+        if (response.data.code == 500) {
+          Toast({
+            message: response.data.msg
+          })
+          this.$router.push('/addressManage/set')
+          return false
+        }
+        this.id = response.data.data.id
+        this.name = response.data.data.name
+        this.phone = response.data.data.phone
+        this.addressDetail = response.data.data.province + response.data.data.city + response.data.data.area + response.data.data.detail
+      })
+      .catch(error => {
+        console.log(error)
+        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+      })
     if (this.$route.params.index == 0) {
       this.giftBag = '礼包一'
     } else if (this.$route.params.index == 1) {
@@ -138,26 +146,26 @@ export default {
         // console.log(payment_password)
         this.$http.get(url + 'giftOrderPay?token='+token+'&order_sn='+order_sn+'&payment_password='+payment_password)
           // 礼包订单支付
-        .then( order => {
-        // console.log(order)
-          if (order.data.code == 500) {
-            Toast({
-              message: order.data.msg
-            })
-            return false
-          } else {
-            Toast({
-              message: order.data.msg,
-              position: 'bottom',
-              duration: 3000
-            })
-            this.$router.push('/index')
-          }
-        })
-        .catch(error => {
-          console.log(error)
-          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-        })
+          .then( order => {
+          // console.log(order)
+            if (order.data.code == 500) {
+              Toast({
+                message: order.data.msg
+              })
+              return false
+            } else {
+              Toast({
+                message: order.data.msg,
+                position: 'bottom',
+                duration: 3000
+              })
+              this.$router.push('/index')
+            }
+          })
+          .catch(error => {
+            console.log(error)
+            Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+          })
       }
     },
     gotoPay () {
@@ -201,10 +209,17 @@ export default {
       api.presentGoods({
         goods_type: this.$route.params.id
       })
-      .then((res) => {
-        // console.log(res)
-        this.orderList = res.data
-      })
+        .then((res) => {
+          // console.log(res)
+          this.orderList = res.data
+        })
+    },
+    popGiftBag (e) {
+      this.giftBagPop = true ;
+      this.giftBagDetail = e.detail_img
+    },
+    popGiftBagF () {
+      this.giftBagPop = false ;
     }
   }
 }

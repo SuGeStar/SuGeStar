@@ -16,21 +16,30 @@
     padding: 0.2rem;
     background-color: #fff;
     border-bottom: 0.5px solid #ececec;
-    display: flex;
-    align-items: center;
+   /* display: flex;
+    align-items: center;*/
+    overflow: hidden;
     .image{
-      width: 30%;
+      width: 2rem;
+      float: left;
       img{
         width: 100%;
       }
     }
     .gift-desc{
-      margin-left: 0.2rem;
+      width: 3.9rem;
+      //margin-left: 0.2rem;
+      float: right;
+      p{
+        font-size: .26rem;
+        padding-bottom: .1rem;
+      }
       span{
         color: #ccc;
       }
       .price{
         color: #e79e56;
+        padding-top: .2rem;
       }
     }
   }
@@ -93,5 +102,29 @@
     padding: 0.2rem;
     color: #fff;
     background-color: #eb881f;
+  }
+}
+.giftBagList{
+  width: 6.4rem;
+  height: 11.38rem;
+  margin: 0 auto;
+  overflow: scroll;
+  background: black;
+  img{
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  button{
+    display: block;
+    width: 4.5rem;
+    height: .7rem;
+    border-radius: .3rem;
+    margin: .5rem auto;
+    background: none;
+    border: 1px solid #a100a1;
+    color: white;
+    font-size: .27rem;
+    outline: none;
   }
 }
