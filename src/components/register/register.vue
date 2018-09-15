@@ -13,7 +13,7 @@
       </div>-->
       <div>
         <!--<span>验&nbsp;证&nbsp;&nbsp;码</span>-->
-        <input type="number" placeholder="手机验证码" @blur="code" v-model="verificationCode" class="verificationCode">
+        <input type="number" placeholder="手机验证码" v-model="verificationCode" class="verificationCode">
         <i :class="{'haveSend':isSend}" @click="sendCode">{{verificationCodeTxt}}</i>
       </div>
       <div>
@@ -144,11 +144,11 @@ export default {
       }
     },
     // 判断验证码是否正确
-    code () {
+    /*code () {
       this.$http.get(url + 'checkSmsCode?phone=' + this.phoneNum +'&code='+this.verificationCode)
         .then(response => {
           console.log(response)
-          if (response.data.code == 200) {
+          if (response.data.code === 200) {
             Toast({
               message: response.data.msg,
               position: 'bottom',
@@ -165,7 +165,7 @@ export default {
         .catch(error => {
           console.log(error)
         })
-    },
+    },*/
     // 所属地区
     hiddenShow (e) {
       this.locations = e[0]

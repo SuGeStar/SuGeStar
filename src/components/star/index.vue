@@ -68,6 +68,14 @@
           </router-link>
         </div>
       </div>
+      <mt-popup v-model="successGet" position="bottom" class="mint-popup">
+          <div class="successGetBox">
+            <div class="successGetBox-close">
+              <span @click="closeSuccessGet"></span>
+            </div>
+            <router-link to="/powerReceiveRecord"><div class="successGetBox-info"></div></router-link>
+          </div>
+      </mt-popup>
       <footGuide></footGuide>
     </div>
   </div>
@@ -111,7 +119,8 @@ export default {
       teamFloor: true,
       ownerGold: 0,
       ownerMoney: 0,
-      ownerPower: 0
+      ownerPower: 0,
+      successGet: false
     }
   },
   components: {
@@ -128,7 +137,6 @@ export default {
       })
       this.$http.post(url + 'get', form)
         .then(response => {
-          // console.log(response)
           Toast({
             message: response.data.msg,
             position: 'middle',
@@ -203,19 +211,27 @@ export default {
           this.promptTxt = res.data
         })
     },*/
+    // 领取每天星钻红包
     getStar () {
       let form = this.$qs.stringify({
         token: token
       });
       api.getEveryDayGold(form)
         .then(res => {
+          if (res.code === 200) {
+            this.successGet = true
+          } else {
+            Toast({
+              message: res.msg,
+              position: 'middle',
+              duration: 2000
+            })
+          }
           console.log(res)
         })
-      /*Toast({
-        message: '红包还在制作中，请稍等..',
-        position: 'middle',
-        duration: 2000
-      })*/
+    },
+    closeSuccessGet () {
+      this.successGet = false
     }
   },
   created () {
