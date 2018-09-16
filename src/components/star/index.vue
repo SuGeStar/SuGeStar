@@ -4,12 +4,7 @@
       <!--基本信息-->
       <div class="index-user-info">
         <span class="fl">公告：</span>
-        <marquee  direction="left" scrolldelay="500">
-          <p>这是1个滚动消息我是一个跟hard的员工</p>
-          <p>这是2个滚动消息</p>
-          <p>这是3个滚动消息</p>
-          <p>这是4个滚动消息</p>
-        </marquee>
+        <marquee  direction="left" scrolldelay="500">{{systemNotice}}</marquee>
         <i>更多 >></i>
       </div>
       <!-- 钻石区域 -->
@@ -120,7 +115,8 @@ export default {
       ownerGold: 0,
       ownerMoney: 0,
       ownerPower: 0,
-      successGet: false
+      successGet: false,
+      systemNotice: ''
     }
   },
   components: {
@@ -168,49 +164,6 @@ export default {
           })
       }
     },
-    /*dataGold () {
-      if (token) {
-        this.$http.get(url + 'dataGold?token=' + token)
-        // 今日代币及累计获得的代币数据
-          .then(response => {
-            // console.log(response)
-            if (response.data.code == 200) {
-              this.today_owen = response.data.data.today
-              this.all_owen = response.data.data.total
-            } else if (response.data.code == 403) {
-              Toast({
-                message: response.data.msg
-              })
-            }
-          })
-          .catch(error => {
-            console.log(error)
-            Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-          })
-      }
-    },*/
-    /*recommend () {
-      // 获取直推人数
-      api.recommendNum()
-        .then((res) => {
-          this.invitpeo = res.data
-        })
-    },
-    getSonNum () {
-      // 旗下人数
-      api.getSonNum()
-        .then((res) => {
-          this.allpeo = res.data
-        })
-    },
-    prompt () {
-      // 提示信息
-      api.prompt()
-        .then((res) => {
-          // console.log(res)
-          this.promptTxt = res.data
-        })
-    },*/
     // 领取每天星钻红包
     getStar () {
       let form = this.$qs.stringify({
@@ -236,92 +189,29 @@ export default {
   },
   created () {
     this.dataMiners()
-    // this.dataGold()
-    // this.recommend()
-    // this.getSonNum()
-    // this.prompt()
     if (token) {
       this.$http.get(url + 'notGet?token=' + token)
       // 未开采K矿
         .then(response => {
-          // console.log(response)
           this.arr = response.data.data;
-         /* this.arr = [{
-            id: 1,
-            ore: '1.00'
-          },
-          {
-            id: 2,
-            ore: '2.00'
-          },
-          {
-            id: 3,
-            ore: '3.00'
-          },
-          {
-            id: 4,
-            ore: '4.00'
-          },
-          {
-            id: 5,
-            ore: '5.00'
-          },
-          {
-            id: 6,
-            ore: '6.00'
-          },
-          {
-            id: 7,
-            ore: '7.00'
-          },
-          {
-            id: 8,
-            ore: '8.00'
-          },
-          {
-            id: 9,
-            ore: '9.00'
-          }]*/
         })
         .catch(error => {
           console.log(error)
           Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        })
+      // 获得金币数量
+      api.getUserTreasure(token)
+        .then(res => {
+          this.ownerGold = res.data.miners
+          this.ownerMoney = res.data.gold
+          this.ownerPower = res.data.power
         })
     }
-    /*if (!token) {
-
-    } else {
-      this.$http.get(url + 'occupancyRate?token=' + token)
-      // 团队看板占比
-        .then(response => {
-          // console.log(response.data.data)
-          for (let i = 0; i < response.data.data.length; i++) {
-            if (response.data.data[i].percentage == 0) {
-              this.progressBox[i] = response.data.data[i]
-              // this.teamFloor = false
-            } else {
-              this.progressBox = response.data.data
-              this.progressBox[1].color = '#a288d2'
-              this.progressBox[2].color = '#f0b026'
-              this.progressBox[3].color = '#1ad3a7'
-              this.progressBox[4].color = '#03a8f7'
-            }
-          }
-        })
-        .catch(error => {
-          console.log(error)
-          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-        })
-    }*/
-    /*
-    * 获得金币数量
-    * */
-    api.getUserTreasure(token)
+    // 系统公告
+    api.systemNotice()
       .then(res => {
-        // console.log(res)
-        this.ownerGold = res.data.miners
-        this.ownerMoney = res.data.gold
-        this.ownerPower = res.data.power
+        this.systemNotice = res.data
+        console.log(res)
       })
   },
   mounted () {

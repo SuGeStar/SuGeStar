@@ -211,7 +211,7 @@ export default {
       })
         .then((res) => {
           // console.log(res)
-          this.orderList = res.data
+          this.orderList = res.data.goods
         })
     },
     popGiftBag (e) {

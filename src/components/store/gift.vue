@@ -6,7 +6,7 @@
       </a>
     </mt-header>
     <div class="gift">
-      <div class="notice">购买须知：购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知</div>
+      <div class="notice">购买须知：{{purchaseNotes}}</div>
       <ul>
         <li v-for="(gift,index) in giftList" :key="index">
           <router-link :to="'/giftOrder/'+gift.id+'/'+index">
@@ -63,15 +63,22 @@ export default {
   data () {
     return {
       giftList: [],
-      imgUrl: imgUrl
+      imgUrl: imgUrl,
+      purchaseNotes: ''
     }
   },
   created () {
+    // 获取礼包列表
     api.present()
-    .then((res) => {
-      console.log(res)
-      this.giftList = res.data
-    })
+      .then((res) => {
+        console.log(res)
+        this.giftList = res.data
+      })
+    // 获取购买须知
+    api.buyAction()
+      .then(res => {
+        this.purchaseNotes = res.data
+      })
   }
 }
 </script>

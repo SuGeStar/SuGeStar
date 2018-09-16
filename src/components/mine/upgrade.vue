@@ -7,10 +7,11 @@
     </mt-header>
     <div class="upgrade">
       <div class="cell-box">
-        <mt-field label="推荐人编号" readonly v-model="recomID"></mt-field>
-        <mt-field label="节点人编号" readonly v-model="contact_code"></mt-field>
+        <mt-field label="发现者编号" v-model="recomID"></mt-field>
+        <mt-field label="探索者编号" v-model="contact_code"></mt-field>
         <!-- <mt-field label="推荐人姓名" readonly  v-model="recomName"></mt-field> -->
         <mt-field label="真实姓名" placeholder="请输入您的真实姓名" v-model="username"></mt-field>
+        <mt-radio title="选择区间" v-model="value" :options="['左', '右',]"></mt-radio>
       </div>
       <div class="btn-box">
         <mt-button class="button" @click="upgrade">确认创建</mt-button>
@@ -27,8 +28,7 @@
       &:last-child{
         border-bottom: none;
       }
-    }
-  }
+    } }
   .btn-box{
     width: 90%;
     margin: 1rem auto 0;
@@ -53,43 +53,58 @@ export default {
       recomName: '张三',
       username: '',
       apply_level: 2,
+      value: '',
+      valCode: 0,
       baseUserInfo: JSON.parse(localStorage.getItem('userinfo'))
     }
   },
   created () {
     this.username = this.baseUserInfo.realname
     api.getRecordCode()
-    .then ((res) => {
-      console.log(res)
-      this.recomID = res.data.recommend_code
-      this.contact_code = res.data.contact_code
-    })
+      .then ((res) => {
+        console.log(res)
+        this.recomID = res.data.recommend_code
+        this.contact_code = res.data.contact_code
+      })
   },
   methods: {
     upgrade () {
+      if (this.value == '左') {
+        this.valCode = 1
+      } else if (this.value == '右') {
+        this.valCode = 2
+      } else if (this.value == ''){
+        Toast({
+          message: '请选择区间',
+          position: 'bottom',
+          duration: 2000
+        });
+        return false
+      }
       let form = this.$qs.stringify({
         apply_level: this.apply_level,
         token: token,
         recommend_code: this.recomID,
-        contact_code: this.contact_code
+        contact_code: this.contact_code,
+        place: this.valCode
       })
-      this.$http.post(url+'apply', form)
-      .then(response => {
-        console.log(response)
-        Toast({
-          message: response.data.msg,
-          position: 'bottom',
-          duration: 2000
+      api.apply(form)
+        .then(response => {
+          console.log(response)
+          Toast({
+            message: response.data.msg,
+            position: 'bottom',
+            duration: 2000
+          })
+          if (response.data.code == 200) {
+            localStorage.setItem('level',this.apply_level)
+            this.$router.push('/index')
+          }
         })
-        if (response.data.code == 200) {
-          localStorage.setItem('level',this.apply_level)
-          this.$router.push('/index')
-        }
-      })
-      .catch(error => {
-        console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-      })
+        .catch(error => {
+          console.log(error)
+          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        })
     }
   }
 }

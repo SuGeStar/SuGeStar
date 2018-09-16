@@ -72,8 +72,14 @@
     </div>-->
     <div class="dynamicContainer">
       <div class="dynamicTxt"></div>
-      <router-link to="/starBase"><div class="treng_pic1 treng_pic"></div></router-link>
-      <router-link to="/starSecret"><div class="treng_pic2 treng_pic"></div></router-link>
+      <router-link to="/starBase"><div class="treng_pic1 treng_pic">
+        <p>星球基地</p>
+        <p class="dynamicTxt-center">价值的贡献者参与价值的分享</p>
+      </div></router-link>
+      <router-link to="/starSecret"><div class="treng_pic2 treng_pic">
+        <p>星球秘籍</p>
+        <p  class="dynamicTxt-center">带您玩转YC星球</p>
+      </div></router-link>
     </div>
   </div>
 </template>

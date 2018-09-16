@@ -248,6 +248,14 @@ export default {
   powerReturnList (params) {
     // 算力每日定反记录
     return Get(`/powerReturnList/${params.page}?token=${token}`)
+  },
+  systemNotice () {
+    // 系统公告
+    return Get(`/aboutus`)
+  },
+  buyAction () {
+    // 购买须知
+    return Get(`/purchasenotes`)
   }
 }
 export { imgUrl }
