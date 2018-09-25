@@ -90,20 +90,25 @@ export default {
       })
       api.apply(form)
         .then(response => {
-          console.log(response)
-          Toast({
-            message: response.data.msg,
-            position: 'bottom',
-            duration: 2000
-          })
-          if (response.data.code == 200) {
-            localStorage.setItem('level',this.apply_level)
+          if (response.code === 200) {
+            Toast({
+              message: response.msg,
+              position: 'bottom',
+              duration: 2000
+            })
+            localStorage.setItem('level', this.apply_level)
             this.$router.push('/index')
+          } else {
+            Toast({
+              message: response.msg,
+              position: 'bottom',
+              duration: 2000
+            })
           }
         })
         .catch(error => {
           console.log(error)
-          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+          Toast(error)
         })
     }
   }

@@ -156,7 +156,7 @@ export default {
                 }
               })
             break
-          case 2:
+          case 1:
             let form1 = this.$qs.stringify({
               token: token,
               phone: this.sendTel,
@@ -167,7 +167,13 @@ export default {
             })
             api.transfer(form1)
               .then(res => {
-                console.log(res)
+                if (res.code === 200) {
+                  Toast({
+                    message: res.msg,
+                    position: 'bottom',
+                    duration: 5000
+                  })
+                }
               })
               .catch(err => {
                 console.log(err)

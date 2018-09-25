@@ -36,7 +36,28 @@
             </router-link>
           </div>
         </div>
-        <div class="friend-cls">
+        <div class="notice-user" v-if="popupVisible1">
+          <p>提示：</p>
+          <h2>您还不是星球的创世居民，暂时没有分享功能，是否拥有此功能？</h2>
+          <span>去拥有</span>
+        </div>
+        <div class="invited-img-container" v-if="!popupVisible1">
+          <input class="friend-int" v-model="copy" readonly>
+          <mt-button @click="copyBtn" class="copy-btn">一键复制</mt-button>
+          <div class="invit-qr">
+            <div class="invit-desc">
+              <p>我是YC星球{{levelTxt}}{{name}}</p>
+              <p>是YC星球的{{number}}位居民</p>
+              <p>邀请你共同参与YC星球的区块开发</p>
+              <p>我在YC星球等你，不见不散</p>
+            </div>
+            <div class="invit-img">
+              <img class="img" :src="src" alt=""/>
+              <p>扫描二维码，加入SG星球</p>
+            </div>
+          </div>
+        </div>
+        <!--<div class="friend-cls">
           <h3>邀请规则</h3>
           <div class="friend-box">
             <div class="invit-rule">
@@ -51,13 +72,13 @@
               </p>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
-      <mt-popup v-model="popupVisible1" popup-transition="popup-fade" class="invit-pop">
+     <!-- <mt-popup v-model="popupVisible1" popup-transition="popup-fade" class="invit-pop">
         <div class="friend-cls">
           <img class="invit-tit" src="../../assets/image/friend-tit.png" alt="">
           <div class="friend-box">
-            <input class="friend-int" v-model="copy" readonly>
+            <input class="frie nd-int" v-model="copy" readonly>
             <mt-button @click="copyBtn" class="copy-btn">一键复制</mt-button>
           </div>
           <div class="invit-line"></div>
@@ -75,7 +96,7 @@
           </div>
         </div>
       </mt-popup>
-      <mt-button class="ivint-btn" @click="invit">生成邀请卡</mt-button>
+      <mt-button class="ivint-btn" @click="invit">生成邀请卡</mt-button>-->
     </div>
   </div>
 </template>
@@ -108,25 +129,29 @@ export default {
   },
   created () {
     this.name = userinfo.realname;
+    this.copy = userinfo.invite_code
+    this.src = url + 'registerLink?token=' + token
     if (userinfo.level === 1) {
       this.levelTxt = '发现者'
+      this.popupVisible1 = true
     } else {
       this.levelTxt = '探索者'
+      this.popupVisible1 = false
     }
   },
   methods: {
-    invit () {
+    /*invit () {
       this.copy = userinfo.invite_code
       this.src = url + 'registerLink?token=' + token
       this.popupVisible1 = true
-    },
+    },*/
     copyBtn () {
       this.$copyText(this.src).then(function (e) {
         Toast('复制成功')
-        console.log(e)
+        // console.log(e)
       }, function (e) {
         Toast('复制失败')
-        console.log(e)
+        // console.log(e)
       })
     }
   }

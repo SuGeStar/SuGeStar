@@ -79,8 +79,8 @@
 @import '../../assets/less/relation.less';
 </style>
 <script>
-import { url } from '../../assets/js/mobile.js'
 import { Toast } from 'mint-ui'
+import api from '@/assets/js/api.js'
 let token = localStorage.getItem('token')
 export default {
   data () {
@@ -93,7 +93,7 @@ export default {
     }
   },
   created () {
-    this.$http.get(url + 'branches?token='+token)
+    /*this.$http.get(url + 'branches?token='+token)
     .then(response => {
       console.log(response)
       if (response.data.data.left[0].id == null && response.data.data.right[0].id == null) {
@@ -111,7 +111,13 @@ export default {
     .catch(error => {
       console.log(error)
       Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-    })
+    })*/
+    api.relationList(token)
+      .then(res => {
+        console.log(res)
+        this.leftList = res.data.left
+        this.rightList = res.data.right
+      })
   },
   methods: {
     shortPeo (e, code) {

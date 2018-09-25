@@ -149,7 +149,7 @@ export default {
     if (!token) {
       this.$router.push('/login')
     }
-    this.userNickName = this.baseUserInfo.nickname;
+    this.userNickName = this.baseUserInfo.realname;
     if (this.level == 2) {
       this.userIdent = '创 世 居 民'
     } else {

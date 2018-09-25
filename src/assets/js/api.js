@@ -142,6 +142,10 @@ export default {
     // 我的待安置
     return Get(`/waitPlacement/1?token=${token}`)
   },
+  relationList () {
+    // 团队看板
+    return Get(`/branches?token=${token}`)
+  },
   setNickname (params) {
     // 修改昵称
     return Post('/setNickname', params)
