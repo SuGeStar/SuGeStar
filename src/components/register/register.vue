@@ -2,8 +2,8 @@
   <div class="reg-container">
     <h3 class="reg-title">YC星球区块创建</h3>
     <div class="reg-form">
-      <div><span>推荐编号</span><input type="text" placeholder="" :readonly="true" v-model="invite_code"></div>
-      <div><span>接点编号</span><input type="text" placeholder="" :readonly="true" v-model="contact_code"></div>
+      <div><span>发现者</span><input type="text" placeholder="" :readonly="true" v-model="invite_code"></div>
+      <div><span>探索者</span><input type="text" placeholder="" :readonly="true" v-model="contact_code"></div>
       <div>
         <!--<span>手机号码</span>-->
         <input type="number" placeholder="请输入手机号码" v-model="phoneNum"></div>

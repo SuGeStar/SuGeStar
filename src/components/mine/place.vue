@@ -82,22 +82,31 @@ export default {
         recommend_code: this.recommend_code,
         contact_code: contact_code,
       })
+      console.log(form)
       MessageBox.confirm('确定执行此操作?').then(action => {
         api.apply(form)
-        .then((res) => {
-          console.log(res)
-          Toast({
-            message: res.msg,
-            position: 'bottom',
-            duration: 2000
+          .then((res) => {
+            console.log(res)
+            if (res.code === 200) {
+              Toast({
+                message: '安置成功',
+                position: 'bottom',
+                duration: 2000
+              })
+            } else {
+              Toast({
+                message: res.msg,
+                position: 'bottom',
+                duration: 2000
+              })
+            }
+            if (res.code == 200) {
+              this.$router.replace('/relation')
+            }
           })
-          if (res.code == 200) {
-            this.$router.replace('/relation')
-          }
-        })
       })
     }
   }
-  
+
 }
 </script>

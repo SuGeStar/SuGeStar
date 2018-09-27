@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Toast } from 'mint-ui'
 // 接口url
 var url = 'http://www.nyycstar.com/api/'
-var imgUrl = 'http://img.sugebei.com/'
+var imgUrl = 'http://img.nyycstar.com/'
 let token = localStorage.getItem('token')
 // axios 配置
 axios.defaults.timeout = 5000
