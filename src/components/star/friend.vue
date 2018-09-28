@@ -36,7 +36,7 @@
             </router-link>
           </div>
         </div>
-        <div class="notice-user" v-if="popupVisible1">
+        <!--<div class="notice-user" v-if="popupVisible1">
           <p>提示：</p>
           <h2>您还不是星球的创世居民，暂时没有分享功能，是否拥有此功能？</h2>
           <span>去拥有</span>
@@ -56,13 +56,13 @@
               <p>扫描二维码，加入SG星球</p>
             </div>
           </div>
-        </div>
-        <!--<div class="friend-cls">
+        </div>-->
+        <div class="friend-cls">
           <h3>邀请规则</h3>
           <div class="friend-box">
             <div class="invit-rule">
               <p>
-                ① 首次邀请两人入驻SG星球，即可解封原力值（必须与邀请人同级）；
+                ① 首次邀请两人入驻YC星球，即可解封原力值（必须与邀请人同级）；
               </p>
               <p>
                 ② 原力值解封之后，每成功邀请两人入驻SG星球，则赠送邀请人相应的原力值（若被邀请人身份等级低于邀请人，则按被邀请人等级赠送相应的原力值；若被邀请人身份等级高于邀请人，则按邀请人等级赠送相应的原力值）；
@@ -72,9 +72,9 @@
               </p>
             </div>
           </div>
-        </div>-->
+        </div>
       </div>
-     <!-- <mt-popup v-model="popupVisible1" popup-transition="popup-fade" class="invit-pop">
+      <mt-popup v-model="popupVisible1" popup-transition="popup-fade" class="invit-pop">
         <div class="friend-cls">
           <img class="invit-tit" src="../../assets/image/friend-tit.png" alt="">
           <div class="friend-box">
@@ -96,7 +96,7 @@
           </div>
         </div>
       </mt-popup>
-      <mt-button class="ivint-btn" @click="invit">生成邀请卡</mt-button>-->
+      <mt-button class="ivint-btn" @click="invit">生成邀请卡</mt-button>
     </div>
   </div>
 </template>
@@ -140,11 +140,11 @@ export default {
     }
   },
   methods: {
-    /*invit () {
+    invit () {
       this.copy = userinfo.invite_code
       this.src = url + 'registerLink?token=' + token
       this.popupVisible1 = true
-    },*/
+    },
     copyBtn () {
       this.$copyText(this.src).then(function (e) {
         Toast('复制成功')
