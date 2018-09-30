@@ -58,6 +58,7 @@ import starBase from '@/components/star/starBase'
 import powerReceiveRecord from '@/components/mine/powerReceiveRecord'
 import withdrawalRecord from '@/components/mine/withdrawalRecord'
 import starSecret from '@/components/star/starSecret'
+import whiteBook from '@/components/star/whiteBook'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -353,6 +354,11 @@ export default new Router({
       path: '/starSecret', // 星球秘籍
       name: 'starSecret',
       component: starSecret
+    },
+    {
+      path: '/whiteBook', // 星球白皮书
+      name: 'whiteBook',
+      component: whiteBook
     }
   ]
 })

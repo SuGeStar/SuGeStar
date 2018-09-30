@@ -7,7 +7,7 @@
           {{userIdent}}
         </div>
         <p class="user-nickname">{{userNickName}}</p>
-        <p class="user-order">YC星球第{{userOrder}}位居民</p>
+        <!--<p class="user-order">YC星球第{{userOrder}}位居民</p>-->
         <div class="user-property">
           <div class="user-property-title">
             <router-link to="/myProperty">

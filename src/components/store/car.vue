@@ -18,7 +18,7 @@
                 <label class="cart-checkbox" :for="cars.id"></label>
               </div>
               <div class="img-box">
-                <img :src="getImg(cars.goods.default_img)" alt="">
+                <img :src="imgUrl+cars.goods.default_img" alt="">
               </div>
               <div class="info-box">
                 <h3>{{cars.goods.goods_name}}</h3>
@@ -58,6 +58,7 @@
 import { Toast } from 'mint-ui';
 import { url } from '../../assets/js/mobile.js'
 import api from '@/assets/js/api.js'
+import { imgUrl } from '@/assets/js/api.js'
 import { MessageBox } from 'mint-ui'
 let token = localStorage.getItem('token')
 export default {
@@ -69,9 +70,7 @@ export default {
       totelMoney: 0,
       currentId: 0,
       carId: '',
-      getImg (url) {
-        return 'http://img.sugebei.com/' + url
-      }
+      imgUrl:imgUrl
     }
   },
   methods: {

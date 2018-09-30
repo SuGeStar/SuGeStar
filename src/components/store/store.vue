@@ -25,7 +25,7 @@
       <div class="store-swiper">
         <carousel-3d :autoplay="true" :autoplay-timeout="5000" :display="3" style="border: none" :style="{height: slideHeight + 'px'}">
           <slide v-for="(slide,i) in slides" :key="i" :index="i" style="border: none" :style="{height: 180 + 'px', width: 98 + '%',marginLeft: 1 + '%',borderRadius: 0.1 +'rem'}">
-            <img :src="getImg(slide.pic)" class="swiper-imgs">
+            <img :src="imgUrl+slide.pic" class="swiper-imgs">
           </slide>
         </carousel-3d>
       </div>
@@ -35,7 +35,7 @@
         <ul>
           <li v-for="(cls,index) in swiperBox" :key="index">
             <router-link :to="{path: '/classifyList/'+cls.id+'/'+cls.name}">
-              <div><img :src="getImg(cls.img)" alt=""></div>
+              <div><img :src="imgUrl+cls.img" alt=""></div>
               <p>{{cls.name}}</p>
             </router-link>
           </li>
@@ -62,7 +62,7 @@
           <ul :style="{width: S_width + 'rem'}">
             <li v-for="(sImg,index) in storeImg" :key="index">
               <router-link :to="{path: '/storeDetial/'+sImg.id}">
-                <img :src="getImg(sImg.logo)" alt="">
+                <img :src="imgUrl+sImg.logo" alt="">
               </router-link>
             </li>
           </ul>
@@ -75,7 +75,7 @@
           <ul>
             <li class="content-list" v-for="item in goodsList" :key="item.id">
               <router-link :to="{path:'/details/' + item.id}">
-                <img :src="getImg(item.default_img)" alt="">
+                <img :src="imgUrl+item.default_img" alt="">
                 <p>
                   {{item.goods_name}}
                 </p>
@@ -118,10 +118,10 @@
 }
 </style>
 <script>
+import api from '../../assets/js/api.js'
+import {imgUrl} from '../../assets/js/api.js'
 import footGuide from '../comp/footGuide.vue'
-import { url } from '../../assets/js/mobile.js'
 import { Carousel3d, Slide } from 'vue-carousel-3d'
-import api from '@/assets/js/api.js'
 let token = localStorage.getItem('token')
 export default {
   components: {
@@ -161,9 +161,7 @@ export default {
       page: 1,
       isScroll: true,
       addMoreLogo: true,
-      getImg (url) {
-        return 'http://img.sugebei.com/' + url
-      }
+      imgUrl: imgUrl
     }
   },
   mounted () {
@@ -171,58 +169,39 @@ export default {
 
   },
   beforeDestroy () {
-    // window.removeEventListener('scroll', () => {
-    //   this._st()
-    // })
     this.isScroll = false
   },
   created () {
     // 获取商品一级分类
-    this.$http.get(url + 'cateList')
+    api.firstCateList()
       .then(response => {
         for (var i = 0; i < 4; i++) {
-          this.swiperBox.push((response.data.data)[i])
+          this.swiperBox.push((response.data)[i])
         }
-        /*let _len = response.data.data.length;
-        if (_len > 8) {
-          this.s2 = true
-          for (var i = 0; i < 8; i++) {
-            this.swiperBox.push((response.data.data)[i])
-          }
-          for (var j = 8; j < _len; j++) {
-            this.swiperBox2.push((response.data.data)[j])
-          }
-        } else {
-          this.s2 = false
-          this.swiperBox = response.data.data
-        }*/
       })
       .catch(error => {
         console.log(error)
       })
     // 轮播图
-    this.$http.get(url + 'slides')
+    api.storeSwiper()
       .then(res => {
-        // console.log(res)
-        this.slides = res.data.data
+        this.slides = res.data
       })
       .catch(err => {
         console.log(err)
       })
     // 品牌
-    this.$http.get(url + 'brandList/1')
+    api.brandList()
       .then(res => {
-        // console.log(res)
-        this.storeImg = res.data.data
-        // this.newList = res.data.data
+        this.storeImg = res.data
       })
       .catch(err => {
         console.log(err)
       })
     // 获取精选好物数据
-    this.$http.get(url + 'goodsSelected/' + 1)
+    api.goodsSelectedList(1)
       .then(res => {
-        this.goodsList = res.data.data
+        this.goodsList = res.data
       })
       .catch(err => {
         console.log(err)
@@ -250,12 +229,12 @@ export default {
         var st = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
         if (st + window.innerHeight + 1 > document.body.offsetHeight) {
           this.page += 1
-          this.$http.get(url + 'goodsSelected/' + this.page)
+          api.goodsSelectedList(this.page)
             .then(res => {
-              for (var i in res.data.data) {
-                this.goodsList.push((res.data.data)[i])
+              for (var i in res.data) {
+                this.goodsList.push((res.data)[i])
               }
-              if (res.data.data == '') {
+              if (res.data == '') {
                 this.isScroll = false
                 this.addMoreLogo = false
               }

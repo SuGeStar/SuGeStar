@@ -11,7 +11,7 @@
         <mt-field label="探索者编号" v-model="contact_code"></mt-field>
         <!-- <mt-field label="推荐人姓名" readonly  v-model="recomName"></mt-field> -->
         <mt-field label="真实姓名" placeholder="请输入您的真实姓名" v-model="username"></mt-field>
-        <mt-radio title="选择区间" v-model="value" :options="['左', '右',]"></mt-radio>
+        <!--<mt-radio title="选择区间" v-model="value" :options="['左', '右',]"></mt-radio>-->
       </div>
       <div class="btn-box">
         <mt-button class="button" @click="upgrade">确认创建</mt-button>
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     upgrade () {
-      if (this.value == '左') {
+      /*if (this.value == '左') {
         this.valCode = 1
       } else if (this.value == '右') {
         this.valCode = 2
@@ -80,13 +80,13 @@ export default {
           duration: 2000
         });
         return false
-      }
+      }*/
       let form = this.$qs.stringify({
         apply_level: this.apply_level,
         token: token,
         recommend_code: this.recomID,
         contact_code: this.contact_code,
-        place: this.valCode
+        // place: this.valCode
       })
       api.apply(form)
         .then(response => {

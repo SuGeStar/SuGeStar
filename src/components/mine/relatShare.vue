@@ -1,24 +1,29 @@
 <template>
   <div class="wrapper">
     <div class="relatShare friend">
-      <div class="invit-pop">
-        <div class="friend-cls">
-          <img class="invit-tit" src="../../assets/image/friend-tit.png" alt="">
-          <div class="friend-box">
-            <input class="friend-int" v-model="copy" readonly>
-            <mt-button @click="copyBtn" class="copy-btn">一键复制</mt-button>
+      <div class="friend-con">
+        <h3>
+          <p class="p1">YC星球</p>
+          <p class="p2">链接你我，共筑YC星球</p>
+        </h3>
+        <div class="invit-pop">
+          <div class="friend-cls">
+            <div class="friend-box">
+              <p class="friend-txt">我的邀请码</p>
+              <input class="friend-int" v-model="copy" readonly>
+              <mt-button @click="copyBtn" class="copy-btn">一键复制</mt-button>
+            </div>
+            <div class="invit-desc">
+              <p>我是{{levelTxt}}{{name}},YC星球的{{number}}位居民</p>
+              <p>我在YC星球等你，不见不散</p>
+            </div>
+            <div class="invit-line"></div>
           </div>
-          <div class="invit-line"></div>
-        </div>
-        <div class="invit-qr">
-          <div class="invit-desc">
-            <p>我是"{{name}}"</p>
-            <p>是SG星球的{{number}}位居民</p>
-            <p>我在SG星球等你，不见不散</p>
-          </div>
-          <div class="invit-img">
-            <img class="img" :src="src" alt=""/>
-            <p>扫描二维码，加入SG星球</p>
+          <div class="invit-qr">
+            <div class="invit-img">
+              <img class="img" :src="src" alt=""/>
+              <p>扫描二维码，加入SG星球</p>
+            </div>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@
       <div><span>探索者</span><input type="text" placeholder="" :readonly="true" v-model="contact_code"></div>
       <div>
         <!--<span>手机号码</span>-->
-        <input type="number" placeholder="请输入手机号码" v-model="phoneNum"></div>
+        <input type="number" placeholder="手机号码" v-model="phoneNum"></div>
        <!--<div><span>图片验证</span>
         <input type="text" placeholder="图片验证码" v-model="pic" class="verificationCode">
         <img :src="imgSrc" alt="" @click="changePic()">
@@ -18,10 +18,10 @@
       </div>
       <div>
         <!--<span>登录密码</span>-->
-        <input type="password" placeholder="字母数字组合" v-model="loginPsd"></div>
+        <input type="password" placeholder="登录密码" v-model="loginPsd"></div>
       <div>
         <!--<span>支付密码</span>-->
-        <input type="password" placeholder="6位数字" v-model="applyPsd"></div>
+        <input type="password" placeholder="6位数字支付密码" v-model="applyPsd"></div>
       <!-- <div  @click="cityPop">
         <span>所属地区</span>
         <input type="text" placeholder="请选择省 市 县" v-model="locations" :readonly="true">
@@ -30,7 +30,7 @@
       <div><span>身份证号</span><input type="text" placeholder="请输入身份证号码" v-model="IDNumber"></div>-->
       <div>
         <!--<span>真实姓名</span>-->
-        <input type="text" placeholder="请输入您的真实姓名" v-model="realName"></div>
+        <input type="text" placeholder="真实姓名" v-model="realName"></div>
       <!-- <div><span>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span><input type="text" placeholder="给自己起个名字吧~" v-model="nickName"></div>  -->
     </div>
     <button  @click="register">开启我的星球建设</button>

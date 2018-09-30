@@ -10,7 +10,7 @@
       <div class="the-swiper">
         <mt-swipe class="det-swiper" :show-indicators="true" :auto="4000">
           <mt-swipe-item v-for="(swiper,index) in swiperBox" :key="index">
-            <img cover :src="getImg(swiper)" alt="">
+            <img cover :src="imgUrl+swiper" alt="">
           </mt-swipe-item>
         </mt-swipe>
       </div>
@@ -28,7 +28,7 @@
       <i v-for="(ifo , index) in info" :key="index"><span>{{ifo.key}}</span><span>{{ifo.value}}</span></i>
     </div>
     <div class="details-imgBox">
-      <img v-for="(img,index) in imgBox" :key="index" :src="getImg(img)" alt="">
+      <img v-for="(img,index) in imgBox" :key="index" :src="imgUrl+img" alt="">
     </div>
   </div>
   <mt-popup v-model="popupVisible" class="deta-pop" position="bottom">
@@ -36,7 +36,7 @@
       <div class="spec">
         <div class="spec-header">
           <div class="spec-imgBox">
-            <img :src="getImg(goodsInfo.default_img)" alt="">
+            <img :src="imgUrl+goodsInfo.default_img" alt="">
           </div>
           <div class="spec-info">
             <p>星币 <span class="spec-pic">{{finalGold}}</span> +¥ <span class="spec-pic">{{finalPrice}}</span></p>
@@ -83,7 +83,8 @@
 </style>
 <script>
 import { Toast } from 'mint-ui';
-import { url } from '../../assets/js/mobile.js'
+import api from '../../assets/js/api.js'
+import {imgUrl} from '../../assets/js/api.js'
 let token = localStorage.getItem('token')
 export default {
   data () {
@@ -113,9 +114,7 @@ export default {
       totalPrice: '',
       info: [],
       row: 0,
-      getImg (url) {
-        return 'http://img.sugebei.com/' + url
-      }
+      imgUrl: imgUrl
     }
   },
   methods: {
@@ -240,14 +239,32 @@ export default {
           })
           break;
       }
+    },
+    // 获得购物车数量
+    GetShopCarNum () {
+      if (token) {
+        api.getShopCarNum(token)
+          .then(res => {
+            console.log(res)
+            if (res.data == 0) {
+              this.shopCarShow = false
+            } else {
+              this.shopCarNum = res.data
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
     }
   },
   created () {
     let self = this
     self.goodsId = this.$route.params.goodsId
-    this.$http.get(url + 'goodsInfo?goods_id=' + self.goodsId)
+    api.goodsDetialInfo(self.goodsId)
       .then(res => {
-        self.goodsInfo = res.data.data
+        console.log(res)
+        self.goodsInfo = res.data
         self.swiperBox = self.goodsInfo.main_img
         self.imgBox = self.goodsInfo.detail_img
         self.colorList = self.goodsInfo.color
@@ -267,17 +284,7 @@ export default {
         console.log(err)
       })
     // 获取购物车数量
-    this.$http.get(url + 'numCart?token=' + token)
-      .then(res => {
-        if (res.data.data == 0) {
-          this.shopCarShow = false
-        } else {
-          this.shopCarNum = res.data.data
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    this.GetShopCarNum()
   }
 }
 </script>

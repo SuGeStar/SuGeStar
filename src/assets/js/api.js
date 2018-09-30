@@ -186,21 +186,37 @@ export default {
     // 类型列表
     return Get(`/cateList?cate_id=${params.cate_id}`)
   },
+  firstCateList () {
+    // 类型列表
+    return Get(`/cateList`)
+  },
+  storeSwiper () {
+    // 类型列表
+    return Get(`/slides`)
+  },
   goodsList (params) {
     // 类型下商品列表
     return Get(`/goodsList/${params.page}?cate_id=${params.cate_id}`)
   },
   brandList () {
     // 品牌列表
-    return Get(`/brandList`)
+    return Get(`/brandList/1`)
   },
   brandGoodsList (params) {
     // 品牌下商品列表
     return Get(`/brandGoodsList/${params.page}?brand_id=${params.brand_id}`)
   },
+  goodsSelectedList (params) {
+    // 好物精选列表
+    return Get(`/goodsSelected/${params}`)
+  },
   zoneList (params) {
     // 品牌下商品列表
     return Get(`/starCateList`)
+  },
+  goodsDetialInfo (params) {
+    // 商品详情
+    return Get(`/goodsInfo?goods_id=${params}`)
   },
   search (params) {
     //  搜索

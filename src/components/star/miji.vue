@@ -80,9 +80,29 @@
         <p>星球秘籍</p>
         <p  class="dynamicTxt-center">带您玩转YC星球</p>
       </div></router-link>
+      <div class="treng_pic3 treng_pic" @click="sourceCode()">
+        <p>星球源码</p>
+        <p  class="dynamicTxt-center">公平、公正、开源</p>
+      </div>
+      <router-link to="/whiteBook"><div class="treng_pic4 treng_pic">
+        <p>星球白皮书</p>
+        <p  class="dynamicTxt-center">让您详细了解星球规划</p>
+      </div></router-link>
     </div>
   </div>
 </template>
 <style lang="less" scoped>
   @import '../../assets/less/miji.less';
 </style>
+<script>
+export default {
+  data () {
+    return {}
+  },
+  methods: {
+    sourceCode () {
+      window.location.href = 'https://etherscan.io/address/0x77a481abdb863e62fb2ab421b7b2f14e9fb6cfb3#code'
+    }
+  }
+}
+</script>
