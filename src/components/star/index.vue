@@ -14,7 +14,7 @@
       <!-- 团队看板 -->
       <div class="index-box">
         <div class="box-title">
-          <h3>星球资源</h3>
+          <h3>星球数据</h3>
         </div>
         <div class="data-box">
           <div class="data-list">

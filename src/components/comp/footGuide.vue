@@ -25,7 +25,8 @@
   justify-content: space-around;
 }
 .mint-tab-item{
-padding:0!important;
+  padding-bottom:.05rem!important;
+  padding-top: 0rem!important;
 }
 
 </style>

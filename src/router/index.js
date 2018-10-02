@@ -59,6 +59,7 @@ import powerReceiveRecord from '@/components/mine/powerReceiveRecord'
 import withdrawalRecord from '@/components/mine/withdrawalRecord'
 import starSecret from '@/components/star/starSecret'
 import whiteBook from '@/components/star/whiteBook'
+import applyRefund from '@/components/store/applyRefund'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -189,6 +190,11 @@ export default new Router({
       path: '/confirmOrder', // 确认订单
       name: 'confirmOrder',
       component: confirmOrder
+    },
+    {
+      path: '/applyRefund', // 申请退款
+      name: 'applyRefund',
+      component: applyRefund
     },
     {
       path: '/car',

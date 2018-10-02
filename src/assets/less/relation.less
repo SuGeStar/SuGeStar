@@ -3,27 +3,29 @@ body,html{
   background: url("../image/relation_bg.jpg") no-repeat center;
 }
 .wrapper .mint-header{
-  background-image: linear-gradient(0deg,
+  /*background-image: linear-gradient(0deg,
   #2c2d31 0%,
   #101013 100%);
-  opacity: 0.9;
+  opacity: 0.9;*/
   color: white;
+  background: none;
 }
 .relation{
   position: absolute;
-  top: 0.85rem;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background: url("../image/relation_bg.jpg") no-repeat center;
-  background-size: 100% 100%;
+  background: url("../image/starBase.jpg") no-repeat center;
+  background-size: 100% auto;
   overflow: scroll;
   .relation-box{
     //background-color: #fff;
+    margin-top: .85rem;
     .relation-list{
       width: 50%;
       text-align: center;
-      border: solid 0.01rem rgba(235, 235, 235, 0.2);
+      border: solid 0.01rem rgba(235, 235, 235, 0.1);
       &:last-child{
         border-right: none;
       }
@@ -32,12 +34,13 @@ body,html{
         font-size: 0.26rem;
         color: #fff;
         border: solid 0.01rem rgba(235, 235, 235, 0.2);
+        border-bottom: none;
       }
       .left-list{
         padding: 0.2rem;
         .list-box{
           align-items: center;
-          background-color: rgba(255, 255, 255, 0.2);
+          background-color: rgba(255, 255, 255, 0.05);
           border-radius: 0.09rem;
           border: solid 0.01rem rgba(235, 235, 235, 0.2);
           .left-box{
@@ -62,7 +65,7 @@ body,html{
               &:last-child{
                 border-bottom: none;
                 p{
-                  color: #f0b026;
+                  color: #c682ff;
                 }
               }
               p{
@@ -70,7 +73,7 @@ body,html{
                 font-size: 0.26rem;
                 color: #03a8f7;
                 &.short{
-                  background-color: rgba(241, 241, 241, 0.2);
+                  background-color: rgba(241, 241, 241, 0.1);
                   color: #999;
                 }
               }

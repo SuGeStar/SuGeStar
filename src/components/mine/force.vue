@@ -10,8 +10,8 @@
         <span>¥</span><input type="number" v-model="smeltingNum">
       </div>
       <!-- <p class="max-smelting">当前可熔炼最大值为：{{max_smelting}} 个</p> -->
-      <mt-button @click="smeltings">释放</mt-button>
-      <mt-button @click="give">转增</mt-button>
+      <mt-button @click="smeltings" class="fl">释放</mt-button>
+      <mt-button @click="give" class="fr">转赠</mt-button>
       <!--<mt-button @click="recharge">充值</mt-button>-->
     </div>
     <applyPop @hidden="hiddenShow"  @password="passwordGro" :password="password" v-show="applyPop_pop_up"></applyPop>

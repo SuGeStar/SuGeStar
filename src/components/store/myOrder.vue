@@ -39,7 +39,7 @@
           <span class="fr" @click="cancelOrder(order)" v-if="order.status ===1">取消订单</span>
           <span class="fr" @click="orderApply(order)" v-if="order.status ===1">去支付</span>
           <span class="fr" @click="confirmReceipt(order)" v-if="order.status ===3">确认收货</span>
-          <span class="fr" @click="applyReturnGoods()" v-if="order.status ===2 || order.status ===3">申请退款</span>
+          <span class="fr" @click="applyReturnGoods(order)" v-if="order.status ===2 || order.status ===3">申请退款</span>
           <span class="fr" @click="logisticsQuery()" v-if="order.status ===3">物流查询</span>
           <span class="fr" @click="applyReturnGoodsDetail()" v-if="order.status ===5">查看详情</span>
         </p>
@@ -155,7 +155,13 @@ export default {
           console.log(err)
         })
     },
-    applyReturnGoods () {},
+    // 申请退款
+    applyReturnGoods (e) {
+      localStorage.setItem('applyRefundGoods', JSON.stringify(e))
+      this.$router.push({
+        path: '/applyRefund'
+      })
+    },
     logisticsQuery () {},
     applyReturnGoodsDetail () {},
     copyTxt (txt) {

@@ -64,7 +64,8 @@ export default {
   },
   created () {
     this.name = userinfo.realname;
-    this.copy = userinfo.invite_code
+    this.copy = userinfo.invite_code;
+    this.number = userinfo.number;
     this.src = url + 'registerLink?token=' + token
     if (userinfo.level === 1) {
       this.levelTxt = '发现者'
