@@ -26,6 +26,16 @@
           <p class="price">￥{{list.price}}</p>
         </div>
       </div>
+      <div class="gift-detail">
+        <div class="image">
+          <img src="../../assets/image/jinbi.png" alt="">
+        </div>
+        <div class="gift-desc">
+          <p>YC星球星币</p>
+          <span>个人努力与贡献的权益投射，星币是YC星球的基础数字货币，星币具有消费、转化、点对点交易等功能</span>
+          <p class="price">{{giftJBNum}} 个</p>
+        </div>
+      </div>
       <div class="gift-list" @click="popup">
         <p>支付方式</p>
         <div class="item-input">
@@ -83,7 +93,8 @@ export default {
       pay_channel: '',
       password: [],
       applyPop_pop_up: false,
-      giftBagDetail: ['image/497c05e01f6235ff52b3cf01a435e179.jpg']
+      giftBagDetail: ['image/497c05e01f6235ff52b3cf01a435e179.jpg'],
+      giftJBNum: 0
     }
   },
   components: {
@@ -212,6 +223,7 @@ export default {
         .then((res) => {
           // console.log(res)
           this.orderList = res.data.goods
+          this.giftJBNum = res.data.award
         })
     },
     popGiftBag (e) {

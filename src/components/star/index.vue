@@ -63,6 +63,7 @@
           </router-link>
         </div>
       </div>
+      <router-link to="/gift"><div class="gift-bag"><p>星球礼包</p></div></router-link>
       <mt-popup v-model="successGet" position="bottom" class="mint-popup">
           <div class="successGetBox">
             <div class="successGetBox-close">
