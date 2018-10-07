@@ -55,13 +55,13 @@ export function Get (url, params) {
       }, err => {
         reject(err)
         Toast({
-          message: '服务器出问题了~快去找程序员'
+          message: '网络延时，请稍后重试'
         })
       })
       .catch((error) => {
         reject(error)
         Toast({
-          message: '服务器出问题了~快去找程序员'
+          message: '网络延时，请稍后重试'
         })
       })
   })

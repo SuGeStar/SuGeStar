@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="gift-list" @click="popup">
-        <p>支付方式</p>
+        <p class="gift-notice" :class="{'gift-notice1':isShake}">请选择支付方式</p>
         <div class="item-input">
           <input type="text" :id="pay_channel" :value="payment" readonly onfocus="this.blur()">
           <i class="icon icon-right"></i>
@@ -61,7 +61,7 @@
     <div class="footer">
       <div class="footer-price">
         <p>应支付：</p>
-        <p>700元</p>
+        <p>{{giftPrice}} 元</p>
       </div>
       <div class="button" @click="gotoPay">
         去支付
@@ -94,7 +94,9 @@ export default {
       password: [],
       applyPop_pop_up: false,
       giftBagDetail: ['image/497c05e01f6235ff52b3cf01a435e179.jpg'],
-      giftJBNum: 0
+      giftJBNum: 0,
+      giftPrice: 0,
+      isShake: true
     }
   },
   components: {
@@ -133,6 +135,7 @@ export default {
   methods: {
     popup () {
       this.popupVisible = true
+      this.isShake = false
     },
     hiddenShow(){
       let that = this;
@@ -221,9 +224,10 @@ export default {
         goods_type: this.$route.params.id
       })
         .then((res) => {
-          // console.log(res)
+          console.log(res)
           this.orderList = res.data.goods
           this.giftJBNum = res.data.award
+          this.giftPrice = res.data.gift_price
         })
     },
     popGiftBag (e) {

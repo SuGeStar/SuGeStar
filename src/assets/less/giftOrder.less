@@ -59,6 +59,32 @@
         text-align: right;
       }
     }
+    .gift-notice{
+
+      -webkit-animation-duration: 800ms;
+      //-ms-animation-duration: 100ms;
+      animation-duration: 800ms;
+      -webkit-animation-timing-function: ease-in-out;
+      //-ms-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      -webkit-animation-delay: 0s;
+      //-ms-animation-delay: 0s;
+      animation-delay: 0s;
+      /*-webkit-animation-play-state: running;
+      -ms-animation-play-state: running;
+      animation-play-state: running;*/
+      -webkit-animation-iteration-count: infinite;
+      -ms-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+      /*-webkit-animation-play-state: paused;
+      -ms-animation-play-state: paused;
+      animation-play-state: paused;*/
+    }
+    .gift-notice1{
+      -webkit-animation-name: shake_box;
+      //-ms-animation-name: shake_box;
+      animation-name: shake_box;
+    }
   }
 }
 .mint-popup-bottom {
@@ -129,4 +155,14 @@
     font-size: .27rem;
     outline: none;
   }
+}
+@keyframes shake_box{
+  0% {transform: translate(0px, 0px) rotate(0deg)}
+  20% {transform: translate(1.5px, -2.5px) rotate(-1.5deg)}
+  40% {transform: translate(-2.5px, 0.5px) rotate(-0.5deg)}
+}
+@-ms-keyframes shake_box{
+  0% {-ms-transform: translate(0px, 0px) rotate(0deg)}
+  20% {-ms-transform: translate(1.5px, -2.5px) rotate(-1.5deg)}
+  40% {transform: translate(-2.5px, 0.5px) rotate(-0.5deg)}
 }

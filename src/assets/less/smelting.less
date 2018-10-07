@@ -5,6 +5,7 @@
   background-color: #ffffff;
   border-radius: 0.09rem;
   margin: 1rem auto 0;
+  padding-bottom: .3rem;
   p{
     font-size: .26rem;
     color: #999999;
@@ -56,26 +57,64 @@
       color: #ff8c37;
     }
   }
-  button{
-    display: block;
-    width: 3rem;
-    height: 0.75rem;
-    background-image: linear-gradient(0deg,
-    #9c27ef 0%,
-    #1062f8 100%);
-    border-radius: 0.09rem;
-    margin: 0.25rem auto 0;
-    color: white;
-    &.releaseBtn{
+  .btn-boxs{
+    .bb1{
+      overflow: hidden;
+      button{
+        display: block;
+        width: 45%;
+        height: 0.75rem;
+        background-image: linear-gradient(0deg,
+        #9c27ef 0%,
+        #1062f8 100%);
+        border-radius: 0.09rem;
+        //margin: 0.25rem auto 0;
+        font-size: .27rem;
+        color: white;
+        border: 1px;
+        outline: none;
+        &.releaseBtn{
+          background-image: linear-gradient(0deg,
+          #3981ff 0%,
+          #afccff 100%);
+        }
+        &.fr{
+          margin-right: .2rem;
+        }
+        &.fl{
+          margin-left: .2rem;
+        }
+        &.fr1{
+          background: none;
+          border: 1px solid #9c27ef;
+          color: #9c27ef;
+        }
+        &.fl1{
+          background: none;
+          border: 1px solid #9c27ef;
+          color: #9c27ef;
+        }
+      }
+    }
+    .flr{
+      width: 93%;
+      display: block;
+      margin: 0.2rem auto;
+      height: 0.75rem;
       background-image: linear-gradient(0deg,
-      #3981ff 0%,
-      #afccff 100%);
+      #9c27ef 0%,
+      #1062f8 100%);
+      border-radius: 0.09rem;
+      //margin: 0.25rem auto 0;
+      font-size: .27rem;
+      color: white;
+      border: 1px;
+      outline: none;
     }
-    &.fr{
-      background: none;
-      border: 1px solid #9c27ef;
-    }
+
   }
+
+
   .btn-box{
     width: 95%;
     height: auto;

@@ -10,9 +10,16 @@
         <span>¥</span><input type="number" v-model="smeltingNum">
       </div>
       <!-- <p class="max-smelting">当前可熔炼最大值为：{{max_smelting}} 个</p> -->
-      <mt-button @click="smelting">释放</mt-button>
-      <mt-button @click="give">转增</mt-button>
-      <mt-button @click="recharge">充值</mt-button>
+     <!-- <mt-button @click="smelting" class="fl">释放</mt-button>
+      <mt-button @click="give" class="fr">转增</mt-button>
+      <mt-button @click="recharge" class="flr">充值</mt-button>-->
+      <div class="btn-boxs">
+        <div class="bb1">
+          <button @click="smelting" class="fl fl1">释放</button>
+          <button @click="give" class="fr fr1">转赠</button>
+        </div>
+        <button @click="recharge" class="flr">充值</button>
+      </div>
     </div>
   </div>
 </template>
@@ -26,7 +33,7 @@ export default {
   data () {
     return {
       smeltingNum: '',
-      SGNum: 32,
+      SGNum: 32
       // max_smelting: 0
     }
   },
