@@ -30,6 +30,8 @@
                 </router-link>
               </li>
             </ul>
+            <p class="add-more" @click="classifyAddMore()" v-if="isAddMore">点击加载更多</p>
+            <img src="../../assets/image/noDate.png" alt="" v-if="isNoDate">
           </mt-tab-container-item>
         </mt-tab-container>
       </div>
@@ -51,18 +53,19 @@ export default {
       classify: [],
       S_width: 0,
       newList: [],
-      page: 0,
+      page: 1,
       nowIndex: 0,
       cid: '',
+      nowCid: '',
       imgUrl: imgUrl,
-      width: 0
+      width: 0,
+      isAddMore: true,
+      isNoDate: false
     }
   },
   created () {
-    console.log(this.$route.params)
     this.title = this.$route.params.name
     this.classTit()
-    this.clsAdd()
   },
   methods: {
     classTit () {
@@ -70,7 +73,6 @@ export default {
         cate_id: this.$route.params.id
       })
         .then((res) => {
-          // console.log(res)
           this.classify = res.data
           this.cid = this.classify[0].id
           this.goodsList(this.cid, 1, 0)
@@ -78,28 +80,41 @@ export default {
         })
     },
     goodsList (cid, page, index) {
+      this.page = 1
       this.nowIndex = index
+      this.nowCid = cid
       api.goodsList({
         cate_id: cid,
         page: page
       })
         .then((res) => {
-          // console.log(res)
-          this.newList = res.data
+          if (res.data == '') {
+            this.isAddMore = false
+            this.isNoDate = true
+          } else {
+            this.isAddMore = true
+            this.isNoDate = false
+            this.newList = res.data
+          }
         })
     },
-    clsAdd () {
-      window.addEventListener('cl', () => {
-        this.clsScroll()
+    classifyAddMore () {
+      this.page += 1
+      console.log(this.page)
+      api.goodsList({
+        cate_id: this.nowCid,
+        page: this.page
       })
-    },
-    clsScroll () {
-      var st = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
-      console.log(st + window.innerHeight)
-      console.log(document.body.offsetHeight)
-      // if (st + window.innerHeight + 1 > document.body.offsetHeight) {
-      //
-      // }
+        .then(res => {
+          console.log(res)
+          if (res.data == '') {
+            this.isAddMore = false
+          } else {
+            for (var i in res.data) {
+              this.newList.push((res.data)[i])
+            }
+          }
+        })
     }
   }
 }

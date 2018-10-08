@@ -2,7 +2,6 @@ import axios from 'axios'
 import { Toast } from 'mint-ui'
 // 接口url
 var url = 'http://www.nyycstar.com/api/'
-// var url = 'ycstar.test'
 var imgUrl = 'http://img.nyycstar.com/'
 let token = localStorage.getItem('token')
 // axios 配置
@@ -71,6 +70,14 @@ export default {
   sendSms (params) {
     // 发送手机验证码
     return Get(`/sendSms?phone=${params.phone}`)
+  },
+  mine (params) {
+    // 开采矿石
+    return Post(`/get`, params)
+  },
+  noMine () {
+    // 获得用户未开采矿石
+    return Get(`/notGet?token=` + token)
   },
   checkSmsCode (params) {
     // 检查手机验证码
@@ -236,7 +243,7 @@ export default {
   },
   getUserTreasure (params) {
     // 获取用户财富
-    return Get(`/availableGold?token=${params}`)
+    return Get(`/availableGold?token=` + token)
   },
   getEveryDayGold (params) {
     // 点击获取每天星钻红包

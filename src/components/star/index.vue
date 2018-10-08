@@ -83,36 +83,12 @@
 import { Toast } from 'mint-ui'
 import footGuide from '../comp/footGuide.vue'
 import collecting from './collecting.vue'
-import { url } from '../../assets/js/mobile.js'
 import api from '@/assets/js/api.js'
 let token = localStorage.getItem('token')
 export default {
   data () {
     return {
-      today_owen: '0',
-      all_owen: '0',
-      miners_today: '0',
-      miners_all: '0',
-      level: 'SG青铜时代',
-      promptTxt: '',
-      pv: '1000',
-      k: '1000',
-      sg: '1000',
-      s: '1000',
-      sgolden: '1000',
-      allpv: '10000',
-      allk: '10000',
-      allsg: '10000',
-      alls: '10000',
-      allsgolden: '10000',
       arr: [],
-      floor: "2",
-      lesspeo: "3",
-      moregold: "350",
-      invitpeo: "3",
-      allpeo: "10",
-      progressBox: [],
-      teamFloor: true,
       ownerGold: 0,
       ownerMoney: 0,
       ownerPower: 0,
@@ -126,16 +102,16 @@ export default {
   },
 
   methods: {
+    // 开采矿石
     getEnergy (id) {
-      // 开采K矿
       let form = this.$qs.stringify({
         token: token,
         id: id
       })
-      this.$http.post(url + 'get', form)
+      api.mine(form)
         .then(response => {
           Toast({
-            message: response.data.msg,
+            message: response.msg,
             position: 'middle',
             duration: 2000
           })
@@ -143,27 +119,6 @@ export default {
         .catch(error => {
           console.log(error)
         })
-    },
-    dataMiners () {
-      if (token) {
-        this.$http.get(url + 'dataMiners?token=' + token)
-        // 今日星币及累计获得的星币数据
-          .then(response => {
-            // console.log(response)
-            if (response.data.code == 200) {
-              this.miners_today = response.data.data.today
-              this.miners_all = response.data.data.total
-            } else if (response.data.code == 403) {
-              Toast({
-                message: response.data.msg
-              })
-            }
-          })
-          .catch(error => {
-            console.log(error)
-            Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-          })
-      }
     },
     // 领取每天星钻红包
     getStar () {
@@ -189,19 +144,17 @@ export default {
     }
   },
   created () {
-    this.dataMiners()
     if (token) {
-      this.$http.get(url + 'notGet?token=' + token)
       // 未开采K矿
+      api.noMine()
         .then(response => {
-          this.arr = response.data.data;
+          this.arr = response.data;
         })
         .catch(error => {
-          console.log(error)
-          Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+          Toast('网络延时，请稍后重试')
         })
       // 获得金币数量
-      api.getUserTreasure(token)
+      api.getUserTreasure()
         .then(res => {
           this.ownerGold = res.data.miners
           this.ownerMoney = res.data.gold
@@ -212,7 +165,6 @@ export default {
     api.systemNotice()
       .then(res => {
         this.systemNotice = res.data
-        console.log(res)
       })
   },
   mounted () {

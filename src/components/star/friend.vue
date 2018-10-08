@@ -39,7 +39,6 @@
   @import '../../assets/less/friend.less';
 </style>
 <script>
-import { url } from '../../assets/js/mobile.js'
 import { Toast, MessageBox } from 'mint-ui'
 let token = localStorage.getItem('token')
 let userinfo = JSON.parse(localStorage.getItem('userinfo'))
@@ -48,17 +47,8 @@ export default {
     return {
       name: '张三',
       number: '100156',
-      popupVisible1: false,
       copy: '123456789',
       src: 'http://ofkzpykzq.bkt.clouddn.com/QR.png',
-      first: {
-        pople: '1000',
-        ylz: '1000'
-      },
-      second: {
-        pople: '1000',
-        ylz: '1000'
-      },
       levelTxt: ''
     }
   },
@@ -66,23 +56,16 @@ export default {
     this.name = userinfo.realname;
     this.copy = userinfo.invite_code;
     this.number = userinfo.number;
-    this.src = url + 'registerLink?token=' + token
+    this.src = 'http://www.nyycstar.com/api/registerLink?token=' + token
     if (userinfo.level === 1) {
       this.levelTxt = '发现者'
-      this.popupVisible1 = true
     } else {
       this.levelTxt = '探索者'
-      this.popupVisible1 = false
     }
   },
   methods: {
-    invit () {
-      this.copy = userinfo.invite_code
-      this.src = url + 'registerLink?token=' + token
-      this.popupVisible1 = true
-    },
     copyBtn () {
-      this.$copyText(this.src).then(function (e) {
+      this.$copyText('http://yc.nyycstar.com/register?recommend_code=' + this.copy + '&contact_code=' + this.copy + '').then(function (e) {
         Toast('复制成功')
         // console.log(e)
       }, function (e) {

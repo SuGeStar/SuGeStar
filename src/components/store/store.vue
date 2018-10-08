@@ -13,7 +13,7 @@
       </div>
       <div class="iconBox">
         <router-link to="/car">
-          <i class="icon icon-car"></i>
+          <i class="icon icon-car"><span v-if="isSC">{{shopCarNum}}</span></i>
         </router-link>
         <router-link to="myOrder">
           <i class="icon icon-order"></i>
@@ -161,11 +161,12 @@ export default {
       page: 1,
       isScroll: true,
       addMoreLogo: true,
-      imgUrl: imgUrl
+      imgUrl: imgUrl,
+      shopCarNum: 0,
+      isSC: false
     }
   },
   mounted () {
-    // 给window添加一个滚动滚动监听事件
 
   },
   beforeDestroy () {
@@ -250,7 +251,12 @@ export default {
       if (token) {
         api.getShopCarNum(token)
           .then(res => {
-            console.log(res)
+            if (res.code === 200) {
+              if (res.data !== 0) {
+                this.shopCarNum = res.data
+                this.isSC = true
+              }
+            }
           })
           .catch(err => {
             console.log(err)

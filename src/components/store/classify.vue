@@ -52,13 +52,10 @@ export default {
   },
   created () {
     // 获取商品一级分类
-    api.cateList({
-      cate_id: ''
-    })
-    .then((res) => {
-      console.log(res)
-      this.classifyList = res.data
-    })
+    api.cateList({})
+      .then((res) => {
+        this.classifyList = res.data
+      })
   }
 }
 </script>
