@@ -27,7 +27,7 @@
           <div class="invit-qr">
             <div class="invit-img">
               <img class="img" :src="src" alt=""/>
-              <p>扫描二维码，加入SG星球</p>
+              <p>扫描二维码，加入YC星球</p>
             </div>
           </div>
         </div>

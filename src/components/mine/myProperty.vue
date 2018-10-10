@@ -14,7 +14,7 @@
           <div class="pc-head-container">
             <p class="pc-head-title">星币总数</p>
             <p class="pc-head-num">{{total}}</p>
-            <p class="pc-head-smelting"><router-link :to="{path:'/force'}"><span class="smelting fr">释放/转增 >></span></router-link></p>
+            <p class="pc-head-smelting"><span class="fl"><i class="icon icon-lock"></i><span>{{frozen_force}}</span></span><router-link :to="{path:'/force'}"><span class="smelting fr">释放/转增 >></span></router-link></p>
             <!-- <p class="pc-head-freeze">
               冻结星币：{{freeze}}
               <i class="icon icon-lock"></i>

@@ -37,6 +37,7 @@
                 </div>
               </mt-loadmore>
             </li>
+            <img src="../../assets/image/noDate1.png" alt="" v-if="isNoDate">
           </ul>
           <ul v-show="isStar">
             <li class="list" v-for="(month,item) in MonthList" :key="item">
@@ -80,6 +81,7 @@
                 </div>
               </mt-loadmore>
             </li>
+            <img src="../../assets/image/noDate1.png" alt="" v-if="isNoDate1">
           </ul>
         </mt-tab-container-item>
       </mt-tab-container>
@@ -108,7 +110,9 @@ export default {
       MonthList: [],
       bottomStatus: '',
       page: 1,
-      url: this.$route.params.id
+      url: this.$route.params.id,
+      isNoDate: false,
+      isNoDate1: false,
     }
   },
   mounted() {
@@ -158,10 +162,9 @@ export default {
       api.alreadyGetMonth()
         .then ((res) => {
           if (res.data.length == 0) {
-            Toast ({
-              message: '没有数据啦~'
-            })
+            this.isNoDate = true
           } else {
+            this.isNoDate = false
             this.isStar = true
             this.MonthList = res.data
           }
@@ -173,15 +176,17 @@ export default {
         'page': page
       })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           if (res.data.length == 0) {
-            Toast({
-              message: '没有数据啦~',
+            /*Toast({
+              message: '暂无数据',
               position: 'bottom',
               duration: 2000
-            });
+            });*/
+            this.isNoDate1 = true
           } else {
             if (page == 1) {
+              this.isNoDate1 = false
               this.list = res.data
               this.page = 2
             } else {
@@ -201,13 +206,15 @@ export default {
         .then((res) => {
           console.log(res)
           if (res.data.length == 0) {
-            Toast({
-              message: '没有数据啦~',
+            /*Toast({
+              message: '暂无数据',
               position: 'bottom',
               duration: 2000
-            })
+            })*/
+            this.isNoDate = true
           } else {
             if (page == 1) {
+              this.isNoDate = false
               this.intoList = res.data
               this.page = 2
             } else {
@@ -227,13 +234,15 @@ export default {
         .then ((res) => {
           console.log(res)
           if(res.data.length == 0){
-            Toast({
-              message: '没有数据啦~',
+           /* Toast({
+              message: '暂无数据',
               position: 'bottom',
               duration: 2000
-            })
+            })*/
+            this.isNoDate1 = true
           } else {
             if (page == 1) {
+              this.isNoDate = false
               this.list = res.data
               this.page = 2
             } else {
