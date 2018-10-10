@@ -17,13 +17,11 @@
           <h3>星球数据</h3>
         </div>
         <div class="data-box">
-          <div class="data-list">
-            <router-link to="/myProperty">
+          <div class="data-list" @click="goTreasure">
               <div class="data-logo">
                 <img src="../../assets/image/jinbi.png" alt=""><span>星币</span>
               </div>
               <p class="data-data">{{ownerGold}}</p>
-            </router-link>
           </div>
           <div class="data-list">
             <div class="data-logo">
@@ -31,8 +29,7 @@
             </div>
             <p class="data-data">{{ownerPower}}</p>
           </div>
-          <div class="data-list">
-            <router-link to="/myProperty">
+          <div class="data-list" @click="goTreasure">
               <div class="data-logo">
                 <img src="../../assets/image/xz.png" alt=""><span>星钻</span>
               </div>
@@ -41,7 +38,6 @@
               <p class="data-data">2.0125</p>
               <p class="data-title">累计获得</p>
               <p class="data-data">100266</p>-->
-            </router-link>
           </div>
         </div>
       </div>
@@ -151,6 +147,17 @@ export default {
     inviteFriend () {
       if (token) {
         this.$router.push('/friend')
+      } else {
+        Toast({
+          message: '您还未登录，请先登录',
+          position: 'middle',
+          duration: 2000
+        })
+      }
+    },
+    goTreasure () {
+      if (token) {
+        this.$router.push('/myProperty')
       } else {
         Toast({
           message: '您还未登录，请先登录',
