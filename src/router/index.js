@@ -60,6 +60,7 @@ import withdrawalRecord from '@/components/mine/withdrawalRecord'
 import starSecret from '@/components/star/starSecret'
 import whiteBook from '@/components/star/whiteBook'
 import applyRefund from '@/components/store/applyRefund'
+import mallDetail from '@/components/store/mallDetail'
 
 Vue.use(Router)
 Vue.use(VueClipboard)
@@ -365,6 +366,11 @@ export default new Router({
       path: '/whiteBook', // 星球白皮书
       name: 'whiteBook',
       component: whiteBook
+    },
+    {
+      path: '/mallDetail/:id', // 店铺详情
+      name: 'mallDetail',
+      component: mallDetail
     }
   ]
 })

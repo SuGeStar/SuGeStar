@@ -31,7 +31,7 @@
               </li>
             </ul>
             <p class="add-more" @click="classifyAddMore()" v-if="isAddMore">点击加载更多</p>
-            <img src="../../assets/image/noDate.png" alt="" v-if="isNoDate">
+            <img src="../../assets/image/noDate.png" alt="" v-if="isNoDate" class="no-data-img">
           </mt-tab-container-item>
         </mt-tab-container>
       </div>
@@ -83,6 +83,7 @@ export default {
       this.page = 1
       this.nowIndex = index
       this.nowCid = cid
+      this.newList = []
       api.goodsList({
         cate_id: cid,
         page: page
@@ -92,7 +93,11 @@ export default {
             this.isAddMore = false
             this.isNoDate = true
           } else {
-            this.isAddMore = true
+            if (res.data.length <= 9) {
+              this.isAddMore = false
+            } else {
+              this.isAddMore = true
+            }
             this.isNoDate = false
             this.newList = res.data
           }
@@ -106,7 +111,7 @@ export default {
         page: this.page
       })
         .then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.data == '') {
             this.isAddMore = false
           } else {

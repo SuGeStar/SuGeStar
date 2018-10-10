@@ -23,12 +23,24 @@
     </div>
   </div>
   <div class="detail-pic">
-    <p><span></span>图文详情</p>
+    <p @click="aaaaa()"><span></span>图文详情</p>
     <div class="detail-table">
       <i v-for="(ifo , index) in info" :key="index"><span>{{ifo.key}}</span><span>{{ifo.value}}</span></i>
     </div>
     <div class="details-imgBox">
       <img v-for="(img,index) in imgBox" :key="index" :src="imgUrl+img" alt="">
+    </div>
+  </div>
+  <div class="detail-foot">
+    <div class="aaa">
+     <router-link :to="{path:'/mallDetail/' + storeId}">
+       <p><i class="icon icon-store"></i><span>店铺</span></p>
+     </router-link>
+    </div>
+    <div>
+      <router-link to="/car">
+        <p><i class="icon icon-shop-car"></i><span>购物车</span></p>
+      </router-link>
     </div>
   </div>
   <mt-popup v-model="popupVisible" class="deta-pop" position="bottom">
@@ -114,7 +126,8 @@ export default {
       totalPrice: '',
       info: [],
       row: 0,
-      imgUrl: imgUrl
+      imgUrl: imgUrl,
+      storeId: 0
     }
   },
   methods: {
@@ -171,7 +184,7 @@ export default {
           message: '已达到最大购买数量',
           position: 'bottom',
           duration: 2000
-        });
+        })
       }
     },
     // 确定按钮执行事件
@@ -256,6 +269,12 @@ export default {
             console.log(err)
           })
       }
+    },
+    aaaaa () {
+      api.storeDetail(this.storeId)
+        .then(res => {
+          console.log(res)
+        })
     }
   },
   created () {
@@ -279,6 +298,8 @@ export default {
         self.number = self.goodsInfo.specs[0].stock
         self.totalPrice = self.goodsInfo.specs[0].total
         self.info = self.goodsInfo.infos
+        self.storeId = self.goodsInfo.store_id
+        console.log(this.storeId)
       })
       .catch(err => {
         console.log(err)

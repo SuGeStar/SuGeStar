@@ -287,6 +287,10 @@ export default {
   },
   refund (params) {
     return Post(`/createReundOrder`, params)
+  },
+  storeDetail (params) {
+    // 店铺详情
+    return Get(`/storeGoodsList/1?store_id=${params}`)
   }
 }
 export { imgUrl }
