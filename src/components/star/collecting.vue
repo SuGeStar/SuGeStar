@@ -140,11 +140,11 @@ export default {
         element.bind('click tap', function handler() {
           if (!token) {
             Toast({
-              message: '您还为登录，请先登录',
+              message: '您还未登录，请先登录',
               position: 'middle',
               duration: 2000
             })
-          }else {
+          } else {
             let top = element.abs_y;                                                        //获取当前对象的Y轴值
             element.stop();                                                                 //停止当前对象动画，此处是砖石
             canvasObj['imageText' + index].stop();                                          //通过index找到文字，停止动画

@@ -6,7 +6,7 @@
       </a>
     </mt-header>
     <div class="giftOrder">
-      <router-link to="/addressManage/set">
+      <router-link to="/addressManage/set" v-if="showAds">
         <div class="address" :id="id">
           <p class="receiver_name fl">{{name}}</p>
           <div class="address-detail">
@@ -96,33 +96,43 @@ export default {
       giftBagDetail: ['image/497c05e01f6235ff52b3cf01a435e179.jpg'],
       giftJBNum: 0,
       giftPrice: 0,
-      isShake: true
+      isShake: true,
+      showAds: true
     }
   },
   components: {
     applyPop
   },
   created () {
-    this.$http.get(url + 'getDefaultAddress?token=' + token)
-    // 获取默认地址
-      .then(response => {
-        // console.log(response)
-        if (response.data.code == 500) {
-          Toast({
-            message: response.data.msg
-          })
-          this.$router.push('/addressManage/set')
-          return false
-        }
-        this.id = response.data.data.id
-        this.name = response.data.data.name
-        this.phone = response.data.data.phone
-        this.addressDetail = response.data.data.province + response.data.data.city + response.data.data.area + response.data.data.detail
+    if (!token) {
+      this.showAds = false
+      Toast({
+        message: '您还未登录，请先登录',
+        position: 'middle',
+        duration: 2000
       })
-      .catch(error => {
-        console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
-      })
+    } else {
+      this.$http.get(url + 'getDefaultAddress?token=' + token)
+      // 获取默认地址
+        .then(response => {
+          // console.log(response)
+          if (response.data.code == 500) {
+            Toast({
+              message: response.data.msg
+            })
+            this.$router.push('/addressManage/set')
+            return false
+          }
+          this.id = response.data.data.id
+          this.name = response.data.data.name
+          this.phone = response.data.data.phone
+          this.addressDetail = response.data.data.province + response.data.data.city + response.data.data.area + response.data.data.detail
+        })
+        .catch(error => {
+          console.log(error)
+          Toast('网络延时，请稍后重试')
+        })
+    }
     if (this.$route.params.index == 0) {
       this.giftBag = '礼包一'
     } else if (this.$route.params.index == 1) {
@@ -137,7 +147,7 @@ export default {
       this.popupVisible = true
       this.isShake = false
     },
-    hiddenShow(){
+    hiddenShow () {
       let that = this;
       that.applyPop_pop_up = false
     },
@@ -184,6 +194,14 @@ export default {
     },
     gotoPay () {
       // 支付
+      if (!token) {
+        Toast({
+          message: '您还未登录，请先登录',
+          position: 'middle',
+          duration: 2000
+        })
+        return false
+      }
       if (this.payment == '') {
         Toast('请选择支付方式')
         return false

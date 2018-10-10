@@ -4,7 +4,6 @@
       <a href="javascript:history.go(-1);" slot="left">
         <mt-button icon="back"></mt-button>
       </a>
-      <router-link to="/car" class="icon icon-car" slot="right"></router-link>
     </mt-header>
     <div class="classifyList">
       <!-- 标题 -->

@@ -36,7 +36,7 @@
           <div class="pc-head-container">
             <p class="pc-head-title">星钻总数</p>
             <p class="pc-head-num"><span>{{gold}}</span></p>
-            <p class="pc-head-smelting"><router-link :to="{path:'/smelting'}"><span class="smelting fr">释放/赠送/充值 >></span></router-link></p>
+            <p class="pc-head-smelting"><router-link :to="{path:'/smelting'}"><span class="smelting fr">提现/赠送/充值 >></span></router-link></p>
             <!--<p class="pc-head-freeze">
               算力：{{frozen_force}}
               <i class="icon icon-lock"></i>
@@ -53,7 +53,7 @@
               <p class="pc-content-title"><i class="icon icon-bonus-record"></i>分红记录</p>
             </router-link>
             <router-link to="/withdrawalRecord">
-              <p class="pc-content-title"><i class="icon icon-smelting-record"></i>释放记录</p>
+              <p class="pc-content-title"><i class="icon icon-smelting-record"></i>提现记录</p>
             </router-link>
             <!-- <ul>
               <li v-for="(list,index) in lists" :key="index">
@@ -145,7 +145,7 @@ export default {
       })
       .catch(error => {
         console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        Toast('网络延时，请稍后重试')
       })
     let selectNum = localStorage.getItem('selectMy')
     if (selectNum) {

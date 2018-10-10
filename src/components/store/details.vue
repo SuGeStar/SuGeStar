@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="detail-pic">
-    <p @click="aaaaa()"><span></span>图文详情</p>
+    <p><span></span>图文详情</p>
     <div class="detail-table">
       <i v-for="(ifo , index) in info" :key="index"><span>{{ifo.key}}</span><span>{{ifo.value}}</span></i>
     </div>
@@ -37,10 +37,8 @@
        <p><i class="icon icon-store"></i><span>店铺</span></p>
      </router-link>
     </div>
-    <div>
-      <router-link to="/car">
+    <div @click="goShopCar">
         <p><i class="icon icon-shop-car"></i><span>购物车</span></p>
-      </router-link>
     </div>
   </div>
   <mt-popup v-model="popupVisible" class="deta-pop" position="bottom">
@@ -196,61 +194,69 @@ export default {
       } else {
         did = e
       }
-      switch (did) {
-        case 1:
-          // 添加到购物车
-          // console.log(this.goodsInfo)
-          let form = this.$qs.stringify({
-            token: token,
-            product_id: this.goodsInfo.id,
-            num: this.value,
-            shop_id: this.goodsInfo.store_id,
-            shop_name: this.goodsInfo.store_name,
-            spec_id: this.finalTypeId,
-            specification: this.finalColor
-          })
-          this.$http.post(url + 'addToCart', form)
-            .then(res => {
-              // console.log(res)
-              if (res.data.code == 200) {
-                Toast('加入购物车成功!')
-                this.shopCarNum = this.shopCarNum + this.value
-              }
+      if (token) {
+        switch (did) {
+          case 1:
+            // 添加到购物车
+            // console.log(this.goodsInfo)
+            let form = this.$qs.stringify({
+              token: token,
+              product_id: this.goodsInfo.id,
+              num: this.value,
+              shop_id: this.goodsInfo.store_id,
+              shop_name: this.goodsInfo.store_name,
+              spec_id: this.finalTypeId,
+              specification: this.finalColor
             })
-            .catch(err => {
-              console.log(err)
+            this.$http.post(url + 'addToCart', form)
+              .then(res => {
+                // console.log(res)
+                if (res.data.code == 200) {
+                  Toast('加入购物车成功!')
+                  this.shopCarNum = this.shopCarNum + this.value
+                }
+              })
+              .catch(err => {
+                console.log(err)
+              })
+            break;
+          case 2:
+            var finalData = {
+              // 商品数量
+              shopCount: this.value,
+              // 选中状态下商品单价--现金
+              shopPrice: this.finalPrice,
+              //  选中状态下商品单价--星币
+              shopGold: this.finalGold,
+              // 选中的颜色（状态1）
+              shopColor: this.finalColor,
+              // 选中的尺寸（状态2）
+              shopSize: this.finalSize,
+              // 商品ID
+              shopId: this.goodsInfo.id,
+              // 商品状态2 ID
+              shopTypeId: this.finalTypeId,
+              // 商品默认图片
+              shopImg: this.goodsInfo.default_img,
+              // 商品名字
+              shopName: this.goodsInfo.goods_name,
+              // 商品状态1名称
+              shopTypeName1: this.goodsInfo.color_name,
+              // 商品状态2名称
+              shopTypeName2: this.goodsInfo.size_name
+            }
+            localStorage.setItem('finalData',JSON.stringify(finalData))
+            this.$router.push({
+              path: '/confirmOrder'
             })
-          break;
-        case 2:
-          var finalData = {
-            // 商品数量
-            shopCount: this.value,
-            // 选中状态下商品单价--现金
-            shopPrice: this.finalPrice,
-            //  选中状态下商品单价--星币
-            shopGold: this.finalGold,
-            // 选中的颜色（状态1）
-            shopColor: this.finalColor,
-            // 选中的尺寸（状态2）
-            shopSize: this.finalSize,
-            // 商品ID
-            shopId: this.goodsInfo.id,
-            // 商品状态2 ID
-            shopTypeId: this.finalTypeId,
-            // 商品默认图片
-            shopImg: this.goodsInfo.default_img,
-            // 商品名字
-            shopName: this.goodsInfo.goods_name,
-            // 商品状态1名称
-            shopTypeName1: this.goodsInfo.color_name,
-            // 商品状态2名称
-            shopTypeName2: this.goodsInfo.size_name
-          }
-          localStorage.setItem('finalData',JSON.stringify(finalData))
-          this.$router.push({
-            path: '/confirmOrder'
-          })
-          break;
+            break;
+        }
+      } else {
+        Toast({
+          message: '您还未登录，请先登录',
+          position: 'middle',
+          duration: 2000
+        })
       }
     },
     // 获得购物车数量
@@ -270,11 +276,16 @@ export default {
           })
       }
     },
-    aaaaa () {
-      api.storeDetail(this.storeId)
-        .then(res => {
-          console.log(res)
+    goShopCar () {
+      if (token) {
+        this.$router.push('/car')
+      } else {
+        Toast({
+          message: '您还未登录，请先登录',
+          position: 'middle',
+          duration: 2000
         })
+      }
     }
   },
   created () {

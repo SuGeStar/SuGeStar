@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
     <div class="moduleHead">
-      <a href="javascript:window.history.go(-1)"></a>赠送/释放/充值
+      <a href="javascript:window.history.go(-1)"></a>赠送/提现/充值
     </div>
     <div class="smelting-container">
       <p>可用星钻：<span>{{SGNum}}</span></p>
-      <p>释放/赠送/充值数量</p>
+      <p>提现/赠送/充值数量</p>
       <div class="smelting-withdraw">
         <span>¥</span><input type="number" v-model="smeltingNum">
       </div>
@@ -15,7 +15,7 @@
       <mt-button @click="recharge" class="flr">充值</mt-button>-->
       <div class="btn-boxs">
         <div class="bb1">
-          <button @click="smelting" class="fl fl1">释放</button>
+          <button @click="smelting" class="fl fl1">提现</button>
           <button @click="give" class="fr fr1">转赠</button>
         </div>
         <button @click="recharge" class="flr">充值</button>
@@ -33,7 +33,7 @@ export default {
   data () {
     return {
       smeltingNum: '',
-      SGNum: 32
+      SGNum: 32,
       // max_smelting: 0
     }
   },

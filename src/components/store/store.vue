@@ -12,12 +12,8 @@
         </router-link>
       </div>
       <div class="iconBox">
-        <router-link to="/car">
-          <i class="icon icon-car"><span v-if="isSC">{{shopCarNum}}</span></i>
-        </router-link>
-        <router-link to="myOrder">
-          <i class="icon icon-order"></i>
-        </router-link>
+          <i class="icon icon-car" @click="goShopCar(0)"><span v-if="isSC">{{shopCarNum}}</span></i>
+          <i class="icon icon-order" @click="goShopCar(1)"></i>
       </div>
     </header>
      <!--轮播图 -->
@@ -122,6 +118,7 @@ import api from '../../assets/js/api.js'
 import {imgUrl} from '../../assets/js/api.js'
 import footGuide from '../comp/footGuide.vue'
 import { Carousel3d, Slide } from 'vue-carousel-3d'
+import { Toast } from 'mint-ui'
 let token = localStorage.getItem('token')
 export default {
   components: {
@@ -261,6 +258,24 @@ export default {
           .catch(err => {
             console.log(err)
           })
+      }
+    },
+    goShopCar (idx) {
+      if (token) {
+        switch (idx) {
+          case 0:
+            this.$router.push('/car')
+            break
+          case 1:
+            this.$router.push('/myOrder')
+            break
+        }
+      } else {
+        Toast({
+          message: '您还未登录，请先登录',
+          position: 'middle',
+          duration: 2000
+        })
       }
     }
   }

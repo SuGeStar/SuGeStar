@@ -56,11 +56,9 @@
             <p>星球动态</p>
           </router-link>
         </div>
-        <div class="explain-list">
-          <router-link to="/friend">
+        <div class="explain-list" @click="inviteFriend">
             <img src="../../assets/image/index-friend.png" alt="">
             <p>邀请好友</p>
-          </router-link>
         </div>
       </div>
       <router-link to="/gift"><div class="gift-bag"><p>星球礼包</p></div></router-link>
@@ -122,25 +120,44 @@ export default {
     },
     // 领取每天星钻红包
     getStar () {
-      let form = this.$qs.stringify({
-        token: token
-      });
-      api.getEveryDayGold(form)
-        .then(res => {
-          if (res.code === 200) {
-            this.successGet = true
-          } else {
-            Toast({
-              message: res.msg,
-              position: 'middle',
-              duration: 2000
-            })
-          }
-          console.log(res)
+      if (token) {
+        let form = this.$qs.stringify({
+          token: token
+        });
+        api.getEveryDayGold(form)
+          .then(res => {
+            if (res.code === 200) {
+              this.successGet = true
+            } else {
+              Toast({
+                message: res.msg,
+                position: 'middle',
+                duration: 2000
+              })
+            }
+            console.log(res)
+          })
+      } else {
+        Toast({
+          message: '您还未登录，请先登录',
+          position: 'middle',
+          duration: 2000
         })
+      }
     },
     closeSuccessGet () {
       this.successGet = false
+    },
+    inviteFriend () {
+      if (token) {
+        this.$router.push('/friend')
+      } else {
+        Toast({
+          message: '您还未登录，请先登录',
+          position: 'middle',
+          duration: 2000
+        })
+      }
     }
   },
   created () {
@@ -177,6 +194,34 @@ export default {
         {
           id: 2,
           ore: '8.00'
+        },
+        {
+          id: 3,
+          ore: '5.00'
+        },
+        {
+          id: 4,
+          ore: '2.00'
+        },
+        {
+          id: 5,
+          ore: '1.00'
+        },
+        {
+          id: 6,
+          ore: '3.00'
+        },
+        {
+          id: 7,
+          ore: '2.00'
+        },
+        {
+          id: 8,
+          ore: '4.00'
+        },
+        {
+          id: 9,
+          ore: '3.00'
         }
       ]
     }
