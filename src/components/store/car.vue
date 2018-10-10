@@ -56,7 +56,6 @@
 </template>
 <script>
 import { Toast } from 'mint-ui';
-import { url } from '../../assets/js/mobile.js'
 import api from '@/assets/js/api.js'
 import { imgUrl } from '@/assets/js/api.js'
 import { MessageBox } from 'mint-ui'

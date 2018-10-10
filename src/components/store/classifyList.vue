@@ -105,7 +105,6 @@ export default {
     },
     classifyAddMore () {
       this.page += 1
-      console.log(this.page)
       api.goodsList({
         cate_id: this.nowCid,
         page: this.page

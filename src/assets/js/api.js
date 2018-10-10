@@ -290,7 +290,11 @@ export default {
   },
   storeDetail (params) {
     // 店铺详情
-    return Get(`/storeGoodsList/1?store_id=${params}`)
+    return Get(`/storeGoodsList/${params.page}?store_id=${params.id}`)
+  },
+  getDefaultAddress (params) {
+    // 获取默认收货地址
+    return Get(`/getDefaultAddress?token=${token}`)
   }
 }
 export { imgUrl }

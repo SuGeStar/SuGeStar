@@ -17,7 +17,7 @@
     <div class="clear_order_list_container">
       <div class="each_order_list ng-scope">
       <div class="eol_img fl">
-        <img :src="getImg(shopData.shopImg)">
+        <img :src="imgUrl+shopData.shopImg">
       </div>
       <div class="eol_info fl">
         <p class="eol_name">{{shopData.shopName}}</p>
@@ -48,8 +48,9 @@
 
 <script>
 let token = localStorage.getItem('token')
-import { url } from '../../assets/js/mobile.js'
 import { MessageBox } from 'mint-ui'
+import api from '@/assets/js/api.js'
+import { imgUrl } from '@/assets/js/api.js'
 export default {
   data () {
     return {
@@ -63,9 +64,7 @@ export default {
       shopSingleGold: '',
       shopFinalPrice: 0,
       shopFinalGold: 0,
-      getImg (url) {
-        return 'http://img.sugebei.com/' + url
-      }
+      imgUrl: imgUrl
     }
   },
   methods: {
@@ -89,11 +88,10 @@ export default {
     }
   },
   created () {
-    // 回去默认收货地址
-    this.$http.get(url + 'getDefaultAddress?token=' + token)
+    // 获取默认收货地址
+    api.getDefaultAddress()
       .then(res => {
-        console.log(res)
-        if (res.data.code === 500) {
+        if (res.code === 500) {
           MessageBox({
             title: '提示',
             message: '你还没有收货地址，是否去添加?',
@@ -109,17 +107,16 @@ export default {
               }
             })
         } else {
-          this.buyerName = res.data.data.name
-          this.buyerTel = res.data.data.phone
-          this.AdsId = res.data.data.id
-          this.buyerAds = res.data.data.province + ' ' + res.data.data.city + ' ' + res.data.data.area + ' ' + res.data.data.detail
+          this.buyerName = res.data.name
+          this.buyerTel = res.data.phone
+          this.AdsId = res.data.id
+          this.buyerAds = res.data.province + ' ' + res.data.city + ' ' + res.data.area + ' ' + res.data.detail
         }
       })
       .catch(err => {
         console.log(err)
       })
     this.shopData = JSON.parse(localStorage.getItem('finalData'))
-    console.log(this.shopData)
     this.shopSinglePrice = this.shopData.shopPrice
     this.shopSingleGold = this.shopData.shopGold
     this.shopFinalPrice = parseFloat(this.shopSinglePrice) * parseFloat(this.shopData.shopCount)

@@ -4,17 +4,17 @@
       <a href="javascript:window.history.go(-1)"></a>{{store.name}}
     </div>
     <div class="storeDetial">
-      <div class="title">
+      <!--<div class="title">
         <div class="title-desc">
           <div class="title-img">
-            <!--<img :src="imgUrl + brand.logo" alt="">-->
+            &lt;!&ndash;<img :src="imgUrl + brand.logo" alt="">&ndash;&gt;
           </div>
           <div class="title-box">
             <p></p>
             <span></span>
           </div>
         </div>
-      </div>
+      </div>-->
       <div class="store-box">
         <ul>
           <li v-for="(goods,index) in mallList" class="store-list" :key="index">
@@ -30,7 +30,7 @@
             </router-link>
           </li>
         </ul>
-        <!--<p class="add-more" @click="addMores" v-if="addMore">点击加载更多</p>-->
+        <p class="add-more" @click="mallAddMores" v-if="addMore">点击加载更多</p>
       </div>
     </div>
   </div>
@@ -44,16 +44,47 @@ export default {
     return {
       mallList: [],
       imgUrl: imgUrl,
-      store: []
+      store: [],
+      page: 1,
+      addMore: true
     }
   },
   created () {
-    api.storeDetail(this.$route.params.id)
+    api.storeDetail({
+      id: this.$route.params.id,
+      page: this.page
+    })
       .then(res => {
-        console.log(res)
-        this.mallList = res.data.goods
-        this.store = res.data.store
+        if (res.data.goods == '') {
+          this.addMore = false
+        } else {
+          if (res.data.goods.length <= 9) {
+            this.addMore = false
+          } else {
+            this.addMore = true
+          }
+          this.mallList = res.data.goods
+          this.store = res.data.store
+        }
       })
+  },
+  methods: {
+    mallAddMores () {
+      this.page += 1
+      api.storeDetail({
+        id: this.$route.params.id,
+        page: this.page
+      })
+        .then(res => {
+          if (res.data.goods == '') {
+            this.addMore = false
+          } else {
+            for (var i in res.data.goods) {
+              this.mallList.push((res.data.goods)[i])
+            }
+          }
+        })
+    }
   }
 }
 </script>

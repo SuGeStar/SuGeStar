@@ -2,8 +2,8 @@
   <div class="reg-container">
     <h3 class="reg-title">YC星球区块创建</h3>
     <div class="reg-form">
-      <div><span>发现者</span><input type="text" placeholder="" :readonly="true" v-model="invite_code"></div>
-      <div><span>探索者</span><input type="text" placeholder="" :readonly="true" v-model="contact_code"></div>
+      <div v-show="showCode"><span>发现者</span><input type="text" placeholder="" :readonly="true" v-model="invite_code"></div>
+      <div v-show="showCode"><span>探索者</span><input type="text" placeholder="" :readonly="true" v-model="contact_code"></div>
       <div>
         <!--<span>手机号码</span>-->
         <input type="number" placeholder="手机号码" v-model="phoneNum"></div>
@@ -65,7 +65,8 @@ export default {
       // z_idNumber: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
       cityPop_up: false,
       // imgSrc: 'http://www.sgyxmall.com/index.php?s=/Api/User/code',
-      pic: ''
+      pic: '',
+      showCode: false
     }
   },
   components: {
@@ -76,9 +77,10 @@ export default {
     let url = window.location.href.substring()
     let arrObj = url.split('?')
     if (url.indexOf('?') == -1) {
-      this.invite_code = '6066999'
-      this.contact_code = '6066999'
+      this.invite_code = ''
+      this.contact_code = ''
     } else {
+      this.showCode = true
       let str = window.location.href.substring(location.href.indexOf('=')+1)
       let recommend_code = str.split('&')[0]
       this.invite_code = recommend_code
