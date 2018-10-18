@@ -72,21 +72,21 @@ export default {
         address_id: ads.id,
         token: token
       })
-      this.$http.post(url + 'delMyAddress',form)
-      .then(response => {
-        console.log(response)
-        Toast({
-          message: response.data.msg,
-          position: 'middle',
-          duration: 2000
+      this.$http.post(url + 'delMyAddress', form)
+        .then(response => {
+          console.log(response)
+          Toast({
+            message: response.data.msg,
+            position: 'middle',
+            duration: 2000
+          })
+          setTimeout(() => {
+            this.$router.go(0)
+          }, 2000);
         })
-        setTimeout(() => {
-          this.$router.go(0)
-        }, 2000);
-      })
-      .catch(error => {
-        console.log(error)
-      })
+        .catch(error => {
+          console.log(error)
+        })
       ele.splice(idx, 1)
     },
     goAds () {

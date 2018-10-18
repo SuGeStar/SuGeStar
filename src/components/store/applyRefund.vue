@@ -64,7 +64,6 @@
 <script>
 import api from '@/assets/js/api.js'
 import { imgUrl } from '@/assets/js/api.js'
-import { url } from '../../assets/js/mobile.js'
 import { Toast } from 'mint-ui'
 let token = localStorage.getItem('token')
 export default {

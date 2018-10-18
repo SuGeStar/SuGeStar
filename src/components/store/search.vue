@@ -54,7 +54,7 @@ export default {
     return {
       isHot: true,
       isNull: false,
-      hot1: '真艾宝',
+      hot1: '男鞋',
       hot2: '羽绒服',
       hot3: '棉袄',
       value: '',

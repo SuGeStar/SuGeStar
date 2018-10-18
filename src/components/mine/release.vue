@@ -115,7 +115,7 @@ export default {
           }
           let card = res.data.card
           this.bankName = res.data.bank
-          this.bankCard = card.substr(card.length-4)
+          this.bankCard = card.substr(card.length - 4)
           this.id = res.data.id
         })
     },
@@ -173,6 +173,7 @@ export default {
                     position: 'bottom',
                     duration: 5000
                   })
+                  window.history.go(-1)
                 }
               })
               .catch(err => {
@@ -190,7 +191,12 @@ export default {
             })
             api.transfer(form2)
               .then(res => {
-                console.log(res)
+                Toast({
+                  message: res.msg,
+                  position: 'bottom',
+                  duration: 5000
+                })
+                window.history.go(-1)
               })
               .catch(err => {
                 console.log(err)

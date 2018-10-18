@@ -38,7 +38,7 @@ export function Get (url, params) {
   return new Promise((resolve, reject) => {
     axios.get(url, params)
       .then(response => {
-        if (response.data.code === 200) {
+        if (response.data.code === 200 || response.data.code === 500) {
           resolve(response.data)
         } else if (response.data.code === 403) {
           Toast({
@@ -230,6 +230,10 @@ export default {
     //  搜索
     return Get(`/goodsSearch/1?key_words=${params.key_words}`)
   },
+  addToShopCar (params) {
+    // 添加购物车
+    return Post(`/addToCart`, params)
+  },
   getShopCarList (params) {
     // 获取购物车列表
     return Get(`/cartList?token=${params}`)
@@ -292,9 +296,21 @@ export default {
     // 店铺详情
     return Get(`/storeGoodsList/${params.page}?store_id=${params.id}`)
   },
-  getDefaultAddress (params) {
+  getDefaultAddress () {
     // 获取默认收货地址
     return Get(`/getDefaultAddress?token=${token}`)
+  },
+  getOrderData (params) {
+    // 获取商城订单列表数据
+    return Get(`/${params.way}/${params.page}?token=${token}`)
+  },
+  cancelShopOrder (params) {
+    // 商城订单--取消订单
+    return Post(`/cancelOrder`, params)
+  },
+  receiveOrder (params) {
+    // 确认收货
+    return Post(`/orderReceive`, params)
   }
 }
 export { imgUrl }

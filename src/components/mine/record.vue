@@ -113,6 +113,7 @@ export default {
       url: this.$route.params.id,
       isNoDate: false,
       isNoDate1: false,
+      val: ''
     }
   },
   mounted() {
@@ -130,10 +131,11 @@ export default {
   },
   watch: {
     selected (value) {
+      this.val = value
       if (this.url == 'star') {
         console.log(value);
         if (value == 1) {
-          this.starInto()
+          this.starInto(1)
           return false
         }
         if (value == 2) {
@@ -256,9 +258,20 @@ export default {
     },
     loadBottom () {
       setTimeout(() => {
+        console.log(this.url)
         // this.starOut(this.page)
         // this.goldInto(this.page)
         // this.goldOut(this.page)
+        if (this.url == 'star') {
+          if (this.val == 1) {
+            this.starInto(this.page)
+            return false
+          }
+          if (this.val == 2) {
+            this.starOut(this.page)
+            return false
+          }
+        }
         this.$refs.loadmore.onBottomLoaded();
       }, 1500)
     },

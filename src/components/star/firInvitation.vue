@@ -86,6 +86,7 @@ export default {
         })
     },
     handleBottomChange (status) {
+      console.log(status)
       this.bottomStatus = status;
     },
     loadBottom () {

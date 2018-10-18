@@ -12,20 +12,22 @@
         <p class="shopName">{{order.product.goods_name}}</p>
         <div class="each-order-list">
           <div class="eol-img fl">
-            <img :src="getImg(order.product.default_img)" alt="">
+            <img :src="imgUrl+order.product.default_img" alt="">
           </div>
           <div class="eol-info fl">
             <p class="eol-nam">&nbsp;{{order.product.goods_name}}</p>
             <p class="eol-type" style="width: 4.2rem;height: .3rem;overflow: hidden">颜色：{{order.color}}，尺寸：{{order.spec.size}}</p>
             <p class="eol-enc">星币 {{order.spec.gold}} + ¥ {{order.spec.cash}}</p>
           </div>
-          <span class="eol-totle">X {{order.total_num}}</span>
+          <span class="eol-totle" v-if="idx!==4">X {{order.total_num}}</span>
         </div>
         <div class="myOrderInfo">
-          <p><span>订单编号：</span>{{order.sn}}</p>
+          <p  v-if="idx!==4"><span>订单编号：</span>{{order.sn}}</p>
+          <p v-if="idx===4"><span>退款编号：</span>{{order.refund_sn}}</p>
           <p><span>下单时间：</span>{{order.created_at}}</p>
-          <p v-if="order.status !==1"><span>支付合计：<i>星币 {{order.total_kb}} + ¥ {{order.total_price}}</i></span></p>
-          <p v-if="order.status ===3"><span>快递单号：<input :id="order.tracking_num" :value="order.tracking_num" readonly></span><i @click="copyTxt(order.tracking_num)" class="copy">一键复制</i></p>
+          <p v-if="idx===1 || idx===2 || idx===3"><span>支付合计：<i>星币 {{order.total_kb}} + ¥ {{order.total_price}}</i></span></p>
+          <p v-if="idx===4"><span>退款合计：<i>星币 {{order.refund_miners}} + ¥ {{order.refund_ready}}</i></span></p>
+          <p v-if="idx===2 || idx===3"><span>快递单号：<input :id="order.tracking_num" :value="order.tracking_num" readonly></span><i @click="copyTxt(order.tracking_num)" class="copy">一键复制</i></p>
           <p><span>运　　费：0</span></p>
         </div>
         <div class="myOrder_receive">
@@ -35,25 +37,28 @@
             <p><span>收货地址：{{order.address.province}} {{order.address.city}} {{order.address.area}} {{order.address.detail}}</span></p>
           </div>
         </div>
-        <p class="applyTui">
-          <span class="fr" @click="cancelOrder(order)" v-if="order.status ===1">取消订单</span>
-          <span class="fr" @click="orderApply(order)" v-if="order.status ===1">去支付</span>
-          <span class="fr" @click="confirmReceipt(order)" v-if="order.status ===3">确认收货</span>
-          <span class="fr" @click="applyReturnGoods(order)" v-if="order.status ===2 || order.status ===3">申请退款</span>
-          <span class="fr" @click="logisticsQuery()" v-if="order.status ===3">物流查询</span>
-          <span class="fr" @click="applyReturnGoodsDetail()" v-if="order.status ===5">查看详情</span>
+        <p class="applyTui" v-if="idx!==4">
+          <span class="fr" @click="cancelOrder(order)" v-if="idx===0">取消订单</span>
+          <span class="fr" @click="orderApply(order)" v-if="idx===0">去支付</span>
+          <span class="fr" @click="confirmReceipt(order)" v-if="idx===2">确认收货</span>
+          <span class="fr" @click="applyReturnGoods(order)" v-if="idx===1 || idx===2">申请退款</span>
         </p>
+        <div v-if="idx===4" class="refundStatus">
+          <p><span>退款状态：</span>{{order.refund_status}}</p>
+          <p><span>退款原因：</span>{{order.refund_reason}}</p>
+        </div>
       </div>
-      <img src="../../assets/image/nodata.png" alt="" v-if="noData" class="noDatas">
+      <img src="../../assets/image/noDate.png" alt="" v-if="noData" class="noDatas">
     </div>
   </div>
 </template>
 
 <script>
 let token = localStorage.getItem('token');
-import { url } from '../../assets/js/mobile.js';
+import api from '@/assets/js/api.js'
 import { Toast } from 'mint-ui';
 import { MessageBox } from 'mint-ui'
+import { imgUrl } from '@/assets/js/api.js'
 export default {
   data () {
     return {
@@ -63,9 +68,8 @@ export default {
       orderList: [],
       way: 'orderAll',
       noData: false,
-      getImg (url) {
-        return 'http://img.sugebei.com/' + url
-      }
+      isRefund: false,
+      imgUrl: imgUrl
     }
   },
   methods: {
@@ -75,7 +79,6 @@ export default {
     * 去支付 orderApply()
     * 确认收货 confirmReceipt()
     * 申请退款 applyReturnGoods()
-    * 物流查询 logisticsQuery()
     * 查看退货详情 applyReturnGoodsDetail()
     * 一键复制 copyTxt()
     * */
@@ -101,7 +104,7 @@ export default {
         default:
           return false;
       }
-      this.getOrderData(this.way, 1)
+      this.getOrderDatas(this.way, 1)
     },
     // 取消订单
     cancelOrder (e) {
@@ -117,11 +120,10 @@ export default {
               token: token,
               order_id: cancelId
             })
-            this.$http.post(url + 'cancelOrder', cancel)
+            api.cancelShopOrder(cancel)
               .then(res => {
-                console.log(res)
-                if (res.data.code === 200) {
-                  Toast(res.data.msg)
+                if (res.code === 200) {
+                  Toast(res.msg)
                 }
               })
               .catch(err => {
@@ -142,17 +144,30 @@ export default {
     },
     // 确认收货
     confirmReceipt (e) {
-      var cfOrder = e.id;
-      let f3 = this.$qs.stringify({
-        token: token,
-        order_id: cfOrder
-      });
-      this.$http.post(url + 'orderReceive', f3)
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log(err)
+      MessageBox({
+        title: '提示',
+        message: '确认收货后，商家会收到货款，确定收货？',
+        showCancelButton: true
+      })
+        .then(ret => {
+          if (ret == 'confirm') {
+            var cfOrder = e.id;
+            let f3 = this.$qs.stringify({
+              token: token,
+              order_id: cfOrder
+            });
+            api.receiveOrder(f3)
+              .then(res => {
+                if (res.code === 200) {
+                  Toast(res.msg)
+                }
+              })
+              .catch(err => {
+                console.log(err)
+              })
+          } else {
+            return false;
+          }
         })
     },
     // 申请退款
@@ -162,7 +177,6 @@ export default {
         path: '/applyRefund'
       })
     },
-    logisticsQuery () {},
     applyReturnGoodsDetail () {},
     copyTxt (txt) {
       this.$copyText(txt).then(function (e) {
@@ -176,29 +190,30 @@ export default {
     * 参数一： 对应接口,[orderAll,waitpay,waitreceive,completed,refund]
     * 参数二：页数
     * */
-    getOrderData (way, page) {
-      this.$http.get(url + way + '/' + page + '?token=' + token)
+    getOrderDatas (way, page) {
+      api.getOrderData({
+        way: way,
+        page: page
+      })
         .then(res => {
-          console.log(res)
-          let noGoods = res.data.data == '' || res.data.data == undefined || res.data.data == null
+          let noGoods = res.data == '' || res.data == undefined || res.data == null
           if (noGoods) {
             this.noData = true;
           } else {
             this.noData = false;
-            this.orderList = res.data.data;
-            console.log(this.orderList)
+            this.orderList = res.data
           }
         })
         .catch(err => {
           console.log(err)
         })
-    },
+    }
   },
   mounted () {
   },
   created () {
     // 获得购买订单
-    this.getOrderData('waitpay', 1)
+    this.getOrderDatas('waitpay', 1)
   }
 }
 </script>

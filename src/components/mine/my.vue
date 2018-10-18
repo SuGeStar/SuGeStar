@@ -122,6 +122,7 @@
   @import '../../assets/less/my.less';
 </style>
 <script>
+import api from '@/assets/js/api.js'
 import { Toast } from 'mint-ui'
 import { url } from '../../assets/js/mobile.js'
 import footGuide from '../comp/footGuide.vue'
@@ -158,16 +159,16 @@ export default {
     /*
     * 获得金币数量
     * */
-    this.$http.get(url + 'availableGold?token=' + token)
+    api.availableGold()
       .then(response => {
         console.log(response.data)
-        if (response.data.code == 200) {
-          this.userSGK = response.data.data.gold
-          this.userST = response.data.data.miners
-          this.userPOW = response.data.data.power
+        if (response.code === 200) {
+          this.userSGK = response.data.gold
+          this.userST = response.data.miners
+          this.userPOW = response.data.power
         } else {
           Toast({
-            message: response.data.msg,
+            message: response.msg,
             position: 'middle',
             duration: 2000
           })
@@ -175,7 +176,7 @@ export default {
       })
       .catch(error => {
         console.log(error)
-        Toast('服务器出问题啦ミﾟДﾟ彡快去告诉程序猿')
+        Toast('网络延时，请稍后重试')
       })
     localStorage.removeItem('selectMy')
   }

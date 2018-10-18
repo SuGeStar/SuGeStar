@@ -208,10 +208,11 @@ export default {
               spec_id: this.finalTypeId,
               specification: this.finalColor
             })
-            this.$http.post(url + 'addToCart', form)
+            // this.$http.post(url + 'addToCart', form)
+            api.addToShopCar(form)
               .then(res => {
                 // console.log(res)
-                if (res.data.code == 200) {
+                if (res.code == 200) {
                   Toast('加入购物车成功!')
                   this.shopCarNum = this.shopCarNum + this.value
                 }
@@ -264,7 +265,6 @@ export default {
       if (token) {
         api.getShopCarNum(token)
           .then(res => {
-            console.log(res)
             if (res.data == 0) {
               this.shopCarShow = false
             } else {
@@ -293,7 +293,6 @@ export default {
     self.goodsId = this.$route.params.goodsId
     api.goodsDetialInfo(self.goodsId)
       .then(res => {
-        console.log(res)
         self.goodsInfo = res.data
         self.swiperBox = self.goodsInfo.main_img
         self.imgBox = self.goodsInfo.detail_img
@@ -310,7 +309,6 @@ export default {
         self.totalPrice = self.goodsInfo.specs[0].total
         self.info = self.goodsInfo.infos
         self.storeId = self.goodsInfo.store_id
-        console.log(this.storeId)
       })
       .catch(err => {
         console.log(err)

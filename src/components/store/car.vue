@@ -6,8 +6,8 @@
       </a>
     </mt-header>
     <div class="car">
-      <ul class="car-box">
-        <li class="list-box" v-for="(shop, index) in carList" :key="index">
+      <ul class="car-box" v-show="noDatas">
+        <li class="list-box" v-for="(shop, indexs) in carList" :key="indexs">
           <div class="car-list">
             <div class="car-title">
               {{shop.shop_name}}
@@ -32,14 +32,15 @@
                   <span>{{cars.spec.gold}} + ¥ {{cars.spec.cash}}</span>
                 </p>
               </div>
-              <div class="delete-btn">
+              <div class="delete-btn" @click="delCar(cars, index ,shop, indexs)">
                 <p class="icon icon-delete"></p>
-                <p @click="delCar(cars, index ,shop)">删除</p>
+                <p>删除</p>
               </div>
             </div>
           </div>
         </li>
       </ul>
+      <img src="../../assets/image/noDate.png" alt="" class="shop-car-no-data" v-show="!noDatas">
     </div>
     <div class="footer">
       <div class="foot-total">
@@ -69,7 +70,8 @@ export default {
       totelMoney: 0,
       currentId: 0,
       carId: '',
-      imgUrl:imgUrl
+      imgUrl: imgUrl,
+      noDatas: true
     }
   },
   methods: {
@@ -152,7 +154,7 @@ export default {
     /*
     * 删除购物车
     * */
-    delCar (e, idx, shop) {
+    delCar (e, idx, shop, idxs) {
       MessageBox({
         title: '提示',
         message: '确认删除此商品?',
@@ -167,6 +169,12 @@ export default {
             api.deleteShopCar(delForm)
               .then(res => {
                 shop.child.splice(idx, 1);
+                if (shop.child.length === 0) {
+                  this.carList.splice(idxs, 1)
+                }
+                if (this.carList.length === 0) {
+                  this.noDatas = false
+                }
                 Toast(res.msg)
               })
               .catch(err => {
@@ -183,7 +191,9 @@ export default {
     getCarList () {
       api.getShopCarList(token)
         .then(res => {
-          console.log(res)
+          if (res.data == '') {
+            this.noDatas = false
+          }
           this.carList = res.data
         })
         .catch(err => {
