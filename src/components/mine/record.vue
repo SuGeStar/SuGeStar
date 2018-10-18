@@ -74,8 +74,8 @@
                   </div>
                 </div>
                 <div slot="bottom" class="mint-loadmore-bottom">
-                  <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
-                  <span v-show="bottomStatus === 'loading'">
+                  <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }" class="add-more">上拉加载更多</span>
+                  <span v-show="bottomStatus === 'loading'" class="add-more-logo">
                     <mt-spinner type="snake"></mt-spinner>
                   </span>
                 </div>
@@ -178,19 +178,21 @@ export default {
         'page': page
       })
         .then((res) => {
-          // console.log(res)
-          if (res.data.length == 0) {
-            /*Toast({
-              message: '暂无数据',
-              position: 'bottom',
-              duration: 2000
-            });*/
-            this.isNoDate1 = true
-          } else {
-            if (page == 1) {
+          if (page == 1) {
+            if (res.data.length == 0) {
+              this.isNoDate1 = true
+            } else {
               this.isNoDate1 = false
               this.list = res.data
               this.page = 2
+            }
+          } else {
+            if (res.data.length == 0) {
+              Toast({
+                message: '暂无数据',
+                position: 'bottom',
+                duration: 2000
+              })
             } else {
               for (let x = 0; x < res.data.length; x++) {
                 this.list.push(res.data[x])
@@ -256,27 +258,21 @@ export default {
           }
         })
     },
+    handleBottomChange(status) {
+      this.bottomStatus = status;
+    },
     loadBottom () {
       setTimeout(() => {
-        console.log(this.url)
-        // this.starOut(this.page)
-        // this.goldInto(this.page)
-        // this.goldOut(this.page)
         if (this.url == 'star') {
           if (this.val == 1) {
             this.starInto(this.page)
-            return false
           }
           if (this.val == 2) {
             this.starOut(this.page)
-            return false
           }
         }
         this.$refs.loadmore.onBottomLoaded();
       }, 1500)
-    },
-    handleBottomChange(status) {
-      this.bottomStatus = status;
     },
   }
 }
