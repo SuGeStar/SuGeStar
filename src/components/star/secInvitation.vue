@@ -61,7 +61,7 @@ export default {
         console.log(res)
         if (res.data.length == 0) {
           Toast({
-            message: '没有数据啦~',
+            message: '暂无数据~',
             position: 'bottom',
             duration: 2000
           });

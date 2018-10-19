@@ -50,7 +50,7 @@ export default {
           })
           .catch(error => {
           console.log(error)
-          Toast('服务器开小差啦（ﾉ´д｀）快去告诉程序猿~')
+          Toast('网络延时，请稍后重试')
         })
       }
     }
