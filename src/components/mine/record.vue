@@ -113,7 +113,7 @@ export default {
       url: this.$route.params.id,
       isNoDate: false,
       isNoDate1: false,
-      val: ''
+      val: 1
     }
   },
   mounted() {
@@ -208,19 +208,21 @@ export default {
         'page': page
       })
         .then((res) => {
-          console.log(res)
-          if (res.data.length == 0) {
-            /*Toast({
-              message: '暂无数据',
-              position: 'bottom',
-              duration: 2000
-            })*/
-            this.isNoDate = true
-          } else {
-            if (page == 1) {
+          if (page == 1) {
+            if (res.data.length == 0) {
+              this.isNoDate1 = true
+            } else {
               this.isNoDate = false
               this.intoList = res.data
               this.page = 2
+            }
+          } else {
+            if (res.data.length == 0) {
+              Toast({
+                message: '暂无数据',
+                position: 'bottom',
+                duration: 2000
+              })
             } else {
               for (let y = 0; y < res.data.length; y++) {
                 this.intoList.push(res.data[y])
@@ -236,19 +238,21 @@ export default {
         'page': page
       })
         .then ((res) => {
-          console.log(res)
-          if(res.data.length == 0){
-           /* Toast({
-              message: '暂无数据',
-              position: 'bottom',
-              duration: 2000
-            })*/
-            this.isNoDate1 = true
-          } else {
-            if (page == 1) {
+          if (page == 1) {
+            if(res.data.length == 0) {
+              this.isNoDate = true
+            } else {
               this.isNoDate = false
               this.list = res.data
               this.page = 2
+            }
+          } else {
+            if (res.data.length == 0) {
+              Toast({
+                message: '暂无数据',
+                position: 'bottom',
+                duration: 2000
+              })
             } else {
               for (let Z = 0; Z < res.data.length; Z++) {
                 this.list.push(res.data[Z])
@@ -271,9 +275,17 @@ export default {
             this.starOut(this.page)
           }
         }
+        if (this.url == 'gold') {
+          if (this.val == 1) {
+            this.goldInto(this.page)
+          }
+          if (this.val == 2) {
+            this.goldOut(this.page)
+          }
+        }
         this.$refs.loadmore.onBottomLoaded();
       }, 1500)
-    },
+    }
   }
 }
 </script>
