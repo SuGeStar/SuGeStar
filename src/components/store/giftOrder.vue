@@ -77,6 +77,7 @@ import { Toast } from 'mint-ui'
 import applyPop from '../comp/applyPop.vue'
 import api from '../../assets/js/api.js'
 import {imgUrl} from '../../assets/js/api.js'
+import { MessageBox } from 'mint-ui'
 export default {
   data () {
     return {
@@ -117,20 +118,34 @@ export default {
         .then(response => {
           // console.log(response)
           if (response.data.code == 500) {
-            Toast({
-              message: response.data.msg
+            var cf = confirm('你还没有收货地址，是否去添加?')
+            if (cf) {
+              this.$router.push('/addressManage/set')
+            } else {
+              window.history.go(-1)
+            }
+            /*MessageBox({
+              title: '提示',
+              message: '你还没有收货地址，是否去添加?',
+              showCancelButton: true
             })
-            this.$router.push('/addressManage/set')
-            return false
+              .then(ret => {
+                if (ret == 'confirm') {
+                  this.$router.push('/addressManage/set')
+                } else {
+                  window.history.go(-1)
+                }
+              })*/
+          } else {
+            this.id = response.data.data.id
+            this.name = response.data.data.name
+            this.phone = response.data.data.phone
+            this.addressDetail = response.data.data.province + response.data.data.city + response.data.data.area + response.data.data.detail
           }
-          this.id = response.data.data.id
-          this.name = response.data.data.name
-          this.phone = response.data.data.phone
-          this.addressDetail = response.data.data.province + response.data.data.city + response.data.data.area + response.data.data.detail
         })
         .catch(error => {
           console.log(error)
-          Toast('网络延时，请稍后重试')
+          // Toast('网络延时，请稍后重试')
         })
     }
     if (this.$route.params.index == 0) {

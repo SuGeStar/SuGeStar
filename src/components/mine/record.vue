@@ -210,7 +210,7 @@ export default {
         .then((res) => {
           if (page == 1) {
             if (res.data.length == 0) {
-              this.isNoDate1 = true
+              this.isNoDate = true
             } else {
               this.isNoDate = false
               this.intoList = res.data
@@ -240,9 +240,9 @@ export default {
         .then ((res) => {
           if (page == 1) {
             if(res.data.length == 0) {
-              this.isNoDate = true
+              this.isNoDate1 = true
             } else {
-              this.isNoDate = false
+              this.isNoDate1 = false
               this.list = res.data
               this.page = 2
             }

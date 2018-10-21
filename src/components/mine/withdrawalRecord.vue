@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="moduleHead">
       <a href="javascript:history.go(-1);"></a>
-      释放记录
+      提现记录
     </div>
     <div class="rcContainer">
       <mt-loadmore :bottom-method="loadRCBottom" @bottom-status-change="handleRCBottomChange" :bottom-all-loaded="allLoaded" ref="">

@@ -34,6 +34,7 @@
 <script>
 import { imgUrl } from '@/assets/js/api.js'
 import api from '@/assets/js/api.js'
+import cache from '@/assets/js/catch.js'
 export default {
   data () {
     return {
@@ -45,13 +46,16 @@ export default {
       classIndex: 0,
       classBox: [],
       advImg: [],
-      imgUrl: imgUrl
+      imgUrl: imgUrl,
+      cache: cache
     }
   },
   methods: {
   },
   created () {
     // 获取商品一级分类
+    // console.log(this.cache.getCache('leave'))
+    window.sessionStorage.removeItem('V+.GUEST.LEAVE')
     api.cateList({})
       .then((res) => {
         this.classifyList = res.data

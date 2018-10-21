@@ -119,6 +119,7 @@ import {imgUrl} from '../../assets/js/api.js'
 import footGuide from '../comp/footGuide.vue'
 import { Carousel3d, Slide } from 'vue-carousel-3d'
 import { Toast } from 'mint-ui'
+import cache from '@/assets/js/catch.js'
 let token = localStorage.getItem('token')
 export default {
   components: {
@@ -160,14 +161,18 @@ export default {
       addMoreLogo: true,
       imgUrl: imgUrl,
       shopCarNum: 0,
-      isSC: false
+      isSC: false,
+      cache: cache
     }
   },
   mounted () {
-
   },
+
   beforeDestroy () {
     this.isScroll = false
+    // let goods = this.goodsList;
+    // let nPage = this.page
+    // this.cache.setCache('store', {g: goods, p: nPage})
   },
   created () {
     // 获取商品一级分类
@@ -197,6 +202,13 @@ export default {
         console.log(err)
       })
     // 获取精选好物数据
+ /*   let GD =  this.cache.getCache('store')
+    if (GD) {
+      this.goodsList = GD.g
+      this.page = GD.p
+    } else {
+
+    }*/
     api.goodsSelectedList(1)
       .then(res => {
         this.goodsList = res.data
@@ -277,7 +289,8 @@ export default {
           duration: 2000
         })
       }
-    }
+    },
+
   }
 }
 </script>

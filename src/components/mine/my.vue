@@ -78,7 +78,7 @@
               </div>
             </router-link>
           </li>
-          <li>
+          <li v-if="level != 2">
             <router-link to="/upgrade">
               <div class="store-list">
                 <div class="store-name">

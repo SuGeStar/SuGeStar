@@ -29,6 +29,7 @@
     </div>
     <div class="details-imgBox">
       <img v-for="(img,index) in imgBox" :key="index" :src="imgUrl+img" alt="">
+      <img src="../../assets/image/refund.jpg" alt="">
     </div>
   </div>
   <div class="detail-foot">

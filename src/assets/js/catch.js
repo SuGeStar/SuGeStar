@@ -29,7 +29,7 @@ function Cache () {
     }
     return (oh ? my : !god);
   })();*/
-return $cache = {
+return {
     //设置缓存数据，key,value形式
     //options rekeys 可选配置Array需要排除重复引用的数据节点key
     //options storage 可选配置boolean是否使用localStorage本地缓存
@@ -146,4 +146,4 @@ return $cache = {
     }
   }
 };
-Cache();
+export default Cache();

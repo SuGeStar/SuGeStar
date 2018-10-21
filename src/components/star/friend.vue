@@ -6,7 +6,7 @@
       </a>
     </mt-header>
     <div class="friend">
-      <div class="friend-con">
+      <div class="friend-con" id="friend">
         <h3>
           <p class="p1">YC星球</p>
           <p class="p2">链接你我，共筑YC星球</p>
@@ -26,12 +26,15 @@
           </div>
           <div class="invit-qr">
             <div class="invit-img">
-              <img class="img" :src="src" alt=""/>
+              <img crossorigin="anonymous" class="img" :src="src" alt=""/>
               <p>扫描二维码，加入YC星球</p>
             </div>
           </div>
         </div>
       </div>
+      <!--<div class="save-btn-box">
+        <button @click="saveImg" class="save-btn">一键保存</button>
+      </div>-->
     </div>
   </div>
 </template>
@@ -40,6 +43,7 @@
 </style>
 <script>
 import { Toast, MessageBox } from 'mint-ui'
+import { html2canvas } from '@/assets/js/html2canvas.js'
 let token = localStorage.getItem('token')
 let userinfo = JSON.parse(localStorage.getItem('userinfo'))
 export default {
@@ -72,7 +76,14 @@ export default {
         Toast('复制失败')
         // console.log(e)
       })
-    }
+    },
+    /*saveImg () {
+      html2canvas(document.querySelector('#friend')).then((canvas) => {
+        let context = canvas.getContext('2d');
+        let url = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        window.location.href = url
+      })
+    }*/
   }
 }
 </script>
