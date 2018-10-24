@@ -48,8 +48,9 @@ export default {
   methods: {
     // 退出登录
     quitLogin: function () {
-      localStorage.removeItem('token')
-      localStorage.removeItem('userinfo')
+      /*localStorage.removeItem('token')
+      localStorage.removeItem('userinfo')*/
+      localStorage.clear()
       // window.location.href = 'login'
       this.$router.push('/login')
     }
