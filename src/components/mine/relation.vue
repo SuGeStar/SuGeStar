@@ -114,15 +114,15 @@ export default {
     })*/
     api.relationList(token)
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.leftList = res.data.left
         this.rightList = res.data.right
       })
   },
   methods: {
     shortPeo (e, code) {
-      console.log(e)
-      console.log(code)
+      // console.log(e)
+      // console.log(code)
       this.popupVisible1 = true
       this.id = e
       this.invite_code = code
@@ -134,7 +134,7 @@ export default {
       })
     },
     share (id) {
-      console.log(id)
+      // console.log(id)
       this.$router.push({
         name: 'relatShare',
         params: {id: this.id}

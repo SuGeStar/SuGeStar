@@ -133,7 +133,7 @@ export default {
     selected (value) {
       this.val = value
       if (this.url == 'star') {
-        console.log(value);
+        // console.log(value);
         if (value == 1) {
           this.starInto(1)
           return false

@@ -71,7 +71,7 @@ export default {
     // 获取礼包列表
     api.present()
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         this.giftList = res.data
       })
     // 获取购买须知

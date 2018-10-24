@@ -138,10 +138,9 @@ export default {
       userIdent: '创 世 居 民',
       userNickName: 'づ塟送じò ぴéā', // 用户昵称
       userOrder: '100203', // 用户排名
-      userPV: '11002', // 用户原力值
-      userSGK: '', // 用户SG代币
+      userSGK: 0, // 用户SG代币
       userPOW: 0, // 用户算力
-      userST: '465465', // 用户SG星币
+      userST: 0, // 用户SG星币
       baseUserInfo: JSON.parse(localStorage.getItem('userinfo')), // 用户个人信息
       level: localStorage.getItem('level')
     }
@@ -161,7 +160,7 @@ export default {
     * */
     api.availableGold()
       .then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         if (response.code === 200) {
           this.userSGK = response.data.gold
           this.userST = response.data.miners

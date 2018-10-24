@@ -58,7 +58,7 @@ export default {
         'page': page
       })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           if (res.data.length == 0) {
             Toast({
               message: '暂无数据~',

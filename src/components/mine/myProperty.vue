@@ -133,7 +133,7 @@ export default {
    * */
     this.$http.get(url + 'availableGold?token=' + token)
       .then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         if (response.data.code == 200) {
           this.gold = response.data.data.gold
           this.frozen_force = response.data.data.frozen_force
