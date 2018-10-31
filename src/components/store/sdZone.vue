@@ -1,79 +1,78 @@
 <template>
   <div class="wrapper">
-    <mt-header fixed title="YC星钻精选">
+    <mt-header fixed title="YC星币市场">
       <a href="javascript:history.go(-1);" slot="left">
         <mt-button icon="back"></mt-button>
       </a>
-      <router-link to="/car" class="icon icon-car" slot="right"></router-link>
     </mt-header>
-    <div class="classifyList">
-      <!-- 标题 -->
-      <div class="title">
-        <ul :style="{width: width + 'rem'}">
-          <li v-for="(title,index) in classify" :key="index" :id="title.cid" :class="{active:index===nowIndex}" @click="goodsList(title.id,page,index)">{{title.name}}</li>
-        </ul>
-      </div>
-      <div>
-        <mt-tab-container class="classify-box" v-model="selected">
-          <mt-tab-container-item v-for="(title,index) in classify" :key="index"  :id="index">
-            <ul>
-              <li v-for="(goods,index) in newList" :key="index">
-                <router-link class="goods-box" :to="{path:'/details/' + goods.id}">
-                  <img :src=" imgUrl + goods.default_img" alt="">
-                  <div class="goods-txt">
-                    <p>{{goods.goods_name}}</p>
-                    <p class="content-price">
-                      星币 <span>{{goods.spec.gold}}</span> + ¥ <span>{{goods.spec.cash}}</span>
-                    </p>
-                    <p class="del-text">￥{{goods.spec.total}}</p>
+    <div class="sd-zone-container">
+      <div class="sd-zone-head"></div>
+      <div class="sd-zone-list">
+        <p class="sd-zone-title"></p>
+        <div class="sz-list">
+          <ul>
+            <li v-for="(bk, index) in bkList" :key="index">
+              <router-link :to="{path:'/sdDetail/' + bk.id}">
+                <img :src="imgUrl+bk.default_img" :alt="bk.goods_name">
+                <div class="sl-info">
+                  <p class="sl-name">{{bk.goods_name}}</p>
+                  <div class="sl-buy">
+                    <div class="sl-buy-center">
+                      <p class="sl-price">星币：<span>{{bk.price}}</span></p>
+                      <div class="sl-buy-now"><span>立即兑换</span></div>
+                    </div>
                   </div>
-                </router-link>
-              </li>
-            </ul>
-          </mt-tab-container-item>
-        </mt-tab-container>
+                </div>
+              </router-link>
+            </li>
+          </ul>
+        </div>
+        <p class="sz-star-title"></p>
+        <div class="sz-star-container">
+          <ul>
+            <li v-for="(st, index) in star" :key="index">
+              <router-link :to="{path:'/sdDetail/' + st.id}">
+                <img :src="imgUrl+st.default_img" :alt="st.goods_name">
+                <p class="sz-name">{{st.goods_name}}</p>
+                <div class="sz-buy">
+                  <p class="sz-price">星币：<span>{{st.price}}</span></p>
+                  <div class="sz-buy-now"><span>立即兑换</span></div>
+                </div>
+              </router-link>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </template>
-<style>
-  @import '../../assets/less/classifyList.less';
-</style>
 <script>
 import { imgUrl } from '@/assets/js/api.js'
 import api from '@/assets/js/api.js'
 export default {
   data () {
     return {
-      title: '',
-      selected: 0,
-      classify: [],
-      S_width: 0,
-      newList: [],
-      page: 0,
-      nowIndex: 0,
-      cid: '',
       imgUrl: imgUrl,
-      width: 0
+      star: [],
+      bkList: []
     }
   },
   created () {
-    this.sdZone()
+    // this.sdZone()
+    api.starCoinMarket()
+      .then(res => {
+        console.log(res)
+        if (res.code === 200) {
+          this.star = res.data.star
+          this.bkList = res.data.explosion
+        }
+      })
   },
   methods: {
-    sdZone () {
-      api.zoneList()
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
   }
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+  @import "../../assets/less/sdZone";
 </style>

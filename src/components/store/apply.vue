@@ -5,7 +5,7 @@
         <mt-button icon="back"></mt-button>
       </a>
     </mt-header>
-    <ul class="apply">
+    <ul class="apply" v-if="way.way!=9">
       <!--<li class="apply-way" @click="applyPop(0)">
         <router-link to="">
           <i class="icon icon-wx"></i>
@@ -25,6 +25,10 @@
         </router-link>
       </li>
     </ul>
+   <div class="applySd" v-if="way.way==9" @click="sdApply">
+     <img src="../../assets/image/xz.png" alt="">
+     <p>星币支付</p>
+   </div>
     <applyPop @hidden="hiddenShow"  v-show="applyPop_pop_up"  @password="passwordArr" :password="applyPsd" ></applyPop>
   </div>
 </template>
@@ -33,6 +37,7 @@
 </style>
 <script>
 import applyPop from '../comp/applyPop.vue';
+import api from '@/assets/js/api.js'
 let token = localStorage.getItem('token');
 import { url } from '../../assets/js/mobile.js';
 import { Toast } from 'mint-ui';
@@ -138,8 +143,9 @@ export default {
             return false;
         }
       }
-
-      //
+    },
+    sdApply () {
+      this.applyPop_pop_up = true;
     },
     passwordArr (e) {
       this.applyPsd = e;
@@ -200,6 +206,25 @@ export default {
                 .catch(error => {
                   console.log(error)
                 })
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else if (this.way.way == 9) {
+        let ppd = this.finalPsd
+        let sdF = this.$qs.stringify({
+          token: token,
+          payment_password: ppd,
+          address_id: this.finalOrder.address_id,
+          goods_id: this.finalOrder.goods_id,
+          total_num: 1,
+          remark: this.finalOrder.remark
+        })
+        api.applySd(sdF)
+          .then(res => {
+            if (res.code === 200) {
+              Toast('兑换成功！请前往我的订单页查看！')
             }
           })
           .catch(err => {

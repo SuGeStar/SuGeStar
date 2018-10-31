@@ -142,14 +142,35 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      -webkit-animation-duration: 1500ms;
+      //-ms-animation-duration: 100ms;
+      animation-duration: 1500ms;
+      -webkit-animation-timing-function: ease;
+      //-ms-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      -webkit-animation-delay: 0s;
+      //-ms-animation-delay: 0s;
+      animation-delay: 0s;
+      /*-webkit-animation-play-state: running;
+      -ms-animation-play-state: running;
+      animation-play-state: running;*/
+      -webkit-animation-iteration-count: infinite;
+      -ms-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+      /*-webkit-animation-play-state: paused;
+      -ms-animation-play-state: paused;
+      animation-play-state: paused;*/
+      -webkit-animation-name: shake_box;
+      //-ms-animation-name: shake_box;
+      animation-name: shake_box;
       .logo-img-con{
         width: 5.89rem;
         height: 0.68rem;
         background-color: #ffffff;
         border-radius: 0.34rem;
         position: relative;
-        box-shadow: 0rem 0.06rem 0.18rem 0rem
-        rgba(7, 0, 0, 0.09);
+        box-shadow: 0rem 0.06rem 0.3rem 0rem
+        rgba(7, 0, 0, 0.4);
         img{
           position: absolute;
           display: block;
@@ -173,7 +194,11 @@
             letter-spacing: 0.05rem;
             color: #333333;
             line-height: .65rem;
-            text-indent: 2em;
+            text-indent: 3em;
+            span{
+              color: #989898;
+              margin-left: .5rem;
+            }
           }
         }
       }
@@ -394,6 +419,24 @@
 		text-align: center;
     }
 }
+.applySd{
+  width: 100%;
+  height: auto;
+  background: white;
+  margin-top: 1rem;
+  padding: .2rem 0;
+  img{
+    display: block;
+    width: .8rem;
+    height: auto;
+    margin: 0 auto;
+  }
+  p{
+    font-size: .28rem;
+    text-align: center;
+    margin-top: .1rem;
+  }
+}
 .mint-popup-1{
 	top: 0;
 	bottom: 0;
@@ -401,4 +444,16 @@
 	right: 0;
 	transform: translate3d(0, 0, 0);
 	background-color: transparent;
+}
+
+@keyframes shake_box{
+  0% {
+    transform:  rotate(0deg) scale(1);
+  }
+  20% {
+    transform:  rotate(-1.5deg) scale(1.1)
+  }
+  40% {
+    transform:  rotate(1.5deg) scale(0.9)
+  }
 }

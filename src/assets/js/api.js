@@ -227,6 +227,14 @@ export default {
     // 商品详情
     return Get(`/goodsInfo?goods_id=${params}`)
   },
+  goodsSdDetialInfo (params) {
+    // 星币商品详情
+    return Get(`/miners/goodsInfo?goods_id=${params}`)
+  },
+  applySd (params) {
+    // 星币商品购买
+    return Post(`/miners/createOrder`, params)
+  },
   search (params) {
     //  搜索
     return Get(`/goodsSearch/1?key_words=${params.key_words}`)
@@ -305,6 +313,10 @@ export default {
     // 获取商城订单列表数据
     return Get(`/${params.way}/${params.page}?token=${token}`)
   },
+  getOrderSdData (params) {
+    // 获取商城订单列表数据
+    return Get(`/miners/orders/1?token=${token}`)
+  },
   cancelShopOrder (params) {
     // 商城订单--取消订单
     return Post(`/cancelOrder`, params)
@@ -312,6 +324,10 @@ export default {
   receiveOrder (params) {
     // 确认收货
     return Post(`/orderReceive`, params)
+  },
+  starCoinMarket () {
+    // 星币市场
+    return Get(`miners/goodsList`)
   }
 }
 export { imgUrl }

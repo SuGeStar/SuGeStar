@@ -26,6 +26,7 @@ import editAddress from '@/components/mine/editAddress/'
 import proofIdent from '@/components/mine/proofIdent'
 import resetPassword from '@/components/mine/resetPassword'
 import details from '@/components/store/details'
+import sdDetail from '@/components/store/sdDetail'
 import applypop from '@/components/comp/applyPop'
 import city from '@/components/comp/city'
 import realName from '@/components/mine/realName'
@@ -33,7 +34,9 @@ import changename from '@/components/mine/changeName'
 import bindBankCard from '@/components/mine/bindBankCard'
 import addBankCard from '@/components/mine/addBankCard'
 import myOrder from '@/components/store/myOrder'
+import myOrderSd from '@/components/store/myOrderSd'
 import confirmOrder from '@/components/store/confirmOrder'
+import confirmOrderSd from '@/components/store/confirmOrderSd'
 import search from '@/components/store/search'
 import information from '@/components/mine/information'
 import team from '@/components/mine/team'
@@ -188,9 +191,19 @@ export default new Router({
       component: myOrder
     },
     {
+      path: '/myOrderSd', // 我的商城订单
+      name: 'myOrderSd',
+      component: myOrderSd
+    },
+    {
       path: '/confirmOrder', // 确认订单
       name: 'confirmOrder',
       component: confirmOrder
+    },
+    {
+      path: '/confirmOrderSd', // 确认订单--星币市场
+      name: 'confirmOrderSd',
+      component: confirmOrderSd
     },
     {
       path: '/applyRefund', // 申请退款
@@ -221,6 +234,11 @@ export default new Router({
       path: '/details/:goodsId',
       name: 'details',
       component: details
+    },
+    {
+      path: '/sdDetail/:goodsId',
+      name: 'sdDetail',
+      component: sdDetail
     },
     {
       path: '/applypop', // 支付盘

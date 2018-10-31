@@ -2,6 +2,7 @@
   <div class="wrapper">
     <div class="moduleHead">
       <a href="javascript:window.history.go(-1)"></a>商城订单
+     <p class="order-others" @click="goOrder"><span>星币市场订单</span></p>
     </div>
     <div class="my-order-title">
       <p v-for="(title, $index) in orderTitle" :key="$index" :class="{'tabOn':idx == $index}" @click="changeTab($index)">{{title}}</p>
@@ -207,6 +208,9 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    goOrder () {
+      this.$router.push('/myOrderSd')
     }
   },
   mounted () {
@@ -219,5 +223,5 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import "../../assets/less/myOrder.less";
+  @import "../../assets/less/myOrder.less";
 </style>
