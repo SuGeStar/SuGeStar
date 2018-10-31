@@ -225,6 +225,9 @@ export default {
           .then(res => {
             if (res.code === 200) {
               Toast('兑换成功！请前往我的订单页查看！')
+              setTimeout(() => {
+                window.history.go(-3)
+              }, 2500)
             }
           })
           .catch(err => {

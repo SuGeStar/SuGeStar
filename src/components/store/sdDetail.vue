@@ -52,10 +52,19 @@ export default {
   methods: {
     // 立即购买
     format () {
-      localStorage.setItem('sdGoods', JSON.stringify(this.goodsInfo))
-      this.$router.push({
-        path: '/confirmOrderSd'
-      })
+      if (token) {
+        localStorage.setItem('sdGoods', JSON.stringify(this.goodsInfo))
+        this.$router.push({
+          path: '/confirmOrderSd'
+        })
+      } else {
+        Toast({
+          message: '您还未登录，请先登录',
+          position: 'middle',
+          duration: 2000
+        });
+        return false
+      }
     }
   },
   created () {
