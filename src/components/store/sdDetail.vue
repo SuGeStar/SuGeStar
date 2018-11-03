@@ -17,7 +17,8 @@
         <div class="the-txt">
           <h3>{{goodsInfo.goods_name}}</h3>
           <p>星币： <span>{{showPrice}}</span></p>
-          <button @click="format()">立即购买</button>
+          <button @click="format()" v-if="goodsInfo.stock !=0">立即购买</button>
+          <button v-if="goodsInfo.stock ==0" class="over-btn">已售罄</button>
         </div>
       </div>
     </div>

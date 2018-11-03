@@ -11,7 +11,7 @@
         <p class="sd-zone-title"></p>
         <div class="sz-list">
           <ul>
-            <li v-for="(bk, index) in bkList" :key="index">
+            <li v-for="(bk, index) in bkList" :key="index" :class="{'sz-over':bk.stock==0}">
               <router-link :to="{path:'/sdDetail/' + bk.id}">
                 <img :src="imgUrl+bk.default_img" :alt="bk.goods_name">
                 <div class="sl-info">
@@ -21,6 +21,9 @@
                       <p class="sl-price">星币：<span>{{bk.price}}</span></p>
                       <div class="sl-buy-now"><span>立即兑换</span></div>
                     </div>
+                  </div>
+                  <div class="sl-over" v-if="bk.stock==0">
+                    <p>已售罄</p>
                   </div>
                 </div>
               </router-link>
@@ -61,7 +64,6 @@ export default {
     // this.sdZone()
     api.starCoinMarket()
       .then(res => {
-        console.log(res)
         if (res.code === 200) {
           this.star = res.data.star
           this.bkList = res.data.explosion

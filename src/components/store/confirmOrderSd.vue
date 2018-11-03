@@ -111,7 +111,6 @@ export default {
         console.log(err)
       })
     this.shopData = JSON.parse(localStorage.getItem('sdGoods'))
-    console.log(this.shopData)
     /*this.shopSinglePrice = this.shopData.shopPrice
     this.shopSingleGold = this.shopData.shopGold
     this.shopFinalPrice = parseFloat(this.shopSinglePrice) * parseFloat(this.shopData.shopCount)
