@@ -6,30 +6,24 @@
       </a>
     </mt-header>
     <div class="firInvit">
-      <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'rem' }">
-        <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
-          <div class="invit-list" v-for="index in items" :key="index.id">
-            <div class="invit-match">
-              <div class="match-pop">
-                <div class="invit-info">
-                  <p class="invit-name">{{index.info.realname}}</p>
-                  <p class="invit-phone">{{index.info.phone}}</p>
-                </div>
-                <div class="invit-msg">
-                  <p>{{index.created_at}}</p>
-                  <p>{{index.info.level}}</p>
-                </div>
+      <div class="firInvit-center">
+        <div class="invit-list" v-for="index in items" :key="index.id">
+          <div class="invit-match">
+            <div class="match-pop">
+              <div class="invit-info">
+                <p class="invit-name">{{index.info.realname}}</p>
+                <p class="invit-phone">{{index.info.phone}}</p>
+              </div>
+              <div class="invit-msg">
+                <p>{{index.created_at}}</p>
+                <p>{{index.info.level}}</p>
               </div>
             </div>
           </div>
-          <div slot="bottom" class="mint-loadmore-bottom">
-            <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop'}" class="add-more">下拉加载刷新</span>
-            <span v-show="bottomStatus === 'loading'" class="add-more-logo">
-              <mt-spinner type="snake"></mt-spinner>
-            </span>
-          </div>
-        </mt-loadmore>
+        </div>
       </div>
+      <img src="../../assets/image/noDate1.png" alt="" class="nodata" v-if="no">
+      <p class="add-more" @click="loadMore" v-if="adm">点击加载更多</p>
     </div>
   </div>
 </template>
@@ -46,7 +40,9 @@ export default {
       allLoaded: false,
       page: 1,
       bottomStatus: '',
-      items: []
+      items: [],
+      no: false,
+      adm: false
     }
   },
   created () {
@@ -57,43 +53,45 @@ export default {
       api.upgrades({
         'page': page
       })
-      .then ((res) => {
-        // console.log(res)
-        if (res.data.length == 0) {
-          Toast({
-            message: '暂无数据~',
-            position: 'bottom',
-            duration: 2000
-          });
-        } else {
+        .then((res) => {
           if (page == 1) {
-            this.items = res.data
-            this.page = 2
-          } else {
-            for (let x = 0; x < res.data.length; x++) {
-              this.items.push(res.data[x])
+            if (res.data.length == 0) {
+              this.no = true;
+              this.adm = false;
+            } else if (res.data.length < 10) {
+              this.items = res.data
+              this.adm = false
+            } else {
+              this.items = res.data
+              this.page = 2
+              this.no = false;
+              this.adm = true;
             }
-            this.page++
-          }
-        }
-
-        for (let i = 0; i < this.items.length; i++) {
-          if (this.items[i].info.level == 1) {
-            this.items[i].info.level = '居民'
           } else {
-            this.items[i].info.level = '创世居民'
+            if (res.data.length == 0) {
+              Toast({
+                message: '暂无数据~',
+                position: 'bottom',
+                duration: 2000
+              })
+            } else {
+              for (let x = 0; x < res.data.length; x++) {
+                this.items.push(res.data[x])
+              }
+              this.page++
+            }
           }
-        }
-      })
+          for (let i = 0; i < this.items.length; i++) {
+            if (this.items[i].info.level == 1) {
+              this.items[i].info.level = '居民'
+            } else {
+              this.items[i].info.level = '创世居民'
+            }
+          }
+        })
     },
-    handleBottomChange(status) {
-      this.bottomStatus = status;
-    },
-    loadBottom () {
-      setTimeout(() => {
-        this.getList(this.page)
-        this.$refs.loadmore.onBottomLoaded();
-      }, 1500)
+    loadMore () {
+      this.getList(this.page)
     }
   }
 }

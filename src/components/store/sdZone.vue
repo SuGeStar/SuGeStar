@@ -17,7 +17,7 @@
                 <div class="sl-info">
                   <p class="sl-name">{{bk.goods_name}}</p>
                   <div class="sl-buy">
-                    <div class="sl-buy-center">
+                    <div class="sl-buy-center" v-if="bk.stock != 0">
                       <p class="sl-price">星币：<span>{{bk.price}}</span></p>
                       <div class="sl-buy-now"><span>立即兑换</span></div>
                     </div>
@@ -37,9 +37,12 @@
               <router-link :to="{path:'/sdDetail/' + st.id}">
                 <img :src="imgUrl+st.default_img" :alt="st.goods_name">
                 <p class="sz-name">{{st.goods_name}}</p>
-                <div class="sz-buy">
+                <div class="sz-buy" v-if="st.stock != 0">
                   <p class="sz-price">星币：<span>{{st.price}}</span></p>
                   <div class="sz-buy-now"><span>立即兑换</span></div>
+                </div>
+                <div class="sz-over" v-if="st.stock==0">
+                  <p>已售罄</p>
                 </div>
               </router-link>
             </li>
