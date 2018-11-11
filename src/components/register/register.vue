@@ -42,7 +42,8 @@
 
 <script>
 import { Toast } from 'mint-ui'
-import { url } from '../../assets/js/mobile.js'
+import { imgUrl } from '@/assets/js/api.js'
+import api from '@/assets/js/api.js'
 import cityPop from '../comp/city.vue'
 export default {
   data () {
@@ -66,9 +67,11 @@ export default {
       // 身份证
       // z_idNumber: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
       cityPop_up: false,
-      imgSrc: 'http://www.nyycstar.com/captcha',
+      imgSrc: '',
+      imgKey: '',
       pic: '',
-      showCode: false
+      showCode: false,
+      imgUrl: imgUrl
     }
   },
   components: {
@@ -88,9 +91,16 @@ export default {
       this.invite_code = recommend_code
       let contact_code = str.split('=')[1]
       this.contact_code = contact_code
-      localStorage.setItem('recommend_code',recommend_code)
-      localStorage.setItem('contact_code',contact_code)
+      localStorage.setItem('recommend_code', recommend_code)
+      localStorage.setItem('contact_code', contact_code)
     }
+    api.getPicCode()
+      .then(res => {
+        if (res.code === 200) {
+          this.imgSrc = res.url.img
+          this.imgKey = res.url.key
+        }
+      })
   },
   methods: {
     // 倒计时
@@ -123,10 +133,11 @@ export default {
         Toast('请稍后点击！')
         return false
       } else {
-        this.$http.get(url + 'sendSms?phone=' + this.phoneNum )
+        // this.$http.get(url + 'sendSms?phone=' + this.phoneNum )
+        api.sendSms(this.phoneNum)
           .then(response => {
             console.log(response)
-            if (response.data.code == 200) {
+            if (response.code == 200) {
               Toast({
                 message: '发送成功',
                 position: 'bottom',
@@ -135,7 +146,7 @@ export default {
               this.ctimer(60)
             } else {
               Toast({
-                message: response.data.message[0],
+                message: response.message[0],
                 position: 'bottom',
                 duration: 2000
               });
@@ -221,17 +232,17 @@ export default {
         phone: this.phoneNum,
         realname: this.realName,
         payment_password: this.applyPsd,
-        captcha: this.pic
+        captcha: this.pic,
+        key: this.imgKey
       })
-      this.$http.post(url + 'register', form)
+      api.registerUser(form)
         .then(response => {
-          console.log(response)
           Toast({
-            message: response.data.msg,
+            message: response.msg,
             position: 'bottom',
             duration: 2000
           })
-          if (response.data.code == 200) {
+          if (response.code == 200) {
             this.$router.push('/login')
           }
         })
@@ -245,8 +256,13 @@ export default {
     },
     // 请求图片验证
     changePic () {
-      var time = new Date().getTime()
-      this.imgSrc = 'http://www.nyycstar.com/captcha?time=' + time
+      api.getPicCode()
+        .then(res => {
+          if (res.code === 200) {
+            this.imgSrc = res.url.img
+            this.imgKey = res.url.key
+          }
+        })
     }
   },
   mounted () {

@@ -70,7 +70,7 @@ export function Get (url, params) {
 export default {
   sendSms (params) {
     // 发送手机验证码
-    return Get(`/sendSms?phone=${params.phone}`)
+    return Get(`/sendSms?phone=${params}`)
   },
   mine (params) {
     // 开采矿石
@@ -118,6 +118,9 @@ export default {
   registers (params) {
     // 我的邀请
     return Get(`/registers/${params.page}?token=${token}`)
+  },
+  registerUser (params) {
+    return Post(`/register`, params)
   },
   upgrades (params) {
     // 我的推荐
@@ -328,6 +331,9 @@ export default {
   starCoinMarket () {
     // 星币市场
     return Get(`miners/goodsList`)
+  },
+  getPicCode () {
+    return Get(`captcha`)
   }
 }
 export { imgUrl }
