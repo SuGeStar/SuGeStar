@@ -246,7 +246,7 @@ export default {
     // 请求图片验证
     changePic () {
       var time = new Date().getTime()
-      this.imgSrc = 'http://www.nyycstar.com/captcha/' + time
+      this.imgSrc = 'http://www.nyycstar.com/captcha?time=' + time
     }
   },
   mounted () {
