@@ -6,11 +6,13 @@
       <div v-show="showCode"><span>探索者</span><input type="text" placeholder="" :readonly="true" v-model="contact_code"></div>
       <div>
         <!--<span>手机号码</span>-->
-        <input type="number" placeholder="手机号码" v-model="phoneNum"></div>
-       <!--<div><span>图片验证</span>
+        <input type="number" placeholder="手机号码" v-model="phoneNum">
+      </div>
+       <div class="spasss">
+         <!--<span>图片验证</span>-->
         <input type="text" placeholder="图片验证码" v-model="pic" class="verificationCode">
         <img :src="imgSrc" alt="" @click="changePic()">
-      </div>-->
+      </div>
       <div>
         <!--<span>验&nbsp;证&nbsp;&nbsp;码</span>-->
         <input type="number" placeholder="手机验证码" v-model="verificationCode" class="verificationCode">
@@ -64,7 +66,7 @@ export default {
       // 身份证
       // z_idNumber: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
       cityPop_up: false,
-      // imgSrc: 'http://www.sgyxmall.com/index.php?s=/Api/User/code',
+      imgSrc: 'http://www.nyycstar.com/captcha',
       pic: '',
       showCode: false
     }
@@ -184,8 +186,13 @@ export default {
       if (!this.phoneNum) {
         Toast('请填写电话号码!')
         return false
-      } if (this.z_tel.test(this.phoneNum) === false) {
+      }
+      if (this.z_tel.test(this.phoneNum) === false) {
         Toast('您的电话号码格式有误!')
+        return false
+      }
+      if (!this.pic) {
+        Toast('您的图片验证码有误!')
         return false
       }
       if (!this.verificationCode) {
@@ -213,9 +220,10 @@ export default {
         code: this.verificationCode,
         phone: this.phoneNum,
         realname: this.realName,
-        payment_password: this.applyPsd
+        payment_password: this.applyPsd,
+        captcha: this.pic
       })
-      this.$http.post(url+'register', form)
+      this.$http.post(url + 'register', form)
         .then(response => {
           console.log(response)
           Toast({
@@ -234,12 +242,12 @@ export default {
     },
     cityPop () {
       this.cityPop_up = true
-    }
+    },
     // 请求图片验证
-    /*changePic () {
+    changePic () {
       var time = new Date().getTime()
-      this.imgSrc = 'http://www.sgyxmall.com/index.php?s=/Api/User/code/' + time
-    }*/
+      this.imgSrc = 'http://www.nyycstar.com/captcha/' + time
+    }
   },
   mounted () {
   }
