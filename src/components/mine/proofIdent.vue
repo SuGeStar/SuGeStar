@@ -55,9 +55,7 @@ export default {
         });
         return false;
       } else {
-        api.sendSms({
-          'phone': this.form.phone
-        })
+        api.sendSms(this.form.phone)
         .then((res) => {
           console.log(res)
           if (res.code == 200) {
