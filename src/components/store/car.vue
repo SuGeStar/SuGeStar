@@ -202,7 +202,11 @@ export default {
     }
   },
   created () {
-    this.getCarList()
+    if (!token) {
+      this.$router.push('/login')
+    } else {
+      this.getCarList()
+    }
   }
 }
 </script>

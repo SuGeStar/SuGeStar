@@ -143,7 +143,7 @@ export default {
                 position: 'bottom',
                 duration: 2000
               });
-              this.ctimer(60)
+              this.ctimer(300)
             } else {
               Toast({
                 message: response.message[0],
