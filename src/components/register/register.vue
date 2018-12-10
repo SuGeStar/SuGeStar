@@ -137,7 +137,7 @@ export default {
         api.sendSms(this.phoneNum)
           .then(response => {
             console.log(response)
-            if (response.code == 200) {
+            if (response.code === 200) {
               Toast({
                 message: '发送成功',
                 position: 'bottom',
@@ -146,8 +146,8 @@ export default {
               this.ctimer(300)
             } else {
               Toast({
-                message: response.message[0],
-                position: 'bottom',
+                message: response.msg,
+                position: 'middle',
                 duration: 2000
               });
             }
