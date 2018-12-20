@@ -6,17 +6,19 @@
       </a>
     </mt-header>
     <div class="firInvit">
-      <div class="invit-list" v-for="(item,index) in items" :key="index"  @click="placeItem(item.id,item.token)">
-        <div class="invit-match">
-          <div class="match-pop">
-            <div class="invit-info">
-            <p class="invit-name">{{item.realname}}</p>
-            <p class="invit-phone">{{item.phone}}</p>
-          </div>
-          <div class="invit-msg">
-            <p>{{item.level}}</p>
-            <p class="invit-date">{{item.created_at}}</p>
-          </div>
+      <div class="invit-list-container">
+        <div class="invit-list" v-for="(item,index) in items" :key="index"  @click="placeItem(item.id,item.token)">
+          <div class="invit-match">
+            <div class="match-pop">
+              <div class="invit-info">
+                <p class="invit-name">{{item.realname}}</p>
+                <p class="invit-phone">{{item.phone}}</p>
+              </div>
+              <div class="invit-msg">
+                <p>{{item.level}}</p>
+                <p class="invit-date">{{item.created_at}}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
