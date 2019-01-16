@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Toast } from 'mint-ui'
 // 接口url
-var url = 'http://www.nyycstar.com/api/'
+var url = 'https://www.nyycstar.com/api/'
 // var url = 'http://ycstar.test/api/'
 
 // axios 配置
